@@ -1,0 +1,89 @@
+\documentclass[10pt, a4paper]{article}
+    \title{Math Note}
+    \author{ianaesthetic}
+\usepackage{indentfirst, amsmath, fontspec, listings, xcolor}
+\setmainfont{微软雅黑}
+
+\newfontfamily\consolas{Consolas}
+\lstset{numbers = left, numberstyle = \small\consolas, basicstyle = \small\consolas}
+
+\XeTeXlinebreaklocale "zh"
+\XeTeXlinebreakskip = 0pt plus 1pt
+
+\begin{document}
+    \maketitle
+    \newpage
+
+    \section{空间几何}
+        \subsection{点法式方程}
+            在知道一个在平面上的点$M(x_0,\ y_0,\ z_0)$和法向量$\textbf{n} = (A,\ B,\ C)$时，通过这个平面上任意一个向量与法向量垂直可以得出这个平面为
+            $$A(x - x_0) + B(y - y_0) + C(z - z_0) = 0$$
+        \subsection{平面的一般方程}
+            $$Ax + By + Cz = 0$$
+            
+            其中法向量为 $(A,\ B,\ C)$
+    \section{多元微分学}
+        \subsection{偏导数在几何中的应用}
+            \subsubsection{空间曲线的切线和法平面}
+                空间曲线的一般参数形式为：
+                $
+                    \left\{\begin{aligned}
+                        x & = & x(t) \\
+                        y & = & y(t) \\
+                        z & = & z(t)
+                    \end{aligned}
+                    \right.
+                $
+                讨论一般空间曲线的切线方程。
+
+                $$\frac{x - x_0}{x(t) - x(t_0)} = \frac{y - y_0}{y(t) - y(t_0)} = \frac{z - z_0}{z(t) - z(t_0)}$$
+                
+                $$\frac{x - x_0}{\frac{x(t) - x(t_0)}{t - t_0}} = \frac{y - y_0}{\frac{y(t) - y(t_0)}{t - t_0}} = \frac{z - z_0}{\frac{z(t) - z(t_0}{t - t_0}}$$
+                \newline 
+                \begin{equation}
+                    \frac{x - x_0}{x^{'}(t_0)} = \frac{y - y_0}{y^{'}(t_0)} = \frac{z - z_0}{z^{'}(t_0)}
+                \end{equation}
+                
+                所以切向量和法平面为
+                \begin{equation}
+                    (x^{'}(t),\ y^{'}(t),\ z^{'}(t))
+                \end{equation}
+                \begin{equation}
+                    x^{'}(t)(x - x_0) + y^{'}(t)(y - y_0) + z^{'}(t)(z - z_0) = 0 
+                \end{equation}
+                
+                注意，在这个公式出现可能的$\frac{0}{0}$时，需要写成其他形式如：
+                $$
+                    \left\{
+                        \begin{aligned}
+                            \frac{x - x_0}{x^{'}(t)} & = & \frac{y - y_0}{y'(t)} \\
+                            z&=&z_0
+                        \end{aligned}
+                        \right.
+                $$
+                
+                还有的曲线方程形如：$y = f(x), z = g(x)$, 直接将$x$看作参数，套用上面的公式。
+                
+                如果是两曲面交的形式$F(x, y, z) = 0, G(x, y, z) = 0$，则使用隐函数推导得到$y, z$对于$x$的导数。推导方式就是对两边同时求$x$的偏导，然后解一个线性方程。
+                
+                $$
+                    \frac{\partial F}{\partial x} + \frac{\partial F}{\partial y}\frac{\partial y}{\partial x} + \frac{\partial F}{\partial z}\frac{\partial z}{\partial x} = 0
+                $$
+                $$
+                    \frac{\partial G}{\partial x} + \frac{\partial G}{\partial y}\frac{\partial y}{\partial x} + \frac{\partial G}{\partial z}\frac{\partial z}{\partial x} = 0
+                $$ 
+                
+                定理：曲线
+                $
+                    \left\{
+                        \begin{aligned}
+                            F(x,\ y,\ z) & = & 0 \\
+                            G(x,\ y,\ z) & = & 0
+                        \end{aligned}
+                    \right.
+                $在$P_0$的发平面是由梯度向量$\textbf{grad}F(P_0)$ 和 $\textbf{grad}G(P_0)$张成的过$P_0$的平面。
+                
+                证明思路：由于雅各布矩阵满秩证明线性无关，并证明两个梯度向量与切向量垂直。
+
+                
+\end{document}

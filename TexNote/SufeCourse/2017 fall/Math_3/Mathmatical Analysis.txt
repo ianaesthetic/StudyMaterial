@@ -1,0 +1,71 @@
+\documentclass[12pt, a4paper]{articale}
+    \title{Mathmattical Analysis}
+    \author{ianaesthetic}
+\usepackage{cindent, amsmath, fontspec}
+\setmainfont{微软雅黑}
+
+\begin{docuemnt}
+    \section{空间}
+        \subsection{切线与法平面}
+
+        切向方程
+        $$\frac{x - x_0}{\frac{\deta x}{\delta t}} = \frac{y - y_0}{\frac{\delta y}{\delta t}} = \frac{z - z_0}{\frac{\delta z}{\delta t}}$$
+        
+        $$\frac{x - x_0}{\phi (t)} = \frac{y - y_0}{\psi (t)} = \frac{z - z_0}{\omega (t)}}$$
+
+        当其中有一个方向的导数为0的时候，也就是出现$\frac{0}{0}$的形式的时候，需要写成
+
+        $$
+        \left\{
+            \begin{aligned}
+             \frac{x - x_0}{\phi (t)} & = & = \frac{y  - y_0}{\psi (t)} \\
+             z = z_0   
+            \end{aligned}b
+        \right. 
+        $$
+
+        切向量
+        
+        $$\hat{\textbf{T}} = (\phi{t_0}, \psi(t_0), \omega{t_1})$$
+
+        法平面
+        
+
+        一般的曲线方程可以看做以$x$为参数的参数方程。
+        \begin{equation*}
+        \begin{align*}
+            x & = & x \\
+            y & = & f(x) \\
+            z & = & g(x)    
+        \end{align*}
+        \end{equation*}
+
+        切向量
+
+        法平面面：
+
+        两曲面交的表现形式使用隐函数转化为以其中一个元素(eg:$x$)的一般曲线方程形式。然后用隐函数求导替换公式中的部分。具体求法是对于两个曲面方程两边都对x求偏导然后解线性方程得出隐函数偏导。 
+        
+        定理：曲线 在$P_0$点法平面就是由梯度向量$\textbf{grad}F(P_0)$和$\textbf{grad}G{P_0}$形成的平面。
+        \subsection{曲面的切平面和法线}
+            在一点所有曲面上的切线都在同一个平面上面形成了一个切平面。
+            
+            证明思路：对于每一个任意的在这个曲面的曲线，写出他关于$t$参数方程，回带回去将平面方程变成一元方程。对现在的这个一元方程求导，得到类似于内积的一个式子：
+
+            $$F_xx^{'}_t + F_yy^{'}_t + F_zz^{'}_t = 0$$
+
+            说明所有的切线都与梯度向量$(F_x,\ F_y,\ F_z)$垂直，此时我们称这个向量为法向量，这是所有的切线显然都在同一个切平面上面。判断内外法向量：取曲面内部的一个点，然后求内积通过内积的正负来得出法向量的方向。通过这个得出的结论可以得出切平面为：
+
+            $$\textbf{F}_x(x - x_0) + \textbf{F}_y(y - y_0) + \tetbf{F}_z(z - z_0) = 0$$
+
+            法线方程：$\frac{x - x_0}{\textbf{F}_x} = \frac{y - y_0}{\textbf{F}_y} = \frac{z - z_0}{\textbf{F}_z}$
+
+            一般情况下的空间曲面方程为$z = f(x,\ y)$, 可以把$z$移过去就是上面的初始情况。
+
+            将全微分的式子和在一般空间曲面的法线方程相比，可以知道在$z = f(x,\ y)$在点$(x_0,\ y_0)$可微的情况下，其附近的曲面可以用切平面代替，其误差就是$\sqrt{\delta x^2 + \delta y^2}$的高阶小量。
+
+
+
+
+\end{document}
+    
