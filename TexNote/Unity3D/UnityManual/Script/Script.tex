@@ -1,7 +1,14 @@
-\documentclass[a4paper, 12pt]{article}
-    \title{script} 
+\documentclass[10pt, a4paper]{article}
     \author{ianaesthetic}
-\usepackage{indentfirst, amsmath, listings, xcolor, fontspec}
+    \title{Unity3D note}
+\usepackage{indentfirst, amsmath, fontspec, listings, xcolor}
+
+
+\newfontfamily\consolas{Consolas}
+\lstset{numbers = left, numberstyle = \footnotesize\consolas, basicstyle=\footnotesize\consolas}
+
+\XeTeXlinebreaklocale "zh"
+\XeTeXlinebreakskip = 0pt plus 1pt
 
 \begin{document}
     \section{Scripting Overview}
@@ -30,5 +37,71 @@
 RigidBody rb = GetComponent<RigidBody>(); 
 \end{lstlisting}
                 you can use it to access the parameter and manipulate the instances.
+            \subsubsection{Accessing other object} 
+                You can either link objects with other variables with public gameObject, which is similar to the public variables. You can also declare a component and drag a other gameObject on it to attach component of other gameObject. This operation must be done in the editor rather than runtime. 
+
+                \textbf{Finding Child Objects} and \textbf{Finding Objects by Name or Tag} can be used to locate gameObject in the runtime. 
+                
+                Finding Child Objects: when you want to keep track same kind of objects such as location of waypoints, you may make the child of a logical parent and can access them using foreach. 
+\begin{lstlisting}
+public gameObject wayPoints;
+...
+void Update() {
+    int num = wayPoints.childCount;
+    ... 
+    foreach(Transform t in wayPoints){
+        wayPointArray[i ++] = t; 
+    }
+    ...
+    particularChild = wayPoints.Find("start"); 
+}
+\end{lstlisting} 
+
+                Finding Objects by Name or Tag:
+\begin{lstlisting}
+\\GameObject[] gameObject_3;
+gameObject_1 = GameObject.Find("Car"); 
+gameObject_2 = GameObject.FindWithTag("Player");
+gameObject_3 = GameObject.FindGameObjectsWithTag("Enemy");
+\end{lstlisting}
+
+        \subsection{Event Functions} 
+            \textbf{Event Functions} are activated by Unity in response to events that occur during game play, such as Update() and Start().
+            \subsubsection{Regular Update Events}
+                \textbf{Update()} is the main function to make changes, taking place before each frames is rendered and each animations is calculated.
+                
+                \textbf{FixedUpdate()} is called before each physics update. This function is dedicated to the change of physics. 
+
+                \textbf{LateUpdate()} can be able to make additional changes after Update() and FixedUpdate(). It can be used to adjust camera and character orientation. 
+            \subsubsection{GUI events} 
+                Unity has a system for rendering GUI controls over the main action in the scene and responding to clicks on these control. These code should be included in \emph{OnGUI()} function. 
+\begin{lstlisting}
+void OnGUI() {
+    GUI.Label(labelRect, "Game Over"); //making a text or texture on screen
+    /*
+    Prototype: GUI.Label(Rect Position, string text);
+               GUI.Label(Rect Position, Texture image);
+    Rect: A 2D rectangle defined by left upper X and Y position, wight, height. 
+          It can also be constructed by xMin, xMax, yMin, yMax. 
+    */
+}
+\end{lstlisting}
+
+                You can also detect \emph{mouse events} that occur over a GameObject as it appears in the scene, such as targeting weapons. \emph{OnMouseDown()} is called when user has pressed the mouse button while over the GUIElement or Collider. A call to \emph{OnMouseOver()} occurs on the first frame the mouse is over the object until the mouse moves away, at which point \emph{OnMouseExit()} is called. It needs the collider to be marked as trigger. More specific mouse and keyboard operations can go to look up for Monobehaviour.
+            \subsubsection{Physics events}
+                A series of function will be called when collision is detected, such as \emph{OnCollisionEnter()}. When collider is marked as trigger, it turns into \emph{OnTriggerEnter()}. Object may contact with multiple objects, which requires for a parameter to identify. 
+        
+        \subsection{Time and Framerate Management}
+            The Update() allows monitoring inputs and other events from the script. A important thing is that neither framerate or length of time between Update() is called is constant. \emph{Time.deltaTime} is the time in seconds it took to complete the last frame. It remains constant when called from FixedUpdate(). In order to subtract or add for a constant per frame, multiply it by Time.deltaTime can guarantee a constant offset per frame. For example: 
+\begin{lstlisting}
+void Update() {
+    Transform.position = (0.0f, 0.0f, distancePerSeconds * Time.deltaTime); 
+}
+\end{lstlisting}
+            \subsubsection{Fixed Timestep}
+                There is a fixed timestep between FixedUpdate() for physics engine. You can change it in \emph{Time Manager} and read from \emph{Time.fixedDeltaTime} in order to get better physical performance.  
+            \subsubsection{Maximum Allowed Timestep}
+                If fixed timestep is too small that gameplay framerate is relatively low, many physical update will in one framerate update, causing even lower fresh rate and unsynchronized movement. With the set of \emph{maximum allowed timestep} in \emph{time manager}, when the rendering time of one frame exceeds it, the physical engine will stop calculating and staying at that conditions waiting for the update of frame. It's a trade off that causes the movement slower than the real world while having better framerate.  
+
 
 \end{document}
