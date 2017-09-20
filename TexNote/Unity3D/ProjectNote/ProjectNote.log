@@ -1,4 +1,4 @@
-This is XeTeX, Version 3.14159265-2.6-0.99998 (TeX Live 2017/W32TeX) (preloaded format=xelatex 2017.8.23)  19 SEP 2017 23:33
+This is XeTeX, Version 3.14159265-2.6-0.99998 (TeX Live 2017/W32TeX) (preloaded format=xelatex 2017.8.23)  20 SEP 2017 23:41
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -569,17 +569,17 @@ LaTeX Font Info:    Overwriting math alphabet `\mathtt' in version `bold'
 
 ]
 Overfull \hbox (0.60352pt too wide) in paragraph at lines 38--39
-[][][][][][][][][][][][][][][][][][][][] 
+[][][][][][][][][][][][][][][][][][][] 
  []
 
 
 Overfull \hbox (0.60352pt too wide) in paragraph at lines 55--56
-[][][][][][][][][][][][][][][][][][][][] 
+[][][][][][][][][][][][][][][][][][][] 
  []
 
 
 Overfull \hbox (0.60352pt too wide) in paragraph at lines 59--60
-[][][][][][][][][][][][][][][][][][][][] 
+[][][][][][][][][][][][][][][][][][][] 
  []
 
 [2]
@@ -596,42 +596,42 @@ Engine.UI」。
 
 [4]
 Overfull \hbox (33.00385pt too wide) in paragraph at lines 154--155
-[][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][] 
+[][][][][][][][][][][][][][][][][][][][][][][][][][][][][][] 
  []
 
 [5]
 Overfull \hbox (27.60379pt too wide) in paragraph at lines 183--184
-[][][][][][][][][][][][][][][][][][] 
+[][][][][][][][][][][][][][][][][] 
  []
 
 [6]
 Overfull \hbox (81.60434pt too wide) in paragraph at lines 210--211
-[][][][][][][][][][][][][][][][][][] 
+[][][][][][][][][][][][][][][][][] 
  []
 
 
 Overfull \hbox (130.20483pt too wide) in paragraph at lines 212--213
-[][][][][][][][][][][][][][][][][][][][] 
+[][][][][][][][][][][][][][][][][][][] 
  []
 
 
 Overfull \hbox (87.0044pt too wide) in paragraph at lines 242--243
-[][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][] 
+[][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][] 
  []
 
 
 Overfull \hbox (54.60406pt too wide) in paragraph at lines 243--244
-[][][][][][][][][][][][][][][][] 
+[][][][][][][][][][][][][][][] 
  []
 
 [7]
 Overfull \hbox (81.60434pt too wide) in paragraph at lines 254--255
-[][][][][][][][][][][][][][][][] 
+[][][][][][][][][][][][][][][] 
  []
 
 
 Overfull \hbox (70.80423pt too wide) in paragraph at lines 256--257
-[][][][][][][][][][][][][][] 
+[][][][][][][][][][][][][] 
  []
 
 
@@ -642,19 +642,19 @@ AddScore
 
 
 Overfull \hbox (0.60352pt too wide) in paragraph at lines 276--277
-[][][][][][][][][][][][][][][][][][][][][][][][][] 
+[][][][][][][][][][][][][][][][][][][][][][][][] 
  []
 
 
 Overfull \hbox (38.4039pt too wide) in paragraph at lines 277--278
-[][][][][][][][][][][][][][][][][][][][][][] 
+[][][][][][][][][][][][][][][][][][][][][] 
  []
 
 [8] (./ProjectNote.aux) ) 
 Here is how much of TeX's memory you used:
  11799 strings out of 493005
  246729 string characters out of 6140056
- 337400 words of memory out of 5000000
+ 336400 words of memory out of 5000000
  15722 multiletter control sequences out of 15000+600000
  8606 words of font info for 55 fonts, out of 8000000 for 9000
  1348 hyphenation exceptions out of 8191
