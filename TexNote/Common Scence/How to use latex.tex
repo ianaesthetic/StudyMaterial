@@ -1,0 +1,59 @@
+\documentclass[10pt, a4paper]{article}
+    \title{Math Note}
+    \author{ianaesthetic}
+\usepackage{indentfirst, amsmath, fontspec, listings, xcolor}
+\setmainfont{微软雅黑}
+
+\newfontfamily\consolas{Consolas}
+\lstset{numbers = left, numberstyle = \small\consolas, basicstyle = \small\consolas}
+
+\XeTeXlinebreaklocale "zh"
+\XeTeXlinebreakskip = 0pt plus 1pt
+
+\begin{document}
+    \section{VSC的设置}
+        \begin{lstlisting}
+    "editor.autoClosingBrackets": false,
+            
+    "latex-workshop.latex.toolchain": [
+        {
+            "command": "xelatex",
+            "args": [
+                "-synctex=1",
+                "-interaction=nonstopmode",
+                "-file-line-error",
+                "%DOC%"
+            ]
+        },
+        {
+            "command": "xelatex",
+            "args": [
+                "-synctex=1",
+                "-interaction=nonstopmode",
+                "-file-line-error",
+                "%DOC%"
+            ]
+        }
+    ],
+            
+    "editor.wordWrap":"on",
+    "editor.minimap.enabled": false,
+        \end{lstlisting}
+
+    \section{TexLive的环境路径}
+        C:$\setminus$texlive$\setminus$2017$\setminus$bin$\setminus$win32
+    \section{Tex文件头}
+\begin{lstlisting}
+\documentclass[10pt, a4paper]{article}
+    \title{Math Note}
+    \author{ianaesthetic}
+\usepackage{indentfirst, amsmath, fontspec, listings, xcolor}
+\setmainfont{XXX}
+    
+\newfontfamily\consolas{Consolas}
+\lstset{numbers = left, numberstyle = \small\consolas, basicstyle = \small\consolas}
+    
+\XeTeXlinebreaklocale "zh"
+\XeTeXlinebreakskip = 0pt plus 1pt
+\end{lstlisting}
+\end{document}
