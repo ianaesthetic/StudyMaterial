@@ -1,13 +1,13 @@
-This is XeTeX, Version 3.14159265-2.6-0.99998 (TeX Live 2017/W32TeX) (preloaded format=xelatex 2017.9.18)  21 SEP 2017 08:03
+This is XeTeX, Version 3.14159265-2.6-0.99998 (TeX Live 2017/W32TeX) (preloaded format=xelatex 2017.9.18)  21 SEP 2017 14:54
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
  %&-line parsing enabled.
-**c:/Users/ianaesthetic/Desktop/hbw/StudyMaterial/TexNote/Unity3D/ProjectNote/P
-rojectNote.tex
+**"c:/Users/ianaesthetic/Desktop/hbw/StudyMaterial/TexNote/SufeCourse/2017 fall
+/Probability theroy/Note.tex"
 
-(c:/Users/ianaesthetic/Desktop/hbw/StudyMaterial/TexNote/Unity3D/ProjectNote/Pr
-ojectNote.tex
+(c:/Users/ianaesthetic/Desktop/hbw/StudyMaterial/TexNote/SufeCourse/2017 fall/P
+robability theroy/Note.tex
 LaTeX2e <2017-04-15>
 Babel <3.10> and hyphenation patterns for 84 language(s) loaded.
 (c:/texlive/2017/texmf-dist/tex/latex/base/article.cls
@@ -492,9 +492,8 @@ LaTeX Info: Redefining \rmfamily on input line 5.
 . <->"Consolas/BI/OT:script=latn;language=DFLT;"
 . - 'bold italic small caps'  (bx/itsc) with NFSS spec.: 
 .................................................
-
-(./ProjectNote.aux)
-\openout1 = `ProjectNote.aux'.
+ (./Note.aux)
+\openout1 = `Note.aux'.
 
 LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 13.
 LaTeX Font Info:    ... okay on input line 13.
@@ -568,99 +567,17 @@ LaTeX Font Info:    Overwriting math alphabet `\mathsf' in version `bold'
 LaTeX Font Info:    Overwriting math alphabet `\mathtt' in version `bold'
 (Font)                  OT1/cmtt/m/n --> TU/lmtt/bx/n on input line 13.
 \c@lstlisting=\count154
- [1
 
-]
-Overfull \hbox (0.60352pt too wide) in paragraph at lines 38--39
-[][][][][][][][][][][][][][][][][][][] 
- []
+[1
 
-
-Overfull \hbox (0.60352pt too wide) in paragraph at lines 55--56
-[][][][][][][][][][][][][][][][][][][] 
- []
-
-
-Overfull \hbox (0.60352pt too wide) in paragraph at lines 59--60
-[][][][][][][][][][][][][][][][][][][] 
- []
-
-[2]
-Overfull \hbox (7.3584pt too wide) in paragraph at lines 98--99
-[]\TU/微软雅黑(0)/m/n/10 设 计 计 数 和 显 示 游 戏 完 成。 在 创 立 Text 时， 一 定 会 出 现 canvas 和 Ev
-entsys-
- []
-
-[3]
-Overfull \hbox (26.25488pt too wide) in paragraph at lines 100--101
-[]\TU/微软雅黑(0)/m/n/10 在 Player_Controller 中 插 入 script 时， 注 意 要 使 用 「using Unity
-Engine.UI」。
- []
-
-[4]
-Overfull \hbox (33.00385pt too wide) in paragraph at lines 154--155
-[][][][][][][][][][][][][][][][][][][][][][][][][][][][][][] 
- []
-
-[5]
-Overfull \hbox (27.60379pt too wide) in paragraph at lines 183--184
-[][][][][][][][][][][][][][][][][] 
- []
-
-[6]
-Overfull \hbox (81.60434pt too wide) in paragraph at lines 210--211
-[][][][][][][][][][][][][][][][][] 
- []
-
-
-Overfull \hbox (130.20483pt too wide) in paragraph at lines 212--213
-[][][][][][][][][][][][][][][][][][][] 
- []
-
-
-Overfull \hbox (87.0044pt too wide) in paragraph at lines 242--243
-[][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][] 
- []
-
-
-Overfull \hbox (54.60406pt too wide) in paragraph at lines 243--244
-[][][][][][][][][][][][][][][] 
- []
-
-[7]
-Overfull \hbox (81.60434pt too wide) in paragraph at lines 254--255
-[][][][][][][][][][][][][][][] 
- []
-
-
-Overfull \hbox (70.80423pt too wide) in paragraph at lines 256--257
-[][][][][][][][][][][][][] 
- []
-
-
-Overfull \hbox (4.58008pt too wide) in paragraph at lines 263--264
-\TU/微软雅黑(0)/m/n/10 在 函 数 体 的 设 计 中， 注 意 由 于 分 数 是 astroid 的 固 有 属 性， 所 以 在 设 计 
-AddScore
- []
-
-
-Overfull \hbox (0.60352pt too wide) in paragraph at lines 276--277
-[][][][][][][][][][][][][][][][][][][][][][][][] 
- []
-
-
-Overfull \hbox (38.4039pt too wide) in paragraph at lines 277--278
-[][][][][][][][][][][][][][][][][][][][][] 
- []
-
-[8] (./ProjectNote.aux) ) 
+] [2] (./Note.aux) ) 
 Here is how much of TeX's memory you used:
- 11799 strings out of 493005
- 247112 string characters out of 6137956
- 336400 words of memory out of 5000000
- 15722 multiletter control sequences out of 15000+600000
- 8606 words of font info for 55 fonts, out of 8000000 for 9000
+ 11758 strings out of 493005
+ 246433 string characters out of 6137956
+ 321385 words of memory out of 5000000
+ 15700 multiletter control sequences out of 15000+600000
+ 4246 words of font info for 35 fonts, out of 8000000 for 9000
  1348 hyphenation exceptions out of 8191
- 35i,6n,66p,10445b,1459s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 35i,5n,66p,10460b,238s stack positions out of 5000i,500n,10000p,200000b,80000s
 
-Output written on ProjectNote.pdf (8 pages).
+Output written on Note.pdf (2 pages).
