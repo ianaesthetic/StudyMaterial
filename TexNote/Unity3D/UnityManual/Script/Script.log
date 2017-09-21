@@ -1,18 +1,15 @@
-This is XeTeX, Version 3.14159265-2.6-0.99998 (TeX Live 2017/W32TeX) (preloaded format=xelatex 2017.9.18)  21 SEP 2017 17:04
+This is XeTeX, Version 3.14159265-2.6-0.99998 (TeX Live 2017/W32TeX) (preloaded format=xelatex 2017.8.23)  21 SEP 2017 22:11
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
  %&-line parsing enabled.
-**c:/Users/ianaesthetic/Desktop/hbw/StudyMaterial/TexNote/Unity3D/UnityManual/S
-cript/Script.tex
-
-(c:/Users/ianaesthetic/Desktop/hbw/StudyMaterial/TexNote/Unity3D/UnityManual/Sc
-ript/Script.tex
+**e:/StudyMaterial/TexNote/Unity3D/UnityManual/Script/Script.tex
+(e:/StudyMaterial/TexNote/Unity3D/UnityManual/Script/Script.tex
 LaTeX2e <2017-04-15>
 Babel <3.10> and hyphenation patterns for 84 language(s) loaded.
-(c:/texlive/2017/texmf-dist/tex/latex/base/article.cls
+(e:/TexLive/texmf-dist/tex/latex/base/article.cls
 Document Class: article 2014/09/29 v1.4h Standard LaTeX document class
-(c:/texlive/2017/texmf-dist/tex/latex/base/size10.clo
+(e:/TexLive/texmf-dist/tex/latex/base/size10.clo
 File: size10.clo 2014/09/29 v1.4h Standard LaTeX file (size option)
 )
 \c@part=\count79
@@ -27,27 +24,27 @@ File: size10.clo 2014/09/29 v1.4h Standard LaTeX file (size option)
 \belowcaptionskip=\skip42
 \bibindent=\dimen102
 )
-(c:/texlive/2017/texmf-dist/tex/latex/tools/indentfirst.sty
+(e:/TexLive/texmf-dist/tex/latex/tools/indentfirst.sty
 Package: indentfirst 1995/11/23 v1.03 Indent first paragraph (DPC)
 )
-(c:/texlive/2017/texmf-dist/tex/latex/amsmath/amsmath.sty
+(e:/TexLive/texmf-dist/tex/latex/amsmath/amsmath.sty
 Package: amsmath 2016/11/05 v2.16a AMS math features
 \@mathmargin=\skip43
 
 For additional information on amsmath, use the `?' option.
-(c:/texlive/2017/texmf-dist/tex/latex/amsmath/amstext.sty
+(e:/TexLive/texmf-dist/tex/latex/amsmath/amstext.sty
 Package: amstext 2000/06/29 v2.01 AMS text
 
-(c:/texlive/2017/texmf-dist/tex/latex/amsmath/amsgen.sty
+(e:/TexLive/texmf-dist/tex/latex/amsmath/amsgen.sty
 File: amsgen.sty 1999/11/30 v2.0 generic functions
 \@emptytoks=\toks14
 \ex@=\dimen103
 ))
-(c:/texlive/2017/texmf-dist/tex/latex/amsmath/amsbsy.sty
+(e:/TexLive/texmf-dist/tex/latex/amsmath/amsbsy.sty
 Package: amsbsy 1999/11/29 v1.2d Bold Symbols
 \pmbraise@=\dimen104
 )
-(c:/texlive/2017/texmf-dist/tex/latex/amsmath/amsopn.sty
+(e:/TexLive/texmf-dist/tex/latex/amsmath/amsopn.sty
 Package: amsopn 2016/03/08 v2.02 operator names
 )
 \inf@bad=\count87
@@ -88,11 +85,11 @@ LaTeX Font Info:    Redeclaring font encoding OMS on input line 713.
 LaTeX Info: Redefining \[ on input line 2817.
 LaTeX Info: Redefining \] on input line 2818.
 )
-(c:/texlive/2017/texmf-dist/tex/latex/fontspec/fontspec.sty
-(c:/texlive/2017/texmf-dist/tex/latex/l3kernel/expl3.sty
+(e:/TexLive/texmf-dist/tex/latex/fontspec/fontspec.sty
+(e:/TexLive/texmf-dist/tex/latex/l3kernel/expl3.sty
 Package: expl3 2017/05/13 L3 programming layer (loader) 
 
-(c:/texlive/2017/texmf-dist/tex/latex/l3kernel/expl3-code.tex
+(e:/TexLive/texmf-dist/tex/latex/l3kernel/expl3-code.tex
 Package: expl3 2017/05/13 L3 programming layer (code)
 \c_max_int=\count99
 \l_tmpa_int=\count100
@@ -185,11 +182,11 @@ Package: expl3 2017/05/13 L3 programming layer (code)
 \l__coffin_scaled_total_height_dim=\dimen141
 \l__coffin_scaled_width_dim=\dimen142
 )
-(c:/texlive/2017/texmf-dist/tex/latex/l3kernel/l3xdvipdfmx.def
+(e:/TexLive/texmf-dist/tex/latex/l3kernel/l3xdvipdfmx.def
 File: l3xdvidpfmx.def 2017/03/18 v L3 Experimental driver: xdvipdfmx
 \l__driver_tmp_box=\box43
 ))
-(c:/texlive/2017/texmf-dist/tex/latex/l3packages/xparse/xparse.sty
+(e:/TexLive/texmf-dist/tex/latex/l3packages/xparse/xparse.sty
 Package: xparse 2017/05/13 L3 Experimental document command parser
 \l__xparse_current_arg_int=\count131
 \g__xparse_grabber_int=\count132
@@ -199,7 +196,7 @@ Package: xparse 2017/05/13 L3 Experimental document command parser
 )
 Package: fontspec 2017/03/31 v2.6a Font selection for XeLaTeX and LuaLaTeX
 
-(c:/texlive/2017/texmf-dist/tex/latex/fontspec/fontspec-xetex.sty
+(e:/TexLive/texmf-dist/tex/latex/fontspec/fontspec-xetex.sty
 Package: fontspec-xetex 2017/03/31 v2.6a Font selection for XeLaTeX and LuaLaTe
 X
 \l__fontspec_script_int=\count136
@@ -215,10 +212,10 @@ X
 \l__fontspec_tmpc_dim=\dimen145
 \g__file_internal_ior=\read1
 
-(c:/texlive/2017/texmf-dist/tex/latex/base/fontenc.sty
+(e:/TexLive/texmf-dist/tex/latex/base/fontenc.sty
 Package: fontenc 2017/04/05 v2.0i Standard LaTeX package
 
-(c:/texlive/2017/texmf-dist/tex/latex/base/tuenc.def
+(e:/TexLive/texmf-dist/tex/latex/base/tuenc.def
 File: tuenc.def 2017/04/05 v2.0i Standard LaTeX file
 LaTeX Font Info:    Redeclaring font encoding TU on input line 82.
 ))
@@ -378,7 +375,7 @@ LaTeX Font Info:    Redeclaring font encoding TU on input line 82.
 . Defining command \UndeclareComposite with sig. 'mm' on line 3501.
 .................................................
 
-(c:/texlive/2017/texmf-dist/tex/latex/fontspec/fontspec.cfg)
+(e:/TexLive/texmf-dist/tex/latex/fontspec/fontspec.cfg)
 LaTeX Info: Redefining \itshape on input line 3686.
 LaTeX Info: Redefining \slshape on input line 3691.
 LaTeX Info: Redefining \scshape on input line 3696.
@@ -397,8 +394,8 @@ LaTeX Info: Redefining \- on input line 3807.
 . Defining command \liningnums with sig. 'm' on line 3906.
 .................................................
 ))
-(c:/texlive/2017/texmf-dist/tex/latex/listings/listings.sty
-(c:/texlive/2017/texmf-dist/tex/latex/graphics/keyval.sty
+(e:/TexLive/texmf-dist/tex/latex/listings/listings.sty
+(e:/TexLive/texmf-dist/tex/latex/graphics/keyval.sty
 Package: keyval 2014/10/28 v1.15 key=value parser (DPC)
 \KV@toks@=\toks19
 )
@@ -415,26 +412,26 @@ Package: keyval 2014/10/28 v1.15 key=value parser (DPC)
 \lst@lineno=\count149
 \lst@maxwidth=\dimen149
 
-(c:/texlive/2017/texmf-dist/tex/latex/listings/lstmisc.sty
+(e:/TexLive/texmf-dist/tex/latex/listings/lstmisc.sty
 File: lstmisc.sty 2015/06/04 1.6 (Carsten Heinz)
 \c@lstnumber=\count150
 \lst@skipnumbers=\count151
 \lst@framebox=\box45
 )
-(c:/texlive/2017/texmf-dist/tex/latex/listings/listings.cfg
+(e:/TexLive/texmf-dist/tex/latex/listings/listings.cfg
 File: listings.cfg 2015/06/04 1.6 listings configuration
 ))
 Package: listings 2015/06/04 1.6 (Carsten Heinz)
 
-(c:/texlive/2017/texmf-dist/tex/latex/xcolor/xcolor.sty
+(e:/TexLive/texmf-dist/tex/latex/xcolor/xcolor.sty
 Package: xcolor 2016/05/11 v2.12 LaTeX color extensions (UK)
 
-(c:/texlive/2017/texmf-dist/tex/latex/graphics-cfg/color.cfg
+(e:/TexLive/texmf-dist/tex/latex/graphics-cfg/color.cfg
 File: color.cfg 2016/01/02 v1.6 sample color configuration
 )
 Package xcolor Info: Driver file: xetex.def on input line 225.
 
-(c:/texlive/2017/texmf-dist/tex/latex/graphics-def/xetex.def
+(e:/TexLive/texmf-dist/tex/latex/graphics-def/xetex.def
 File: xetex.def 2016/07/11 v4.10 LaTeX color/graphics driver for XeTeX (L3/RRM/
 JK)
 )
@@ -567,26 +564,26 @@ Overfull \hbox (43.80396pt too wide) in paragraph at lines 127--128
  []
 
 [4]
-Overfull \hbox (23.37202pt too wide) in paragraph at lines 156--157
+Overfull \hbox (23.37202pt too wide) in paragraph at lines 155--156
 \TU/lmr/m/n/10 tion in a script to indicate special behavior like [HideInspecto
 r], [System.Serialization]; 
  []
 
 Missing character: There is no ： in font [lmroman10-regular]:mapping=tex-text;!
 [5]
-Overfull \hbox (8.49002pt too wide) in paragraph at lines 191--192
+Overfull \hbox (8.49002pt too wide) in paragraph at lines 190--191
 []\TU/lmr/bx/n/10 OnRenderImage()\TU/lmr/m/n/10 :Called after scene is complete
  to allow for post-processing
  []
 
-[6] [7] (./Script.aux) ) 
+[6] [7] [8] (./Script.aux) ) 
 Here is how much of TeX's memory you used:
  11746 strings out of 493005
- 245935 string characters out of 6137956
+ 245552 string characters out of 6140056
  331809 words of memory out of 5000000
  15690 multiletter control sequences out of 15000+600000
  4230 words of font info for 33 fonts, out of 8000000 for 9000
  1348 hyphenation exceptions out of 8191
- 35i,6n,58p,10429b,1453s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 35i,6n,58p,10398b,1453s stack positions out of 5000i,500n,10000p,200000b,80000s
 
-Output written on Script.pdf (7 pages).
+Output written on Script.pdf (8 pages).

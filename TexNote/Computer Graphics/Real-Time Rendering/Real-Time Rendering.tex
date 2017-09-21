@@ -1,0 +1,980 @@
+\documentclass[10pt, a4paper]{article}
+    \author{Ianaesthetic}
+    \title{Real-Time Rendering Note}
+    \usepackage{indentfirst, amsmath, color}
+\begin{document}
+\maketitle
+\newpage
+\section{Introduction\\}
+
+\section{The Graphics Rendering Pipeline}
+    \emph{Pipeline}: to generate, or render, a two-dimensional images in a three dimensional environment.
+        \subsection{Architecture}
+        A pipeline consists of several \emph{stages}. Rendering speed depends on the \emph{bottleneck (the slowest pipeline stage)}.
+        \\
+
+        \emph{Conceptual Stages}: Including \emph{Application Stage}, \emph{Geometry Stage}, \emph{Rasterizer Stage}.\\
+        \indent\emph{Functional Stages}: Has certain tasks to perform without specifying the way that task is executed in the pipeline.\\
+        \indent\emph{Pipeline Stages}: The actual implementations of the functional stages. It may combine or divide functional stages in order to get better performance.\\
+        
+        The rendering speed is expressed in \emph{frames per seconds (fps)} or \emph{Hertz (Hz)}. Hertz is for hardware. The output fps is determined by both pipeline and display. \\
+
+        \subsection{The Application Stage}
+        Application Stage is executed on the CPU and can be fully controlled by developers. At the end of the application stage, \emph{rendering primitive} including points, edges and other geometric elements are generated and passed onto geometry stage. \\
+        \indent Application stage hasn't got any substage, and is charge of collision detection, input interaction and acceleration algorithm.\\
+
+        \subsection{The Geometry stage} 
+        Geometry stage is responsible for per polygon and vertex operations, including several pipeline stages.\\
+        \begin{center}
+        \emph{\scriptsize  Model \& View Transform} $\to$ \emph{\scriptsize Vertex Shading} $\to$ \emph{\scriptsize Projection} $\to$ \emph{\scriptsize Clipping} $\to$ \emph{\scriptsize Screen Mapping}
+        \end{center}
+            
+            \subsubsection{Model and View Transform}
+            every model has its own \emph{model space}, and is associated with \emph{model transforms} determining its orientation and positions. Thus, a single model can have different copies called \emph{instances}.\\
+            \begin{center}
+            \noindent \emph{\footnotesize Model Space} $\xrightarrow{\tiny \emph{Model Transform}}$ \emph{\footnotesize World Space} $\xrightarrow{\tiny \emph{View Transform}}$ \emph{\footnotesize Camera Space}
+            \end{center}
+            \newpage
+            World Space is unique. In Camera Space, the camera locates at the origin and faces the negative z direction commonly.
+            
+            \subsubsection{Vertex Shading}
+                The appearance of objects are related to materials and light. \emph{Shading} determines the effect of light on specific material using \emph{shading equation}. Those computations are performed in geometry stage per vertex or in rasterizer stage per pixel.
+            
+            \subsubsection{Projection}
+                \emph{Projection} transforms the view volume to a unit cube(\emph{canonical view volume}). Projection methods involve \emph{orthographic} and \emph{perspective}.After Projection, the models are said to be in \emph{normalized device coordinate}.
+            
+            \subsubsection{Clipping} 
+                Primitives that are partially inside the canonical view volume require \emph{clipping} as only the part inside the view volume will be rendered. The previous stages are performed by programmable processing unit, while clipping is performed by fixed-operation hardware. 
+            
+            \subsubsection{Screen Mapping} 
+                \emph{Screen Mapping} maps normalized device coordinate to screen coordinate. DirectX 9 and its predecessors define the center of first pixel as $(0, 0)$. The successors of DirectX 10 and OpenGL define the center as $(0, 0)$, resulting a convenient conversions:\\
+                \begin{center}
+                    \large{\emph{d} = \textbf{\emph{floor}}(\emph{c})}\\
+                    \large{\emph{c} = \emph{d} + 0.5}
+                \end{center}
+
+                \indent Different API puts the first pixel in different places. 
+        
+        \subsection{The Rasterizer Stage}
+            Given the transformed and projected vertices and associated shading data, the Rasterizer Stage will set the color of every pixels. This process is called \emph{rasterization} or \emph{scan conversion}.
+            \begin{center}
+                \emph{Triangle Setup} $\to$ \emph{Triangle Traversal} $\to$ \emph{Pixel Shading} $\to$ \emph{Merging}
+            \end{center}
+
+            \subsubsection{Triangle Setup}
+            In this stage the differentials and other data for the triangle's surface are computed. This stage is performed by fixed-operation hardware dedicated to this task.
+            
+            \subsubsection{Triangle Traversal} 
+            Finding which samples or pixels are inside a triangle is often called \emph{Triangle Traversal} or \emph{Scan Conversion}.
+            
+            \subsubsection{Pixel Shading} 
+            Any per-pixel shading is here and resulting more color data passed to next stage. This stage is executed by programmable process unit. A lot of important technics such as \emph{texturing} is employed here. 
+
+            \subsubsection{Merging} 
+            The information for every pixel is stored in \emph{color buffer}. \emph{Merging} is responsible for combine the fragment color with the color in the buffer and visibility. This stage is not programmable but highly configurable. Visibility is done by \emph{Z-Buffer} or \emph{Depth-Buffer} by update the smallest z value. However, when rendering transparent primitives, all opaque primitives must be rendered first and then rendered other in a \textbf{back-to-front} order. \\
+            \indent The \emph{alpha channel} is associated with color buffer and stores a related opacity value. The \emph{stencil buffer} is an offscreen buffer used to record the locations of rendered primitives. It derives from primitives and can be used to control rendering into color buffer and z-buffer. All functions above are called \emph{raster operation} or \emph{blend operation}.\\
+            \indent There are also \emph{frame buffer}(consists of all the buffer), \emph{accumulation buffer}(complement to frame buffer), \emph{double buffer}(for display).
+    
+        \subsection{Through the Pipeline}
+        \newpage
+    
+
+
+    \section{The Graphics Processing Unit}
+        \emph{Graphics processing unit}(\emph{GPU}) is different from previous rasterization-only chip, evolve from configuration implementations of complex fixed operation to highly programmable blankslates. Programmable \emph{shader} is the primary means.Vertex Shader and Pixel Shader allow operations per Vertex and pixel. Geometry shader allows create and destroy primitives on the fly. 
+        
+        \subsection{GPU Pipeline Overview}
+            \noindent Vertex Shader \hfill\emph{fully programmable}\\
+            Geometry Shader \hfill\emph{fully programmable}\\
+            Clipping \hfill\emph{configurable}\\
+            Screen Mapping \hfill\emph{completely fixed}\\
+            Triangle Setup \hfill\emph{completely fixed}\\
+            Triangle Traversal \hfill\emph{completely fixed}\\
+            Pixel Shader \hfill\emph{fully programmable}\\
+            Merger \hfill\emph{configurable}\\
+            
+            The Geometry shader is optional.
+
+        \subsection{The Programmable Shader Stage}
+            Modern shader stages share a \emph{common shader core}.The common shader core is the API and unified shaders is a GPU features. Shaders are programmed using C-like \emph{shading language} which will be compiled to \emph{intermediate language}(\emph{IL}), and IL will be converted to machine language through drivers. IL can be seen as a virtual machine, with 4-way \emph{single-instruction multiple-data}(SIMD) representing positions, vectors, textures. \emph{Swizzling}, the replication of any vector component, and \emph{masking}, the specific component of vector is used, are supported. \\
+            \indent A \emph{draw call} invokes the graphics API to draw a group of primitives, so causing the graphics pipeline to execute. Inputs of shaders involve \emph{uniform} inputs that remain same in the draw call and \emph{varying} inputs. The output of GPU is strictly constrained. Uniform inputs are accessed via \emph{constant register} or \emph{constant buffer}, much more than \emph{varying input register} in which varying inputs lie. There are also \emph{temporary registers} for scratch space.\\
+            \indent Common operations are efficient in GPU and it has \emph{intrinsic functions} for complex operations.\\
+            \indent The term \emph{flow control} refers to the use of \textbf{branching instructions} to change the flow of code execution. \emph{Static flow control} depends on uniform inputs while \emph{dynamic flow control} depends on varying inputs.\\
+            Shader Programme can be compiled offline and have different output files sent to GPU via drivers as strings according to different situations.
+        
+        \subsection{The Evolution of Programmable Shading}
+        
+        \newpage
+
+        \subsection{The Vertex Shader}
+             It's worth noticing that some data manipulations happen before this stage called \emph{input assembler}, weaving streams of data to different sets of vertices and primitives. It also performs instancing, which allows an object to be drawn a number of times with different data. \\
+             \indent The Vertex Shader first process vertices of triangle shader. Each vertex is processed independently thus they can be applied to parallel.
+       
+        \subsection{The Geometry Shader} 
+            The input to the geometry shader is a single object and its associated vertices. The output can be \textbf{zero} and more primitives. The type of primitives in the input and output can be different. The geometry shader guarantee the output has the same order as the input. This stage is more about programmatically modifying incoming data or making a limited number of copies, rather than massively replicating or amplifying it.
+
+            \subsubsection{Stream Output}
+                The idea of \emph{stream output} is to gathered the output from vertex shader and geometry shader in the stream. The rasterizeraion stage can be optionally turned off and data processed in this way can be sent back allowing interaction process. 
+        
+        \subsection{The Pixel Shader} 
+            The rasterizer does not directly affect pixel's color, but generate data to describe how a triangle covers a pixel. Additional inputs are needed for the pixel shader. The pixel shader can only influence the fragment it handles for merging. One exception is dealing with gradient and derivative information, which is the special capability of pixel shader. GPU implements this by processing a group of 2 $\times$ 2 or more. However, as a group of pixels should follow do same operations, no flow control is available here.\\
+            \indent\emph{Multiple Rendering Targets}(MRT) is derived as the huge capability of pixel shader, saving resulted color data to different same-dimension even same-bit-depth buffer. For different intermediate images being computed from same data, MRT allows all the rendering being done in one pass. MRT are also related to the abilities to read from these resulting images as textures.
+
+        \subsection{The Merging Stage}
+            This stage is where stencil-buffer and Z-buffer operations occur. Other operations such as color blending are involved. Operations are highly configurable. Color blending can be set up to perform a large number of different operations. 
+        
+        \subsection{Effect}
+            As shader program can't be isolated, or some particular effects need rounds of processing, \emph{effect file} is aimed to encapsulate all the relevant information with some arguments to produce certain effects written in \emph{effect language}. 
+
+    \section{Transform} 
+        \emph{Transform} is an operation that takes entities such as points, vectors or colors and converts them in some way. A \emph{linear transform} is one that preserve vector addition and scalar multiplication, specifically:$$\textbf{f}(\textbf{x}) + \textbf{f}(\textbf{y}) = \textbf{f}(\textbf{x} + \textbf{y})$$ $$k\textbf{f}(\textbf{x}) = \textbf{f}(k\textbf{x})$$ \indent Scaling and Rotation are both linear transform while translation is not. Combining linear transform and translation, we introduce \emph{affine transform} with 4 $\times$ 4 matrices and \emph{homogeneous notation}. \\
+        \indent Vectors are presented as $\textbf{v} = (v_x, v_y, v_z, 0)^T$ and points are $\textbf{v} = (v_x, v_y, v_z, 1)^T$.
+        
+        \subsection{Basic Transform} 
+            
+            \subsubsection{Translation}
+            \begin{equation*}
+                \textbf{T}(\textbf{t}) = \textbf{T}(t_x\ t_y\ t_z) = \begin{pmatrix}
+                    1&0&0&t_x\\
+                    0&1&0&t_y\\
+                    0&0&1&t_z\\
+                    0&0&0&1
+                \end{pmatrix}
+            \end{equation*}
+            $$\textbf{T}^{-1}(\textbf{t}) = \textbf{T}(-\textbf{t})$$
+            
+            \subsubsection{Rotation}
+                Rotation, along with Translation, is \emph{rigid-body transform}, which preserves the distances between points transformed, and preserves handedness.\\
+                \indent Assume $\textbf{u}$, $\textbf{v}$, $\textbf{w}$ are orthonormal, which means:
+                
+                \begin{equation*}
+                    \textbf{u} \cdot \textbf{u} = \textbf{v} \cdot \textbf{v} = \textbf{w} \cdot \textbf{w} = 1
+                \end{equation*}
+                    \begin{equation*}
+                    \textbf{u} \cdot \textbf{v} = \textbf{v} \cdot \textbf{w} = \textbf{w} \cdot \textbf{u} = 0
+                \end{equation*}
+
+                \indent Place three vector Horizontally to form a matrix $\textbf{R}_{uvw}$
+                
+                \begin{equation*}
+                    \textbf{R}_{uvw} = \begin{pmatrix}
+                        x_u&y_u&z_u\\
+                        x_v&y_v&z_v\\
+                        x_w&y_w&z_w
+                    \end{pmatrix}
+                \end{equation*}
+
+                \indent we can find $\textbf{R}_{uvw}\textbf{u} = \textbf{x}$, $\textbf{R}_{uvw}\textbf{v} = \textbf{y}$, $\textbf{R}_{uvw}\textbf{w} = \textbf{z}$. Take $\textbf{u}$ as example:
+                
+                \begin{equation*}
+                    \textbf{R}_{uvw}\textbf{u}=\begin{pmatrix}
+                        x_u&y_u&z_u\\
+                        x_v&y_v&z_v\\
+                        x_w&y_w&z_w
+                    \end{pmatrix}
+                    \begin{pmatrix}
+                        x_u\\
+                        y_u\\
+                        z_u
+                    \end{pmatrix}
+                    =
+                    \begin{pmatrix}
+                        1\\
+                        0\\
+                        0\\
+                    \end{pmatrix}
+                    =\textbf{x}
+                \end{equation*}
+
+                \indent We then consider the inverse of the $\textbf{R}_{uvw}^T$ 
+                \begin{equation*}
+                    \textbf{R}_{uvw}^T = 
+                    \begin{pmatrix}
+                        x_u & x_v & x_w\\
+                        y_u & y_v & y_w\\
+                        z_u & z_v & z_w
+                    \end{pmatrix}
+                \end{equation*}
+                \newpage
+                \indent We can find $\textbf{R}_{uvw}^T\textbf{x}=\textbf{u}$, $\textbf{R}_{uvw}^T\textbf{y}=\textbf{v}$, $\textbf{R}_{uvw}^T\textbf{z}=\textbf{w}$. Take $\textbf{x}$ as example:
+                \begin{equation*}
+                    \textbf{R}_{uvw}^T\textbf{x}=
+                    \begin{pmatrix}
+                        x_u & x_v & x_w\\
+                        y_u & y_v & y_w\\
+                        z_y & z_v & z_w
+                    \end{pmatrix}
+                    \begin{pmatrix}
+                        1\\
+                        0\\
+                        0\\
+                    \end{pmatrix}
+                    =
+                    \begin{pmatrix}
+                        x_u\\
+                        y_u\\
+                        z_u
+                    \end{pmatrix}
+                    =\textbf{u}
+                \end{equation*}
+            \indent As $\textbf{u}$, $\textbf{v}$, $\textbf{w}$ are orthonormal, they can form a new group of base vectors. Matrix $\textbf{R}_{uvw}$ and its inverse can be perceived as the transform of the \emph{rotation} between different coordinate systems. Especially, $\textbf{R}_{uvw}$ means converting from \emph{current} base to \emph{new} base while its inverse means converting from \emph{new} base to \emph{current} base.\\
+
+            Think like above, we can easily get the formula for rotation around $x$-axis, $y$-axis, $z$-axis:
+            \newline
+            \begin{equation*}
+                \textbf{R}_{x}(\phi) = 
+                \begin{pmatrix}
+                    1 & 0 & 0 & 0\\
+                    0 & \rm{cos\phi} & \rm{-sin\phi} & 0\\
+                    0 & \rm{sin\phi} & \rm{cos\phi} & 0\\
+                    0 & 0 & 0 & 1 
+                \end{pmatrix}
+            \end{equation*}
+            \newline
+            \begin{equation*}
+                \textbf{R}_{y}(\phi) = 
+                \begin{pmatrix}
+                    \rm{cos\phi} & 0 & \rm{sin\phi} & 0\\
+                    0 & 1 & 0 & 0\\
+                    \rm{-sin\phi} & 0 & \rm{cos\phi} & 0 \\
+                    0 & 0 & 0 & 1
+                \end{pmatrix}
+            \end{equation*}
+            \newline
+            \begin{equation*}
+                \textbf{R}_{z}(\phi) = 
+                \begin{pmatrix}
+                    \rm{cos\phi} & \rm{-sin\phi} & 0 & 0\\
+                    \rm{sin\phi} & \rm{cos\phi} & 0 & 0\\
+                    0 & 0 & 1 & 0\\
+                    0 & 0 & 0 & 1
+                \end{pmatrix}
+            \end{equation*}
+            $$\textbf{R}^{-1}_i(\phi) = \textbf{R}_i(-\phi) = \textbf{R}_i^T(\phi)$$
+            \indent Attention: every rotation matrix is orthogonal and has a determinant of 1. And the \emph{trace} is constant independent of axis:$$tr(\textbf{R}) = 1 + 2\rm{cos\phi}$$
+        
+            \subsubsection{Scaling}
+            \begin{equation*}
+                \textbf{S}(\textbf{s}) = \textbf{S}(s_x\ s_y\ s_z) =
+                \begin{pmatrix}
+                    s_x & 0 & 0 & 0\\
+                    0 & s_y & 0 & 0\\
+                    0 & 0 & s_z & 0\\
+                    0 & 0 & 0 & 1
+                \end{pmatrix}
+            \end{equation*}
+            $$\textbf{S}^{-1}(\textbf{s}) = \textbf{S}(1/s_x\ 1/s_y\ 1/s_z)$$
+            \indent The scaling operation is called \emph{uniform} if $s_x = s_y = s_z$ and \emph{nonuniform} otherwise.\\
+            \newpage
+            For uniform scaling operation, there are two forms of matrix:
+            \begin{equation*}
+                \textbf{S} = 
+                \begin{pmatrix}
+                    s & 0 & 0 & 0\\
+                    0 & s & 0 & 0\\
+                    0 & 0 & s & 0\\
+                    0 & 0 & 0 & 1
+                \end{pmatrix}
+                ,\quad\quad
+                \textbf{S}^{'} = 
+                \begin{pmatrix}
+                    1 & 0 & 0 & 0\\
+                    0 & 1 & 0 & 0\\
+                    0 & 0 & 1 & 0\\
+                    0 & 0 & 0 & 1/s
+                \end{pmatrix}
+            \end{equation*}
+            \indent A negative on one or three of the components of $\textbf{s}$ gives a \emph{reflection matrix}, or \emph{mirror matrix}. If only two scale factors are negative, then we will rotate $\pi$ radians.If the matrix has a negative determinants, then it's reflective.
+
+            \indent If you want scale the axis of the orthonormal, right-oriented vectors $\textbf{f}_x$, $\textbf{f}_y$ and $\textbf{f}_z$. You can first rotate the current axis to the new one, do the scaling and then rotate it back. That is:\newline
+            \begin{equation*}
+                \textbf{F} = 
+                \begin{pmatrix}
+                    \textbf{f}_x & 0\\
+                    \textbf{f}_y & 0\\
+                    \textbf{f}_z & 0\\
+                    0 & 1
+                \end{pmatrix}
+            \end{equation*}
+            $$\textbf{S}^{'} = \textbf{F}^T\textbf{S}(\textbf{s})\textbf{F}$$
+        
+            \subsubsection{Shearing}
+            $\textbf{H}_{ij}$ means $i$ coordinate is changed by the shearing matrix and $j$ coordinate does the shearing. For example:\newline
+            \begin{equation*}
+                \textbf{H}_{xz}(s)=
+                \begin{pmatrix}
+                    1 & 0 & s & 0\\
+                    0 & 1 & 0 & 0\\
+                    0 & 0 & 1 & 0\\
+                    0 & 0 & 0 & 1
+                \end{pmatrix}
+            \end{equation*}
+            $$\textbf{H}_{ij}^{-1}(s) = \textbf{H}_{ij}(-s)$$
+            \indent Another form:\newline
+            \begin{equation*}
+                \textbf{H}_{xy}^{'}(s,\ t) =
+                \begin{pmatrix}
+                    1 & 0 & s & 0\\
+                    0 & 1 & t & 0\\
+                    0 & 0 & 1 & 0\\
+                    0 & 0 & 0 & 1
+                \end{pmatrix}
+            \end{equation*}
+            $$\textbf{H}_{xy}^{'}(s,\ t) = \textbf{H}_{xz}(s)\textbf{H}_{yz}(t)$$
+            \indent Since every shearing matrix has a determinant of 1, this is a volume preserving transformation.
+        
+            \subsubsection{Concatenation of Transforms}
+                It's associative.
+                $$\textbf{T}\textbf{R}\textbf{S}\textbf{p} = (\textbf{T}(\textbf{R}(\textbf{S}\textbf{p}))) = (\textbf{T}\textbf{R})(\textbf{S}\textbf{p})$$
+                \newpage
+        
+            \subsubsection{The Rigid-Body Transformation}
+                \emph{Rigid-body transformation} refers to that consists of only rotations and translations.\newline
+                \begin{equation*}
+                    \textbf{X} = \textbf{T}\textbf{R}=
+                    \begin{pmatrix}
+                        r_{00} & r_{01} & r_{02} & t_x\\
+                        r_{10} & r_{11} & r_{12} & t_y\\
+                        r_{20} & r_{21} & r_{22} & t_z\\
+                        0 & 0 & 0 & 1
+                    \end{pmatrix}
+                    =
+                    \begin{pmatrix}
+                        \textbf{R} & \textbf{t}\\
+                        \textbf{0}^T & 1
+                    \end{pmatrix}
+                \end{equation*}
+                \newline
+                \begin{equation*}
+                    \textbf{X}^{-1} = 
+                    \begin{pmatrix}
+                        \textbf{R}^T & -\textbf{R}^T\textbf{t}\\
+                        \textbf{0}^T & 1
+                    \end{pmatrix}
+                \end{equation*}
+            
+            \subsubsection{Normal Transformation}
+                The original Transform can't directly applied to normals, but it can be applied to tangent vector.The correct matrix for normals are actually the \emph{transpose of the original matrix's adjoint}.Attention, the normal needs normalization after the transform.\newline
+                \indent Prove when original matrix's inverse exists:\newline
+                $$\textbf{n}^T\textbf{t} = 0$$
+                $$\textbf{n}^T(\textbf{M}^{-1}\textbf{M})\textbf{t} = 0$$
+                $$(\textbf{n}^T\textbf{M}^{-1})(\textbf{M}\textbf{t}) = 0$$
+                $$(\textbf{n}^T\textbf{M}^{-1})\textbf{t}_M = 0$$
+                \indent As normal is always perpendicular to tangent:\newline
+                $$\textbf{n}_M^T = \textbf{n}^T\textbf{M}^{-1}$$
+                \indent So the real transform matrix is:\newline
+                $$\textbf{M}^{'} = (\textbf{M}^{-1})^T=({\frac{\textbf{M}^{*}}{|\textbf{M}|})^T} \to \textbf{M}^{'} = ({\textbf{M}^{*}})^T$$
+                \indent There some optimization. As the normal is a vector, translation will not affect it. In affine transformation, they will not change the $w$ component. So we only need to calculate the adjoint of the upper-left 3 $\times$ 3 component. Often even this adjoint is unnecessary: Consider the concatenation of translations, \emph{uniform} scaling and rotations. Rotations will remain same as the inverse of rotation matrix is it's transpose, which will cancel out,  and other two have no effect on normals.\\ 
+                \indent Normalization is not always needed as long as the $|\textbf{M}| = 1$. It means that the concatenation involves a scaling that $|\textbf{S}| \ne 1$\newpage 
+            
+            \subsubsection {Computations of Inverses}
+                Something about  eigenvalues and singular value decomposition.\\
+                Eigenvalue:
+                $$\textbf{A}\textbf{a} = \lambda\textbf{a}$$
+                \indent Factor $\lambda$ is called eigenvalue, and $\textbf{a}$ is called eigenvector. To calculate eigenvalue:
+                $$(\textbf{A} - \lambda\textbf{I})\textbf{a} = 0$$
+                $$|\textbf{A} - \lambda\textbf{I}| = 0$$
+                \indent When \textbf{A} is \emph{symmetric matrices} ($\textbf{A} = \textbf{A}^T$), the decomposition is quite simple for matrix \textbf{A}: 
+                $$\textbf{A} = \textbf{QD}\textbf{Q}^T$$
+                Where \textbf{Q} is an orthogonal matrix and \textbf{D} is a diagonal matrix. The columns of \textbf{Q} are the eigenvector of \textbf{A} and the diagonal elements of \textbf{D} are the eigenvalues of \textbf{A}.\\
+                
+                There is another generalization of the symmetric eigenvalue decomposition for non-symmetric matrices:\emph{singular value decomposition}(SVD).For matrix \textbf{A}: 
+                    $$\textbf{A} = \textbf{USV}^T$$
+                \indent \textbf{U},\textbf{V} are potentially different, orthogonal matrices whose column are known as \emph{singular vectors}. \textbf{S} is a diagonal matrix whose entries are \emph{singular value}. To calculate the singular value and \textbf{U}, \textbf{V}, take \textbf{U} as example:
+                    $$\textbf{M} = \textbf{AA}^T = (\textbf{USV}^{T})(\textbf{USV}^T)^T = \textbf{USV}^T\textbf{V}\textbf{S}^T\textbf{U}^T = \textbf{U}\textbf{S}^2\textbf{U}^T$$
+                \indent This is the form of eigenvalue decomposition for matrix \textbf{M}(which is a symmetric matrix) and we can get \textbf{U}, \textbf{S}. Set $\textbf{M} = \textbf{A}^T\textbf{A}$can work \textbf{V} out.\\
+                
+                This two kinds of decomposition stands for two kinds of transform decomposition, which can lead us to the inverse of the transformation(only consider the left upper 3 $\times 3$ part). 
+                $$\textbf{A} = \textbf{RSR}^T$$ 
+                \indent Where $\textbf{v}_1$, $\textbf{v}_2$, $\textbf{v}_3$ are the eigenvectors and $\lambda_1$, $\lambda_2$, $\lambda_3$ are the eigenvalues.
+                \begin{enumerate}
+                    \item  Rotate the coordinate to make $\textbf{v}_1$ $\textbf{v}_2$ $\textbf{v}_3$ become the coordinate axis.
+                    \item Scale in $x$ and $y$ by $(\lambda_1\ \lambda_2\ \lambda_3)$
+                    \item Rotate the coordinate to the original one.
+                \end{enumerate}
+
+                \indent It's similar for singular decomposition which form is: 
+                $$\textbf{A} = \textbf{R}_2\textbf{S}\textbf{R}_1^T$$
+
+                There are also some basic ways to compute inverse, and another thing is when dealing with vector, we only needs to calculate the left upper 3 $\times$ 3 matrix's inverse.
+                \newpage
+
+        \subsection{Special Matrix Transform Operations}
+            \subsubsection{The Euler Transform}
+                The idea to \emph{Euler transform} is pretty easy, as to decompose a rotation to the rotation around three different axis:
+                $$\textbf{E}(h,\ p,\ r) = \textbf{R}_i(r)\textbf{R}_j(p)\textbf{R}_k(h)$$
+                \indent However, when $p = \frac{\pi}{2}$, the \emph{gimbal lock} will happen as one degree of freedom is lost. Directly, it will lead to one of axis in the model space to be rounded twice. Mathematically, when $p$ is set to $\frac{\pi}{2}$, take one order as example: 
+                \begin{equation*}
+                    \textbf{E}(h,\ \frac{\pi}{2},\ r) =
+                    \begin{pmatrix}
+                        \rm{cos}(\emph{r} + \emph{h}) & 0 & \rm{sin}(\emph{r} + \emph{h}) \\
+                        \rm{sin}(\emph{r} + \emph{h}) & 0 & \rm{-cos}(\emph{r} + \emph{h})\\
+                        0 & 1 & 0
+                    \end{pmatrix}
+                \end{equation*}
+                \indent Since the matrix is only depend on $(r + h)$, we can see on degree of freedom is lost. Meanwhile, the \emph{interpolation} of Euler transform is not interpolating the angle, which is its main weakness. 
+                
+            \subsubsection{Extracting Parameters from the Euler transform}
+                \begin{equation*}
+                    \textbf{F} = 
+                    \begin{pmatrix}
+                        f_{00} & f_{01} & f_{02}\\
+                        f_{10} & f_{11} & f_{12}\\
+                        f_{20} & f_{21} & f_{22}
+                    \end{pmatrix}
+                    = \textbf{R}_z(r)\textbf{R}_x(p)\textbf{R}_z(h) = \textbf{E}(h,\ p,\ r)
+                \end{equation*}
+                \newline
+                \begin{equation*}
+                    \textbf{F} = 
+                    \begin{pmatrix}
+                        \rm{cos}\emph{r}\rm{cos}\emph{h} - \rm{sin}\emph{r}\rm{sin}\emph{p}\rm{sin}\emph{h} & 
+                        -\rm{sin}\emph{r}\rm{cos}\emph{p} & 
+                        \rm{cos}\emph{r}\rm{sin}\emph{h} + \rm{sin}\emph{r}\rm{sin}\emph{p}\rm{cos}\emph{h} \\
+                        \rm{sin}\emph{r}\rm{cos}\emph{h} + \rm{cos}\emph{r}\rm{sin}\emph{p}\rm{sin}\emph{h} &
+                        \rm{cos}\emph{r}\rm{cos}\emph{p} &
+                        \rm{sin}\emph{r}\rm{sin}\emph{h} - \rm{cos}\emph{r}\rm{sin}\emph{p}\rm{cos}\emph{h} \\
+                        -\rm{cos}\emph{p}\rm{sin}\emph{h} &
+                        \rm{sin}\emph{p} & 
+                        \rm{cos}\emph{p}\rm{cos}\emph{h}
+                    \end{pmatrix} 
+                \end{equation*} 
+                \newline
+                $$\frac{f_{01}}{f_{11}} = -\rm{tan}\emph{r}\quad\quad \frac{f_{20}}{f_{22}} = -\rm{tan}\emph{h}$$\newline
+                $$h = \textbf{atan2}(-f_{20}, -f_{22})$$  $$ p = arcsin{f_{21}}$$ $$r = \textbf{atan2}(-f_{10}, -f_{11})$$
+                \indent In a special case, when $f_{10} = 0 $ implying $f_{21} = \pm 1$:\newline
+                \begin{equation*}
+                    \textbf{F} = 
+                    \begin{pmatrix}
+                        \rm{cos}(\emph{r} + \emph{h}) & 0 & \rm{sin}(\emph{r} + \emph{h}) \\
+                        \rm{sin}(\emph{r} + \emph{h}) & 0 & \rm{-cos}(\emph{r} + \emph{h})\\
+                        0 & \pm 1 & 0 
+                    \end{pmatrix} 
+                \end{equation*} 
+                $$\emph{h} = 0 \quad\quad \emph{r} = \frac{f_{10}}{f_{00}}$$
+        
+            \subsubsection{Matrix Decomposition}
+                \newpage
+            \subsubsection{Rotation about an Arbitrary Axis} 
+                Use the given vector $\text{r}$ to form orthonormal axis of base $\textbf{r}$, $\textbf{s}$, $\textbf{t}$. $\text{r}$ needs normalization first. Use the base to form matrix $\textbf{M}$ and do the transform.
+                \begin{equation*} \bar{\textbf{s}} = 
+                    \left\{
+                    \begin{array}{lr}
+                        (0, -r_z, r_y),\ if & |r_x| < |r_y|\  and\ |r_x| < |r_z| \\
+                        (-r_z, 0, r_x),\ if & |r_y| < |r_x|\  and\ |r_y| < |r_z| \\
+                        (-r_y, 0, r_x),\ if & |r_z| < |r_x|\  and\ |r_z| < |r_y| 
+                    \end{array}
+                    \right.
+                \end{equation*} 
+                $$\textbf{s} = \frac{\bar{\textbf{s}}}{\parallel{\bar{\textbf{s}}}\parallel} $$
+                $$\textbf{t} = \textbf{r}\times\textbf{s}$$
+                \begin{equation*}
+                    \textbf{M} = 
+                    \begin{pmatrix}
+                        \textbf{r}^T \\
+                        \textbf{s}^T \\
+                        \textbf{t}^T
+                    \end{pmatrix} 
+                \end{equation*} 
+                $$\textbf{X} = \textbf{M}^T\textbf{R}_{x}(\phi)\textbf{M}$$
+                
+                Another method for a normalized vector $\textbf{r}$ by $\phi$ radians: 
+                \begin{equation*}
+                    \textbf{X} = 
+                    \begin{pmatrix}
+                        \cos{\phi} + (1 - \cos{phi})r_x^2 & (1 - \cos{\phi})r_xr_y - r_z\sin{\phi} & (1 - \cos{\phi}r_xr_z + r_y\sin{\phi} \\
+                        (1 - \cos{\phi})r_xr_y + r_z\sin{\phi} & \cos{\phi} + (1 - \cos{\phi})r_y^2 & (1 - \cos{\phi}r_yr_z - r_x\sin{\phi} \\
+                        (1 - \cos{\phi})r_xr_z - r_y\sin{\phi} & (1 - \cos{\phi})r_yr_z + r_x\sin{\phi} & (\cos{phi} + (1 - \cos{\phi})r_z^2
+                    \end{pmatrix}
+                \end{equation*} 
+                \newpage
+        
+        \subsection{Quaternions}
+            \subsubsection{Mathematical background}
+            \emph{Quaternions} are much more straight forward than matrix and Euler transform in rotation and orientation.\\    
+            Definition:\\
+            $$\hat{\textbf{q}} = (\textbf{q}_v,\ \textbf{q}_w) = iq_x + jq_y + kq_z + q_w = \textbf{q}_v + q_w,$$
+            $$\textbf{q}_v = iq_x + jq_y + kq_z + q_w = (q_x,\ q_y,\ q_z)$$
+            $$i^2 = j^2 = k^2 = -1, jk = -kj = i, ki = -ik = j, ij = -ji = k$$
+            \indent All operations of $\textbf{q}_v$ are the same as the vectors'.\\
+            \indent Multiplication: 
+            \begin{align*}
+                \hat{\textbf{q}}\hat{\textbf{r}} &= (iq_x + jq_y + kq_z + q_w)(ir_x + jr_y + kr_z + r_w)\\
+                    &= (\textbf{q}_v\times\textbf{r}_v + r_w\textbf{q}_v + q_w\textbf{r}_v,\ q_wr_w - \textbf{q}_v\cdot  \textbf{r}_v)
+            \end{align*}
+            \indent Addition:
+                $$\hat{\textbf{q}} + \hat{\textbf{r}} = (\textbf{q}_v + \textbf{r}_v,\ q_w + r_w)$$
+            \indent Conjugate:
+                $$(\hat{\textbf{q}})^* = (-\textbf{q}_v,\ q_w)$$
+            \indent Norm: 
+                $$n(\hat{\textbf{q}}) = \sqrt{\hat{\textbf{q}}\hat{\textbf{q}}^*} =  \sqrt{\textbf{q}_v\cdot\textbf{q}_v + q_w^2} = \sqrt{q_x^2 + q_y^2 + q_z^2 + q_w^2}$$ 
+            \indent Identity:
+                $$\hat{\textbf{i}} = (\textbf{0}, 1)$$
+            \indent Inverse: 
+                $$\hat{\textbf{q}}^{-1} = \frac{\hat{\textbf{q}}^*}{n(\hat{\textbf{q}})^2}$$ 
+                \indent Commutative: 
+                $$\hat{\textbf{q}}s = s\hat{\textbf{q}} = (\textbf{0}, s)(\textbf{q}_v, q_w) = (s\textbf{q}_v, sq_w)$$
+            \indent Conjugate rules: 
+                $$(\hat{\textbf{q}}^*)^* = \hat{\textbf{q}}$$
+                $$(\hat{\textbf{q}} + \hat{\textbf{r}})^* = \hat{\textbf{q}}^* + \hat{\textbf{r}}^*$$
+                $$(\hat{\textbf{q}}\hat{\textbf{r}})^* = \hat{\textbf{r}}^*\hat{\textbf{q}}^*$$
+            \indent Norm rules: 
+                $$n(\hat{\textbf{q}}^*) = n(\hat{\textbf{q}})$$
+                $$n(\hat{\textbf{q}}\hat{\textbf{r}}) = n(\hat{\textbf{q}})n(\hat{\textbf{r}})$$
+            \indent Linearity: 
+                $$\hat{\textbf{p}}(s\hat{\textbf{q}} + t\hat{\textbf{r}}) = s\hat{\textbf{p}}\hat{\textbf{q}} + t\hat{\textbf{p}}\hat{\textbf{r}}$$
+                $$(s\hat{\textbf{p}} + t\hat{\textbf{q}})\hat{\textbf{r}} = s\hat{\textbf{p}}\hat{\textbf{r}} + t\hat{\textbf{q}}\hat{\textbf{r}}$$
+            \indent Associativity:
+                $$\hat{\textbf{p}}(\hat{\textbf{q}}\hat{\textbf{r}}) = (\hat{\textbf{p}}\hat{\textbf{q}})\hat{\textbf{r}}$$
+            \indent Unit quaternion which is $n(\hat{\textbf{q}}) = 1$ with $\textbf{u}_q\cdot\textbf{u}_q = 1$: 
+                $$\hat{\textbf{q}} = (\sin{\phi}\textbf{u}_q, \cos{\phi}) = \sin{\phi}\textbf{u}_q + \cos{\phi} = e^{\phi\textbf{u}_q}$$
+                $$\log{(\hat{\textbf{q}})} = \log{(e^{\phi\textbf{u}_q})} = \phi\textbf{u}_q$$
+                $$(\hat{\textbf{q}})^t = e^{t\phi\textbf{u}_q} = \sin{(\phi t)}\textbf{u}_q + \cos{(\phi t)}$$
+        
+            \subsubsection{Quaternion Transform}
+                The \emph{unit quaternions} can represent any three-dimensional rotation. Put the four coordinates of a point or a vector $(p_x,\ p_y,\ p_z,\ p_w)^T$ into a quaternion $\hat{\textbf{p}}$. With the unit quaternion $\hat{\textbf{q}} = (\sin{\phi}\textbf{u}_q, \cos{\phi})$:
+                $$\hat{\textbf{q}}\hat{\textbf{p}}\hat{\textbf{q}}^{-1}$$
+                
+                the vector or point will be rotated around axis $\textbf{u}_q$ by $\textbf{2$\phi$}$. Not that here $\hat{\textbf{q}}^{-1} = \hat{\textbf{q}}^{*}$. Any nonzero real multiple of $\hat{\textbf{q}}$ also represents the same transform. The transform is also the same as $(\textbf{u}_q, q_w)$ for any $q_w$.Extracting a quaternion from a matrix can return either $\hat{\textbf{q}}$ or $-\hat{\textbf{q}}$.
+
+                The concatenation is similar to matrix: 
+                $$\hat{\textbf{r}}(\hat{\textbf{q}}\hat{\textbf{p}}\hat{\textbf{q}}^{*})\hat{\textbf{r}}^{*} = (\hat{\textbf{r}}\hat{\textbf{q}})\hat{\textbf{p}}(\hat{\textbf{r}}\hat{\textbf{q}})^{*}$$
+                
+                The conversion from quaternion to matrix as $s = \frac{2}{n(\hat{\textbf{q}})}$:
+                    \begin{equation*}
+                        \textbf{M}^q = 
+                        \begin{pmatrix}
+                            1 - s(q_y^2 + q_z^2) & s(q_xq_y - q_wq_z) & s(q_xq_z + q_wq_y) & 0\\
+                            s(q_xq_y + q_wq_z) & 1 - s(q_x^2 + q_z^2) & s(q_yq_z - q_xq_w) & 0\\
+                            s(q_xq_z - q_yq_w) & s(q_yq_z + q_wq_x) & 1 - s(q_x^2 + q_y^2) & 0\\
+                            0 & 0 & 0 & 1
+                        \end{pmatrix}
+                    \end{equation*}
+                
+                For unit quaternion especially: 
+                \begin{equation*}
+                    \textbf{M}^q = 
+                    \begin{pmatrix}
+                        1 - 2(q_y^2 + q_z^2) & 2(q_xq_y - q_wq_z) & 2(q_xq_z + q_wq_y) & 0\\
+                        2(q_xq_y + q_wq_z) & 1 - 2(q_x^2 + q_z^2) & 2(q_yq_z - q_xq_w) & 0\\
+                        2(q_xq_z - q_yq_w) & 2(q_yq_z + q_wq_x) & 1 - 2(q_x^2 + q_y^2) & 0\\
+                        0 & 0 & 0 & 1
+                    \end{pmatrix}
+                \end{equation*}
+
+                To extract quaternion from matrix:
+                $$\textbf{M}_{21}^q - \textbf{M}_{12}^q = 4q_wq_x$$
+                $$\textbf{M}_{02}^q - \textbf{M}_{20}^q = 4q_wq_y$$
+                $$\textbf{M}_{10}^q - \textbf{M}_{01}^q = 4q_wq_z$$
+                $$tr(\textbf{M}^q) = 4q_w^2$$
+                
+                It's better to first find out the biggest entry for numerical precision.
+                \newpage
+                \emph{Spherical linear interpolation} is used to interpolated between two quaternions as quaternion can be seen as a point on a four-dimensional sphere. The original form for any interpolation is:
+                $$\textbf{s}(\textbf{q}, \textbf{r}, t) = \frac{\sin{(1 - t)\phi}}{\sin{\phi}}\textbf{q} + \frac{\sin{t\phi}}{\sin{\phi}}\textbf{r}$$
+
+                \textbf{q}, \textbf{r} are points on the sphere and $\phi$ is the angle between two radiuses towards points. For quaternion it can also be considered as: 
+                $$\hat{\textbf{s}}(\hat{\textbf{q}}, \hat{\textbf{r}},\ t) = (\hat{\textbf{r}}\hat{\textbf{q}}^{-1})^t\hat{\textbf{q}}$$
+                
+                in quaternions, $\phi$ can be computed through $\cos{\phi} = q_xr_x + q_yr_y + q_zr_z + q_wr_w$ The interpolate path is arc on the sphere.\\
+                
+                The transform from one vector \textbf{s} to \textbf{t}: First \textbf{s} and \textbf{t} should be normalized. 
+                $$\textbf{u} = \textbf{s} \times \textbf{t}$$
+                $$e = \textbf{s} \cdot \textbf{t} = \cos{2\phi}$$
+                $$\parallel\textbf{u}\parallel = \parallel\textbf{s}\times\textbf{t}\parallel = \sin{2\phi}$$
+                $$\hat{\textbf{q}} = (\frac{\sin{\phi}}{\sin{2\phi}}\textbf{u}, \cos{\phi}) = (\frac{1}{\sqrt{2(1 + e)}}(\textbf{s} \times \textbf{t}), \frac{\sqrt{2(1 + e)}}{2})$$
+                \indent For matrix form(this form can avoid numerical issue): 
+                \begin{equation*}
+                    \textbf{R}(\textbf{s},\ \textbf{t}) = 
+                    \begin{pmatrix}
+                        e + hu_x^2 & hu_xu_y - u_z & hu_xu_z + u_y & 0 \\
+                        hu_xu_y + u_z & e + hu_y^2 & hu_yu_z - u_x & 0 \\
+                        hu_xu_z - u_y & hu_yu_z + u_x & e + hu_z^2 & 0 \\
+                        0 & 0 & 0 & 1
+                    \end{pmatrix}
+                \end{equation*}
+                $$ h  = \frac{1 - \cos{2\phi}}{\sin^2{2\phi}} = \frac{1 - e}{\textbf{u} \cdot \textbf{u}} = \frac{1}{1 + e}$$
+                \indent For $2\phi \approx 0$, transform matrix is identity; for $2\phi \approx \pi$, we can choose one of the vector as the axis to rotate by.
+                \newpage 
+
+        \subsection{Vertex Blending}
+            Consider the transformation of the arms made up of forearm and upper arm. When they are both \emph{rigid-body}, the joint will be presented as the overlap, which is not flexible. \emph{stitching} is the technique that the join is an elastic skin on which vertex may have different transforms of the forearm or upper arm. One implementation is that keep the transforms the same in a triangle. 
+            \emph{Vertex blending}, which is also called \emph{skinning}, \emph{enveloping}, and \emph{skeleton-subspace deformation}, the object has a skeleton of \emph{bones} and \emph{skin} referring to whole mesh. Every vertex will be affected by more than one bones thus having many different transforms. To blend all these transforms, in mathematical background:
+                $$\textbf{u}(t) = \sum_{i = 0}^{n - 1}w_i\textbf{B}_i(t)\textbf{M}_i^{-1}\textbf{p},\quad \rm{where}\quad \sum_{i = 0}^{n - 1}w_i = 1,\quad w_i > 0$$
+            \indent \textbf{u} is the final output that change with time $t$; $\textbf{M}_i$ is the  transform from the bone's coordinate space to the world space; $\textbf{B}_i$ is the transform in the world space; $\textbf{p}$ stands for the vertex.\\
+            
+            In implementations, $\sum{i = 0}^{n - 1}w_i$ can be out of range [0, 1] for specific blending algorithm like \emph{morph targets}. \emph{Dual quaternions} are employed to resolve unwanted folding, twisting and self-intersection.
+        \subsection{Morphing}
+            \emph{Morphing} uses linear interpolation to represent frames between key frames. After we find the one-to-one \emph{vertex correspondence} which may be very difficult, the interpolation is obvious enough:
+                $$\textbf{m} = (1 - s)\textbf{p}_0 + s\textbf{p}_1,\quad s = \frac{t - t_0}{t_1 - t_0}$$
+            \indent \emph{Morph targets}, or \emph{blend shapes} is used to interpolate between shapes. Consider we have a initial shape $\textbf{N}$ and other shape models $\textbf{P}_i$. $\textbf{D}_i = \textbf{P}_i - \textbf{N}$ stands for data describing the differentials between models and initial. An morphed model \textbf{M} can be obtained by: 
+                $$\textbf{M} = \textbf{N} + \sum_{i = 0} ^ {n - 1}w_i\textbf{D}_i$$
+            \indent $w_i$ can be negative symbolizing a inverse change of the model.
+            \newpage
+        
+        \subsection{Projection}
+            Setting: we are looking at negative $z$-axis as DirectX.
+            \subsubsection{Orthographic Projection}
+                The simplest one with intervals on $z$-axis from $n$(near plane) to $f$(far plane) ($n > f$)
+                \begin{equation*}
+                    \textbf{P}_o = 
+                    \begin{pmatrix}
+                        1 & 0 & 0 & 0 \\
+                        0 & 1 & 0 & 0 \\
+                        0 & 0 & 0 & 0 \\
+                        0 & 0 & 0 & 1 
+                    \end{pmatrix} 
+                \end{equation*} 
+            \indent Often the orthographic projection is expressed in terms of a AABB(\emph{Axis-Aligned Bounding Box}) with it's minimum corner$(l, b, n)$ and maximum $(r, t, f)$. The transform involves first translate it to the origin and then scale it to make it in the canonical view volume. For OpenGL, the minimum corner of canonical view volume is$(-1, -1, -1)$ and maximum corner is $(1, 1, 1)$ while the DirectX's bounds are $(-1, -1, 0)$ and $(-1, -1, 1)$.\\
+            \indent Theoretically: 
+                \begin{align*}
+                    \textbf{P}_o = \textbf{S}(\textbf{s})\textbf{T}(\textbf{t}) 
+                    &= 
+                    \begin{pmatrix}
+                        \frac{2}{r - l} & 0 & 0 & 0\\
+                        0 & \frac{2}{t - b} & 0 & 0\\
+                        0 & 0 & \frac{2}{f - n} & 0\\
+                        0 & 0 & 0 & 1
+                    \end{pmatrix}
+                    \begin{pmatrix}
+                        1 & 0 & 0 & -\frac{l + r}{2}\\
+                        0 & 1 & 0 & -\frac{t + b}{2}\\
+                        0 & 0 & 1 & -\frac{f + n}{2}\\
+                        0 & 0 & 0 & 1 
+                    \end{pmatrix}\\
+                    &=
+                    \begin{pmatrix}
+                        \frac{2}{r - l} & 0 & 0 & -\frac{r + l}{r - l}\\
+                        0 & \frac{2}{t - b} & 0 & -\frac{t + b}{t - b}\\
+                        0 & 0 & \frac{2}{f - n} & -\frac{n + f}{f - n}\\
+                        0 & 0 & 0 & 1
+                    \end{pmatrix}
+                \end{align*}
+            \indent For DirectX, we should apply an additional transform for different $z$ intervals:
+            \begin{align*}
+                \textbf{P}_{o[0, 1]}
+                &= 
+                \begin{pmatrix}
+                    1 & 0 & 0 & 0\\
+                    0 & 1 & 0 & 0\\
+                    0 & 0 & 0.5 & 0.5\\
+                    0 & 0 & 0 & 1 
+                \end{pmatrix}
+                \begin{pmatrix}
+                    \frac{2}{r - l} & 0 & 0 & -\frac{r + l}{r - l}\\
+                    0 & \frac{2}{t - b} & 0 & -\frac{t + b}{t - b}\\
+                    0 & 0 & \frac{2}{f - n} & -\frac{n + f}{f - n}\\
+                    0 & 0 & 0 & 1
+                \end{pmatrix}\\
+                &=
+                \begin{pmatrix}
+                \frac{2}{r - l} & 0 & 0 & -\frac{r + l}{r - l}\\
+                0 & \frac{2}{t - b} & 0 & -\frac{t + b}{t - b}\\
+                0 & 0 & \frac{1}{f - n} & -\frac{n}{f - n}\\
+                0 & 0 & 0 & 1
+                \end{pmatrix}
+            \end{align*}
+            \indent As a left-handed projection is used after projection, a reflect transform is needed:\\
+            \begin{equation*}
+                \textbf{M} =
+                \begin{pmatrix}
+                    1 & 0 & 0 & 0 \\
+                    0 & 1 & 1 & 0 \\ 
+                    0 & 0 & -1 & 0\\
+                    0 & 0 & 0 & 1
+                \end{pmatrix}
+            \end{equation*}
+        \newpage 
+
+        \subsubsection{Prospective Projection}
+            \emph{Prospective projection} project point $\textbf{p}$ to point $\textbf{q}$ on plane $-d, d > 0$:
+                $$ \frac{q_x}{p_x} = \frac{-d}{p_z} \iff q_x = \frac{-dp_x}{p_z}$$
+            
+            in matrix form: 
+                \begin{equation*}
+                    \textbf{P}_p = 
+                    \begin{pmatrix}
+                        1 & 0 & 0 & 0 \\
+                        0 & 1 & 0 & 0 \\
+                        0 & 0 & 1 & 0 \\
+                        0 & 0 & -\frac{1}{d} & 0
+                    \end{pmatrix}
+                \end{equation*}
+                \begin{equation*} 
+                    \textbf{q} = \textbf{P}_p\textbf{p} = 
+                    \begin{pmatrix}
+                    1 & 0 & 0 & 0 \\
+                    0 & 1 & 0 & 0 \\
+                    0 & 0 & 1 & 0 \\
+                    0 & 0 & -\frac{1}{d} & 0
+                    \end{pmatrix}
+                    \begin{pmatrix}
+                        p_x\\
+                        p_y\\
+                        p_z\\
+                        1
+                    \end{pmatrix}
+                    =
+                    \begin{pmatrix}
+                        p_x\\
+                        p_y\\
+                        p_z\\
+                        -\frac{p_z}{d}
+                    \end{pmatrix}
+                    \iff
+                    \begin{pmatrix}
+                        -\frac{dp_x}{p_z}\\
+                        -\frac{dp_y}{p_z}\\
+                        -d\\
+                        1
+                    \end{pmatrix}
+                \end{equation*}
+                
+            Like orthogonal projection, rather than projecting onto a plane, we transform the \emph{view frustum} to canonical view volume with $(l, r, b, t, n, f)$(minimum corner: $(l, b, n)$ and maximum corner $(r, t, n)$ on near plane). We can concatenate the transform from view frustum to rectangular and orthogonal transform. The following transform $\textbf{P}_t$ guarantees that all points on the near plane remain the same. 
+            \begin{align*}
+                \textbf{P}_p &= \textbf{P}_o\textbf{P}_t\\
+                &= \begin{pmatrix}
+                    \frac{2}{r - l} & 0 & 0 & -\frac{r + l}{r - l}\\
+                    0 & \frac{2}{t - b} & 0 & -\frac{t + b}{t - b}\\
+                    0 & 0 & \frac{2}{f - n} & -\frac{n + f}{f - n}\\
+                    0 & 0 & 0 & 1
+                \end{pmatrix}
+                \begin{pmatrix}
+                    n & 0 & 0 & 0\\
+                    0 & n & 0 & 0\\
+                    0 & 0 & n + f & -2fn\\
+                    0 & 0 & 1 & 0
+                \end{pmatrix}\\
+                &=\begin{pmatrix}
+                    \frac{2n}{r - l} & 0 & -\frac{r + l}{r - l} & 0\\
+                    0 & \frac{2n}{t - b} & -\frac{t + b}{t - b} & 0\\
+                    0 & 0 & \frac{f + n}{f - n} & -\frac{2fn}{f - n}\\
+                    0 & 0 & 1 & 0
+                \end{pmatrix}
+            \end{align*} 
+
+            For OpenGL, as $n^{'} = -n$, $f^{'} = -f$:
+            \begin{equation*}
+                \textbf{P}_{OpenGL} = \textbf{P}_o\textbf{S}(1,\ 1,\ -1) = 
+                \begin{pmatrix}
+                    \frac{2n^{'}}{r - l} & 0 & -\frac{r + l}{r - l} & 0\\
+                    0 & \frac{2n^{'}}{t - b} & -\frac{t + b}{t - b} & 0\\
+                    0 & 0 & \frac{f^{'} + n^{'}}{f^{'} - n^{'}} & -\frac{2f^{'}n^{'}}{f^{'} - n^{'}}\\
+                    0 & 0 & 1 & 0
+                \end{pmatrix}
+            \end{equation*}
+        
+            For DirectX, as it implements left-handed coordinates and $z$-interval in [0, 1]:
+            \begin{equation*}
+                \textbf{P}_{p[0,1]} = \textbf{P}_{o[0, 1]}\textbf{S}(1,\ 1,\ -1) = 
+                \begin{pmatrix}
+                    \frac{2n^{'}}{r - l} & 0 & -\frac{r + l}{r - l} & 0\\
+                    0 & \frac{2n^{'}}{t - b} & -\frac{t + b}{t - b} & 0\\
+                    0 & 0 & \frac{f^{'}}{f^{'} - n^{'}} & -\frac{f^{'}n^{'}}{f^{'} - n^{'}}\\
+                    0 & 0 & 1 & 0
+                \end{pmatrix}
+            \end{equation*}
+            \newpage
+
+\section{Visual Appearance}
+    \subsection{Visual Phenomena} 
+        Light is emitted by light sources, scattered by object and finally absorbed by a sensor.
+    \subsection{Light Source}
+        Light discussed here are \emph{directional lights}, presented by \emph{light vector} \textbf{l}. $\textbf{l}$ has a length of 1 and always point to the \emph{opposite} of the direction that light travels. The science measuring of light is \emph{radiance}. The emission quantity of a direction light source is \emph{irradiance}, which stands for the power through a unit area perpendicular to \textbf{l}, describing the brightness of an area(like surface). We represent irradiance as an RBG vector as light has color. Environmental light is called \emph{ambient light}.
+            
+        The surface irradiance is equal to irradiace measured perpendicular to \textbf{l} times the cosine of the angle $\theta_i$ between \textbf{l} and normal \textbf{n}.Irraidance is proportional to the \emph{density} of light and inversely proportional to the \emph{distance} between rays. We use $E$ to stand for irriaidance:
+        $$E = E_L\bar{\cos{\theta_i}} = E_L \max(\textbf{l}\cdot\textbf{n},\ 0)$$
+        
+        In reality the direction of light is arbitrary, requiring a \emph{light meter} to measure. For multiple light sources: 
+        $$E = \sum_{k = 1}^{n}E_{L_k}\bar{\cos{\theta_{i_k}}}$$
+    
+    \subsection{Material}
+        Fundamentally, all light-matter interaction are the result of two phenomena:\emph{scattering} and \emph{absorption}. Scattering happens when light encounters any kind of optical discontinuity, usually interface between surface and air, involving \emph{reflection} and \emph{refraction}. Absorption happens inside matter and causes some of the light to be converted into another kind of energy and disappear, which reduces the amount but don't affect its direction. 
+        
+        In opaque objects, surface shading equation is divided to two parts: \emph{specular term} representing the light that was reflected at the surface, and \emph{diffuse term} representing light which has undergone transmission, absorption and scattering. To characterize by a shading equation, we need to represent the amount and direction of \emph{out going light} based on the amount and direction of the \emph{incoming light}.
+
+        Incoming illumination is measured as surface irradiance. The outgoing light is measured as \emph{exitance} with symbol \textbf{M}. Light-matter interaction is linear. The ratio of existance and irradiance is between 0 to 1 in opaque objects and differentiates in colors. There are represented as RGB vector called the \emph{surface color} \textbf{c}.It can be divided into two terms \emph{specular color} $\textbf{c}_{\rm{spec}}$ and \emph{diffuse color} $\textbf{c}_{\rm{diff}}$. They are dependent on the its composition.
+        
+        In this chapter we assume diffuse term has no directionality. The directional distribution of the specular term depends on the surface smoothness, which is also involved in shading. Smoothness can either be a parameter in shading equation, or be made into model or texture, depending on the situation. 
+
+    \subsection{Sensor}
+        Sensors to form images should include a light-proof enclosure with a single small \emph{aperture}(opening) that restricts the directions of light. The combination of enclosure, lens and aperture causes the sensor to be \emph{directionally specific}. That is, the sensor measure average \emph{radiance}($\textbf{L}$), the density of light flow per unit area per incoming direction, rather than average irradiance, the density of light flow per unit area from all incoming direction. Radiance can used to describe the brightness and color of a ray of light. 
+
+        In the model, each sensor only measure a single radiance sample which is along a ray goes through the sensor and the center of perspective projection. The detection of the sensor is replaced by the shader equation evaluation to evaluate radiance. This ray in the equation is represented as \emph{view vector} $\textbf{v}$ whose length is set to be 1. After the evaluation, the transform between radiance and signal is required. The physical sensors measure the \emph{average} value of the radiance over their area, over incoming directions focused by the lens, and over a time interval. 
+    
+    \subsection{Shading}
+        \emph{Shading} is the process of using an equation to compute the outgoing radiance $\textbf{L}_o$ along the view ray, $\textbf{v}$, based on the material properties and light sources. In this chapter we will introduce a simple shading model. 
+            $$M_{\rm{diff}} = \textbf{c}_{\rm{diff}} \otimes E_L\bar{\cos{\theta_i}}$$
+            $$L_{\rm{diff}} = \frac{M_{\rm{diff}}}{\pi} = \frac{\textbf{c}_{\rm{diff}}}{\pi} \otimes E_L\bar{\cos{\theta_i}}$$
+        
+        This type of shading term is also called \emph{Lambertian}.In real time shading we will fold $\frac{1}{\pi}$ into $E_L$. 
+
+        Similarly, for specular term: 
+            $$M_{\rm{spec}} = \textbf{c}_{\rm{spec}} \otimes E_{L}\bar{\cos{\theta_i}}$$
+        As the specular term is directional, we introduce \emph{half vector} $\textbf{h}$(some of the explanation is in chapter 7):
+            $$\textbf{h} = \frac{\textbf{l} + \textbf{v}}{\parallel \textbf{l} + \textbf{v} \parallel}$$
+            \begin{align*} L_{\rm{spec}}(\textbf{v}) &= \frac{m + 8}{8\pi}\bar{\cos^m{\theta_h}}M_{\rm{spec}}\\
+             &= \frac{m + 8}{8\pi}\bar{\cos^m{\theta_h}}\textbf{c}_{\rm{spec}} \otimes E_{L}\bar{\cos{\theta_i}}
+            \end{align*}
+        
+        where $\theta_h$ is the angle between $\textbf{h}$ and $\textbf{n}$.
+        
+        The total outgoing radiance $\textbf{L}_o$:
+        $$\textbf{L}_o(\textbf{v}) = (\frac{\textbf{c}_{\rm{diff}}}{\pi} + \frac{m + 8}{8\pi}\bar{\cos^m{\theta_h}}\textbf{c}_{\rm{spec}}) \otimes E_L\bar{\cos{\theta_i}}$$
+        
+        which is qute similar to Bling-Phong equation.
+        $$\textbf{L}_o(\textbf{v}) = (\bar{\cos{\theta_i}}\textbf{c}_{\rm{diff}} + \bar{\cos^m{\theta_h}}\textbf{c}_{\rm{spec}}) \otimes B_L$$
+        
+        \subsubsection{Implementing the Shading Equation} 
+            For multiple light sources: 
+            $$\textbf{L}_o(\textbf{v}) = \sum_{k = 1}^n((\frac{\textbf{c}_{\rm{diff}}}{\pi} + \frac{m + 8}{8\pi}\bar{\cos^m{\theta_{h_k}}}\textbf{c}_{\rm{spec}}) \otimes E_L\bar{\cos{\theta_{i_k}}})$$
+            
+            When implemented into shader, the computations need to be divided according to their \emph{frequency of evaluation}. The lowest frequency of evaluation is \emph{per-model}: Expressions that are constant over the entire model can be evaluated once, and the result passed to the graphics API. \emph{Per-primitive} can be performed by geometry shader if the result of computation is constant over each of the primitives comprising the model. In \emph{per-vertex} evaluation, where the evaluation is performed in vertex shader and passed to pixel shader. The highest frequency of evaluation is \emph{per-pixel}, which the evaluation is performed in pixel shader. We assume all material properties are same across the entire mesh. 
+
+            Separating out the \emph per-model subexpressions, $\textbf{K}_d$ and $\textbf{K}_s$ will be evaluated in the application: 
+            $$\textbf{L}_o(\textbf{v}) = \sum_{k = 1}^n((\textbf{K}_d + \textbf{K}_s\bar{\cos^m{\theta_{h_k}}}) \otimes E_L\bar{\cos{\theta_{i_k}}})$$
+            
+            The view vector $\textbf{v}$ can be computed from the surface position $\textbf{p}$ to the view position $\textbf{p}_v$: 
+            $$ \textbf{v} = \frac{\textbf{p}_v - \textbf{p}}{\parallel \textbf{p}_v - \textbf{p} \parallel}$$ 
+            
+            The normal $\textbf{n}$ derives from the vertex normal as triangle mesh is used to represent underlying curved structure with each vertex has normals per triangle. 
+            
+            Now we can create \textbf{Shade()} function. Per-primitives evaluation (also called \emph{flat shading} is not desirable as vertex normals involved. Per-vertex evaluation, known as \emph{Gouraud Shading}, passes normals and positions to the function and get an interpolated result passed to pixel shader and the result is directly written to the output. It's reasonable for matte surface but have noticeable artifacts on specular surface. Per-pixel, known as \emph{Phong shading}, uses vertex shader to interpolate normals and positions, then passed by the pixel to \textbf{Shader()}. It has no interpolation artifacts while costly. Solution to it is to adopt hybrid approach where some evaluations are per-vertex and some are per-pixel.
+
+            Implementing a shading equation is a matter of deciding what parts can be simplified, how frequently to compute various expressions, and how the user will be able to modify and control the appearance.
+            \newpage
+         
+        \subsection{Aliasing and Anti-aliasing}            \subsubsection{Sampling and Filtering Theory}
+                {\footnotesize{Continuous image}} $\xrightarrow{\emph{sampling}}$ {\footnotesize{sampled signal}} $\xrightarrow{\emph{reconstruction}}$ {\footnotesize{reconstructed signal}}
+            \newline
+
+            When sampling is done, aliasing can occur when samples are taken in a series of time steps, which is called \emph{temporal aliasing}. It's because signal is sampled at a too low frequency.According to \emph{sample theory}, in order to sample properly, the sampling frequency has to be more than twice the maximum frequency, and the sampling frequency is called the \emph{nyquist rate} or \emph{Nyquist limit}. This also implies that the signal has to be \emph{bandlimited}. However, an three-dimensional scene is normally never bandlimited when rendered with point samples. But there is signal that is bandlimited like textures.
+
+            Reconstruction from sampling requires for \emph{filtering}. Note that the area of filter should always be 1, or reconstructed signal can appear to grow or shrink. \emph{Box filter} is used as the simplest filter. \emph{Tent filter} is another one implementing interpolating between nearby samples. 
+            
+            In order to get better continuity, \emph{low-pass filter} is introduced. The \emph{frequency component} of a signal is a sine wave: $\sin{(2\pi f)}$, where $f$ is the frequency of that component. A low-pass filter removes all frequency components with frequencies higher than a certain frequency defined by the filter, removing sharp features of the signal. A ideal low-pass filter is sinc filter:
+                $$\rm{sinc}(x) = \frac{\sin{\pi x}}{\pi x}$$
+            
+            In fact, the sinc filter eliminates all sine waves with frequencies higher than $\frac{1}{2}$ sampling rate, perfect for sampling rate at 1.0. More generally, assume the sampling frequency is $f_s$, the perfect filter is $\rm{sinc}(f_s x)$, which eliminates all frequencies  higher than $\frac{f_s}{2}$. However, as the filter width is infinite and is also negative at times, it's rarely useful in practice. In practice, we often use filters similar to sinc filter with limited pixels they influence. When negative filter value are undesirable or impractical, filters with no negative lobes.
+
+            After reconstruction, we need \emph{resampling} to display signal. Resampling is used to magnify or minify a sampled signal. Originally all sampled points are on integer coordinates. For new sampled points with interval $a$ uniformly, if $a > 1$ \emph{minification} (\emph{downsampling}) take place, and for $a < 1$, \emph{magnification} (\emph{upsampling}) occurs. For magnification, it's pretty straight forward to sample from a perfectly reconstructed, continuous signal. For minification, it's better to use $\rm{sinc}(\frac{x}{a})$ to get reconstructed signal for resampling.
+
+            \subsubsection{Screen-Based Algorithm}
+                Some anti-aliasing schemes are focused on particular primitives. There are two special cases: texture aliasing and line aliasing. For line aliasing, one method is to treat the line as quadrilateral one pixel wide that is blended with it's background; another is to consider it an infinitely thin, transparent object with a halo; third is to render the line as an anti-aliased texture. Hardware solution is dedicated to rapid, high-quality rendering. 
+
+                One problem of aliasing is low sampling rate, which can be better when introducing more samples in the cell. The general strategy of screen-based anti-aliasing schemes is to use a sample pattern for the screen and then weight and sum the samples to produce a pixel color, $\textbf{p}$: 
+                    $$\textbf{P}(x, y) = \sum_{i = 1}^nw_i\textbf{c}(i,x,y),\quad \sum_{i = 1}^nw_i = 1$$
+                
+                    Where the sample is taken on the screen grid is different for each sample, and optionally the sampling pattern can vary from pixel to pixel. As sampling point is point in real time rendering system, $\textbf{c}$ function can be thought of first retrieve position of the point and then the color. For $w_i$ in most design is set to be constant, i.e., $w_i = \frac{1}{n}$. The simplest anti-aliasing is a single sample at the center of pixel. 
+
+                    Anti-aliasing algorithms that compute more than one full sample per pixel are called \emph{sumpersampling} (or \emph{oversampling}) methods. \emph{Full-scene anti-aliasing} (FSAA) renders the scene at a higher resolution and then average neighboring samples to create an image. It's costly but simple. Other, low quality FSAA is to sample at twice the rate on only one screen axis. 
+
+                    A related method is the \emph{accumulation buffer}. This method instead uses a buffer that has the same resolution with more color bits. To obtain an 2$\times$2 sampling, four images are generated with the moved half a pixel in the screen $x$- or $y$- axis. They can be used to create effects such as \emph{motion blurring} and \emph{depth of field} (where objects not at camera focus appear to be blurry). 
+                    
+                    An advantage that the accumulation buffer has over the FSAA(and A-buffer) is that sampling does not have to be uniform orthogonal pattern within a pixel's grid cell. \emph{Rotate grid supersampling}(RGSS), this pattern gives more levels of anti-aliasing for nearly vertical and horizontal edges. 
+                    
+                    However, techniques like supersampling generating samples that are fully specified has relatively high cost. \emph{Multisampling} strategies lessen the high computational costs of these algorithms by sampling various types of data at different frequencies. Within GPU hardware, these techniques are called \emph{multisample anti-aliasing} and more recently, \emph{converge sampling anti-aliasing}, which saves time by computing fewer shading samples per fragment. If all MSAA positional samples are covered by the fragment, the shading sample is in the center. If the fragment covers fewer samples, the center may shift to avoid shade sampling off the edge of a texture. This is called \emph{centroid sampling} or \emph{centroid interpolation}.
+
+                    MSAA is faster than a pure supersampling scheme because the fragment is shaded only once. It stores separate color and z-depth for each samples, which is not necessary. in CSAA, pixels are subdivided to subpixels which stores a index to the fragment it associated with. And a table with limited entries stores color and z-depth associated with fragment, which can be indexed by each subpixel  . It may occur artifacts with too many kinds of fragments within a pixel, however it's not so common in practice.
+
+                    This idea is similar to \emph{A-buffer}, which is commonly used as software at non-interaction speed. For each polygon rendered, a \emph{converge mask} is created for coverage. The shade for the polygon associated with this coverage mask is typically computed once at the centroid location on the fragment.The z-depth is also computed, even slope is retained for precise z-depth value. A critical way $A$-buffer is different from $Z$-buffer is that a screen grid cell can hold any number of fragments at one time. As they collect, fragments can be discarded if they are hidden judged from z-depth and coverage mask. Coverage mask can also be merged by \textbf{or} to form a larger area of coverage. Such merging can happen when a fragment buffer becomes filled, or as a final step before shading and display. After all the polygons are sent to A-buffer, colors of pixels can be computed by multiplying the percentage of coverage with fragments color. 
+
+                    All these anti-aliasing technique result in better approximation of how each polygon covers a grid cell, however, they have limitations. One limitation is that a scene made of arbitrarily small objects. This can be solved by \emph{stochastic sampling}, which distribute samples randomly in the pixel with different sampling pattern at each pixel. The most common kind of stochastic sampling is \emph{jittering}, a form of \emph{stratified sampling} which works by place sample points in a random location of a subpixel divided equally. \emph{N-rooks sampling} is another form, for $n$ samples being placed in a  n$ \times $n grid. 
+                    
+                    Another technique called \emph{interleaved sampling} with different sample patterns can be intermingled in a repeating pattern and be done with a pure jittering scheme. It's seen as the generalization of accumulation buffer. 
+                    
+                    One real-time anti-aliasing scheme that lets samples affect more than one pixel is Quincunx method, also called \emph{high resolution anti-aliasing}. There four samples in the corner and the fifth in the center. In average every pixel has two samples, with the center has a weight of $\frac{1}{2}$ and the corner has a weight of $\frac{1}{8}$. This patter approximate a two-dimensional tent filter. Though this technique appears to die out, its method is reused, such as \emph{custom filter anti-aliasing} and FLIPQUAD which mix the idea of Quincunx and RGSS. 
+
+                    Sampling rate can be varied, at low rate when scene is changing, and at high rate for static scene. 
+
+        \subsection{Transparency, Alpha, and Compositing} 
+            Transparency effect can be divided view based effect and light based effect. $Z$-buffer as the dominating algorithm, has a problem of not able to deal with a number of transparent objects overlapping on one pixel. One method for giving the illusion of transparency is called \emph{screen-door transparency}. This idea is to render the transparent polygon with a checkerboard fill pattern. That is, every other pixel of the polygon is rendered, thereby leaving the object behind it partially visible. However, a transparent object looks best when 50\% transparent; Only one transparent object can be convincingly rendered on one area of the screen. It's simple and the same idea is used in \emph{alpha to converge} at a subpixel level. 
+
+            The concept of \emph{alpha blending} is used for blend transparent object's color with the color of the object behind it. Alpha value $\alpha$ is introduced describing the degree of opacity of an object fragment for a given pixel. To make an object transparent, it is rendered on the top of the existing scene with an alpha class less than 1.0. Every pixel will finally receive RGBA value to blend with its own color using \textbf{over} operator.
+            $$\textbf{c}_o = \alpha_s\textbf{c}_s + (1 - \alpha_s)\textbf{c}_d$$
+        
+            $\textbf{c}_s$ and $\alpha_s$ refer to the incoming transparent object's color and alpha value(\emph{source}).$\textbf{c}_d$ is the pixel color(\emph{destination}). Especially, when incoming object is opaque, which means $\alpha_s = 1$, it's the form of the original $Z$-buffer. It requires specific order, as the opaque objects been rendered first and the transparent object are blended on top of them in back-to-front order. The equation can be modeled for front-to-back-order, which is another blending mode called \emph{under operator}. However, sorting is not available some time. At this time, it's often best to use $Z$-buffer testing with all transparent objects at least appearing rather than $Z$-buffer replacement. Other technique also helps. 
+
+            $A$-buffer can achieve hardware sorting rather than software sorting, and multisample fragment's alpha represents purely the transparency as it stores a separate converge mask. 
+
+            Transparency can also be computed using two or more depth buffers and multiple passes: First, a rendering pass is made so that the opaque surfaces' $z$-depth are in the first $Z$-buffer. In the next pass, find the transparent surfaces that are closer than the first stored $Z$-buffer and the farthest among them to find the backmost transparent layer, then put their depths into second $Z$-buffer , and so on. The pixel shader can be used to compare $z$-depths in this fashion and so perform \emph{depth peeling}, where each visible layer is found in turn. 
+
+            The \textbf{over} operator can also be used for anti-aliasing edges. Instead of storing a converge mask, an alpha can be generated to approximate the edge cover. This alpha value is then used to blend the object's edge with the scene, using \textbf{over} operator. It's unwise to generate alpha value for every polygon's edge. This can be avoided by using converge mask or by blurring the edges outwards. Ins summary, alpha value can represent transparency and coverage. 
+            
+            The \textbf{over} operator turns out to be useful for blending together photographs or synthetic rendering of the objects. This process is called \emph{compositing}, leading to RGB$\alpha$ values. The $\alpha$ channel is sometimes called \emph{matte} and shows the silhouette shape of the object. 
+            
+            \emph{Additive blending} is another way: 
+                $$\textbf{c}_o = \alpha\textbf{c}_s + \textbf{c}_d$$
+
+            This blending mode doesn't require sorting between triangles. It works well for glowing effects that do not attenuate the pixel behind them but only brighten them. It's not suitable for transparency but work well for semitransparent surfaces. 
+
+            The most common way to store synthetic RGB$\alpha$ images is with \emph{pre-multiplied alphas} (\emph{associated alpha}). That is, the RGB values are multiplied by $\alpha$ before stored(RGB values are smaller than $\alpha$), which make \textbf{over} operator more easily: 
+                $$\textbf{c}_o = \textbf{c}_s^{'} + (1 - \alpha)\textbf{c}_d$$
+
+            Another way images are stored is with \emph{un-multiplied alphas} (\emph{un-associated alpha}), means that the RGB value is not multiplied by $\alpha$. It's rarely used in synthetic image but has the advantage of represent the actual color. It's also useful to mask a photograph without affecting the underlying image's origin data. 
+
+            A concept related to the alpha channel is \emph{chroma-keying}.It derives from the term \emph{green-screen} or \emph{blue-screen matting}. The idea here is that a particular color is designated to be transparent. This allows images to be given an outline shape by using just RGB values with out $\alpha$. The drawback is that the actual $alpha$ is 0.0 or 1.0. 
+
+            Thought \textbf{over} operator can represent transparency, it's better to be the approximation of pixel coverage. In reality, the transparent object is represented of filtering and reflection. To filter, the scene behind the transparent object should be multiplied by objects spectral opacity. Reflection is to multiply the frame buffer by one RGB color and add another RGB color, which can be done in two process or \emph{dual-color blending}. 
+            
+        \subsection{Gama Correction}
+            The content above discuss about the pixel values. For display, \emph{cathode-ray tube} (CRT) monitors exhibit a power law relationship between input voltage and display radiance, which turns out to match the inverse of light sensitivity of human eys, leading to that an encoding proportional to CRT input voltage is roughly \emph{perceptually uniform}. This near-optimal distribution of values minimizes \emph{banding} artifacts. The desire for compatibility is another important factor. LCDs have different tone response curve with hardware providing compatibility. 
+
+            The \emph{transfer functions} that define the relationship between radiance and encoded pixel values are slightly modified power curves by the exponent $\gamma$:
+                $$\textbf{f}_{xfer}(x) \approx x^{\gamma}$$
+            
+            Two $\gamma$ values are needed to fully characterize an imaging system. The \emph{encoding gamma} describes the \emph{encoding transfer function}, which is the relationship between scene radiance values captured by a imaging device and encoded pixel values. The \emph{display gamma} characterizes the \emph{display transfer function}, which is the relationship between encoded pixel values and displayed radiance. The product of the two gamma values is the overall or \emph{end-to-end gamma} of the \emph{end-to-end transform function}. It seems to be ideal to have end-to-end gamma being 1, there two differences: Absolute display radiance is much less than scene radiance; the \emph{surrounded effect}, refers to the fact that the the original scene radiance values fill the entire filed of view of the observer, while the display radiance values are limited to a screen surrounded by ambient room illumination. To counteract that, a non-unit end-to-end $gamma$ is used from 1.5 for dark environment to 1.125 for bright environment. 
+
+            The relevant gamma for rendering purposes is encoding gamma. For television is 0.5, and for personal computer with a standard called \emph{sRGB} is 0.45. It's responsible of the render to convert physical radiance value into nonlinear frame buffer values by applying the appropriate transfer function. This \emph{gamma correction} guarantee the correctness of linear interpolating between radiance. Ignoring gamma correction also affects the quality of anti-aliased edges like \emph{roping}.Fortunately, modern GPUs can be set to automatically apply the encoding transfer function when values are written to the color buffer. But this feature can't be misused. It's important to apply conversion at the final stage. This doesn't mean intermediate buffers can't contain nonlinear encodings, but it must be converted carefully before post-processing. 
+            
+            It's also necessary to convert any nonlinear input values to a linear space as well, such as texture. GPU is now available to convert it automatically. For authoring texture, care must be taken to use the correct color space. Various other inputs need similar conversion as well.
+            \newpage
+    
+    
+    \section{Texture}
+        \subsection{The Texturing Pipeline}
+            Texturing, at its simplest, is a technique for efficiently modeling the surface's properties. The pixels in the image texture are called \emph{texels}. The gloss texture modifies the gloss value, and \emph{bumping texture} changes the direction of the normal, which will all influence lighting equation.
+            
+            \begin{align*}
+                \text{\emph{{object space location}}} 
+                &\xrightarrow{projector\ function} \emph{parameter space coordinate}\\
+                &\xrightarrow{corresponder\ function} \emph{texture space coordinate} \\
+                &\xrightarrow{obtain\ value} \emph{texture value}\\
+                &\xrightarrow{value transform function} \emph{transformed  texture value}
+            \end{align*}
+
+            This projector function is called \emph{mapping}, which needs to \emph{texture mapping}.
+
+            \subsubsection{The Projector Function}
+                Projector functions typically work by converting a three-dimensional point in space into texture coordinates, including spherical, cylindrical, planar projections. Problems may occur at the seams where faces meet. \emph{Polycube map} maps a model to a set of cube with different volumes of space mapping to different cubes. Other form of projector functions are not projections but are implicit part of surface formation. The goal of the projector function is to generate texture coordinate. 
+
+                Various projector functions can be applied to a single model. most projector function are applied in modeling stage and results are stored in vertices. Some functions require vertex or pixel shader like animation and \emph{environmental mapping}.
+
+                Spherical projector function, according to spherical coordinates: 
+                $$\phi(x,\ y,\ z) = (\frac{\pi + \textbf{atan2}(y,\ x)}{2\pi}, \frac{\pi - \textbf{acos}(\frac{z}{\parallel x \parallel})}{\pi})$$
+
+                Cylindrical:
+                $$\phi(x,\ y,\ z) = (\frac{\pi + \textbf{atan2}(y,\ x)}{2\pi}, \frac{1}{2}(1 + z))$$
+                
+                Planar projection simply uses orthogonal projection to apply texture maps to characters.
+                \begin{equation*}
+                    \phi(x,\ y,\ z) = (\frac{\tilde{u}}{w}, \frac{\tilde{v}}{w}), \quad \text{where}
+                    \begin{pmatrix}
+                        \tilde{u} \\
+                        \tilde{v} \\
+                        * \\
+                        w 
+                    \end{pmatrix}
+                    = \textbf{P}_t
+                    \begin{pmatrix}
+                        x \\
+                        y \\
+                        z \\
+                        1
+                    \end{pmatrix}
+                \end{equation*}
+
+
+
+
+\end{document}

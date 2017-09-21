@@ -134,7 +134,6 @@ void Update() {
 \begin{lstlisting}
 Destroy(this); //This is used to destroy the script itself
 \end{lstlisting}
-        
         \subsection{Coroutine}
             \textbf{Coroutine} is function that has the ability to pause execution and return control to Unity but then continue where it left off on the following frame. It's essential a function to be declared with a return type of \emph{IEnumerator} and function will pause at the point of \emph{yield return line}. It will resume on the frame after it's yield by default but you can set a delay time with \emph{WaitForSeconds()}. The coroutine function can be used to spread an effect over a period of time and also can perform regular check and update which has a bigger interval than Update() interval. Coroutine functions will finally stop when all \emph{yield instructions} finishes.
 \begin{lstlisting}
@@ -254,7 +253,27 @@ float[] RandomList() {
             \subsubsection{Requesting a Collection}
                 It's best to avoid allocations as far as possible. As they can't be eliminated, there are two strategies: \emph{Small heap with fast and frequent GC}; \emph{Large heap with slow but infrequent GC}. 
 
-                The first strategy is often best for games that have long periods of gameplay where a smooth framerate in the main concern. It may make more collections than necessary, but still ha
+                The first strategy is often best for games that have long periods of gameplay where a smooth framerate in the main concern. It may make more collections than necessary, but still have better performances. 
 
+                The second strategy works for games with infrequent collections and collections can be handled during the pauses in gameplay. You should manually allocate some placeholder to enlarge the heap. 
+\begin{lstlisting}
+void Start() {
+    var tmp = System.Object [1024]; 
+    for(int i = 0; i < 1024; ++ i) 
+        tmp[i] = new byte[1024]; 
+    tmp = 0;// release reference to get free block
+}
+\end{lstlisting}
+                
+                The collection should be done manually in the game pause: 
+\begin{lstlisting}
+    System.GC.Collect(); 
+\end{lstlisting}
+
+            \subsubsection{Reusable Object pool}
+                It's better to have less objects to avoid GC waste. It's a good idea to reuse game object to have less objects stored. 
+
+        \subsection{Platform Dependent Compilation} 
+        
 
 \end{document}
