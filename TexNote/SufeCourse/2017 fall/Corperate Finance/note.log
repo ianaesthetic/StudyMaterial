@@ -1,4 +1,4 @@
-This is XeTeX, Version 3.14159265-2.6-0.99998 (TeX Live 2017/W32TeX) (preloaded format=xelatex 2017.9.18)  20 SEP 2017 09:41
+This is XeTeX, Version 3.14159265-2.6-0.99998 (TeX Live 2017/W32TeX) (preloaded format=xelatex 2017.9.18)  22 SEP 2017 10:05
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -551,7 +551,7 @@ on: whether
 
 [1
 
-] [2] (./note.aux) ) 
+] [2] [3] [4] (./note.aux) ) 
 Here is how much of TeX's memory you used:
  11736 strings out of 493005
  245705 string characters out of 6137956
@@ -559,6 +559,6 @@ Here is how much of TeX's memory you used:
  15685 multiletter control sequences out of 15000+600000
  4206 words of font info for 30 fonts, out of 8000000 for 9000
  1348 hyphenation exceptions out of 8191
- 35i,6n,58p,10441b,233s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 35i,8n,58p,10441b,233s stack positions out of 5000i,500n,10000p,200000b,80000s
 
-Output written on note.pdf (2 pages).
+Output written on note.pdf (4 pages).

@@ -482,9 +482,9 @@
                 \begin{equation*}
                     \textbf{X} = 
                     \begin{pmatrix}
-                        \cos{\phi} + (1 - \cos{phi})r_x^2 & (1 - \cos{\phi})r_xr_y - r_z\sin{\phi} & (1 - \cos{\phi}r_xr_z + r_y\sin{\phi} \\
+                        \cos{\phi} + (1 - \cos{\phi})r_x^2 & (1 - \cos{\phi})r_xr_y - r_z\sin{\phi} & (1 - \cos{\phi}r_xr_z + r_y\sin{\phi} \\
                         (1 - \cos{\phi})r_xr_y + r_z\sin{\phi} & \cos{\phi} + (1 - \cos{\phi})r_y^2 & (1 - \cos{\phi}r_yr_z - r_x\sin{\phi} \\
-                        (1 - \cos{\phi})r_xr_z - r_y\sin{\phi} & (1 - \cos{\phi})r_yr_z + r_x\sin{\phi} & (\cos{phi} + (1 - \cos{\phi})r_z^2
+                        (1 - \cos{\phi})r_xr_z - r_y\sin{\phi} & (1 - \cos{\phi})r_yr_z + r_x\sin{\phi} & (\cos{\phi} + (1 - \cos{\phi})r_z^2
                     \end{pmatrix}
                 \end{equation*} 
                 \newpage
@@ -535,7 +535,7 @@
                 The \emph{unit quaternions} can represent any three-dimensional rotation. Put the four coordinates of a point or a vector $(p_x,\ p_y,\ p_z,\ p_w)^T$ into a quaternion $\hat{\textbf{p}}$. With the unit quaternion $\hat{\textbf{q}} = (\sin{\phi}\textbf{u}_q, \cos{\phi})$:
                 $$\hat{\textbf{q}}\hat{\textbf{p}}\hat{\textbf{q}}^{-1}$$
                 
-                the vector or point will be rotated around axis $\textbf{u}_q$ by $\textbf{2$\phi$}$. Not that here $\hat{\textbf{q}}^{-1} = \hat{\textbf{q}}^{*}$. Any nonzero real multiple of $\hat{\textbf{q}}$ also represents the same transform. The transform is also the same as $(\textbf{u}_q, q_w)$ for any $q_w$.Extracting a quaternion from a matrix can return either $\hat{\textbf{q}}$ or $-\hat{\textbf{q}}$.
+                the vector or point will be rotated around axis $\textbf{u}_q$ by $\textbf{2$\phi$}$. Not that here $\hat{\textbf{q}}^{-1} = \hat{\textbf{q}}^{*}$. Any nonzero real multiple of $\hat{\textbf{q}}$ also represents the same transform.Extracting a quaternion from a matrix can return either $\hat{\textbf{q}}$ or $-\hat{\textbf{q}}$.
 
                 The concatenation is similar to matrix: 
                 $$\hat{\textbf{r}}(\hat{\textbf{q}}\hat{\textbf{p}}\hat{\textbf{q}}^{*})\hat{\textbf{r}}^{*} = (\hat{\textbf{r}}\hat{\textbf{q}})\hat{\textbf{p}}(\hat{\textbf{r}}\hat{\textbf{q}})^{*}$$
