@@ -677,9 +677,9 @@
             \indent As a left-handed projection is used after projection, a reflect transform is needed:\\
             \begin{equation*}
                 \textbf{M} =
-                \begin{pmatrix}
+                \begin{pmatrix} 
                     1 & 0 & 0 & 0 \\
-                    0 & 1 & 1 & 0 \\ 
+                    0 & 1 & 0 & 0 \\ 
                     0 & 0 & -1 & 0\\
                     0 & 0 & 0 & 1
                 \end{pmatrix}
@@ -789,9 +789,9 @@
         $$E = \sum_{k = 1}^{n}E_{L_k}\bar{\cos{\theta_{i_k}}}$$
     
     \subsection{Material}
-        Fundamentally, all light-matter interaction are the result of two phenomena:\emph{scattering} and \emph{absorption}. Scattering happens when light encounters any kind of optical discontinuity, usually interface between surface and air, involving \emph{reflection} and \emph{refraction}. Absorption happens inside matter and causes some of the light to be converted into another kind of energy and disappear, which reduces the amount but don't affect its direction. 
+        Fundamentally, all light-matter interaction are the result of two phenomena:\emph{scattering} and \emph{absorption}. Scattering happens when light encounters any kind of optical discontinuity, usually interface between surface and air, involving \emph{reflection} and \emph{refraction} (\emph{transmission}), which chage the direction without changing the amount. Absorption happens inside matter and causes some of the light to be converted into another kind of energy and disappear, which reduces the amount but don't affect its direction. 
         
-        In opaque objects, surface shading equation is divided to two parts: \emph{specular term} representing the light that was reflected at the surface, and \emph{diffuse term} representing light which has undergone transmission, absorption and scattering. To characterize by a shading equation, we need to represent the amount and direction of \emph{out going light} based on the amount and direction of the \emph{incoming light}.
+        In opaque objects, surface shading equation is divided to two parts: \emph{specular term} representing the light that was reflected at the surface, and \emph{diffuse term} representing light which has undergone transmission, absorption and scattering. Scattering is different with reflection here as reflection obeys the law of reflection. To characterize by a shading equation, we need to represent the amount and direction of \emph{out going light} based on the amount and direction of the \emph{incoming light}.
 
         Incoming illumination is measured as surface irradiance. The outgoing light is measured as \emph{exitance} with symbol \textbf{M}. Light-matter interaction is linear. The ratio of existance and irradiance is between 0 to 1 in opaque objects and differentiates in colors. There are represented as RGB vector called the \emph{surface color} \textbf{c}.It can be divided into two terms \emph{specular color} $\textbf{c}_{\rm{spec}}$ and \emph{diffuse color} $\textbf{c}_{\rm{diff}}$. They are dependent on the its composition.
         
@@ -857,7 +857,7 @@
             
             In fact, the sinc filter eliminates all sine waves with frequencies higher than $\frac{1}{2}$ sampling rate, perfect for sampling rate at 1.0. More generally, assume the sampling frequency is $f_s$, the perfect filter is $\rm{sinc}(f_s x)$, which eliminates all frequencies  higher than $\frac{f_s}{2}$. However, as the filter width is infinite and is also negative at times, it's rarely useful in practice. In practice, we often use filters similar to sinc filter with limited pixels they influence. When negative filter value are undesirable or impractical, filters with no negative lobes.
 
-            After reconstruction, we need \emph{resampling} to display signal. Resampling is used to magnify or minify a sampled signal. Originally all sampled points are on integer coordinates. For new sampled points with interval $a$ uniformly, if $a > 1$ \emph{minification} (\emph{downsampling}) take place, and for $a < 1$, \emph{magnification} (\emph{upsampling}) occurs. For magnification, it's pretty straight forward to sample from a perfectly reconstructed, continuous signal. For minification, it's better to use $\rm{sinc}(\frac{x}{a})$ to get reconstructed signal for resampling.
+            After reconstruction, we need \emph{resampling} to display signal. Resampling is used to magnify or minify a sampled signal. Originally all sampled points are on integer coordinates. For new sampled points with interval $a$ uniformly, if $a > 1$ \emph{minification} (\emph{downsampling}) take place, and for $a < 1$, \emph{magnification} (\emph{upsampling}) occurs. For magnification, it's pretty straight forward to sample from a perfectly reconstructed, continuous signal. For minification, it's better to use $\rm{sinc}(\frac{x}{a})$ to get reconstructed signal for resampling in order to blur the continuous signal.
 
             \subsubsection{Screen-Based Algorithm}
                 Some anti-aliasing schemes are focused on particular primitives. There are two special cases: texture aliasing and line aliasing. For line aliasing, one method is to treat the line as quadrilateral one pixel wide that is blended with it's background; another is to consider it an infinitely thin, transparent object with a halo; third is to render the line as an anti-aliased texture. Hardware solution is dedicated to rapid, high-quality rendering. 

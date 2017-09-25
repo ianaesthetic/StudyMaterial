@@ -1,4 +1,4 @@
-This is XeTeX, Version 3.14159265-2.6-0.99998 (TeX Live 2017/W32TeX) (preloaded format=xelatex 2017.9.18)  20 SEP 2017 11:16
+This is XeTeX, Version 3.14159265-2.6-0.99998 (TeX Live 2017/W32TeX) (preloaded format=xelatex 2017.9.18)  25 SEP 2017 13:29
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -585,7 +585,7 @@ Underfull \hbox (badness 10000) in paragraph at lines 115--117
 
  []
 
-[3] (./Math.aux) ) 
+[3] [4] (./Math.aux) ) 
 Here is how much of TeX's memory you used:
  11789 strings out of 493005
  247022 string characters out of 6137956
@@ -595,4 +595,4 @@ Here is how much of TeX's memory you used:
  1348 hyphenation exceptions out of 8191
  35i,10n,66p,10448b,238s stack positions out of 5000i,500n,10000p,200000b,80000s
 
-Output written on Math.pdf (3 pages).
+Output written on Math.pdf (4 pages).
