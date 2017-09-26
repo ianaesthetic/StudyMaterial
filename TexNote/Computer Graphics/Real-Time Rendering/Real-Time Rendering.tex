@@ -1000,6 +1000,47 @@
         \subsubsection{Texture Value}
             The texture value is retrieved after corresponder function. For image textures, this is done by using the texture to retrieve texel information from the image. Procedural functions are sometimes used. 
             
-            The 
+            The most common texture values include RGB triplet, gray scale and RBG$\alpha$ value. The values returned from the texture are optionally transformed before use. One common example is the remapping of data from unsigned range to a signed range. Another one is to compare the value with a reference value and return a flag.
+            
+    \subsection{Image Texturing}
+        The texture used in GPU has usually $2^m \times 2^n$ texels. Modern GPU allows for an arbitrary size. When finally projecting teture onto the screen, the projected square may contain \emph{magnification} and \emph{minification}. The filtering can take place in the input(values read from  textures) or in the output(final pixel colors). When input and output is linear, there will be no difference. 
+        
+        \subsubsection{Magnification}
+            The most common filtering techniques for magnification is \emph{nearest neighbor}(application of box filter) and \emph{bilinear interpolation}. There is also \emph{cubic convolution}, enabling high quality. It's not commonly available in the native hardware but can be realized in shader program. 
+            
+            One characteristic of nearest neighbor is that the individual texels may become apparent, which is called \emph{pixelation} for every pixel only fetch one neareast texel to each pixel center. 
+
+            In bilinear interpolation, for each pixel, this kind of filtering finds the four neighboring texels and linearly interpolates in two dimension to form a blended value for pixel. The cuibic convolution is more exepensive.  Specifically, for a image coordinate $(p_u, p_v)$. According to the coordinate, four centers of texels can be calculated.
+
+            $$x_l = \lfloor p_u \rfloor, \quad y_b = \lfloor p_v \rfloor$$
+            $$x_r = \lceil p_u \rceil, \quad y_t = \lceil  p_v \rceil$$
+
+            When interpolating:
+
+            $$u^{'} = p_u - \lfloor p_u \rfloor,\quad v^{'} = p_v - \lfloor p_v \rfloor$$
+            \begin{align*}
+                \textbf{c}(p_v,\ p_u) &= (1 - u^{'})(1 - v^{'})\textbf{t}(x_l,\ y_b) \\
+                    &+ u^{'}(1 - v^{'})\textbf{t}(x_r,\ y_b) \\
+                    &+ (1 - u^{'})v^{'}\textbf{t}(x_l,\ y_t) \\
+                    &+ u^{'}v^{'}\textbf{t}(x_r,\ y_t)
+            \end{align*}
+
+            This kind of interpolation will have poor performance when the image has a nonlinear change such as the edge of a object. 
+
+            A common solution to the blurriness that accompanish magnification is to use \emph{detail textures}. These are textures that represent fine surface details. The high-frequency of repetitive pattern of the detail texture, combined with low-frequency magnified texture will have a similar visual effect with high resolution texture. 
+            
+            Sometime, linear interpolation is not required. In order to magnify checkerboard, remapping will have better visual effect. Such remapping is useful in cases where well-defined edges are important, such as text. Alpha value can be used to be threshold the results. This method is called \emph{cutout texture}. \emph{Vector textures} can handle high quality edges generation. It stores information at texel describing how the edges cross the grid. These information can contain more subjects leading to accuracy and resolution-independence. However, it's too costly to apply to read-time rendering application. 
+            
+            There is simpler technique using \emph{sampled distance filed} data structure. A distance filed is a scalar signed field over a space or surface in which an object is embeded(that means, the filed can be curved). At any point, the distance field has a value with a magnitude equal to the distance to the object's neareast boundary point. The value is negative within the object and positive outside the object. This will interpolated with the real distance rather than space coordinate so it's linear and fit bilinear interpolation to get a sampled distance filed for further rendering. The evaluation of sampled distance field is to use alpha map and built-in GPU interpolation and alpha testing rather than pixel shader modification.   
+            
+        \subsubsection{Minification}
+            Directly, we consider how to aggregate the influence of texels, which is hard to acomplish.
+
+            Nearest neighbor can be used to use one texel at the very center of the pixel to represent, which will cause big aliase and even noticable when surface is moveing and result  \emph{temporal aliasing}. Similarly, bilinear interpolation can be used but don't perform much better than nearest neighbor. 
+
+            According to Nyquist, we need to increase the pixel sample rate or the the texture frequency has to decrease. The previous chapter introduces increasing of samling rate, but has a limited increase that don't fit minification. The design of anti-aliasing algorithm is to preprocess texture and create data structure to help with effect approximation.
+            
+            The most popular method is called \emph{mipmapping}.
+
 
 \end{document}
