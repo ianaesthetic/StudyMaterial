@@ -1,7 +1,7 @@
 \documentclass[10pt, a4paper]{article}
     \title{Note} 
     \author{ianaesthetic}
-\usepackage{indentfirst, fontspec}
+\usepackage{indentfirst, fontspec, amsmath}
 
 \begin{document}
     \section{Measuring GDP}
@@ -19,14 +19,31 @@
 
                 Consumption: spending by domestic households on final goods and services including Consumer durables, nondurable goods and services. 
                 
-                Investment: spending for new capital goods plus(fixed investment) and inventory investment(the change in the quantity of goods that firms hold in storage, including materials and supplies, work progress and finished goods. \emph{Raw material} is not counted as investment as they will be turned in to product ultimately.
+                Investment: spending for new capital goods (fixed investment) plus inventory investment(the change in the quantity of goods that firms hold in storage, including materials and supplies, work progress and finished goods. \emph{Raw material} is not counted as investment as they will be turned in to product ultimately.
                 
                 Government purchases of goods and services: Not all government expenditure are purchases of goods and services like interest rate of debt, transfers, and exchange not counted in current goods and services. Some spending is for capital goods to add nation's capital stock.
 
                 Net exports: $Net\ Exports = Exports - Import$
-        
 
+                \begin{align*}
+                    GDP &= (C - C_M) + (I - I_M) + (G - G_M) + X \\
+                    &= C + I + G + NX
+                \end{align*}
 
+        \subsection{The Income Approach}
+            Private sector: 
+            $$Private\ sector = Y(GDP) + NPF + TR + INT - T$$
+
+            Government sector: 
+            $$Government\ sector = T - TR - INT$$
+            \begin{align*}
+                GDP &= After\text{-}tax\ Wage\ Income \\
+                    &+ After\text{-}tax\ Profit \\
+                    &+ Interest\ Income\\
+                    &+ Taxes\\
+            \end{align*}
+
+            Income forms the basis for Expenditure(demand), Disposition of Expenditure determined Production(supply), and Revenue of Supply becomes Income. Three approach will get identical GDP.
         \subsection{Example}
             Example1: Consumption outside of home country.$\Delta C = +6, \Delta NX = -6$
             
@@ -122,16 +139,16 @@
             \textbf{Diminishing marginal products}: Slope becomes 
             
             \textbf{Marginal Product of Capital}: The extra output the firm can produce from an additional unit of capital. 
-            $$MPK = F(K + 1, L) - F(K, L)$$
+            $$MPK = F(K + 1, L) - F(K, L)  = \frac{\partial F}{\partial K}$$
             
             \textbf{Marginal Product of Labor}: TThe extra output the firm can produce from an additional unit of labor.  
-            $$MPL = F(K, L + 1) - F(K, L)$$
+            $$MPL = F(K, L + 1) - F(K, L) = \frac{\partial F}{\partial L}$$
 
             MPK and MPL, as the property, are always positive and has a diminishing rate. Their units are in \emph{goods} per unit of labor.  
 
             \textbf{Diminishing Marginal Returns}: As only one input is increased, its marginal product falls.
 
-            \textbf{Returns to scale}: scale all inputs by the same factor, $Y_1 = F(K_1, L_1)$, $Y_2 = K(zK_1, zK_2)$: 
+            \textbf{Returns to scale}: scale all inputs by the same factor, $Y_1 = F(K_1, L_1)$, $Y_2 = F(zK_1, zK_2)$: 
 
             {Constant returns to scale}: $Y_2 = zY_1$
             
@@ -143,6 +160,7 @@
             $$Y = AK^{\alpha}L^{1 - \alpha}$$
 
             Each factor's marginal product is proportional to its average product. 
+            $$MPK = \frac{\alpha Y}{K}, \quad MPL = \frac{(1 - \alpha) Y}{L}$$
 
             $\alpha$ is the capital share of total income, with a constant returns to scale.
 

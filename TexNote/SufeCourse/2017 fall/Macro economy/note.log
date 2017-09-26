@@ -1,18 +1,15 @@
-This is XeTeX, Version 3.14159265-2.6-0.99998 (TeX Live 2017/W32TeX) (preloaded format=xelatex 2017.9.18)  22 SEP 2017 11:45
+This is XeTeX, Version 3.14159265-2.6-0.99998 (TeX Live 2017/W32TeX) (preloaded format=xelatex 2017.8.23)  26 SEP 2017 09:05
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
  %&-line parsing enabled.
-**"c:/Users/ianaesthetic/Desktop/hbw/StudyMaterial/TexNote/SufeCourse/2017 fall
-/Macro economy/note.tex"
-
-(c:/Users/ianaesthetic/Desktop/hbw/StudyMaterial/TexNote/SufeCourse/2017 fall/M
-acro economy/note.tex
+**"e:/StudyMaterial/TexNote/SufeCourse/2017 fall/Macro economy/note.tex"
+(e:/StudyMaterial/TexNote/SufeCourse/2017 fall/Macro economy/note.tex
 LaTeX2e <2017-04-15>
 Babel <3.10> and hyphenation patterns for 84 language(s) loaded.
-(c:/texlive/2017/texmf-dist/tex/latex/base/article.cls
+(e:/TexLive/texmf-dist/tex/latex/base/article.cls
 Document Class: article 2014/09/29 v1.4h Standard LaTeX document class
-(c:/texlive/2017/texmf-dist/tex/latex/base/size10.clo
+(e:/TexLive/texmf-dist/tex/latex/base/size10.clo
 File: size10.clo 2014/09/29 v1.4h Standard LaTeX file (size option)
 )
 \c@part=\count79
@@ -27,14 +24,14 @@ File: size10.clo 2014/09/29 v1.4h Standard LaTeX file (size option)
 \belowcaptionskip=\skip42
 \bibindent=\dimen102
 )
-(c:/texlive/2017/texmf-dist/tex/latex/tools/indentfirst.sty
+(e:/TexLive/texmf-dist/tex/latex/tools/indentfirst.sty
 Package: indentfirst 1995/11/23 v1.03 Indent first paragraph (DPC)
 )
-(c:/texlive/2017/texmf-dist/tex/latex/fontspec/fontspec.sty
-(c:/texlive/2017/texmf-dist/tex/latex/l3kernel/expl3.sty
+(e:/TexLive/texmf-dist/tex/latex/fontspec/fontspec.sty
+(e:/TexLive/texmf-dist/tex/latex/l3kernel/expl3.sty
 Package: expl3 2017/05/13 L3 programming layer (loader) 
 
-(c:/texlive/2017/texmf-dist/tex/latex/l3kernel/expl3-code.tex
+(e:/TexLive/texmf-dist/tex/latex/l3kernel/expl3-code.tex
 Package: expl3 2017/05/13 L3 programming layer (code)
 \c_max_int=\count87
 \l_tmpa_int=\count88
@@ -127,11 +124,11 @@ Package: expl3 2017/05/13 L3 programming layer (code)
 \l__coffin_scaled_total_height_dim=\dimen132
 \l__coffin_scaled_width_dim=\dimen133
 )
-(c:/texlive/2017/texmf-dist/tex/latex/l3kernel/l3xdvipdfmx.def
+(e:/TexLive/texmf-dist/tex/latex/l3kernel/l3xdvipdfmx.def
 File: l3xdvidpfmx.def 2017/03/18 v L3 Experimental driver: xdvipdfmx
 \l__driver_tmp_box=\box41
 ))
-(c:/texlive/2017/texmf-dist/tex/latex/l3packages/xparse/xparse.sty
+(e:/TexLive/texmf-dist/tex/latex/l3packages/xparse/xparse.sty
 Package: xparse 2017/05/13 L3 Experimental document command parser
 \l__xparse_current_arg_int=\count119
 \g__xparse_grabber_int=\count120
@@ -141,7 +138,7 @@ Package: xparse 2017/05/13 L3 Experimental document command parser
 )
 Package: fontspec 2017/03/31 v2.6a Font selection for XeLaTeX and LuaLaTeX
 
-(c:/texlive/2017/texmf-dist/tex/latex/fontspec/fontspec-xetex.sty
+(e:/TexLive/texmf-dist/tex/latex/fontspec/fontspec-xetex.sty
 Package: fontspec-xetex 2017/03/31 v2.6a Font selection for XeLaTeX and LuaLaTe
 X
 \l__fontspec_script_int=\count124
@@ -157,10 +154,10 @@ X
 \l__fontspec_tmpc_dim=\dimen136
 \g__file_internal_ior=\read1
 
-(c:/texlive/2017/texmf-dist/tex/latex/base/fontenc.sty
+(e:/TexLive/texmf-dist/tex/latex/base/fontenc.sty
 Package: fontenc 2017/04/05 v2.0i Standard LaTeX package
 
-(c:/texlive/2017/texmf-dist/tex/latex/base/tuenc.def
+(e:/TexLive/texmf-dist/tex/latex/base/tuenc.def
 File: tuenc.def 2017/04/05 v2.0i Standard LaTeX file
 LaTeX Font Info:    Redeclaring font encoding TU on input line 82.
 ))
@@ -320,7 +317,7 @@ LaTeX Font Info:    Redeclaring font encoding TU on input line 82.
 . Defining command \UndeclareComposite with sig. 'mm' on line 3501.
 .................................................
 
-(c:/texlive/2017/texmf-dist/tex/latex/fontspec/fontspec.cfg)
+(e:/TexLive/texmf-dist/tex/latex/fontspec/fontspec.cfg)
 LaTeX Info: Redefining \itshape on input line 3686.
 LaTeX Info: Redefining \slshape on input line 3691.
 LaTeX Info: Redefining \scshape on input line 3696.
@@ -338,7 +335,65 @@ LaTeX Info: Redefining \- on input line 3807.
 . 
 . Defining command \liningnums with sig. 'm' on line 3906.
 .................................................
-)) (./note.aux)
+))
+(e:/TexLive/texmf-dist/tex/latex/amsmath/amsmath.sty
+Package: amsmath 2016/11/05 v2.16a AMS math features
+\@mathmargin=\skip49
+
+For additional information on amsmath, use the `?' option.
+(e:/TexLive/texmf-dist/tex/latex/amsmath/amstext.sty
+Package: amstext 2000/06/29 v2.01 AMS text
+
+(e:/TexLive/texmf-dist/tex/latex/amsmath/amsgen.sty
+File: amsgen.sty 1999/11/30 v2.0 generic functions
+\@emptytoks=\toks14
+\ex@=\dimen137
+))
+(e:/TexLive/texmf-dist/tex/latex/amsmath/amsbsy.sty
+Package: amsbsy 1999/11/29 v1.2d Bold Symbols
+\pmbraise@=\dimen138
+)
+(e:/TexLive/texmf-dist/tex/latex/amsmath/amsopn.sty
+Package: amsopn 2016/03/08 v2.02 operator names
+)
+\inf@bad=\count132
+LaTeX Info: Redefining \frac on input line 213.
+\uproot@=\count133
+\leftroot@=\count134
+LaTeX Info: Redefining \overline on input line 375.
+\classnum@=\count135
+\DOTSCASE@=\count136
+LaTeX Info: Redefining \ldots on input line 472.
+LaTeX Info: Redefining \dots on input line 475.
+LaTeX Info: Redefining \cdots on input line 596.
+\Mathstrutbox@=\box42
+\strutbox@=\box43
+\big@size=\dimen139
+LaTeX Font Info:    Redeclaring font encoding OML on input line 712.
+LaTeX Font Info:    Redeclaring font encoding OMS on input line 713.
+\macc@depth=\count137
+\c@MaxMatrixCols=\count138
+\dotsspace@=\muskip16
+\c@parentequation=\count139
+\dspbrk@lvl=\count140
+\tag@help=\toks15
+\row@=\count141
+\column@=\count142
+\maxfields@=\count143
+\andhelp@=\toks16
+\eqnshift@=\dimen140
+\alignsep@=\dimen141
+\tagshift@=\dimen142
+\tagwidth@=\dimen143
+\totwidth@=\dimen144
+\lineht@=\dimen145
+\@envbody=\toks17
+\multlinegap=\skip50
+\multlinetaggap=\skip51
+\mathdisplay@stack=\toks18
+LaTeX Info: Redefining \[ on input line 2817.
+LaTeX Info: Redefining \] on input line 2818.
+) (./note.aux)
 \openout1 = `note.aux'.
 
 LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 6.
@@ -373,7 +428,6 @@ LaTeX Font Info:    Redeclaring math accent \check on input line 6.
 LaTeX Font Info:    Redeclaring math accent \hat on input line 6.
 LaTeX Font Info:    Redeclaring math accent \dot on input line 6.
 LaTeX Font Info:    Redeclaring math accent \mathring on input line 6.
-LaTeX Font Info:    Redeclaring math symbol \colon on input line 6.
 LaTeX Font Info:    Redeclaring math symbol \Gamma on input line 6.
 LaTeX Font Info:    Redeclaring math symbol \Delta on input line 6.
 LaTeX Font Info:    Redeclaring math symbol \Theta on input line 6.
@@ -419,32 +473,21 @@ Overfull \hbox (0.68002pt too wide) in paragraph at lines 8--9
 l goods and services. within
  []
 
-LaTeX Font Info:    External font `cmex10' loaded for size
-(Font)              <7> on input line 13.
-LaTeX Font Info:    External font `cmex10' loaded for size
-(Font)              <5> on input line 13.
 [1
 
-]
-Underfull \hbox (badness 10000) in paragraph at lines 73--75
+] [2]
+Underfull \hbox (badness 10000) in paragraph at lines 90--92
 
  []
 
-[2]
-LaTeX Font Info:    External font `cmex10' loaded for size
-(Font)              <12> on input line 110.
-LaTeX Font Info:    External font `cmex10' loaded for size
-(Font)              <8> on input line 110.
-LaTeX Font Info:    External font `cmex10' loaded for size
-(Font)              <6> on input line 110.
- [3] [4] (./note.aux) ) 
+[3] [4] [5] (./note.aux) ) 
 Here is how much of TeX's memory you used:
- 9270 strings out of 493005
- 213247 string characters out of 6137956
- 271766 words of memory out of 5000000
- 13267 multiletter control sequences out of 15000+600000
- 6464 words of font info for 34 fonts, out of 8000000 for 9000
+ 9884 strings out of 493005
+ 219889 string characters out of 6140056
+ 280524 words of memory out of 5000000
+ 13863 multiletter control sequences out of 15000+600000
+ 7592 words of font info for 39 fonts, out of 8000000 for 9000
  1348 hyphenation exceptions out of 8191
- 35i,5n,31p,10437b,233s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 35i,10n,31p,10406b,233s stack positions out of 5000i,500n,10000p,200000b,80000s
 
-Output written on note.pdf (4 pages).
+Output written on note.pdf (5 pages).
