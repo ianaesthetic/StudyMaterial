@@ -1,4 +1,4 @@
-This is XeTeX, Version 3.14159265-2.6-0.99998 (TeX Live 2017/W32TeX) (preloaded format=xelatex 2017.9.18)  20 SEP 2017 21:41
+This is XeTeX, Version 3.14159265-2.6-0.99998 (TeX Live 2017/W32TeX) (preloaded format=xelatex 2017.9.18)  27 SEP 2017 20:33
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -551,7 +551,25 @@ Underfull \hbox (badness 10000) in paragraph at lines 34--36
 
 [1
 
-] [2] [3] (./Money and Banking.aux) ) 
+] [2]
+Overfull \hbox (10.11406pt too wide) in paragraph at lines 114--115
+[]\TU/lmr/m/n/10 Interest rate change($\OMS/cmsy/m/n/10 "$\TU/lmr/m/n/10 , as e
+xample) will affect exchange market, stock market($\OMS/cmsy/m/n/10 #$\TU/lmr/m
+/n/10 ,
+ []
+
+
+Overfull \hbox (4.07405pt too wide) in paragraph at lines 114--115
+\TU/lmr/m/n/10 as it’s more difficult to raise money), national bond market, co
+mmercial market($\OMS/cmsy/m/n/10 #$\TU/lmr/m/n/10 ,
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 135--136
+
+ []
+
+[3] [4] (./Money and Banking.aux) ) 
 Here is how much of TeX's memory you used:
  11736 strings out of 493005
  245822 string characters out of 6137956
@@ -561,4 +579,4 @@ Here is how much of TeX's memory you used:
  1348 hyphenation exceptions out of 8191
  35i,6n,58p,10454b,233s stack positions out of 5000i,500n,10000p,200000b,80000s
 
-Output written on Money and Banking.pdf (3 pages).
+Output written on Money and Banking.pdf (4 pages).

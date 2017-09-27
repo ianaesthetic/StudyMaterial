@@ -1,4 +1,4 @@
-This is XeTeX, Version 3.14159265-2.6-0.99998 (TeX Live 2017/W32TeX) (preloaded format=xelatex 2017.9.18)  26 SEP 2017 15:55
+This is XeTeX, Version 3.14159265-2.6-0.99998 (TeX Live 2017/W32TeX) (preloaded format=xelatex 2017.9.18)  27 SEP 2017 17:58
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -323,7 +323,7 @@ e incoming transparent object’s color and alpha value(\TU/lmr/m/it/10 source\T
 /lmr/m/n/10 ). 
  []
 
-[26] [27] [28] [29] [30] [31] [32] (./Real-Time Rendering.aux) ) 
+[26] [27] [28] [29] [30] [31] [32] [33] (./Real-Time Rendering.aux) ) 
 Here is how much of TeX's memory you used:
  1129 strings out of 493005
  14384 string characters out of 6137956
@@ -333,4 +333,4 @@ Here is how much of TeX's memory you used:
  1348 hyphenation exceptions out of 8191
  27i,18n,20p,1183b,187s stack positions out of 5000i,500n,10000p,200000b,80000s
 
-Output written on Real-Time Rendering.pdf (32 pages).
+Output written on Real-Time Rendering.pdf (33 pages).
