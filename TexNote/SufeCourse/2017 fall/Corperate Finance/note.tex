@@ -74,13 +74,33 @@
             Assets are listed in order to liquidity(Current asset > Fixed Asset[Tangible and Intangible]). Liquidity stands for ease of cash conversion without significant loss.
 
             Current asset includes \emph{Cash and equivalents}, \emph{Accounts receivable}, \emph{Inventories}. Fixed asset includes \emph{Property, plant and equipment(PPE)}, \emph{Less accumulated depreciation}, Intangible assets and other. Amotization;
+            \begin{align*}
+                Total\ Current\ Assets &= Cash\ and\ Equivalents\\
+                                       &+ Accounts\ Receivable\\
+                                       &+ Inventories  
+            \end{align*}
+            \begin{align*}
+                Total\ Fixed\ Assets &= Net Property,\ Plant,\ equipment\ (PPE) \\
+                                     &+ Intangible\ Assets\ and\ Other        
+            \end{align*}
+            $$Net\ PPE = PPE - Less\ Accumulated\ Depreciation$$
 
-            Current Liabilities includes \emph{Accounts payable}, Notes payable, Accrued expenses. Long term Liabilities includes deferred taxes, \emph{long-term debt}. Stockholder's equity: Preferred stock, Common stock, capital surplus, \emph{Accumulated retained earnings}(which balance sheet and income statement).
+            Current Liabilities includes \emph{Accounts payable}, Notes payable, Accrued expenses. Long term Liabilities includes deferred taxes, \emph{long-term debt}. Stockholder's equity: Preferred stock, Common stock, capital surplus, \emph{Accumulated retained earnings}(which links balance sheet and income statement).
+            
+            $$Current\ Liability = Accounts\ Payable + Note\ Payable$$
+            $$Long\text{-}term Liability = Deferred\ Taxes + Long\text{-}Term Debt$$
+            \begin{align*}
+                Stockholder's\ equity &= Preferred\ Stock \\
+                                      &+ Common\ Stock\\
+                                      &+ Capital\ Surplus \\ 
+                                      &+ Accumulated Retained Earnings
+            \end{align*}
+        
         \subsubsection{Market Vs. Book Value}
             $$Market\ Value = P \times N \quad\quad \text{Can't be negative}$$ 
             $$Bool\ Value = A - L \quad\quad \text{Can be negative}$$
 
-            Market value means the value of equity can be sold in the market. Book values are calculated in the balance sheet to define value. Market values matter more than book value according to the goal of financial management. The market value will be affected be market by price, eg. increasing value of raw material, to be different with book value. 
+            Market value means the value of equity can be sold in the market. Book values are calculated in the balance sheet as historical price. Market values matter more than book value according to the goal of financial management. The market value will be affected be market by price, eg. increasing value of raw material, to be different with book value. 
 
             $$Net\ Working\ Capital = Current\ Assets - Current\ Liabilities$$
 
@@ -90,9 +110,17 @@
         \textbf{Definition}: It's more like a video of the firm's operations for a specified period of time. 
         $$Income = Revenue - Expenses$$
 
-        \textbf{Operation section} of the income statement reports the firm's revenue and expenses from \emph{principle operations} including: Total operating revenues; Cost of goods sold; Selling, general and administrative expenses; Depreciation(allocate the value of Inventory) and Operating income. 
+        \textbf{Operation section} of the income statement reports the firm's revenue and expenses from \emph{principle operations} including: Total operating revenues; Cost of goods sold; Selling, general and administrative expenses; Depreciation(allocate the value of Inventory) and Operating income.
+        \begin{align*}
+            Operating\ Income &= Total\ Operating\ revenues \\   
+                              &- Costs\ of\ Goods\ Sold \\
+                              &- Selling,\ General,\ Administrative\ Expense\\
+                              &- Depreciation \\
+        \end{align*}
 
-        \textbf{Non-operation section} of the income statement includes all \emph{financing costs}, such as interest expenses including Other income , Earnings before interest and taxes(EBIT); Interest expense and Pretax income. Debt will have interest without tax, which means interest expenses can reduce the tax, the phenomena of \emph{tax shield}.
+        \textbf{Non-operation section} of the income statement includes all \emph{financing costs}, such as interest expenses including Other income , Earnings before interest and taxes(EBIT); Interest expense and Pretax income. Debt will have interest without tax, which means interest expenses can reduce the tax, the phenomena of \emph{tax shield}. Interest expense should be dealt first as they are not a part of tax. 
+
+        Net Income will be divided into \emph{Retained Earnings} and \emph{Dividends}
         
     \subsection{Cash Flow} 
         \subsubsection{Accounting Perspective}
@@ -109,32 +137,91 @@
         Accounts payable belongs to operating while Notes payable belongs to financial activity for note are financial instrument. 
         
         \subsubsection{Financial Perspective}
-        From the financial perspective, we concern the capability to generate total cash flow. Cash Flow from Assets(CFFA) of the firm:   
+        From the financial perspective, we concern the capability to generate total cash flow. (total / free) Cash Flow from Assets(CFFA) of the firm:   
         \begin{align*}
-            CFFA &= CFTS + CFTC \\
-            CFFA &= 
+            CFFA = Cash\ Flow\ to\ Creditors + Cash\ Flow\ to\ Shareholders
         \end{align*}
+        \begin{align*}
+            CFFA &= Operating\ Cash\ Flow\ (OFC)\\
+                 &+ Net\ Capital\ Spending\ (NCS)\\
+                 &+ Change\ in\ Net\ Working\ Capital\ (\Delta NWC) 
+        \end{align*}
+        $$OCF = Earning\ before\ Interest\ and\ Taxes + Depreciation - Taxes$$
+        $$NCS = Ending\ Net\ Fixed\ Assets - Beginning\ Net\ Fixed\ Assets +  Depreciation$$
+        $$\Delta NWC = Ending\ NWC - Beginning\ NWC$$
         
-        Income does not equal to the amount of cash the firm has eard: 
+        $$Cash\ Flow\ to\ Creditors = Interest\ Paid - Net\ New\ Borrowing$$
+        $$Cash\ Flow\ to\ Shareholders = Dividends\ Paid - Net\ New\ Equity\ Raised$$
+
+        $\Delta NWC$ can be negative, for example you decrease the 
+
+
+        Income does not equal to the amount of cash the firm has earned:
+
             $a$. Non-Cash Expenses
+        
             $b$. Uses of Cash not on the Income Statement such as investment in EBIT
     
     \subsection{Categories of Financial Ratios}
+        Ratios are main instrument to analyze. The formula is not actually required as they maybe given in exam. It's the analysis that is important. 
+        
         \subsubsection{Short-term solvency or liquidity}
+        Current Ratio is used as the most important way to measure debt payment in short run.
         $$Current\ Ratio = \frac{Current\ Asset(CA)}{Current\ Liability(CL)}$$
+
+        Quick Ratio is to measure the ability to liquidate at once to repay debt.
         $$Quick\ Ratio = \frac{CA - Inventory}{CL}$$
+        
+        Cash Ratio is to measure the ability to use money 
         $$Cash\ Ratio = \frac{Cash}{CL}$$
+
         \subsubsection{Long-term  solvency or financial leverage ratios}
-        $$Total\ Debt\ Ratio = \frac{TA - TE}{TA}$$
-        $$\frac{Debt}{Equity} = \frac{TD}{TE}$$
-        $$Equity\ Multiplier = \frac{TA}{TE} = 1 + \frac{D}{E}$$
-        \subsubsection{Computing Coverage Ratios}
-        How will you can pay the interest. 
+        $$Total\ Debt\ Ratio = \frac{Total\ Asset - Total\ Equity}{Total\ Asset}$$
+        $$\frac{Debt}{Equity} = \frac{Total\ Debt}{Total\ Equity}$$
+        $$Equity\ Multiplier = \frac{Total\ Asset}{Total\ Equity} = 1 + \frac{Debt}{Equity}$$
+
+        The bigger of $EM$, the ratio of the equity is smaller, meaning more debt and crisis potential. 
+        \subsubsection{Coverage Ratio}
+        Coverage Ratio: How will you can pay the interest. 
         $$Times\ Interest\ Earned = \frac{EBIT}{Interest}$$
         $$Cash\ Coverage = \frac{EBIT + Depreciation + Amortization}{Interest}$$
-        $$Interest\ Bear $$
-        \subsubsection{Computing Inventory Ratios}
-            $$Inventory\ Turnover = \frac{Cost}{hha}$$
+        The Depreciation and Amortization is the current one, not the accumulated one. 
+        
+        \subsubsection{Asset Management or Turnover  ratios}
+        
+        Inventory Ratios is used to measure the speed the inventory turns to sold goods. Day's scale to some extent is to measure the time to store the inventory.
+            $$Inventory\ Turnover = \frac{Cost\ of\ Goods\ Sold}{Inventory}$$
+            $$Day's\ Sales\ in\ Inventory = \frac{365}{Inventory\ Turnover}$$
+        
+        Receivable Ratios is used to measure the speed of retrieving accounts receivable.
+            $$Receivable Turnover = \frac{Sales}{Accounts\ Receivable}$$
+            $$Day's\ Sales\ in\ Receivable = \frac{365}{Receivable\ Turnover}$$
+
+        Total Asset Turnover, reflects long-run efficiency they generate income. 
+            $$Total\ Asset\ Turnover(TAT) = \frac{Sales}{Total\ Asset}$$
+
+            It's not unusual for TAT < 1, especially if a firm has a large amount of fixed assets.  
+        \subsubsection{Computing Profitability Measures}    
+            The most important ratio in measuring a company.
+
+            $$Profit\ Margin = \frac{Net\ Income}{Sales}$$
+            $$EBITDA\ Margin = \frac{EBITDA}{Sales}$$
+            
+            
+
+            $$Return\ on\ Assets\ (ROA) = \frac{Net\ Income}{Total\ Asset}$$
+            $$Return\ on\ Equity\ (ROE) = \frac{Net\ Income}{Total\ Equity}$$
+        \subsubsection{Computing Market Value Measures}
+            $$Market\ Capitalization = Share\ Price \times Share\ Outstanding$$
+            $$EPS = \frac{Net\ Income}{Shares\ Outstanding}$$
+            $$PE\ Ratio = \frac{Price\ per\ Share}{Earnings\ per\ Share}$$
+            $$Market-to-Book Ratio = \frac{Market\ Value\ per\ Share}{Book\ value\ per\ Share}$$
+            \begin{align*}
+                Enterprise\ Value\ (EV) &= Market\ Capitalization \\
+                                        &+ Market\ Value\ of\ Interest\ Bearing\ Debt \\
+                                        &- Cash
+            \end{align*}
+            $$EV\ Multiple = \frac{EV}{EBITDA}$$
         
 
 \end{document}
