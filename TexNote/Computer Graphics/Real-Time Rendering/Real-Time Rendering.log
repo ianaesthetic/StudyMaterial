@@ -1,18 +1,18 @@
-This is XeTeX, Version 3.14159265-2.6-0.99998 (TeX Live 2017/W32TeX) (preloaded format=xelatex 2017.9.18)  28 SEP 2017 17:04
+This is XeTeX, Version 3.14159265-2.6-0.99998 (TeX Live 2017/W32TeX) (preloaded format=xelatex 2017.8.23)  28 SEP 2017 23:40
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
  %&-line parsing enabled.
-**"c:/Users/ianaesthetic/Desktop/hbw/StudyMaterial/TexNote/Computer Graphics/Re
-al-Time Rendering/Real-Time Rendering.tex"
+**"e:/StudyMaterial/TexNote/Computer Graphics/Real-Time Rendering/Real-Time Ren
+dering.tex"
 
-(c:/Users/ianaesthetic/Desktop/hbw/StudyMaterial/TexNote/Computer Graphics/Real
--Time Rendering/Real-Time Rendering.tex
+(e:/StudyMaterial/TexNote/Computer Graphics/Real-Time Rendering/Real-Time Rende
+ring.tex
 LaTeX2e <2017-04-15>
 Babel <3.10> and hyphenation patterns for 84 language(s) loaded.
-(c:/texlive/2017/texmf-dist/tex/latex/base/article.cls
+(e:/TexLive/texmf-dist/tex/latex/base/article.cls
 Document Class: article 2014/09/29 v1.4h Standard LaTeX document class
-(c:/texlive/2017/texmf-dist/tex/latex/base/size10.clo
+(e:/TexLive/texmf-dist/tex/latex/base/size10.clo
 File: size10.clo 2014/09/29 v1.4h Standard LaTeX file (size option)
 )
 \c@part=\count79
@@ -27,27 +27,27 @@ File: size10.clo 2014/09/29 v1.4h Standard LaTeX file (size option)
 \belowcaptionskip=\skip42
 \bibindent=\dimen102
 )
-(c:/texlive/2017/texmf-dist/tex/latex/tools/indentfirst.sty
+(e:/TexLive/texmf-dist/tex/latex/tools/indentfirst.sty
 Package: indentfirst 1995/11/23 v1.03 Indent first paragraph (DPC)
 )
-(c:/texlive/2017/texmf-dist/tex/latex/amsmath/amsmath.sty
+(e:/TexLive/texmf-dist/tex/latex/amsmath/amsmath.sty
 Package: amsmath 2016/11/05 v2.16a AMS math features
 \@mathmargin=\skip43
 
 For additional information on amsmath, use the `?' option.
-(c:/texlive/2017/texmf-dist/tex/latex/amsmath/amstext.sty
+(e:/TexLive/texmf-dist/tex/latex/amsmath/amstext.sty
 Package: amstext 2000/06/29 v2.01 AMS text
 
-(c:/texlive/2017/texmf-dist/tex/latex/amsmath/amsgen.sty
+(e:/TexLive/texmf-dist/tex/latex/amsmath/amsgen.sty
 File: amsgen.sty 1999/11/30 v2.0 generic functions
 \@emptytoks=\toks14
 \ex@=\dimen103
 ))
-(c:/texlive/2017/texmf-dist/tex/latex/amsmath/amsbsy.sty
+(e:/TexLive/texmf-dist/tex/latex/amsmath/amsbsy.sty
 Package: amsbsy 1999/11/29 v1.2d Bold Symbols
 \pmbraise@=\dimen104
 )
-(c:/texlive/2017/texmf-dist/tex/latex/amsmath/amsopn.sty
+(e:/TexLive/texmf-dist/tex/latex/amsmath/amsopn.sty
 Package: amsopn 2016/03/08 v2.02 operator names
 )
 \inf@bad=\count87
@@ -88,15 +88,15 @@ LaTeX Font Info:    Redeclaring font encoding OMS on input line 713.
 LaTeX Info: Redefining \[ on input line 2817.
 LaTeX Info: Redefining \] on input line 2818.
 )
-(c:/texlive/2017/texmf-dist/tex/latex/graphics/color.sty
+(e:/TexLive/texmf-dist/tex/latex/graphics/color.sty
 Package: color 2016/07/10 v1.1e Standard LaTeX Color (DPC)
 
-(c:/texlive/2017/texmf-dist/tex/latex/graphics-cfg/color.cfg
+(e:/TexLive/texmf-dist/tex/latex/graphics-cfg/color.cfg
 File: color.cfg 2016/01/02 v1.6 sample color configuration
 )
 Package color Info: Driver file: xetex.def on input line 147.
 
-(c:/texlive/2017/texmf-dist/tex/latex/graphics-def/xetex.def
+(e:/TexLive/texmf-dist/tex/latex/graphics-def/xetex.def
 File: xetex.def 2016/07/11 v4.10 LaTeX color/graphics driver for XeTeX (L3/RRM/
 JK)
 ))
@@ -316,21 +316,15 @@ Underfull \hbox (badness 10000) in paragraph at lines 848--850
 
  []
 
-[23] [24] [25]
-Overfull \hbox (19.88567pt too wide) in paragraph at lines 898--899
-[]$[][]$ \TU/lmr/m/n/10 and $\OML/cmm/m/it/10 ^^K[]$ \TU/lmr/m/n/10 refer to th
-e incoming transparent object’s color and alpha value(\TU/lmr/m/it/10 source\TU
-/lmr/m/n/10 ). 
- []
-
-[26] [27] [28] [29] [30] [31] [32] [33] [34] (./Real-Time Rendering.aux) ) 
+[23] [24] [25] [26] [27] [28] [29] [30] [31] [32] [33] [34] [35] [36]
+(./Real-Time Rendering.aux) ) 
 Here is how much of TeX's memory you used:
  1129 strings out of 493005
- 14384 string characters out of 6137956
+ 14156 string characters out of 6140056
  89192 words of memory out of 5000000
  5113 multiletter control sequences out of 15000+600000
  7648 words of font info for 46 fonts, out of 8000000 for 9000
  1348 hyphenation exceptions out of 8191
- 27i,18n,20p,1183b,187s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 27i,18n,20p,1152b,187s stack positions out of 5000i,500n,10000p,200000b,80000s
 
-Output written on Real-Time Rendering.pdf (34 pages).
+Output written on Real-Time Rendering.pdf (36 pages).

@@ -895,7 +895,7 @@
             The concept of \emph{alpha blending} is used for blend transparent object's color with the color of the object behind it. Alpha value $\alpha$ is introduced describing the degree of opacity of an object fragment for a given pixel. To make an object transparent, it is rendered on the top of the existing scene with an alpha class less than 1.0. Every pixel will finally receive RGBA value to blend with its own color using \textbf{over} operator.
             $$\textbf{c}_o = \alpha_s\textbf{c}_s + (1 - \alpha_s)\textbf{c}_d$$
         
-            $\textbf{c}_s$ and $\alpha_s$ refer to the incoming transparent object's color and alpha value(\emph{source}).\newline \noindent$\textbf{c}_d$ is the pixel color(\emph{destination}). Especially, when incoming object is opaque, which means $\alpha_s = 1$, it's the form of the original $Z$-buffer. It requires specific order, as the opaque objects been rendered first and the transparent object are blended on top of them in back-to-front order. The equation can be modeled for front-to-back-order, which is another blending mode called \emph{under operator}. However, sorting is not available some time. At this time, it's often best to use $Z$-buffer testing with all transparent objects at least appearing rather than $Z$-buffer replacement. Other technique also helps. 
+            $\textbf{c}_s$ and $\alpha_s$ refer to the incoming transparent object's color and alpha value(\emph{so-}\newline \noindent\emph{urce}).$\textbf{c}_d$ is the pixel color(\emph{destination}). Especially, when incoming object is opaque, which means $\alpha_s = 1$, it's the form of the original $Z$-buffer. It requires specific order, as the opaque objects been rendered first and the transparent object are blended on top of them in back-to-front order. The equation can be modeled for front-to-back-order, which is another blending mode called \emph{under operator}. However, sorting is not available some time. At this time, it's often best to use $Z$-buffer testing with all transparent objects at least appearing rather than $Z$-buffer replacement. Other technique also helps. 
 
             $A$-buffer can achieve hardware sorting rather than software sorting, and multisample fragment's alpha represents purely the transparency as it stores a separate converge mask. 
 
@@ -1087,6 +1087,61 @@
 
              \emph{Prefetching} where future needs are anticipated making the texture loading over a few frames as there may be sudden big amount of texture loading and it takes a lot of time. 
 
-             When dataset is huge, such as flight simulations program. The traditional approach is to break these images into smaller tiles that hardware can handle. A improved structure is clipmap. 
+             When dataset is huge, such as flight simulations program. The traditional approach is to break these images into smaller tiles that hardware can handle. A improved structure is \emph{clipmap}. The entire dataset is treated as a mipmap, but only a small part of the lower levels of the mipmap is required for certain view and memory. 
+
+        \subsubsection{Texture Compression}
+            \emph{Texture Compression} can directly attack memory and bandwidth problem. \emph{S3 texture compression} becomes the standard for DirextX and called \emph{DXTC} or \emph{BC}. It has independently encoded pieces on $4 \times 4$ texel blocks, which is also called \emph{tile}. Encoding is based on interpolation which is simple and fast. There are five variants: 
+            
+            \quad \textbf{DXT1 / BC1}: It has two 16-bit reference RGB565 values as the limitation. Each texel has a 2-bit interpolation factor to refer to 2 references or 2 intermediate value, while only 1 intermediate value is included and another stands for transparnt when alpha is introduced. The compression ratio is 6 : 1 compressing 24-bit RGB texture. 
+
+            \quad \textbf{DXT3 / BC2}: The encoding pattern is same as DXT1. Meanwhile, every texel has a 4-bit alpha value stored separatly. The compression ratio is 4 : 1. 
+
+            \quad \textbf{DXT5 / BC3}: The encoding pattern is same as DXT1. In addition, alpha data is encoded using two 8-bit reference values. Each texel has 3 interpolation factor which can refer to one of the reference alpha values or one of the six intermediate alpha values. 
+
+            \quad \textbf{ATI1/ BC4}:  It supports single color channal and encoded as the alpha channel in DXT5.
+        
+            \quad \textbf{ATI2/ BC5}: It supports dual color channesl and encoded as the aloha channel in DXT5. 
+
+            The disadvantage of these compressions is \emph{lossy}. Once a tile has many distinct value it will lead to some loss. Fortunately, These compression scheme generally give accetable image fidelity. Another problem is that all the colors are on a straght line in RGB space. \emph{color distribution} can attack it as it uses colors from the neighbors blocks in order to achieve more colors. 
+
+            For OpenGL ES, \emph{Ericsson texture compression(ETC)} is chosen. It shares the same features as S3TC. It encodes $4 \times 4$ texels with 4 bits per texel. Each $2 \times 4$ or $4 \times 2$ block stores a basic color, and each texel in a block can select to add one of the values in the selected lookup table. 
+
+            Compression of normal maps requires some care. We assume the normal is unit vector and the $z$-component is positive. So we can derive $z$ by: 
+            $$n_z = \sqrt{1 - n_x^2 - n_y^2}$$
+            
+            So the three-dimensional texture can be stored as two-dimensional texture, a modest compression. Futher compression is usually achieved in BC5 mannar: A block of texel has 16 possible values, which can be bounded by a bounding box. So x, y values can be preceived as two channels of color and interpolation factor allows for value to choose from for each axis. 
+
+            A fallback when GPU does not support BC5 can use DXT5 to substitude. 
+
+            For normal maps, the aspect ratio decides the layout of the normal inside a block. For example, as the noraml has a width nearly twice as height, the current $8 \times 8$ grids can be converted to $4 \times 16$ grids with different bits allocation. 
+
+    \subsection{Procedual Texturing}
+        \emph{Procedual texure} is to evaluate a function to look up texture value rather than generate texture space coordinate. It's often used in offline rendering system and not so common in real-time rendering. Procedual texture is used when image texture requires for costly memory access. Volume texture is a typical example. 
+
+        \emph{Cellular texture}, calculated the closest distance to a set a special points for every location. The color or shading nomal will change by this distance. 
+
+        Another type of application is on physical simulation like water ripples. 
+
+        As parameterization will be more difficult for procedial texture, it's better to synthesis texture onto the surface directly. Antialiasing procedual texture becomes both easier and more difficult. On one hand, precomputations methods are not available; On other hand, procedual texture have more inside information. 
+
+    \subsection{Texture Animation}  
+        The image applied and coordinate can both be dynamic. For example, dynamic coordinate for water downfall to make the water move. The texture can be applied to matrix transformation and blending tequniques. 
+
+    \subsection{Material Mapping}
+        A common use of a texture is to modify a material property affecting the shading equation. Shader can read values from the texture directly. For equation:
+        $$\textbf{L}_o(\textbf{v}) = (\frac{\textbf{c}_{\rm{diff}}}{\pi} + \frac{m + 8}{8\pi}\bar{\cos^m{\theta_h}}\textbf{c}_{\rm{spec}}) \otimes E_L\bar{\cos{\theta_i}}$$
+
+        $\textbf{c}_{\rm{diff}}$, $\textbf{c}_{\rm{spec}}$ and $m$ is the material information can be read from textures, particularly \emph{diffuse color map, specular color map}(grayscale value rather than RGB for the reality) and \emph{gloss map}(describing the smoothness). As $\textbf{c}_{\rm{diff}}$, $\textbf{c}_{\rm{spec}}$ is linear to the ouput, the input can be filtered without antialiasing, when $m$ needs some care. 
+    \subsection{Alpha Mapping}
+        The alpha map can be used for manying interesting effect like decaling with clamp corresponder function and trasparent edge. A smilar application is in making cutouts that have 3D visual effect. In order to reserve the visual effect from other angle, cross tree is set by rotate the cutouts. As illusion will break down when viewer see from the above, more cutouts can be added. Combining alpha textre and texture animations can make many visual effects. 
+
+        Alpha map can also be used in Alpha blending. \emph{Alpha test} is the technique that conditionally discarding pixels with alpha values below a given threshold. 
+
+
+
+            
+            
+
+            
 
 \end{document}
