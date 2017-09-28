@@ -1,4 +1,4 @@
-This is XeTeX, Version 3.14159265-2.6-0.99998 (TeX Live 2017/W32TeX) (preloaded format=xelatex 2017.9.18)  25 SEP 2017 11:41
+This is XeTeX, Version 3.14159265-2.6-0.99998 (TeX Live 2017/W32TeX) (preloaded format=xelatex 2017.9.18)  28 SEP 2017 14:35
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -570,7 +570,7 @@ LaTeX Font Info:    Overwriting math alphabet `\mathtt' in version `bold'
 
 [1
 
-] [2] (./Note.aux) ) 
+] [2] [3] (./Note.aux) ) 
 Here is how much of TeX's memory you used:
  11758 strings out of 493005
  246433 string characters out of 6137956
@@ -580,4 +580,4 @@ Here is how much of TeX's memory you used:
  1348 hyphenation exceptions out of 8191
  35i,5n,66p,10460b,238s stack positions out of 5000i,500n,10000p,200000b,80000s
 
-Output written on Note.pdf (2 pages).
+Output written on Note.pdf (3 pages).

@@ -1005,7 +1005,7 @@
             The most common texture values include RGB triplet, gray scale and RBG$\alpha$ value. The values returned from the texture are optionally transformed before use. One common example is the remapping of data from unsigned range to a signed range. Another one is to compare the value with a reference value and return a flag.
             
     \subsection{Image Texturing}
-        The texture used in GPU has usually $2^m \times 2^n$ texels. Modern GPU allows for an arbitrary size. When finally projecting teture onto the screen, the projected square may contain \emph{magnification} and \emph{minification}. The filtering can take place in the input(values read from  textures) or in the output(final pixel colors). When input and output is linear, there will be no difference. 
+        The texture used in GPU has usually $2^m \times 2^n$ texels. Modern GPU allows for an arbitrary size. When finally projecting tex ture onto the screen, the projected square may contain \emph{magnification} and \emph{minification}. The filtering can take place in the input(values read from  textures) or in the output(final pixel colors). When input and output is linear, there will be no difference. 
         
         \subsubsection{Magnification}
             The most common filtering techniques for magnification is \emph{nearest neighbor}(application of box filter) and \emph{bilinear interpolation}. There is also \emph{cubic convolution}, enabling high quality. It's not commonly available in the native hardware but can be realized in shader program. 
@@ -1054,6 +1054,39 @@
 
             \emph{d} is used to determine where to sample along the mipmap's pyrimid axis. The goal of texel ratio is at least 1:1 according to Nyquist. The improtant principle is that the more texels a pixel covers and \emph{d} increases, a smaller and blurrier version of texture will be accessed by a triplet $(u, v, d)$. Instead of a integer representing mipmap level, $d$ is a fractional value between two level. Using u, v coordinates we can get two bilinear texture values by bilinear interpolation and linear interpolated them using the decimal part of \emph{d} to get the final value. This process is called trilinear interpolation and is performed in each pixel. 
 
-            \emph{Level of detail bias(LOD bias)} is used to control by added to 
+            \emph{Level of detail bias(LOD bias)} is used to control by being added to \emph{d} in different circumstances. It can be specified for the texture as whole, or per-pixel in the pixel shader. 
+
+            Instead of summing all the texels that affect a pixel, precombined set of texels are accessed and interpolated. It may lead to \emph{overblurring}, which happens when camera looks along nearly edge-on. It may have a rectangular area. In order to avoid aliasing, we may use the largest derivative as \emph{d} and result in relatively blurring. One extension to solve this is \emph{ripmap}, which will also create rectangular texture. However, it's too costly to use in real-time rendering. 
+
+            Another method to avoid overblurring is \emph{summed-area table}(SAT). Every texel has more bits of precision and record its individual data(color for example) and the sum of all the corresponding texture's texels in the rectangle formed by this location and texel (0, 0). When a pixle grid is back-projected (which means project the pixel grid to the texture space; normally, we preceive as the texture projected on the pixel space on the screen) onto the texture, the projected gird is bounded by a rectangular. The average data in the rectangular will be retuerned as the texture value. 
+            $$\textbf{c} = \frac{\textbf{s}(x_{ur}, y_{ur}) - \textbf{s}(x_{ll}, y_{ur}) - \textbf{s}(x_{ur}, y_{ll}) + \textbf{s}(x_{ll}, y_{ll})}{(x_{ur} - x_{ll})(y_{ur} - y_{ll})}$$
+
+            However, both ripmap and summed-area table will have blurring image when a texture is viewed along the diagonal as the average of the whole texture will be averaged rather than the average the thin real projected rectangle. 
+
+            Ripmaps and  summed-area table are examples of \emph{anisotropic filtering} algorithm. They have good effect in horizontal and vertical directions but is memory intensive.  Summed-area table are more suitable in moreden GPU with more algorithms to optimize. 
+
+            Other from anisotropic filtering, \emph{unconstrained anisotropic filtering} is widely used. Similar to summed-area table, pixel grid is back-projected to a quad and sampled a number of time with associated squarish area. Instead of using a single mipmap sample to approximate the coverage, the algorithm uses a number of squares to cover the quad. The shorter side of the quad is used to determine \emph{d} with a relatively small avaraged are for each sample. The longer side creates a \emph{line of anisotropic} parallel to the longer side and through the middle of the quad. Samples will be taken on the line and its amount is decided by the value of anisotropic. 
+            
+            This scheme allows the line of anisotropic to run in any direction (Correctly sample the diagonal view of texture as the line can be diagnol rathan than horizontal and vertical in common anisotripic filtering). Meanwhile it has same cost as the minimap does. 
+        \subsubsection{Volume Textures}
+            A direct extension of image textures is three-dimensional image data that is accessed by $(u, v, w)$ value. Being inside A single mipmap level requires a trilinear interpolation, while filting between mimaps reqire \emph{quadrilinear interpolation}. This requires for high percison texture. Volume textures have the advantage that the good projection function which avoids distortion and seam. 
+            
+        \subsubsection{Cube Maps}
+            Another type of texture is the \emph{cube texture} and \emph{cube map}. The mapping point is specifed by a three-dimensional vector. It points from the center of the cube and choose the texture face by the face with largest magnitude. (choose $-Z$ for $(1, 2, -3)$. The other entries will be divided by magnitude to be in range in [-1, 1] and can simply be mapped to range [0, 1]. It's useful for environmental mapping.
+
+            Cube maps support bilinear interpolation and mipmaps, but may have problems near the seam as the sample can't be across the boundaries of faces and faces can't affect each other. Another problem that the angular size of a texel varies over a cube face.  That is, a texel at the center of a cube repersents a greater visual solid angle than a texel at the corner. 
+
+        \subsubsection{Texture Caching}
+             Memories for textures are always not enough. \emph{Texture Caching} aims to a balance between the overhead of uploading textures to memory and the amount of of memory taken up by textures at one time. 
+
+             Some general advice is to keep the texture no larger than necessary and to try to keep polygons grouped by their use of texture. 
+
+             A \emph{least recently used}(LRU) stratigy is one commonly used in texture caching scheme. Every texture has a time stamp representing when it's last accessed. When new texture is uploaded, the texture with oldest time stamp is unloaded first. Piority is optionally given to prevent unnecessary texture swapping. 
+
+             It's suggested to check the texture being swapped out for problems will happen when this texture is used in current frame. When it occurs, LRU has terrible performance. It better to first transfer to \emph{most recently used} and after no textures are swapped out to switch back to LRU. 
+
+             \emph{Prefetching} where future needs are anticipated making the texture loading over a few frames as there may be sudden big amount of texture loading and it takes a lot of time. 
+
+             When dataset is huge, such as flight simulations program. The traditional approach is to break these images into smaller tiles that hardware can handle. A improved structure is clipmap. 
 
 \end{document}
