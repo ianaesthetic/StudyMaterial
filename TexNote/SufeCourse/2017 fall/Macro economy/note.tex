@@ -198,5 +198,147 @@
             Aggregate quantity of labor demanded = aggregate quantity of labor supplied. However wage is sticky and may be above the equilibrium which leads to unemployment. 
 
             Example of changes: government policy to production / retirement age. 
+    \section{Goods Markets}
+        Assume it is in closed economy with $NX = 0$, $GDP = GNP$, $$NFP = 0$$.
+        
+        Aggregate demand(spending) represents equilibrium of goods and services: 
+        $$Y = C + I + G + NX = C + I + G$$
+        The conversion of this equation means the \emph{national savings} and represent equilibrium of loanable funds. 
+        $$I = Y - C - G$$ 
+        \subsection{Consumption and Saving}
+            Household(disposable income $Y - T$): 
+            $$S = (Y - T) - C$$
+
+            $C^d$ is the aggregation of consumption amount desired by households. The $C^d$ can be perceived as: 
             
+            $$C^d = \sum_{i = 1}^{N}C_i$$
+
+            The household will finally sum together and translate to the aggregate level. 
+
+            Desired national saving(which is the planned saving and investment to find the equilibrium): 
+            $$S^d = Y - C^d - G$$
+            
+            The consumption and savings lead to savior and borrower which is two faces of one thing. The savings introduce tradeoff between current consumption versus future consumption, measuring by real rate.
+            
+            \subsubsection{Interest Rate}
+
+            \textbf{Interest Rate}: a rate of return promised by a borrower to a lender. 
+
+            \textbf{Real Interest Rate}: rate at which the real value f an asset increases over time, representing real purchasing power. 
+            
+            \textbf{Nominal Interest Rate}: rate at which the nominal value of an asset increases over time on the normal contrast, affected by the inflation rate. 
+            
+            Fisher effect: 
+            $$(1 + i) = (1 + r)(1 + \pi)$$
+            $$i = r +  \pi + r\pi$$
+            As $r\pi$ is very small and it can be neglected. 
+            $$r = i - \pi$$
+            
+            $r$ is derived from goods market equilibrium and $\pi$ can be observed.  As $\pi$ needs to be expected to introduce ex-ante rate(prior, before realization): 
+
+            $$i^e = r + E\pi$$
+
+            We also have a after realization we will have a ex-pose $i$ similar to the above. This equation can be used to represent inflation rate's feature. The expected interest rate is usually used. The price of 1 unit of current consumption is 1 + $r$ units of future consumption. 
+            
+            \subsubsection{Consumption-smoothing Motive}
+                It's the desire to have a relatively even pattern of consumption over time. 
+
+                Permanent Income Hypothesis: Focuses in what consumers do with stochastic income receipts, which is not very suitable for China. 
+
+                Life-cycle Hypothesis: Focuses on predictable changes in income over the life cycle. 
+
+                The hypothesis  tries to explain the consumption-smoothing motive. 
+
+            
+            \subsection{Consumption function}
+
+                \textbf{Marginal Propensity to Consume}: the change in C when disposable income increase by one dollar. MPC is in the range of $(0, 1)$ due to consumer-smoothing motive. MPC is actually the slope of consumption function in household level, which can be used to evaluate aggregate level $C^d$.
+                $$MPC = \frac{\Delta C}{\Delta (Y - T)}$$
+
+                Factors will affect consumption will present as followed. 
+
+                \subsubsection{Current Income $Y_t$}
+                    As $Y_t \uparrow$, both consumption and savings $\uparrow$ as $0 < |\Delta C| < |\Delta (Y_t - T_t)|$ (consumption-smoothing motive).  The aggregate level has a similar change. 
+                    $$\Delta C_{t + 1} = \Delta Y_t \times MPC \times (1 + r)$$
+
+                \subsubsection{Expected Future Income}
+                    Higher expected future income leads to more consumption today with saving falls like deflation.  Deflation will discourage consumption.  
+                \subsubsection{Changes in Wealth}
+                    $$Wealth = Asset - Liability$$
+                    $$Savings = Current\ Income - Current\ Expenditure$$
+
+                    Savings can contribute to wealth. Wealth is not a part of saving. When wealth $\uparrow$, consumption $\uparrow$, savings $\downarrow$, which is similar to mechanism of future income.
+                \subsubsection{Changes in Real Interest Rate} 
+                    Increased real interest rate has two opposing effects. For saver, interest rate is benefit of saving: 
+                    
+                    \quad Substitution effect: positive effect on saving, since rate of return is higher. 
+
+                    \quad Income effect: negative effect on saving, since it's easier to save to obtain a given amount in the future.\newline
+                    
+                    
+                    For borrower, interest rate is the cost of borrowing.
+
+                    \quad Substitution effect: positive effect on savings, since the cost is higher. 
+
+                    \quad Income effect: Positive effect on saving, since the higher real interest rate means a loss of wealth.
+
+                    The mixed result will result in a slightly positive slope between $r$ and $S^d$ 
+                \subsubsection{Changes in Tax}
+                    Interest earning are taxed: $t$ is the rate at which nominal interest income is taxed. Expected after-tax real interest rate: 
+
+                    $$r_{a\text{-}t} = (1 - t)i - E\pi$$
+
+                    The tax will affect interest rate, which influence consumption.
+                \subsubsection{Fiscal Policy}
+
+                    The fiscal policy is under balanced Gov Budget:
+                    $$Gov\ Budget = T - G - 0$$
+
+                    Affects desired consumption through changes in current and expected future income. it will directly affect desired national saving. 
+                    
+                    There are two channels: 
+                    
+                    \quad An increase in current government purchases (G) 
+
+                    \quad Adjusting the timing of taxes to change consumption behavior.
+
+                    Government purchases(temporary increase): There two approaches to compensate $G \uparrow$: $T_t \uparrow$ or $T_{t+1} \uparrow$:
+                    
+                    $$T_t\uparrow \  \Rightarrow \  0 < |\Delta C| < |\Delta (Y_t - T_t)|$$
+                        $$S = (Y_t - T_t) - C_t,\ MPC < 1, \quad  S\downarrow$$
+                        $$S^d = Y_t - C_d - G,\ |\Delta C| < |\Delta G| = |\Delta T_t|,\quad S^d\downarrow$$
+
+
+                    $$T_{t+1}\uparrow \Rightarrow (Y_{t+1}^e - T_{t+1})\downarrow \Rightarrow C_t \downarrow$$
+                    $$S = (Y_t - T_t) - C_t,\ \Delta C < 0,\ \Delta T_t = 0, \quad   S\uparrow$$
+                    $$S^d = Y_t - C_d - G,\ |\Delta C| < |\Delta G| = |\Delta PV(T_{t+1})|,\quad S^d\downarrow$$
+
+                    Adjusting of the timing of taxes: 
+
+                    \quad Assumption(Ricardian equivalence proposition): If future income loss exactly offsets current income gain, no change in consumption as people are rational. $T_t \uparrow$ and $T_{t+1} \downarrow$ 
+
+                    $$S = (Y_t - T_t) - C_t,\ \Delta C_t = 0,\ \Delta T_t \uparrow,\quad  S \downarrow$$
+                    $$S^d = Y_t - C_d - G,\ \Delta C^d = 0,\ \Delta G = 0, \quad \Delta S^d = 0$$
+
+                    \quad Assumption(Myopic): In practice, people may  not see that future taxes will rise if taxes are cut today. $T_t \uparrow$ and $T_{t+1} \downarrow$ 
+                    $$S = (Y_t - T_t) - C_t,\ |\Delta C_t| < |\Delta (Y - T_t),\quad S\downarrow$$
+                    $$S^d = Y_t - C_d - G,\ \Delta C^d > 0,\ \Delta G = 0, \quad S^d\downarrow$$
+
+        \subsection{Investment}
+            Investment refers to the purchase or construction of capital goods, including residential and nonresidential buildings, equipment and software used un production, and additions to inventory stock. Investment intends to fluctuate over the business cycle. Investment decision has a time delay differing from labor markets. 
+            \subsubsection{desired capital stock}
+                \textbf{Desired Capital Stock} is the amount of capital that allows firms to \emph{earn the largest expected profit}($Max\ E_t(profit_{t+1}$). Desired capital stock depends on costs and benefits of additional capital, similar to labor market with expected profit. For each unit of investment, the balance is seeked similar to labor market: 
+
+                $$MPK^f = E_t(\frac{\Delta Y_{t+1}}{\Delta K_{t+1}})\  = 0\  \Rightarrow E_t(benefit_{t+1}) = E_t(cost_{t+1})$$
+
+                The benefit of this can be using the Expected production function.
+
+                $$p_k = real\ price\ of\ capital\ goods\ per\ unit$$
+                $$d = depreciation\ rate$$
+                $$e = expected\ real\ interest\ rate$$
+
+                To get expected cost per unit, we define user cost as two parts include depreciation rate and expected real interest rate:
+                $$UC = p_k \times (r + d)$$
+                
+                
 \end{document} 

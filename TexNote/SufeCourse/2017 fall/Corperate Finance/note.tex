@@ -178,7 +178,7 @@
         \subsubsection{Long-term  solvency or financial leverage ratios}
         $$Total\ Debt\ Ratio = \frac{Total\ Asset - Total\ Equity}{Total\ Asset}$$
         $$\frac{Debt}{Equity} = \frac{Total\ Debt}{Total\ Equity}$$
-        $$Equity\ Multiplier = \frac{Total\ Asset}{Total\ Equity} = 1 + \frac{Debt}{Equity}$$
+        $$Equity\ Multiplier (EM) = \frac{Total\ Asset}{Total\ Equity} = 1 + \frac{Debt}{Equity}$$
 
         The bigger of $EM$, the ratio of the equity is smaller, meaning more debt and crisis potential. 
         \subsubsection{Coverage Ratio}
@@ -215,13 +215,99 @@
             $$Market\ Capitalization = Share\ Price \times Share\ Outstanding$$
             $$EPS = \frac{Net\ Income}{Shares\ Outstanding}$$
             $$PE\ Ratio = \frac{Price\ per\ Share}{Earnings\ per\ Share}$$
-            $$Market-to-Book Ratio = \frac{Market\ Value\ per\ Share}{Book\ value\ per\ Share}$$
+
+            It demonstrates the overall to evaluate company value. 
+
+            $$Market\text{-}to\text{-}Book\ Ratio = \frac{Market\ Value\ per\ Share}
+            {Book\ value\ per\ Share}$$
+
+            As the investors think the company is potential, the PE \& MB ratio will be bigger than 1. If investors are irrational, the market-value may be overpriced. 
+
             \begin{align*}
                 Enterprise\ Value\ (EV) &= Market\ Capitalization \\
                                         &+ Market\ Value\ of\ Interest\ Bearing\ Debt \\
                                         &- Cash
             \end{align*}
+
+            It represents a value of an enterprises. 
+
             $$EV\ Multiple = \frac{EV}{EBITDA}$$
+
+            It only tells about the business decision and exclude all non-business factors like accounting factors and leverage. 
+            
+        \subsubsection{The Du Pont Identity}
+            ROE: Rate of Return on Common Stockholder equity. The higher it is, the more earnings for the shareholders to investment 
+            \begin{align*}
+                ROE &= \frac{NI}{TE} \\
+                    &= \frac{NI}{TE} \times \frac{TA}{TA} \\
+                    &= \frac{NI}{TA} \times \frac{TA}{TE} = ROA \times EM \\
+                    &= \frac{NI}{TE} \times \frac{TA}{TA} \times \frac{Sales}{Sales}\\
+                    &= \frac{NI}{Sales} \times \frac{Sales}{TA} \times \frac{TA}{TE}\\
+                    &= PM \times TAT \times EM
+            \end{align*}
+    \subsection{Potential problems}
+        Different fiscal year
+        Extraodinary event. 
+    
+    \subsection{Effect to evaluate financial statement}
+        For internal uses: it's a performance evaluation and planning for the future. 
+        It's the only way for outsider to know what's real going on within the company.
         
+    \section{Arbitrage and Financial Decision Making}
+        decision is to compare costs and benefits in \emph{common terms}(cash).
+        \subsection{Time Value of Money}
+            The difference in value between money today and money in the future is called the \emph{value of time}.
+
+            Interest rate: An exchange rate across time. 
+            
+            $$Risk\text{-}free\ Interest = r_f$$
+
+            Which is perfectly secured without risk.  
+            
+            \subsubsection{Net Present Value}
+                \textbf{Net Present Value}(NPV) of a project or investment is the difference between the present value of its benefit and the present value of its costs. 
+
+                $$NPV = PV (all\ Project\ cash\ flows)$$
+                $$NPV = PV(benefit) - PV(costs)$$
+            
+                The sign of NPV is the rule to judge weather accepting or rejecting. The higher of NPV, the more priority the project has. 
+
+                The starting cash outlay can affect your choice as you can borrow money. The remaining cash will go  to bank. 
+            
+            \subsubsection{The separation theorem }
+                We assume the interest rate is higher than risk-free rate and consistent with lending and borrowing rate and lending and borrowing is without limitations. 
+
+                The project you take is your \emph{investment decision}. The way you will use the money is your \emph{financial decision}. The investment decision is independent of financial decision. That means you should first maximize NPV first. The we can 
+
+        \subsection{Arbitrage and The Law of One Price}
+            \textbf{Arbitrage}: The opportunity to buy and sell equivalent goods in different markets to exploit a price difference without taking any risk or incurring any cost. 
+
+            \textbf{The Law of One Price}
+                If equivalent investment opportunities trade simultaneously in different competitive markets, then they must trade for the same price in both markets as arbitrage eliminate the price difference.
+                Either overstated or understated price will lead to arbitrage.
+                
+            \subsection{Valuing a Security}
+                No arbitrage price of a security: 
+                $$Price(Security) = PV(All\ Cash\ Flows\ Paid\ by\ the\ Security)$$
+
+            \subsubsection{Valuing a Portfolio}
+                The law of one price guarantee value-additivity.
+
+                $$Price(C) = Price(A + B) = Price(A) + Price(B)$$
+
+            \subsubsection{The Price of Risk}
+                Market index is a value measure the overall situation. 
+
+                \textbf{Risk Averse}:Investors prefer  to  have a safe income rather than a risky one of the same average amount. 
+
+                \textbf{Risk Premium}: The additional return that investors expect to earn to compensate them for a security's risk. It depends on risk. 
+
+                The risk is relative to the overall market.  A security's risk premium will be higher the more its returns tend to vary with the overall tend to vary with overall economy and the market index. If the security's returns vary in the opposite direction of the market index, it offers insurance and will have a negative risk premium like food industry.  
+
+                In order to lower the risk premium, it's better to have multiple securities. 
+
+                $$r_s = r_f + r_{premium}$$
+
+                The $r_s$ is better to evaluate the interest rate for risky securities. 
 
 \end{document}
