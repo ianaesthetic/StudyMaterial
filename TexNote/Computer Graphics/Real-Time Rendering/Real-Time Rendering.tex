@@ -1133,9 +1133,13 @@
 
         $\textbf{c}_{\rm{diff}}$, $\textbf{c}_{\rm{spec}}$ and $m$ is the material information can be read from textures, particularly \emph{diffuse color map, specular color map}(grayscale value rather than RGB for the reality) and \emph{gloss map}(describing the smoothness). As $\textbf{c}_{\rm{diff}}$, $\textbf{c}_{\rm{spec}}$ is linear to the ouput, the input can be filtered without antialiasing, when $m$ needs some care. 
     \subsection{Alpha Mapping}
-        The alpha map can be used for manying interesting effect like decaling with clamp corresponder function and trasparent edge. A smilar application is in making cutouts that have 3D visual effect. In order to reserve the visual effect from other angle, cross tree is set by rotate the cutouts. As illusion will break down when viewer see from the above, more cutouts can be added. Combining alpha textre and texture animations can make many visual effects. 
+        The alpha map can be used for manying interesting effect like decaling with clamp corresponder function and trasparent edge to present the part you want. A smilar application is in making cutouts that have 3D visual effect like cross tree. In order to reserve the visual effect from other angle, cross tree is set by rotating the cutouts. As illusion will break down when viewer see from the above, more cutouts can be added. Combining alpha textre and texture animations can make many visual effects. 
 
-        Alpha map can also be used in Alpha blending. \emph{Alpha test} is the technique that conditionally discarding pixels with alpha values below a given threshold. 
+        Alpha map has many options like alpha blending. As discussed before, alpha blending needs a relative order. \emph{Alpha test} is another option that conditionally discarding pixels with alpha values below a given threshold in the merge unit or pixel shader, which enable polygons to be rendered in any order. 
+
+        \emph{Alpha to coverage}, and the similar feature \emph{transparency adaptive antialiasing}, take the transparency value of the fragment and convert this into how many samples inside a pixel are covered. This is similar to screen-door transparency but at a subpixel level. The alpha value determines the porpotion of samples being covered within a pixel. 
+
+    \subsection{Bump Mapping}
 
 
 
