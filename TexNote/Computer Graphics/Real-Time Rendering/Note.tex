@@ -1,7 +1,7 @@
 \documentclass[10pt, a4paper]{article}
     \author{Ianaesthetic}
     \title{Real-Time Rendering Note}
-    \usepackage{indentfirst, amsmath, color}
+    \usepackage{indentfirst, amsmath, color, multirow, amssymb}
 \begin{document}
 \maketitle
 \newpage
@@ -72,7 +72,7 @@
 
             \subsubsection{Merging} 
             The information for every pixel is stored in \emph{color buffer}. \emph{Merging} is responsible for combine the fragment color with the color in the buffer and visibility. This stage is not programmable but highly configurable. Visibility is done by \emph{Z-Buffer} or \emph{Depth-Buffer} by update the smallest z value. However, when rendering transparent primitives, all opaque primitives must be rendered first and then rendered other in a \textbf{back-to-front} order. \\
-            \indent The \emph{alpha channel} is associated with color buffer and stores a related opacity value. The \emph{stencil buffer} is an offscreen buffer used to record the locations of rendered primitives. It derives from primitives and can be used to control rendering into color buffer and z-buffer. All functions above are called \emph{raster operation} or \emph{blend operation}.\\
+            \indent The \emph{alpha channel} is associated with color buffer and stores a related opacity value. The \emph{stencil buffer} is an off-screen buffer used to record the locations of rendered primitives. It derives from primitives and can be used to control rendering into color buffer and z-buffer. All functions above are called \emph{raster operation} or \emph{blend operation}.\\
             \indent There are also \emph{frame buffer}(consists of all the buffer), \emph{accumulation buffer}(complement to frame buffer), \emph{double buffer}(for display).
     
         \subsection{Through the Pipeline}
@@ -81,7 +81,7 @@
 
 
     \section{The Graphics Processing Unit}
-        \emph{Graphics processing unit}(\emph{GPU}) is different from previous rasterization-only chip, evolve from configuration implementations of complex fixed operation to highly programmable blankslates. Programmable \emph{shader} is the primary means.Vertex Shader and Pixel Shader allow operations per Vertex and pixel. Geometry shader allows create and destroy primitives on the fly. 
+        \emph{Graphics processing unit}(\emph{GPU}) is different from previous rasterization-only chip, evolve from configuration implementations of complex fixed operation to highly programmable blank-slates. Programmable \emph{shader} is the primary means.Vertex Shader and Pixel Shader allow operations per Vertex and pixel. Geometry shader allows create and destroy primitives on the fly. 
         
         \subsection{GPU Pipeline Overview}
             \noindent Vertex Shader \hfill\emph{fully programmable}\\
@@ -114,7 +114,7 @@
             The input to the geometry shader is a single object and its associated vertices. The output can be \textbf{zero} and more primitives. The type of primitives in the input and output can be different. The geometry shader guarantee the output has the same order as the input. This stage is more about programmatically modifying incoming data or making a limited number of copies, rather than massively replicating or amplifying it.
 
             \subsubsection{Stream Output}
-                The idea of \emph{stream output} is to gathered the output from vertex shader and geometry shader in the stream. The rasterizeraion stage can be optionally turned off and data processed in this way can be sent back allowing interaction process. 
+                The idea of \emph{stream output} is to gathered the output from vertex shader and geometry shader in the stream. The rasterization stage can be optionally turned off and data processed in this way can be sent back allowing interaction process. 
         
         \subsection{The Pixel Shader} 
             The rasterizer does not directly affect pixel's color, but generate data to describe how a triangle covers a pixel. Additional inputs are needed for the pixel shader. The pixel shader can only influence the fragment it handles for merging. One exception is dealing with gradient and derivative information, which is the special capability of pixel shader. GPU implements this by processing a group of 2 $\times$ 2 or more. However, as a group of pixels should follow do same operations, no flow control is available here.\\
@@ -782,18 +782,18 @@
     \subsection{Light Source}
         Light discussed here are \emph{directional lights}, presented by \emph{light vector} \textbf{l}. $\textbf{l}$ has a length of 1 and always point to the \emph{opposite} of the direction that light travels. The science measuring of light is \emph{radiance}. The emission quantity of a direction light source is \emph{irradiance}, which stands for the power through a unit area perpendicular to \textbf{l}, describing the brightness of an area(like surface). We represent irradiance as an RBG vector as light has color. Environmental light is called \emph{ambient light}.
             
-        The surface irradiance is equal to irradiace measured perpendicular to \textbf{l} times the cosine of the angle $\theta_i$ between \textbf{l} and normal \textbf{n}.Irraidance is proportional to the \emph{density} of light and inversely proportional to the \emph{distance} between rays. We use $E$ to stand for irriaidance:
+        The surface irradiance is equal to irradiance measured perpendicular to \textbf{l} times the cosine of the angle $\theta_i$ between \textbf{l} and normal \textbf{n}.Irradiance is proportional to the \emph{density} of light and inversely proportional to the \emph{distance} between rays. We use $E$ to stand for irradiance:
         $$E = E_L\bar{\cos{\theta_i}} = E_L \max(\textbf{l}\cdot\textbf{n},\ 0)$$
         
         In reality the direction of light is arbitrary, requiring a \emph{light meter} to measure. For multiple light sources: 
         $$E = \sum_{k = 1}^{n}E_{L_k}\bar{\cos{\theta_{i_k}}}$$
     
     \subsection{Material}
-        Fundamentally, all light-matter interaction are the result of two phenomena:\emph{scattering} and \emph{absorption}. Scattering happens when light encounters any kind of optical discontinuity, usually interface between surface and air, involving \emph{reflection} and \emph{refraction} (\emph{transmission}), which chage the direction without changing the amount. Absorption happens inside matter and causes some of the light to be converted into another kind of energy and disappear, which reduces the amount but don't affect its direction. 
+        Fundamentally, all light-matter interaction are the result of two phenomena:\emph{scattering} and \emph{absorption}. Scattering happens when light encounters any kind of optical discontinuity, usually interface between surface and air, involving \emph{reflection} and \emph{refraction} (\emph{transmission}), which change the direction without changing the amount. Absorption happens inside matter and causes some of the light to be converted into another kind of energy and disappear, which reduces the amount but don't affect its direction. 
         
         In opaque objects, surface shading equation is divided to two parts: \emph{specular term} representing the light that was reflected at the surface, and \emph{diffuse term} representing light which has undergone transmission, absorption and scattering. Scattering is different with reflection here as reflection obeys the law of reflection. To characterize by a shading equation, we need to represent the amount and direction of \emph{out going light} based on the amount and direction of the \emph{incoming light}.
 
-        Incoming illumination is measured as surface irradiance. The outgoing light is measured as \emph{exitance} with symbol \textbf{M}. Light-matter interaction is linear. The ratio of existance and irradiance is between 0 to 1 in opaque objects and differentiates in colors. There are represented as RGB vector called the \emph{surface color} \textbf{c}.It can be divided into two terms \emph{specular color} $\textbf{c}_{\rm{spec}}$ and \emph{diffuse color} $\textbf{c}_{\rm{diff}}$. They are dependent on the its composition.
+        Incoming illumination is measured as surface irradiance. The outgoing light is measured as \emph{exitance} with symbol \textbf{M}. Light-matter interaction is linear. The ratio of exitance and irradiance is between 0 to 1 in opaque objects and differentiates in colors. There are represented as RGB vector called the \emph{surface color} \textbf{c}.It can be divided into two terms \emph{specular color} $\textbf{c}_{\rm{spec}}$ and \emph{diffuse color} $\textbf{c}_{\rm{diff}}$. They are dependent on the its composition.
         
         In this chapter we assume diffuse term has no directionality. The directional distribution of the specular term depends on the surface smoothness, which is also involved in shading. Smoothness can either be a parameter in shading equation, or be made into model or texture, depending on the situation. 
 
@@ -822,7 +822,7 @@
         The total outgoing radiance $\textbf{L}_o$:
         $$\textbf{L}_o(\textbf{v}) = (\frac{\textbf{c}_{\rm{diff}}}{\pi} + \frac{m + 8}{8\pi}\bar{\cos^m{\theta_h}}\textbf{c}_{\rm{spec}}) \otimes E_L\bar{\cos{\theta_i}}$$
         
-        which is qute similar to Bling-Phong equation.
+        which is quite similar to Bling-Phong equation.
         $$\textbf{L}_o(\textbf{v}) = (\bar{\cos{\theta_i}}\textbf{c}_{\rm{diff}} + \bar{\cos^m{\theta_h}}\textbf{c}_{\rm{spec}}) \otimes B_L$$
         
         \subsubsection{Implementing the Shading Equation} 
@@ -831,7 +831,7 @@
             
             When implemented into shader, the computations need to be divided according to their \emph{frequency of evaluation}. The lowest frequency of evaluation is \emph{per-model}: Expressions that are constant over the entire model can be evaluated once, and the result passed to the graphics API. \emph{Per-primitive} can be performed by geometry shader if the result of computation is constant over each of the primitives comprising the model. In \emph{per-vertex} evaluation, where the evaluation is performed in vertex shader and passed to pixel shader. The highest frequency of evaluation is \emph{per-pixel}, which the evaluation is performed in pixel shader. We assume all material properties are same across the entire mesh. 
 
-            Separating out the \emph per-model subexpressions, $\textbf{K}_d$ and $\textbf{K}_s$ will be evaluated in the application: 
+            Separating out the \emph per-model sub-expressions, $\textbf{K}_d$ and $\textbf{K}_s$ will be evaluated in the application: 
             $$\textbf{L}_o(\textbf{v}) = \sum_{k = 1}^n((\textbf{K}_d + \textbf{K}_s\bar{\cos^m{\theta_{h_k}}}) \otimes E_L\bar{\cos{\theta_{i_k}}})$$
             
             The view vector $\textbf{v}$ can be computed from the surface position $\textbf{p}$ to the view position $\textbf{p}_v$: 
@@ -867,7 +867,7 @@
                 
                     Where the sample is taken on the screen grid is different for each sample, and optionally the sampling pattern can vary from pixel to pixel. As sampling point is point in real time rendering system, $\textbf{c}$ function can be thought of first retrieve position of the point and then the color. For $w_i$ in most design is set to be constant, i.e., $w_i = \frac{1}{n}$. The simplest anti-aliasing is a single sample at the center of pixel. 
 
-                    Anti-aliasing algorithms that compute more than one full sample per pixel are called \emph{sumpersampling} (or \emph{oversampling}) methods. \emph{Full-scene anti-aliasing} (FSAA) renders the scene at a higher resolution and then average neighboring samples to create an image. It's costly but simple. Other, low quality FSAA is to sample at twice the rate on only one screen axis. 
+                    Anti-aliasing algorithms that compute more than one full sample per pixel are called \emph{supersampling} (or \emph{oversampling}) methods. \emph{Full-scene anti-aliasing} (FSAA) renders the scene at a higher resolution and then average neighboring samples to create an image. It's costly but simple. Other, low quality FSAA is to sample at twice the rate on only one screen axis. 
 
                     A related method is the \emph{accumulation buffer}. This method instead uses a buffer that has the same resolution with more color bits. To obtain an 2$\times$2 sampling, four images are generated with the moved half a pixel in the screen $x$- or $y$- axis. They can be used to create effects such as \emph{motion blurring} and \emph{depth of field} (where objects not at camera focus appear to be blurry). 
                     
@@ -920,7 +920,7 @@
             Though \textbf{over} operator can represent transparency, it's better to be the approximation of pixel coverage. In reality, the transparent object is represented of filtering and reflection. To filter, the scene behind the transparent object should be multiplied by objects spectral opacity. Reflection is to multiply the frame buffer by one RGB color and add another RGB color, which can be done in two process or \emph{dual-color blending}. 
             
         \subsection{Gama Correction}
-            The content above discuss about the pixel values. For display, \emph{cathode-ray tube} (CRT) monitors exhibit a power law relationship between input voltage and display radiance, which turns out to match the inverse of light sensitivity of human eyes, leading to that an encoding proportional to CRT input voltage is roughly \emph{perceptually uniform}. This near-optimal distribution of values minimizes \emph{banding} artifacts. The desire for compatibility is another important factor. LCDs have different tone response curve with hardware providing compatibility. 
+            The content above discuss about the pixel values. For display, \emph{cathode-ray tube} (CRT) monitors exhibit a power law relationship between input voltage and display radiance, which turns out to match the inverse of light sensitivity of human eyes, leading to that an encoding proportional to CRT input voltage is roughly \emph{perceptually uniform}. This near-optimal distribution of values minimizes \emph{banding} artifacts. The desire for compatibility is another important factor. LCD has different tone response curve with hardware providing compatibility. 
 
             The \emph{transfer functions} that define the relationship between radiance and encoded pixel values are slightly modified power curves by the exponent $\gamma$:
                 $$\textbf{f}_{\text{xfer}}(x) \approx x^{\gamma}$$
@@ -929,223 +929,647 @@
 
             The relevant gamma for rendering purposes is encoding gamma. For television is 0.5, and for personal computer with a standard called \emph{sRGB} is 0.45. The sRGB standard assume the display gamma is 2.5 as the CRT usually has and set to 0.45 to ensure an appropriate end-to-end gamma.
             
-            Most image data read to rendering system has been applied to encoded transfer function, which turns from linear-space to a non-linear space. \emph{Gamma correction} guarantee the correctness of linear interpolating between radiance. Ignoring gamma correction also affects the quality of anti-aliased edges like \emph{roping}.Fortunately, modern GPUs can be set to automatically apply the encoding transfer function when values are written to the color buffer. But this feature can't be misused. It's important to apply conversion at the final stage(Where the values are written to the display buffer for the last time). This doesn't mean intermediate buffers can't contain nonlinear encodings, but it must be converted carefully before post-processing. 
+            Most image data read to rendering system has been applied to encoded transfer function, which turns from linear-space to a non-linear space. \emph{Gamma correction} guarantee the correctness of linear interpolating between radiance. Ignoring gamma correction also affects the quality of anti-aliased edges like \emph{roping}.Fortunately, modern GPU can be set to automatically apply the encoding transfer function when values are written to the color buffer. But this feature can't be misused. It's important to apply conversion at the final stage(Where the values are written to the display buffer for the last time). This doesn't mean intermediate buffers can't contain nonlinear encodings, but it must be converted carefully before post-processing. 
             
             It's also necessary to convert any nonlinear input values to a linear space as well, such as texture. GPU is now available to convert it automatically. For authoring texture, care must be taken to use the correct color space. Various other inputs need similar conversion as well.
             \newpage
+
+\section{Texture}
+\subsection{The Texturing Pipeline}
+    Texturing, at its simplest, is a technique for efficiently modeling the surface's properties. The pixels in the image texture are called \emph{texels}. The gloss texture modifies the gloss value, and \emph{bumping texture} changes the direction of the normal, which will all influence lighting equation.
     
+    \begin{align*}
+        \text{\emph{{object space location}}} 
+        &\xrightarrow{projector\ function} \emph{parameter space coordinate}\\
+        &\xrightarrow{corresponder\ function} \emph{texture space coordinate} \\
+        &\xrightarrow{obtain\ value} \emph{texture value}\\
+        &\xrightarrow{value transform function} \emph{transformed  texture value}
+    \end{align*}
+
+    This projector function is called \emph{mapping}, which needs to \emph{texture mapping}.
+
+    \subsubsection{The Projector Function}
+        Projector functions typically work by converting a three-dimensional point in space into texture coordinates, including spherical, cylindrical, planar projections. Problems may occur at the seams where faces meet. \emph{Polycube map} maps a model to a set of cube with different volumes of space mapping to different cubes. Other form of projector functions are not projections but are implicit part of surface formation. The goal of the projector function is to generate texture coordinate. 
+
+        Various projector functions can be applied to a single model. most projector function are applied in modeling stage and results are stored in vertices. Some functions require vertex or pixel shader like animation and \emph{environmental mapping}.
+
+        Spherical projector function, according to spherical coordinates: 
+        $$\phi(x,\ y,\ z) = (\frac{\pi + \textbf{atan2}(y,\ x)}{2\pi}, \frac{\pi - \textbf{acos}(\frac{z}{\parallel x \parallel})}{\pi})$$
+
+        Cylindrical:
+        $$\phi(x,\ y,\ z) = (\frac{\pi + \textbf{atan2}(y,\ x)}{2\pi}, \frac{1}{2}(1 + z))$$
+        
+        Planar projection simply uses orthogonal projection to apply texture maps to characters, as the texture glued onto a paper doll. 
+        \begin{equation*}
+            \phi(x,\ y,\ z) = (\frac{\tilde{u}}{w}, \frac{\tilde{v}}{w}), \quad \text{where}
+            \begin{pmatrix}
+                \tilde{u} \\
+                \tilde{v} \\
+                * \\
+                w 
+            \end{pmatrix}
+            = \textbf{P}_t
+            \begin{pmatrix}
+                x \\
+                y \\
+                z \\
+                1
+            \end{pmatrix}
+        \end{equation*}
+
+
+        Artists often must manually decompose the model into near-planar pieces to avoid distortion by unwrapping the mesh. The goal is to have each polygon be given a fairer share of a texture's area, while also maintaining mesh connectivity (without too many seams).
+        
+        The parameter space is not always a two-dimensional plane; sometimes is a three-dimension volume. For three-element vector $(u,\ v,\ w)$, $w$ represents the depth along the projection direction. For four-coordinate $(s, t, r, q)$, $q$ is used as fourth value in a homogeneous coordinate for spotlighting effect. Another important type of parameter space is directional, where each point in the parameter space represents a direction. The most common one is \emph{cube texture}. The one-dimensional projector function also have its own use(coloration according to altitude). Line can also be textured.(Rain is textured with a semi-transparent image)
+
+    \subsubsection{The Corresponder Function}
+        Corresponder function convert parameter-space coordinate to texture-space location in order to provide flexibility. One type is to use the API to select a portion of existing texture for display. Another type is a matrix transformation, which can be applied in vertex or pixel shader. The order of the transformation must be reserved as it's the location of image  will be changed rather the location of object. 
+
+        Another class of corresponder functions controls the way an image is applied when parameters are out of range $[0, 1)$.
+
+        \textbf{Warp}(DirectX), \textbf{Repeat}(OpenGL), or\textbf{title}: The image repeats itself across the surface; algorithmically, the integer part will drop. 
+        
+        \textbf{mirror}: The image repeats itself across the surface, but is mirrored on every other repetition. This provide some continuity along the 
+
+        \textbf{Clamp}(DirectX), \textbf{Clamp to edge}(OpenGL): Values out of range of$[0, 1)$ will clamp to the edge. This function is useful for avoiding accidentally taking samples from the opposite edge of a texture when bilinear interpolation happens near a texture's edge. 
+
+        \textbf{Border}(DirectX), \textbf{Clamp to Border}: Values out of range of $[0, 1)$ will be set to a border color. This function is good for rendering decal onto surfaces. 
+
+        The \emph{periodicity} problem like repeating tiles of a texture can be solved by combining the texture values with another, non-tiled texture. Another option to avoid periodicity is to use shader programs to implement specialized corresponder functions that randomly recombine texture pattern or tiles. \emph{Wang tiles} are one example which choose randomly from small square tiles with matching edges. 
+
+        For real-time work, the last corresponder function is implicit, and is derived from the image's size. It allows the parameter being in range  $[0, 1)$ with different resolution of texture can be applied. 
+\subsubsection{Texture Value}
+    The texture value is retrieved after corresponder function. For image textures, this is done by using the texture to retrieve texel information from the image. Procedural functions are sometimes used. 
     
-    \section{Texture}
-        \subsection{The Texturing Pipeline}
-            Texturing, at its simplest, is a technique for efficiently modeling the surface's properties. The pixels in the image texture are called \emph{texels}. The gloss texture modifies the gloss value, and \emph{bumping texture} changes the direction of the normal, which will all influence lighting equation.
-            
-            \begin{align*}
-                \text{\emph{{object space location}}} 
-                &\xrightarrow{projector\ function} \emph{parameter space coordinate}\\
-                &\xrightarrow{corresponder\ function} \emph{texture space coordinate} \\
-                &\xrightarrow{obtain\ value} \emph{texture value}\\
-                &\xrightarrow{value transform function} \emph{transformed  texture value}
-            \end{align*}
+    The most common texture values include RGB triplet, gray scale and RBG$\alpha$ value. The values returned from the texture are optionally transformed before use. One common example is the remapping of data from unsigned range to a signed range. Another one is to compare the value with a reference value and return a flag.
+    
+\subsection{Image Texturing}
+The texture used in GPU has usually $2^m \times 2^n$ texels. Modern GPU allows for an arbitrary size. When finally projecting texture onto the screen, the projected square may contain \emph{magnification} and \emph{minification}. The filtering can take place in the input(values read from  textures) or in the output(final pixel colors). When input and output is linear, there will be no difference. 
 
-            This projector function is called \emph{mapping}, which needs to \emph{texture mapping}.
+\subsubsection{Magnification}
+    The most common filtering techniques for magnification is \emph{nearest neighbor}(application of box filter) and \emph{bilinear interpolation}. There is also \emph{cubic convolution}, enabling high quality. It's not commonly available in the native hardware but can be realized in shader program. 
+    
+    One characteristic of nearest neighbor is that the individual texels may become apparent, which is called \emph{pixelation} for every pixel only fetch one nearest texel to each pixel center. 
 
-            \subsubsection{The Projector Function}
-                Projector functions typically work by converting a three-dimensional point in space into texture coordinates, including spherical, cylindrical, planar projections. Problems may occur at the seams where faces meet. \emph{Polycube map} maps a model to a set of cube with different volumes of space mapping to different cubes. Other form of projector functions are not projections but are implicit part of surface formation. The goal of the projector function is to generate texture coordinate. 
+    In bilinear interpolation, for each pixel, this kind of filtering finds the four neighboring texels and linearly interpolates in two dimension to form a blended value for pixel. The cubic convolution is more expensive.  Specifically, for a image coordinate $(p_u, p_v)$. According to the coordinate, four centers of texels can be calculated.
 
-                Various projector functions can be applied to a single model. most projector function are applied in modeling stage and results are stored in vertices. Some functions require vertex or pixel shader like animation and \emph{environmental mapping}.
+    $$x_l = \lfloor p_u \rfloor, \quad y_b = \lfloor p_v \rfloor$$
+    $$x_r = \lceil p_u \rceil, \quad y_t = \lceil  p_v \rceil$$
 
-                Spherical projector function, according to spherical coordinates: 
-                $$\phi(x,\ y,\ z) = (\frac{\pi + \textbf{atan2}(y,\ x)}{2\pi}, \frac{\pi - \textbf{acos}(\frac{z}{\parallel x \parallel})}{\pi})$$
+    When interpolating:
 
-                Cylindrical:
-                $$\phi(x,\ y,\ z) = (\frac{\pi + \textbf{atan2}(y,\ x)}{2\pi}, \frac{1}{2}(1 + z))$$
-                
-                Planar projection simply uses orthogonal projection to apply texture maps to characters, as the texture glued onto a paper doll. 
-                \begin{equation*}
-                    \phi(x,\ y,\ z) = (\frac{\tilde{u}}{w}, \frac{\tilde{v}}{w}), \quad \text{where}
-                    \begin{pmatrix}
-                        \tilde{u} \\
-                        \tilde{v} \\
-                        * \\
-                        w 
-                    \end{pmatrix}
-                    = \textbf{P}_t
-                    \begin{pmatrix}
-                        x \\
-                        y \\
-                        z \\
-                        1
-                    \end{pmatrix}
-                \end{equation*}
+    $$u^{'} = p_u - \lfloor p_u \rfloor,\quad v^{'} = p_v - \lfloor p_v \rfloor$$
+    \begin{align*}
+        \textbf{c}(p_v,\ p_u) &= (1 - u^{'})(1 - v^{'})\textbf{t}(x_l,\ y_b) \\
+            &+ u^{'}(1 - v^{'})\textbf{t}(x_r,\ y_b) \\
+            &+ (1 - u^{'})v^{'}\textbf{t}(x_l,\ y_t) \\
+            &+ u^{'}v^{'}\textbf{t}(x_r,\ y_t)
+    \end{align*}
 
+    This kind of interpolation will have poor performance when the image has a nonlinear change such as the edge of a object. 
 
-                Artists often must manually decompose the model into near-planar pieces to avoid distortion by unwrapping the mesh. The goal is to have each polygon be given a fairer share of a texture's area, while also maintaining mesh connesctivity (without too many seams).
-                
-                The parameter space is not always a two-dimensional plane; sometimes is a three-dimension volume. For three-element vector $(u,\ v,\ w)$, $w$ represents the depth along the projection direction. For four-coordinate $(s, t, r, q)$, $q$ is used as fourth value in a homogeneous coordinate for spotlighting effect. Another important type of parameter space is directional, where each point in the parameter space represents a direction. The most common one is \emph{cube texture}. The one-dimensional projector function also have its own use(coloration according to altitude). Line can also be textured.(Rain is textured with a semi-transparent image)
+    A common solution to the blurriness that accomplish magnification is to use \emph{detail textures}. These are textures that represent fine surface details. The high-frequency of repetitive pattern of the detail texture, combined with low-frequency magnified texture will have a similar visual effect with high resolution texture. 
+    
+    Sometime, linear interpolation is not required. In order to magnify checkerboard, remapping will have better visual effect. Such remapping is useful in cases where well-defined edges are important, such as text. Alpha value can be used to be threshold the results. This method is called \emph{cutout texture}. \emph{Vector textures} can handle high quality edges generation. It stores information at texel describing how the edges cross the grid. These information can contain more subjects leading to accuracy and resolution-independence. However, it's too costly to apply to read-time rendering application. 
+    
+    There is simpler technique using \emph{sampled distance filed} data structure. A distance filed is a scalar signed field over a space or surface in which an object is embedded(that means, the filed can be curved). At any point, the distance field has a value with a magnitude equal to the distance to the object's nearest boundary point. The value is negative within the object and positive outside the object. This will interpolated with the real distance rather than space coordinate so it's linear and fit bilinear interpolation to get a sampled distance filed for further rendering. The evaluation of sampled distance field is to use alpha map and built-in GPU interpolation and alpha testing rather than pixel shader modification.   
+    
+\subsubsection{Minification}
+    Directly, we consider how to aggregate the influence of texels, which is hard to accomplish.
 
-            \subsubsection{The Corresponder Function}
-                Corresponder function convert parameter-space coordinate to texture-space location in order to provide flexibility. One type is to use the API to select a portion of existing texture for display. Another type is a matrix transformation, which can be applied in vertex or pixel shader. The order of the transformation must be reserved as it's the location of image  will be changed rather the location of object. 
+    Nearest neighbor can be used to use one texel at the very center of the pixel to represent, which will cause big alias and even noticeable when surface is moving and result  \emph{temporal aliasing}. Similarly, bilinear interpolation can be used but don't perform much better than nearest neighbor. 
 
-                Another class of corresponder functions controls the way an image is applied when parameters are out of range $[0, 1)$.
+    According to Nyquist, we need to increase the pixel sample rate or the the texture frequency has to decrease. The previous chapter introduces increasing of sampling rate, but has a limited increase that don't fit minification. The design of anti-aliasing algorithm is to pre-process texture and create data structure to help with effect approximation.
+    
+    The most popular method is called \emph{mipmapping}. Mipmapping generate a set of images, called \emph{mipmap chain}, with a level start at 0 and each level downsample to a quarter of the original area as the next level. level 0 is the original one and the downsampled ones are called subtexture. 
 
-                \textbf{Warp}(DirectX), \textbf{Repeat}(OpenGL), or\textbf{title}: The image repeats itself across the surface; algorithmically, the integer part will drop. 
-                
-                \textbf{mirror}: The image repeats itself across the surface, but is mirrored on every other repetition. This provide some continuity along the 
+    Two important elements in forming high-quality mipmaps are good filtering and gamma correction. The common way to form a mipmap level is to take each $2 \times 2$ sets of texels and average them to get the mip level texel. This is actually a 2-dimensional box filter, which is better to use a Gaussian filter instead. 
 
-                \textbf{Clamp}(DirectX), \textbf{Clamp to edge}(OpenGL): Values out of range of$[0, 1)$ will clamp to the edge. This function is useful for avoiding accidentally taking samples from the opposite edge of a texture when bilinear interpolation happens near a texture's edge. 
+    For textures encoded in a non-linear space (such as color texture), gamma correction is obviously needed to apply to the texture before mipmapping to a linear space. After filtering, converting texture back to non-linear space is also needed. 
+    
+    For the texture is fundamentally in a non-linear space, specialized mipmapping method is required. 
 
-                \textbf{Border}(DirectX), \textbf{Clamp to Border}: Values out of range of $[0, 1)$ will be set to a border color. This function is good for rendering decal onto surfaces. 
+    In order to measure the coverage of a single pixel, \emph{d} or $\lambda$ is introduced. There two approaches to compute it: First we use the longest edge of quadrilateral formed by the pixel's cell to approximate; Or we can select the largest absolute value of $\frac{\partial u}{\partial x}$, $\frac{\partial v}{\partial x}$, $\frac{\partial u}{\partial y}$, $\frac{\partial v}{\partial y}$. Each differentials is a measure of the amount of change in the texture coordinate with respect to a screen axis. These gradient value is not accessible by dynamic flow control. And as the vertex shader can't access derivative data so it needs to be calculated first and then sent into GPU. 
 
-                The \emph{periodicity} problem like repeating tiles of a texture can be solved by combining the texture values with another, non-tiled texture. Another option to avoid periodicity is to use shader programs to implement specialized corresponder functions that randomly recombine texture pattern or tiles. \emph{Wang tiles} are one example which choose randomly from small square tiles with matching edges. 
+    \emph{d} is used to determine where to sample along the mipmap's pyramid axis. The goal of texel ratio is at least 1:1 according to Nyquist. The important principle is that the more texels a pixel covers and \emph{d} increases, a smaller and blurrier version of texture will be accessed by a triplet $(u, v, d)$. Instead of a integer representing mipmap level, $d$ is a fractional value between two level. Using u, v coordinates we can get two bilinear texture values by bilinear interpolation and linear interpolated them using the decimal part of \emph{d} to get the final value. This process is called trilinear interpolation and is performed in each pixel. 
 
-                For real-time work, the last corresponder function is implicit, and is derived from the image's size. It allows the parameter being in range  $[0, 1)$ with different resolution of texture can be applied. 
-        \subsubsection{Texture Value}
-            The texture value is retrieved after corresponder function. For image textures, this is done by using the texture to retrieve texel information from the image. Procedural functions are sometimes used. 
-            
-            The most common texture values include RGB triplet, gray scale and RBG$\alpha$ value. The values returned from the texture are optionally transformed before use. One common example is the remapping of data from unsigned range to a signed range. Another one is to compare the value with a reference value and return a flag.
-            
-    \subsection{Image Texturing}
-        The texture used in GPU has usually $2^m \times 2^n$ texels. Modern GPU allows for an arbitrary size. When finally projecting tex ture onto the screen, the projected square may contain \emph{magnification} and \emph{minification}. The filtering can take place in the input(values read from  textures) or in the output(final pixel colors). When input and output is linear, there will be no difference. 
+    \emph{Level of detail bias(LOD bias)} is used to control by being added to \emph{d} in different circumstances. It can be specified for the texture as whole, or per-pixel in the pixel shader. 
+
+    Instead of summing all the texels that affect a pixel, pre-combined set of texels are accessed and interpolated. It may lead to \emph{overblurring}, which happens when camera looks along nearly edge-on. It may have a rectangular area. In order to avoid aliasing, we may use the largest derivative as \emph{d} and result in relatively blurring. One extension to solve this is \emph{ripmap}, which will also create rectangular texture. However, it's too costly to use in real-time rendering. 
+
+    Another method to avoid overblurring is \emph{summed-area table}(SAT). Every texel has more bits of precision and record its individual data(color for example) and the sum of all the corresponding texture's texels in the rectangle formed by this location and texel (0, 0). When a pixel grid is back-projected (which means project the pixel grid to the texture space; normally, we perceive as the texture projected on the pixel space on the screen) onto the texture, the projected gird is bounded by a rectangular. The average data in the rectangular will be returned as the texture value. 
+    $$\textbf{c} = \frac{\textbf{s}(x_{ur}, y_{ur}) - \textbf{s}(x_{ll}, y_{ur}) - \textbf{s}(x_{ur}, y_{ll}) + \textbf{s}(x_{ll}, y_{ll})}{(x_{ur} - x_{ll})(y_{ur} - y_{ll})}$$
+
+    However, both ripmap and summed-area table will have blurring image when a texture is viewed along the diagonal as the average of the whole texture will be averaged rather than the average the thin real projected rectangle. 
+
+    Ripmap and  summed-area table are examples of \emph{anisotropic filtering} algorithm. They have good effect in horizontal and vertical directions but is memory intensive.  Summed-area table are more suitable in modern GPU with more algorithms to optimize. 
+
+    Other from anisotropic filtering, \emph{unconstrained anisotropic filtering} is widely used. Similar to summed-area table, pixel grid is back-projected to a quad and sampled a number of time with associated squarish area. Instead of using a single mipmap sample to approximate the coverage, the algorithm uses a number of squares to cover the quad. The shorter side of the quad is used to determine \emph{d} with a relatively small averaged are for each sample. The longer side creates a \emph{line of anisotropy} parallel to the longer side and through the middle of the quad. Samples will be taken on the line and its amount is decided by the value of anisotropy. 
+    
+    This scheme allows the line of anisotropic to run in any direction (Correctly sample the diagonal view of texture as the line can be diagonal rather than horizontal and vertical in common anisotropic filtering). Meanwhile it has same cost as the mipmap does. 
+\subsubsection{Volume Textures}
+    A direct extension of image textures is three-dimensional image data that is accessed by $(u, v, w)$ value. Being inside A single mipmap level requires a trilinear interpolation, while filtering between mipmaps require \emph{quadrilinear interpolation}. This requires for high precision texture. Volume textures have the advantage that the good projection function which avoids distortion and seam. 
+    
+\subsubsection{Cube Maps}
+    Another type of texture is the \emph{cube texture} and \emph{cube map}. The mapping point is specified by a three-dimensional vector. It points from the center of the cube and choose the texture face by the face with largest magnitude. (choose $-Z$ for $(1, 2, -3)$. The other entries will be divided by magnitude to be in range in [-1, 1] and can simply be mapped to range [0, 1]. It's useful for environmental mapping.
+
+    Cube maps support bilinear interpolation and mipmaps, but may have problems near the seam as the sample can't be across the boundaries of faces and faces can't affect each other. Another problem that the angular size of a texel varies over a cube face.  That is, a texel at the center of a cube represents a greater visual solid angle than a texel at the corner. 
+
+\subsubsection{Texture Caching}
+     Memories for textures are always not enough. \emph{Texture Caching} aims to a balance between the overhead of uploading textures to memory and the amount of of memory taken up by textures at one time. 
+
+     Some general advice is to keep the texture no larger than necessary and to try to keep polygons grouped by their use of texture. 
+
+     A \emph{least recently used}(LRU) strategy is one commonly used in texture caching scheme. Every texture has a time stamp representing when it's last accessed. When new texture is uploaded, the texture with oldest time stamp is unloaded first. Priority is optionally given to prevent unnecessary texture swapping. 
+
+     It's suggested to check the texture being swapped out for problems will happen when this texture is used in current frame. When it occurs, LRU has terrible performance. It better to first transfer to \emph{most recently used} and after no textures are swapped out to switch back to LRU. 
+
+     \emph{Prefetching} where future needs are anticipated making the texture loading over a few frames as there may be sudden big amount of texture loading and it takes a lot of time. 
+
+     When data set is huge, such as flight simulations program. The traditional approach is to break these images into smaller tiles that hardware can handle. A improved structure is \emph{clipmap}. The entire data set is treated as a mipmap, but only a small part of the lower levels of the mipmap is required for certain view and memory. 
+
+\subsubsection{Texture Compression}
+    \emph{Texture Compression} can directly attack memory and bandwidth problem. \emph{S3 texture compression} becomes the standard for DirectX and called \emph{DXTC} or \emph{BC}. It has independently encoded pieces on $4 \times 4$ texel blocks, which is also called \emph{tile}. Encoding is based on interpolation which is simple and fast. There are five variants: 
+    
+    \quad \textbf{DXT1 / BC1}: It has two 16-bit reference RGB565 values as the limitation. Each texel has a 2-bit interpolation factor to refer to 2 references or 2 intermediate value, while only 1 intermediate value is included and another stands for transparent when alpha is introduced. The compression ratio is 6 : 1 compressing 24-bit RGB texture. 
+
+    \quad \textbf{DXT3 / BC2}: The encoding pattern is same as DXT1. Meanwhile, every texel has a 4-bit alpha value stored separately. The compression ratio is 4 : 1. 
+
+    \quad \textbf{DXT5 / BC3}: The encoding pattern is same as DXT1. In addition, alpha data is encoded using two 8-bit reference values. Each texel has 3 interpolation factor which can refer to one of the reference alpha values or one of the six intermediate alpha values. 
+
+    \quad \textbf{ATI1/ BC4}:  It supports single color channel and encoded as the alpha channel in DXT5.
+
+    \quad \textbf{ATI2/ BC5}: It supports dual color channels and encoded as the aloha channel in DXT5. 
+
+    The disadvantage of these compressions is \emph{lossy}. Once a tile has many distinct value it will lead to some loss. Fortunately, These compression scheme generally give acceptable image fidelity. Another problem is that all the colors are on a straight line in RGB space. \emph{color distribution} can attack it as it uses colors from the neighbors blocks in order to achieve more colors. 
+
+    For OpenGL ES, \emph{Ericsson texture compression(ETC)} is chosen. It shares the same features as S3TC. It encodes $4 \times 4$ texels with 4 bits per texel. Each $2 \times 4$ or $4 \times 2$ block stores a basic color, and each texel in a block can select to add one of the values in the selected lookup table. 
+
+    Compression of normal maps requires some care. We assume the normal is unit vector and the $z$-component is positive. So we can derive $z$ by: 
+    $$n_z = \sqrt{1 - n_x^2 - n_y^2}$$
+    
+    So the three-dimensional texture can be stored as two-dimensional texture, a modest compression. Further compression is usually achieved in BC5 manner: A block of texel has 16 possible values, which can be bounded by a bounding box. So x, y values can be perceived as two channels of color and interpolation factor allows for value to choose from for each axis. 
+
+    A fallback when GPU does not support BC5 can use DXT5 to substitute. 
+
+    For normal maps, the aspect ratio decides the layout of the normal inside a block. For example, as the normal has a width nearly twice as height, the current $8 \times 8$ grids can be converted to $4 \times 16$ grids with different bits allocation. 
+
+\subsection{Procedural Texturing}
+\emph{Procedural texture} is to evaluate a function to look up texture value rather than generate texture space coordinate. It's often used in offline rendering system and not so common in real-time rendering. Procedural texture is used when image texture requires for costly memory access. Volume texture is a typical example. 
+
+\emph{Cellular texture}, calculated the closest distance to a set a special points for every location. The color or shading normal will change by this distance. 
+
+Another type of application is on physical simulation like water ripples. 
+
+As parameterization will be more difficult for procedural texture, it's better to synthesis texture onto the surface directly. Anti-aliasing procedural texture becomes both easier and more difficult. On one hand, pre-computations methods are not available; On other hand, procedural texture have more inside information. 
+
+\subsection{Texture Animation}  
+The image applied and coordinate can both be dynamic. For example, dynamic coordinate for water downfall to make the water move. The texture can be applied to matrix transformation and blending techniques. 
+
+\subsection{Material Mapping}
+A common use of a texture is to modify a material property affecting the shading equation. Shader can read values from the texture directly. For equation:
+$$\textbf{L}_o(\textbf{v}) = (\frac{\textbf{c}_{\rm{diff}}}{\pi} + \frac{m + 8}{8\pi}\bar{\cos^m{\theta_h}}\textbf{c}_{\rm{spec}}) \otimes E_L\bar{\cos{\theta_i}}$$
+
+$\textbf{c}_{\rm{diff}}$, $\textbf{c}_{\rm{spec}}$ and $m$ is the material information can be read from textures, particularly \emph{diffuse color map, specular color map}(grayscale value rather than RGB for the reality) and \emph{gloss map}(describing the smoothness). As $\textbf{c}_{\rm{diff}}$, $\textbf{c}_{\rm{spec}}$ is linear to the output, the input can be filtered without anti-aliasing, when $m$ needs some care. 
+\subsection{Alpha Mapping}
+The alpha map can be used for many interesting effect like decaling with clamp corresponder function and transparent edge to present the part you want. A similar application is in making cutouts that have 3D visual effect like cross tree. In order to reserve the visual effect from other angle, cross tree is set by rotating the cutouts. As illusion will break down when viewer see from the above, more cutouts can be added. Combining alpha texture and texture animations can make many visual effects. 
+
+Alpha map has many options like alpha blending. As discussed before, alpha blending needs a relative order. \emph{Alpha test} is another option that conditionally discarding pixels with alpha values below a given threshold in the merge unit or pixel shader, which enable polygons to be rendered in any order. 
+
+\emph{Alpha to coverage}, and the similar feature \emph{transparency adaptive anti-aliasing}, take the transparency value of the fragment and convert this into how many samples inside a pixel are covered. This is similar to screen-door transparency but at a sub-pixel level. The alpha value determines the proportion of samples being covered within a pixel. 
+
+\subsection{Bump Mapping}
+\emph{Bump mapping} is used to represent small-scale detail which is implemented in per-pixel shading. The scale of detail on object can be classified into: \emph{macro-features}, \emph{meso-feature} and \emph{micro-features}
+
+Macro features cover many pixel. Macro-geometry is represented by geometric primitives, while micro-geometry is encapsulated in the shading model and used in pixel shader using texture maps as parameters for equation. Meso-geometry describe everything between these two scales.
+
+\emph{Bumping mapping techniques} are commonly used for mesoscale shading, adjusting the shading parameters(like normals) at pixel level in such a way that the viewer perceives small perturbations away from the base geometry. For example, when introducing a change to color component, instead of changing the base texture directly, we access another texture which is used to modify the surface normal. This will preserve the original geometry with different effect. 
+
+For bump mapping, the normal must change direction with respect to some frame of reference. \emph{Tangent space basis} is stored per vertex used to transform the lights to a surface location's space to compute the effect of perturbing the normal and is expressed by \emph{tangent and bitangent vectors} and corresponding basis matrix.
+\begin{equation*}
+    \begin{pmatrix}
+    t_x & t_y & t_z & 0 \\
+    b_x & b_y & b_z & 0 \\
+    n_x & n_y & n_z & 0 \\
+    0 & 0 & 0 & 1
+    \end{pmatrix}
+\end{equation*}  
+
+Tangent and Bitangent don't have to truly be perpendicular to each other since the normal map itself maybe distorted to fit the surface. The normal can be calculated by the product of tangent and bitangent vectors, which can save memory with attention to handedness(e.g, in symmetric model). The handedness can be marked with a bit. The idea of tangent space is important for other algorithms like the orientation of the material. 
+
+    \subsubsection{Blinn's Methods}
+        The original bump mapping method stores two offset values $b_u$ and $b_v$ for interpolated normals along \textbf{u} and \textbf{v} image axes. This type of of bump map texture is called an \emph{offset vector bump map} or \emph{offset map}.
+
+        Another way to represent bumps is to use \emph{heightfield} to represent bumps so the direction of normals. 
         
-        \subsubsection{Magnification}
-            The most common filtering techniques for magnification is \emph{nearest neighbor}(application of box filter) and \emph{bilinear interpolation}. There is also \emph{cubic convolution}, enabling high quality. It's not commonly available in the native hardware but can be realized in shader program. 
-            
-            One characteristic of nearest neighbor is that the individual texels may become apparent, which is called \emph{pixelation} for every pixel only fetch one neareast texel to each pixel center. 
+    \subsubsection{Normal Mappings}
+        \emph{Normal map} directly stores perturbed normals, represent the same effect with original bump mapping with different storage format. $(x,y,z)$ values are mapped to [-1, 1], e.g., for an 8-bit texture the $x$-axis value 0 represents -1.0 abd 255 represents 1.0. It's similar to RGB values and light blue [128, 128, 255] represents flat surface. 
 
-            In bilinear interpolation, for each pixel, this kind of filtering finds the four neighboring texels and linearly interpolates in two dimension to form a blended value for pixel. The cuibic convolution is more exepensive.  Specifically, for a image coordinate $(p_u, p_v)$. According to the coordinate, four centers of texels can be calculated.
+        Originally, the normal map is in world-space. However, this approach can't deal with any deformation, like rotation, which will lead to change in orientation. So it's rarely used. 
 
-            $$x_l = \lfloor p_u \rfloor, \quad y_b = \lfloor p_v \rfloor$$
-            $$x_r = \lceil p_u \rceil, \quad y_t = \lceil  p_v \rceil$$
+        Normal map can also be defined in object space. It now can deal with rigid transformation. Lights should be transformed into object space which can be done in application stage. 
 
-            When interpolating:
+        Tangent space is usually used. It allows for deformation of the surface and maximal usage of normal maps. It can be compressed as introduced before while requiring or more transformations. 
 
-            $$u^{'} = p_u - \lfloor p_u \rfloor,\quad v^{'} = p_v - \lfloor p_v \rfloor$$
-            \begin{align*}
-                \textbf{c}(p_v,\ p_u) &= (1 - u^{'})(1 - v^{'})\textbf{t}(x_l,\ y_b) \\
-                    &+ u^{'}(1 - v^{'})\textbf{t}(x_r,\ y_b) \\
-                    &+ (1 - u^{'})v^{'}\textbf{t}(x_l,\ y_t) \\
-                    &+ u^{'}v^{'}\textbf{t}(x_r,\ y_t)
-            \end{align*}
+        There are two methods to use normal maps. If there is seldom lights, it's preferred to transform the light to tangent space as it move slowly per pixel and can be interpolated in triangle. However, it's preferred to transform perturbed normals to world space when there are more lights as it involves less transformation and avoid tangent space distortion. 
 
-            This kind of interpolation will have poor performance when the image has a nonlinear change such as the edge of a object. 
+        Filtering normal maps is a difficult problem as the relationship between normal and shaded color is not linear. However, Lambertian surfaces are a special case where the normal map has an almost linear effect on shading. In Lambertian shading, it satisfies: 
+        \begin{equation*}
+            \textbf{l} \cdot (\frac{\sum_{j = 1}^n\textbf{n}_j}{n}) = \frac{\sum_{j = 1}^n(\textbf{l} \cdot \textbf{n}_j)}{n} 
+        \end{equation*}
 
-            A common solution to the blurriness that accompanish magnification is to use \emph{detail textures}. These are textures that represent fine surface details. The high-frequency of repetitive pattern of the detail texture, combined with low-frequency magnified texture will have a similar visual effect with high resolution texture. 
-            
-            Sometime, linear interpolation is not required. In order to magnify checkerboard, remapping will have better visual effect. Such remapping is useful in cases where well-defined edges are important, such as text. Alpha value can be used to be threshold the results. This method is called \emph{cutout texture}. \emph{Vector textures} can handle high quality edges generation. It stores information at texel describing how the edges cross the grid. These information can contain more subjects leading to accuracy and resolution-independence. However, it's too costly to apply to read-time rendering application. 
-            
-            There is simpler technique using \emph{sampled distance filed} data structure. A distance filed is a scalar signed field over a space or surface in which an object is embeded(that means, the filed can be curved). At any point, the distance field has a value with a magnitude equal to the distance to the object's neareast boundary point. The value is negative within the object and positive outside the object. This will interpolated with the real distance rather than space coordinate so it's linear and fit bilinear interpolation to get a sampled distance filed for further rendering. The evaluation of sampled distance field is to use alpha map and built-in GPU interpolation and alpha testing rather than pixel shader modification.   
-            
-        \subsubsection{Minification}
-            Directly, we consider how to aggregate the influence of texels, which is hard to acomplish.
+        So Lambertian shading \emph{almost} produce the right result while it's a \emph{clamped} dot product. But in practice it's not objectionable. 
 
-            Nearest neighbor can be used to use one texel at the very center of the pixel to represent, which will cause big aliase and even noticable when surface is moveing and result  \emph{temporal aliasing}. Similarly, bilinear interpolation can be used but don't perform much better than nearest neighbor. 
+        For other surfaces, more details are included in following chapters. 
 
-            According to Nyquist, we need to increase the pixel sample rate or the the texture frequency has to decrease. The previous chapter introduces increasing of samling rate, but has a limited increase that don't fit minification. The design of anti-aliasing algorithm is to preprocess texture and create data structure to help with effect approximation.
-            
-            The most popular method is called \emph{mipmapping}. Mipmapping generate a set of images, called \emph{mipmap chain}, with a level start at 0 and each level downsample to a quater of the original area as the next level. level 0 is the original one and the downsampled ones are called subtexture. 
+    \subsubsection{Parallax Mapping}
+        A problem with normal mapping is that the bumps never block each other. The idea of \emph{parallax mapping} is an approximation to shift the pixel location to simulate this effect. 
 
-            Two important elements in forming high-quality mipmas are good filtering and gamma correction. The common way to form a mipmap level is to take each $2 \times 2$ sets of texels and average them to get the mip level texel. This is actually a 2-dimensional box filter, which is better to use a Gaussian filter instead. 
-
-            For textures encoded in a non-linear space (such as color texture), gamma correction is obviously needed to apply to the texture before mipmapping to a linear space. After filtering, converting texture back to non-linear space is also needed. 
-            
-            For the texture is fundamentally in a non-linear space, specialized mipmapping method is required. 
-
-            In order to measure the coverage of a single pixel, \emph{d} or $\lambda$ is introduced. There two approaches to compute it: First we use the longest edge of quadrilateral formed by the pixel's cell to approximate; Or we can select the largest absolute value of $\frac{\partial u}{\partial x}$, $\frac{\partial v}{\partial x}$, $\frac{\partial u}{\partial y}$, $\frac{\partial v}{\partial y}$. Each differentials is a measure of the amount of change in the texture coordinate with respect to a screen axis. These gradient value is not accessible by dynamic flow control. And as the vertex shader can't access derivative data so it needs to be calculated first and then sent into GPU. 
-
-            \emph{d} is used to determine where to sample along the mipmap's pyrimid axis. The goal of texel ratio is at least 1:1 according to Nyquist. The improtant principle is that the more texels a pixel covers and \emph{d} increases, a smaller and blurrier version of texture will be accessed by a triplet $(u, v, d)$. Instead of a integer representing mipmap level, $d$ is a fractional value between two level. Using u, v coordinates we can get two bilinear texture values by bilinear interpolation and linear interpolated them using the decimal part of \emph{d} to get the final value. This process is called trilinear interpolation and is performed in each pixel. 
-
-            \emph{Level of detail bias(LOD bias)} is used to control by being added to \emph{d} in different circumstances. It can be specified for the texture as whole, or per-pixel in the pixel shader. 
-
-            Instead of summing all the texels that affect a pixel, precombined set of texels are accessed and interpolated. It may lead to \emph{overblurring}, which happens when camera looks along nearly edge-on. It may have a rectangular area. In order to avoid aliasing, we may use the largest derivative as \emph{d} and result in relatively blurring. One extension to solve this is \emph{ripmap}, which will also create rectangular texture. However, it's too costly to use in real-time rendering. 
-
-            Another method to avoid overblurring is \emph{summed-area table}(SAT). Every texel has more bits of precision and record its individual data(color for example) and the sum of all the corresponding texture's texels in the rectangle formed by this location and texel (0, 0). When a pixle grid is back-projected (which means project the pixel grid to the texture space; normally, we preceive as the texture projected on the pixel space on the screen) onto the texture, the projected gird is bounded by a rectangular. The average data in the rectangular will be retuerned as the texture value. 
-            $$\textbf{c} = \frac{\textbf{s}(x_{ur}, y_{ur}) - \textbf{s}(x_{ll}, y_{ur}) - \textbf{s}(x_{ur}, y_{ll}) + \textbf{s}(x_{ll}, y_{ll})}{(x_{ur} - x_{ll})(y_{ur} - y_{ll})}$$
-
-            However, both ripmap and summed-area table will have blurring image when a texture is viewed along the diagonal as the average of the whole texture will be averaged rather than the average the thin real projected rectangle. 
-
-            Ripmaps and  summed-area table are examples of \emph{anisotropic filtering} algorithm. They have good effect in horizontal and vertical directions but is memory intensive.  Summed-area table are more suitable in moreden GPU with more algorithms to optimize. 
-
-            Other from anisotropic filtering, \emph{unconstrained anisotropic filtering} is widely used. Similar to summed-area table, pixel grid is back-projected to a quad and sampled a number of time with associated squarish area. Instead of using a single mipmap sample to approximate the coverage, the algorithm uses a number of squares to cover the quad. The shorter side of the quad is used to determine \emph{d} with a relatively small avaraged are for each sample. The longer side creates a \emph{line of anisotropic} parallel to the longer side and through the middle of the quad. Samples will be taken on the line and its amount is decided by the value of anisotropic. 
-            
-            This scheme allows the line of anisotropic to run in any direction (Correctly sample the diagonal view of texture as the line can be diagnol rathan than horizontal and vertical in common anisotripic filtering). Meanwhile it has same cost as the minimap does. 
-        \subsubsection{Volume Textures}
-            A direct extension of image textures is three-dimensional image data that is accessed by $(u, v, w)$ value. Being inside A single mipmap level requires a trilinear interpolation, while filting between mimaps reqire \emph{quadrilinear interpolation}. This requires for high percison texture. Volume textures have the advantage that the good projection function which avoids distortion and seam. 
-            
-        \subsubsection{Cube Maps}
-            Another type of texture is the \emph{cube texture} and \emph{cube map}. The mapping point is specifed by a three-dimensional vector. It points from the center of the cube and choose the texture face by the face with largest magnitude. (choose $-Z$ for $(1, 2, -3)$. The other entries will be divided by magnitude to be in range in [-1, 1] and can simply be mapped to range [0, 1]. It's useful for environmental mapping.
-
-            Cube maps support bilinear interpolation and mipmaps, but may have problems near the seam as the sample can't be across the boundaries of faces and faces can't affect each other. Another problem that the angular size of a texel varies over a cube face.  That is, a texel at the center of a cube repersents a greater visual solid angle than a texel at the corner. 
-
-        \subsubsection{Texture Caching}
-             Memories for textures are always not enough. \emph{Texture Caching} aims to a balance between the overhead of uploading textures to memory and the amount of of memory taken up by textures at one time. 
-
-             Some general advice is to keep the texture no larger than necessary and to try to keep polygons grouped by their use of texture. 
-
-             A \emph{least recently used}(LRU) stratigy is one commonly used in texture caching scheme. Every texture has a time stamp representing when it's last accessed. When new texture is uploaded, the texture with oldest time stamp is unloaded first. Piority is optionally given to prevent unnecessary texture swapping. 
-
-             It's suggested to check the texture being swapped out for problems will happen when this texture is used in current frame. When it occurs, LRU has terrible performance. It better to first transfer to \emph{most recently used} and after no textures are swapped out to switch back to LRU. 
-
-             \emph{Prefetching} where future needs are anticipated making the texture loading over a few frames as there may be sudden big amount of texture loading and it takes a lot of time. 
-
-             When dataset is huge, such as flight simulations program. The traditional approach is to break these images into smaller tiles that hardware can handle. A improved structure is \emph{clipmap}. The entire dataset is treated as a mipmap, but only a small part of the lower levels of the mipmap is required for certain view and memory. 
-
-        \subsubsection{Texture Compression}
-            \emph{Texture Compression} can directly attack memory and bandwidth problem. \emph{S3 texture compression} becomes the standard for DirextX and called \emph{DXTC} or \emph{BC}. It has independently encoded pieces on $4 \times 4$ texel blocks, which is also called \emph{tile}. Encoding is based on interpolation which is simple and fast. There are five variants: 
-            
-            \quad \textbf{DXT1 / BC1}: It has two 16-bit reference RGB565 values as the limitation. Each texel has a 2-bit interpolation factor to refer to 2 references or 2 intermediate value, while only 1 intermediate value is included and another stands for transparnt when alpha is introduced. The compression ratio is 6 : 1 compressing 24-bit RGB texture. 
-
-            \quad \textbf{DXT3 / BC2}: The encoding pattern is same as DXT1. Meanwhile, every texel has a 4-bit alpha value stored separatly. The compression ratio is 4 : 1. 
-
-            \quad \textbf{DXT5 / BC3}: The encoding pattern is same as DXT1. In addition, alpha data is encoded using two 8-bit reference values. Each texel has 3 interpolation factor which can refer to one of the reference alpha values or one of the six intermediate alpha values. 
-
-            \quad \textbf{ATI1/ BC4}:  It supports single color channal and encoded as the alpha channel in DXT5.
+        The amount to shift is based on the height retrieved and the angle of the eye to the surface.The heightfield values are scaled and biased before being used. The scale determines how height the heightfield meant to extend and the bias gives a sea-level height at which no shift take place. The equation follows: 
+        \begin{equation*}
+            \textbf{p}_{\text{adj}} = \textbf{p} + \frac{h\cdot \textbf{v}_{xy}}{v_{z}}
+        \end{equation*} 
         
-            \quad \textbf{ATI2/ BC5}: It supports dual color channesl and encoded as the aloha channel in DXT5. 
+        Note that unlike most shading equations, here the view vector needs to be in tangent space. The new location also uses the same height as it's about the same. However, this method falls apart at shallow viewing angles. In order to solve this, limited the amount of shifting is needed: 
+        \begin{equation*}
+            \textbf{p}_{\text{adj}}^{'} = \textbf{p} + h\cdot \textbf{v}_{xy}
+        \end{equation*}
 
-            The disadvantage of these compressions is \emph{lossy}. Once a tile has many distinct value it will lead to some loss. Fortunately, These compression scheme generally give accetable image fidelity. Another problem is that all the colors are on a straght line in RGB space. \emph{color distribution} can attack it as it uses colors from the neighbors blocks in order to achieve more colors. 
+        It has some drawbacks, like lessen bumpiness at shallow angles, etc. But it is still considered the practical standard for bump mapping. 
 
-            For OpenGL ES, \emph{Ericsson texture compression(ETC)} is chosen. It shares the same features as S3TC. It encodes $4 \times 4$ texels with 4 bits per texel. Each $2 \times 4$ or $4 \times 2$ block stores a basic color, and each texel in a block can select to add one of the values in the selected lookup table. 
+    
+    \subsubsection{Relief Mapping}
+        Parallax mapping is just an approximation. The actual effect we want is what is visible at the pixel, or where the view vector first  intersects the heightfield. 
 
-            Compression of normal maps requires some care. We assume the normal is unit vector and the $z$-component is positive. So we can derive $z$ by: 
-            $$n_z = \sqrt{1 - n_x^2 - n_y^2}$$
+        Methods are similar to traditional ray tracing with different implementations. Relief mapping is actually a class of three independent research outcomes based on same approaches. 
+
+        The key idea is to test a fixed number of texture samples along the projected vector in the cut of the surface along the view direction. The algorithm finds the first intersection of the eye ray with the line segments approximating the curved height field. Once the location is determined, the attached map will be used. It can also be used to have the  bumpy surface casts shadows onto it self.  
+
+        The problem of determining the actual intersection point is a root-finding problem. There is a critical importance in sampling the heightfield frequently enough. This can be done either by using better filtering methods or higher resolution of heightfield texture. 
+
+        Another approach to increasing both performance and sampling accuracy is to not initially sample the heightfield at a regular interval, but instead to try to skip intervening empty space. 
+
+        One problem with relief mapping methods is that the illusion breaks down along the silhouette edges of objects.  The key idea is that the triangles rendered define which pixels should be evaluate by the pixel shader program, not where the surface actually is located. \emph{Shell map} is introduced to extrude each polygon in the mesh outwards and form a prism. Rendering this prism forces evaluation of all pixels in which the heightfield could possibly appear. 
+    \subsubsection{Heightfield Texturing}
+        \emph{Displacement mapping} method has a flat meshed polygon access a heightfield texture and the height retrieved from the texture is used by the vertex shading program to modify the vertex's location. So the heightfield is called \emph{displacement texture}. It's a similar concept to relief mapping. They both have a drawbacks like making collision detection more challenging. 
+
+\newpage
+
+\section{Advanced Shading}
+    \subsection{Radiometry}
+        Radiometry deals with the measurement of electromagnetic radiation consisting of a flow of \emph{photons} which behave as either particles or waves. One wave-related property of photons which can't be disregarded is the fact that each has an associated frequency or wavelength, and the energy of each photon and interaction with rods and cones are to do with its frequency.  Different frequencies of photons are perceived as light of different colors or not perceived at all. The relation between wavelength $\lambda$, frequency $\nu$ and energy $Q$: 
+
+        $$\nu = \frac{c}{\lambda}$$
+        $$\lambda = \frac{c}{\nu}$$
+        $$Q = h\nu$$
+
+        where $c$ is the speed of light and $h$ is Planck's constant. 
+
+        Electromagnetic radiation exists from ELF(extremely low frequency) radio waves to gamma rays.  \emph{visible spectrum} that is from roughly 380 to 780 nanometers. Colors are perceived for \emph{monochromatic} light. The various radiometric units are presented below. 
+        \begin{center}
+            Wavelength:\quad m
+
+            Frequency:\quad Hertz
             
-            So the three-dimensional texture can be stored as two-dimensional texture, a modest compression. Futher compression is usually achieved in BC5 mannar: A block of texel has 16 possible values, which can be bounded by a bounding box. So x, y values can be preceived as two channels of color and interpolation factor allows for value to choose from for each axis. 
-
-            A fallback when GPU does not support BC5 can use DXT5 to substitude. 
-
-            For normal maps, the aspect ratio decides the layout of the normal inside a block. For example, as the noraml has a width nearly twice as height, the current $8 \times 8$ grids can be converted to $4 \times 16$ grids with different bits allocation. 
-
-    \subsection{Procedual Texturing}
-        \emph{Procedual texure} is to evaluate a function to look up texture value rather than generate texture space coordinate. It's often used in offline rendering system and not so common in real-time rendering. Procedual texture is used when image texture requires for costly memory access. Volume texture is a typical example. 
-
-        \emph{Cellular texture}, calculated the closest distance to a set a special points for every location. The color or shading nomal will change by this distance. 
-
-        Another type of application is on physical simulation like water ripples. 
-
-        As parameterization will be more difficult for procedial texture, it's better to synthesis texture onto the surface directly. Antialiasing procedual texture becomes both easier and more difficult. On one hand, precomputations methods are not available; On other hand, procedual texture have more inside information. 
-
-    \subsection{Texture Animation}  
-        The image applied and coordinate can both be dynamic. For example, dynamic coordinate for water downfall to make the water move. The texture can be applied to matrix transformation and blending tequniques. 
-
-    \subsection{Material Mapping}
-        A common use of a texture is to modify a material property affecting the shading equation. Shader can read values from the texture directly. For equation:
-        $$\textbf{L}_o(\textbf{v}) = (\frac{\textbf{c}_{\rm{diff}}}{\pi} + \frac{m + 8}{8\pi}\bar{\cos^m{\theta_h}}\textbf{c}_{\rm{spec}}) \otimes E_L\bar{\cos{\theta_i}}$$
-
-        $\textbf{c}_{\rm{diff}}$, $\textbf{c}_{\rm{spec}}$ and $m$ is the material information can be read from textures, particularly \emph{diffuse color map, specular color map}(grayscale value rather than RGB for the reality) and \emph{gloss map}(describing the smoothness). As $\textbf{c}_{\rm{diff}}$, $\textbf{c}_{\rm{spec}}$ is linear to the ouput, the input can be filtered without antialiasing, when $m$ needs some care. 
-    \subsection{Alpha Mapping}
-        The alpha map can be used for manying interesting effect like decaling with clamp corresponder function and trasparent edge to present the part you want. A smilar application is in making cutouts that have 3D visual effect like cross tree. In order to reserve the visual effect from other angle, cross tree is set by rotating the cutouts. As illusion will break down when viewer see from the above, more cutouts can be added. Combining alpha textre and texture animations can make many visual effects. 
-
-        Alpha map has many options like alpha blending. As discussed before, alpha blending needs a relative order. \emph{Alpha test} is another option that conditionally discarding pixels with alpha values below a given threshold in the merge unit or pixel shader, which enable polygons to be rendered in any order. 
-
-        \emph{Alpha to coverage}, and the similar feature \emph{transparency adaptive antialiasing}, take the transparency value of the fragment and convert this into how many samples inside a pixel are covered. This is similar to screen-door transparency but at a subpixel level. The alpha value determines the porpotion of samples being covered within a pixel. 
-
-    \subsection{Bump Mapping}
-
-
-
+            Radiant Energy:\quad J 
             
-            
+            Radiant flux:\quad W
 
+            Irradiance:\quad W/$\text{m}^2$
+
+            Radiant intensity:\quad W/$\text{sr}$
+
+            Radiance:\quad W/$(\text{m}^2\text{sr})$
+        \end{center}
+    
+        The \emph{radiant flux} or \emph{radiant power}, $\Phi$ or $P$, of a light source is equal to the number of joules per second emitted.
+        $$\Phi = \frac{dQ}{dt}$$
+
+        \emph{Irradiance} is the density of radiant flux with respect to area.
+        $$E = \frac{d\Phi}{dA}$$
+
+        irradiance $E$ is used to measure light flowing into a surface and exitance $M$ (also called \emph{radiosity} or \emph{radiant exitance} is used to measure light flowing out of a surface, and both of them can be referred by \emph{radiant flux density}. The irradiance is constant for a single and further directional light. Assume a small light bulb in relatively large space so the light can be considered to be emitted from a point. When we want to examine the irradiance in a particular direction using a narrow cone, we can find: 
+
+        $$E_L(r) \propto \frac{1}{r^2}$$
+
+        r is the distance from the light source to the surface. 
+
+        $$E_L(r) = \frac{I}{r^2} \quad \Rightarrow \quad I = E_L(r)r^2$$
+
+        This quantity, $I$, is called \emph{intensity} or \emph{radiant intensity}. We observe when $r = 1$, intensity is flux density with respect to an area on an enclosing unit sphere, similar to the definition of radians. A \emph{solid angle} is a three-dimensional extension of the concept,  measured with \emph{steradians}(sr). Using the definition of solid angle:
+        $$I = \frac{d\Phi}{d\omega}$$
+
+        When light sources can be treated  as a point, it's called \emph{point lights}. Intensity is useful for measuring the illumination of a point light source. If the distance from the light source is five times or more that of the light's width, the light source can be recognized as point light when considering the relationship between intensity  and irradiance.
+        
+        As mentioned before, \emph{radiance} $L$ measures density of light flow per unit area for a given ray direction, which is important  for rendering. 
+        $$L = \frac{d^2\Phi}{dA_{\text{proj}}d\omega}$$
+
+        where $dA_{\text{proj}}$ refers to $dA$ projected to the plane perpendicular to the ray. We can also perceive the projection as there is a mixed directional light perpendicular to a small area. The relationship between them is : 
+
+        $$dA_{\text{proj}} = dA\overline{\text{cos}}\theta$$
+
+        Where $\theta$ is the angle between two surface normals. 
+
+        It's helpful to perceive: 
+        $$L = \frac{dI}{dA_{\text{proj}}} = \frac{dE_{\text{proj}}}{d\omega}$$
+
+        The radiance in an environment can be thought of as a function of five variables (or six, including wavelength), called the \emph{radiance distribution}. Three of the variables specify a location, the other two a direction. This function can describes all light traveling anywhere in space.
+
+        An important property of radiance is that it is not affected by distance. To perceive this, what is happening physically is that the solid angle covered by the light's emitting surface gets smaller as distance increases. For the light bulb example: 
+        $$L^{'} = \frac{dE_{\text{proj}}\cdot\frac{k}{r_1^2}}{d\omega\cdot\frac{k}{r_1^2}} = L$$
+
+    \subsection{Photometry}
+        \emph{Photometry} is like radiometry, except that ti weights everything by the sensitivity of the human eye. The results of radiometric computations are converted to photometric units by multiplying by the \emph{CIE photometric curve}, a bell- shaped curve centered around 555nm that represents the eye's response to various lengths of light. The another difference is the unit. 
+
+        Photometry does not deal with the perception of color itself, but rather with the perception of brightness from light of various wavelengths. The units for photometry: 
+        
+        \begin{center}
+            Luminous Energy:\quad talbot
+
+            Luminous Flux:\quad lumen(lm) 
+
+            Illuminance:\quad lux(lx) 
+
+            Luminous intensity:\quad candela(cd) 
+
+            Luminance: \quad cd/$\text{m}^2$ = nit
+        \end{center}
+
+        Luminance is often used to describe the brightness of flat surfaces. 
+
+    \subsection{Colorimetry}
+        Light from a given direction consists of a set of photons in some distribution of wavelengths. This distribution is called the light's \emph{spectrum}. Three numbers can be used to precisely represent any spectrum seen as only three different signal can be receives. 
+
+        By color matching experiments, as color can be divided two three base color in [-1, 1] knob range or energy value, three values are derived for each wavelength and for every wavelength it forms a color matching curve. The relative amount of three values decide the visual color. Given an arbitrary spectrum, multiply it with three color matching curve and the integral of the resulting curves give the relative amount of three values. So different spectra can resolve to the same three weights and representing same color perceived. Matching spectra presenting same color are called metamers. 
+
+        $r$, $g$, $b$ value can not represent all color directly for negative weights. $\overline{x}(\lambda )$, $\overline{y}(\lambda)$ and $\overline{z}(\lambda)$ is used instead as no negative weight appears. $\overline{y}(\lambda)$ color is the same one as the photometric curve. The surface reflectance and light source will define a color function $C(\lambda)$. Like $r$, $g$, $b$ weights: 
+        
+        $$X = \int_{380}^{780}C(\lambda)\overline{x}(\lambda)d\lambda$$
+        $$Y = \int_{380}^{780}C(\lambda)\overline{y}(\lambda)d\lambda$$
+        $$Z = \int_{380}^{780}C(\lambda)\overline{z}(\lambda)d\lambda$$
+
+        These $X$, $Y$, and $Z$ \emph{tristimulus values} are weights that define a color in CIE XYZ space. A better three-dimensional space is use the plane $X + Y +Z = 1$ as the relative weights count. 
+
+        $$x = \frac{X}{X + Y + Z}$$
+        $$y = \frac{Y}{X + Y + Z}$$
+        $$z = \frac{Z}{X + Y + Z}$$
+
+        As $z$ value is omitted, the plot of the \emph{chromaticity coordinates} $x$ and $y$ values is known as the \emph{CIE chromaticity diagram}. The curved line in the diagram shows where the spectrum lie, and the straight line connecting the ends of the spectrum is called the \emph{purple line}. For $x = y = z = \frac{1}{3}$, it's used to define white. For a computer monitor, the \emph{white point} is the combination of the three color phosphors at full intensity. 
+
+        Given a color point $(x, y)$, draw a line from the white point through this point to the spectral line. The relative distance of the color point compared to the distance to the edge of the region is the \emph{saturation} of the color. The point on the region edge defines the \emph{hue} of the color.
+
+        The third dimension to fully describe a color is the $Y$ (the curve is the same as photometric curve) value, luminance, defining a $xyY$ coordinate system. The display system is limited in its ability to present different colors by the spectra of its three channels. An obvious limitation is in luminance and saturation.
+
+        The triangle in the chromaticity diagram represents the \emph{gamut} of a typical computer monitor. The three corners of the triangle are the most saturated red, green and blue colors. An important property of the chromaticity diagram is that these limiting colors can be joined by straight lines to show the limits of the monitor as a whole. 
+
+        Conversion from $XYZ$ to $RGB$ space is linear: 
+
+        \begin{equation*}
+            \begin{pmatrix}
+                R \\
+                G \\
+                B
+            \end{pmatrix}
+            =
+            \begin{pmatrix}
+                3.24049 & -1.537150 & -0.498535 \\
+                -0.969256 & 1.875992 & 0.041556 \\
+                0.055648 & -0.204043 & 1.057311 
+            \end{pmatrix}
+            \begin{pmatrix}
+                X \\
+                Y \\
+                Z
+            \end{pmatrix}
+        \end{equation*}
+        
+        This conversion matrix is for a monitor with a D65 white point. Some XYZ values can transform to RGB values that are negative or greater than one. Theses are colors out of gamut. A common conversion is to transform a RGB color to a grayscale luminance value is use the inverse of the matrix: 
+
+        $$Y = 0.212671R + 0.715160G + 0.072169B$$
+
+        While any given spectrum can be precisely represented by an RGB triplet, there is some contrast. For example, multiplying two RGB colors is not the sam as multiplying two spectra. However, in practice ,multiplying RGB values together works well.
+    
+    \subsection{Light Source Types}
+        The combination of light source and housing is called a \emph{luminaire}. In rendering it's common to model the luminaire as a light source with a directional distribution that implicitly models the effect of the housing. 
+
+        Directional lights are the simplest model. They are fully described by \textbf{l} and $E_l$. Recall $E_L$ is expressed as an RGB vector for rendering purposes. 
+        
+        Point lights have a softer assumption compared to directional light that can be applied to more circumstances. 
+
+        For all variants of directional and point lights introduce in this section, they follow the same assumption: at a give surface location, each light source illuminates the surface from one direction only. 
+        
+        \subsubsection{Omni Lights}
+            Point lights with a constant value for $I_L$ are known as \emph{omni lights}. $I_L$ is also expressed as an RGB vector. For computations: 
+            $$r = \| \textbf{p}_L - \textbf{p}_S \|$$
+            $$\textbf{l} = \frac{\textbf{p}_L - \textbf{p}_S}{r}$$
+            $$E_L = \frac{I_L}{r^2}$$
+
+            It's often  preferable to use \emph{distance falloff functions} instead to describe the relationship between $E_L$ and distance.
+            $$E_L = I_Lf_{\text{dist}}(r)$$
+
+            Distance falloff functions can proved ore control for lighting. One historically important falloff function: 
+
+            $$f_{\text{dist}}(r) = \frac{1}{s_c + s_lr + s_qr^2}$$
+
+            where $s_c$, $s_l$ and $s_q$ are properties of light source. 
+
+            A much simpler one used in games and modeling: 
+
+            $$
+            f_{\text{dist}}(r)=
+                \begin{cases}
+                    1 & \text{where } r \leqslant r_{\text{start}}\\
+                    \frac{r_{\text{end}} - r}{r_{\text{end}} - r_{\text{start}}} & \text{where } r_{\text{start}} < r < r_{\text{end}}\\
+                    0 & \text{where } r \geqslant r_{\text{end}} 
+                \end{cases}
+            $$
+
+        \subsubsection{Spotlights}
+            In reality, different visual effects can be produced using different functions to describe how $I_L$ varies with direction. One important type of effect is \emph{spotlight}. The angle $\theta_s$ is defined as the angle between the spotlight direction \textbf{s} and $-\textbf{l}$. In OpenGL: 
+
+            $$
+            I_L(\textbf{l}) = \begin{cases}
+                I_{L_{\text{max}}}(\cos{\theta_s)}^{s_{\text{exp}}} & \text{where } \theta_s \leqslant \theta_u \\
+                0 & \text{where } \theta_s > \theta_u
+            \end{cases} 
+            $$
+
+            $s_{\text{exp}}$ controls the tightness and $\theta_u$ controls the edge as the \emph{umbra angle}.
+        
+            In DirectX: 
+
+            $$
+            I_L{\textbf{l}} = \begin{cases}
+                I_{L_{\text{max}}} & \text{where } \cos{\theta_s} \geqslant \cos{\theta_p} \\
+                I_{L_{\text{max}}} (\frac{\cos{\theta_s} - \cos{\theta_u}}{\cos{\theta_p} - \cos{\theta_u}})^{s_{\text{exp}}} & \text{where } \cos{\theta_u} < \cos{\theta_s} < \cos{\theta_p} \\
+                0 & \text{where } \cos{\theta_s} \leqslant \cos{\theta_u}
+            \end{cases}
+            $$
+
+            The angle $\theta_p$ defines the \emph{penumbra angle} of the spotlight, or the angle at which its intensity starts to decrease. 
+        \subsubsection{Textured Lights}
+            Textures can be used to add  visual richness to light sources and allow for complex intensity distribution or spotlight functions. Projected textures can be sued for projector effects limited in a frustum. These lights are often called \emph{gobo} or \emph{cookie} lights.  
+            
+            For lights that are not limited to a frustum but illuminate in all directions, a cube map can be used. Textures can be added to any light type to enable additional visual effects. Textured lights allow for easy control of the illumination by artists. 
+    \subsection{BRDF Theory}
+        \subsubsection{The BRDF}
+            In radiometry, the function that is used to describe how a surface reflects light is called the \emph{bidirectional reflectance distribution function}(BRDF).  The precise definition of the BRDF is the ratio between differential outgoing radiance and differential irradiance. 
+
+            $$f(\text{l}, \text{v}) = \frac{dL_o(\textbf{v})}{dE(\textbf{l})}$$
+
+            The value of the BRDF depends on wavelength, so for rendering purposes it is represented as an RGB vector. 
+
+            For non-area light sources, the BRDF definition can be expressed in a non-differential form. 
+
+            $$f(\text{l}, \text{v}) = \frac{L_o(\textbf{v})}{E_L(\textbf{l})\overline{\text{cos}}\theta_i}$$
+
+            So for evaluating radiance in a particular viewing direction, it's straightforward with n non-area light sources: 
+
+            $$L_o(\text{v}) = \sum_{k = 1}^{n}f(\textbf{l}_k, \textbf{v}) \otimes E_L\overline{\text{cos}}\theta_{i_k}$$
+
+            In order to describe an direction($\textbf{l}$ or $\textbf{v}$), the parameterization is to use two angles: elevation $\theta$ relative to the surface normal and rotation $\phi$ about the normal. This gives total four scalar variables in the general case of BRDF. \emph{Isotropic} BRDFs remain the same when the incoming and outgoing direction are rotated around the surface normal with same relative angles. They just have three scalar variables. 
+
+            The BRDF is defined as radiance dived by irradiance, so its units are $\text{sr}^{-1}$. Intuitively,, the BRDF value is the relative amount of energy reflected in the outgoing direction, given the incoming direction. 
+
+            Lights interaction with optical discontinuity will have various phenomena occur as discussed before. The phenomena called \emph{subsurface scattering} describe light that transmitted into the object may return and exit the surface with absorption and scattering. There are two circumstances when rendering: When the area covered by a pixel is relatively small compared to the distance between the entry and exit locations of subsurface scattering, BRDF can't be used. Instead \emph{bidirectional surface scattering reflectance distribution function} (BSSRDF)is used to exhibit large-scale subsurface scattering. 
+
+            When a pixel covers a relatively large area, reflection, refraction and subsurface scattering can be approximated as happening at a single point, allowing for the usage of BRDF. This shows that whether a BRDF can be used depends both on the surface material and observation scale. 
+
+            The derivation of BRDF assumes BRDF as a property of uniform surfaces, which is unreal. A function that captures BRDF variation based on spatial location is called a \emph{spatially varying BRDF}(SVBRDF) or \emph{SBRDF}. To handle transmission of light, two BRDFs and two BTDFs are defined for the surface, one for each side, and so make up the BSDF. In most situation, BRDF or SVBRDF is sufficient. \newline
+
+
+            The laws of physics put two constraints on BRDF: the first one is \emph{Helmholtz reciprocity}
+                $$f(\textbf{l}, \textbf{v)} = f(\textbf{v}, \textbf{l})$$
+
+            In practice, BRDF will violate it without noticeable artifacts. 
+
+            The second constraint is conversion of energy: the outgoing energy con not be greater that the income energy. In the real time rendering, strict energy conversion is not necessary, but approximate energy conversion is desired. 
+
+            The \emph{directional-hemispherical reflectance} $R(\textbf{l})$ is a function related to the BRDF. It measures measures the amount of light coming from a given direction that is reflected at all, regardless of outgoing direction. Essentially, it measures the energy loss for a given incoming direction. 
+
+            $$R(\textbf{l}) = \frac{dM}{dE(\textbf{l})}$$
+
+            For non-area light, non-differential form can be used:
+
+            $$R(\textbf{l}) = \frac{M}{E_L\overline{\text{cos}}\theta_i}$$
+
+            Like BRDF, $R(\textbf{l})$ is expressed in RGB form. Besides, it is in range [0,1] so it can be considered as RGB color. Note that the restriction of energy conversion does not apply to BRDF with arbitrarily high values in certain directions. The relationship between directional-hemispherical reflectance and BRDF: 
+
+            $$R(\textbf{l}) = \int_{\Omega}f(\textbf{l}, \textbf{v})\cos{\theta_o}d\omega_o$$
+
+            where $\theta_o$ is the angle between \textbf{n} and \textbf{l}.
+
+            The most simple BRDF model is Lambertian BRDF. It has a constant value and usually represents subsurface scattering. The directional-hemispherical is also a constant value:
+            $$R(\textbf{l}) = \pi f(\textbf{l}, \textbf{v})$$
+            
+            The constant reflectance value of a Lambertian BRDF is commonly referred to as the \emph{diffuse color} $\textbf{c}_{\text{diff}}$: 
+            $$f(\textbf{l}, \textbf{v}) = \frac{\textbf{c}_{\text{diff}}}{\pi}$$
+            
+            So for lambertian shading equation: 
+
+            $$L_o(\textbf{v}) = \frac{\textbf{c}_{\text{diff}}}{\pi} \otimes \sum_{k = 1}^{n} E_{L_k}\overline{\text{cos}}\theta_{i_k}$$
+
+            The $\frac{1}{\pi}$ is usually integrated into $E_{L_k}$.
+
+            For visualized BRDFs with fixed incoming direction, the spherical terms terms reflect diffuse term as it goes to every direction. The \emph{reflectance lobe} represents the specular and the thickness of it represents the fussiness of the reflection. 
+
+        \subsubsection{Surface and Body Reflectance}
+            When using BRDF representations, surface phenomena are simulated as \emph{surface reflectance}, and the interior phenomena are models as \emph{body reflectance}(or \emph{volume reflectance}). The surface is a optical discontinuity and as such scatters light with reflections and transmissions but does not absorb any; The object's interior contains matter, which may absorb some of the light and this process is under the surface. It may also contain additional optical discontinuities that will further scatter the light. Surface reflectance is modeled by specular BRDF terms while body reflectance is modeled with diffuse term. 
+        \subsubsection{Fresnel Reflectance}
+            The interaction of light with a planar interface between two substances follows the \emph{fresnel reflectance}. Perfect flat surface is expected, while in practice a surface can be considered as perfectly flat with irregularities much smaller than the smallest light wavelength. 
+            
+            An optically planar interface between two substances will scatter light into ideal reflection direction and ideal refraction direction. 
+
+            Note that the ideal reflection direction forms the same angle with the surface normal \textbf{n} as the incoming direction \textbf{l}. The amount of light reflected is described by the \emph{Fresnel reflectance} $R_F$. So the proportion of transmitted flux is $1 - R_F$ due to the energy conversion. However, radiance proportion of transmitted light is different due to the projected area and solid angle: 
+            
+            $$L_t = (1 - R_F(\theta_i))\frac{\sin^2{\theta_i}}{\sin^2{\theta_t}}L_i $$
+
+            The refraction vector $r_i$ can be computed: 
+            $$r_i = -\textbf{l} + 2(\textbf{n}\cdot\textbf{l})\textbf{n}$$
+
+            The relationship between the $\theta_t$ and $\theta_i$ is described by Shell's Law with \emph{refraction index} or \emph{index of refraction}:
+            $$n_i\sin{\theta_i} = n_t\sin{\theta_t}$$
+
+            So for the transmitted radiance:
+
+            $$L_t = (1 - R_F(\theta_i))\frac{n_t^2}{n_i^2}L_i $$
+
+            The importance of Fresnel equation is description of the dependence of $R_F$, $\theta$, $n_1$ and $n_2$.\newline 
+
+            \emph{External Reflection} is the case where light reflects from an object's external surface. In other word, the light is traveling from air to the object. 
+
+            For rendering purpose, $R_F(\theta_i)$ is treated as RGB vector. $R_F(0^{\circ})$, sometimes called \emph{normal incidence}, can be thought of as the characteristic specular color of the substance. As $\theta_i$ increases, $R_F(\theta_i)$ intends to increase. When $\theta_i = 90^{\circ}$, the $R_F(\theta_i)$ reaches 1 for all frequencies. In rendering, the increase in reflectance at glancing angles is called \emph{Fresnel effect}.
+
+            Besides the complexity of $R_F(\theta_i)$, they require refractive index values sampled over the visible spectrum, which make it difficultly to directly use in rendering. A simple approximation for most substances of Fresnel equation: 
+
+            $$R_F(\theta_i) = R_F(0^{\circ}) + (1 - R_F(0^{\circ}))(1 - \overline{\text{cos}}\theta_i)^5$$
+
+            The approximation performs not so well when $R_F(\theta_i)$ is not a monotonic. For precise value, it's better to pre-compute these value into a one-dimensional lookup texture. $R_F(0^{\circ})$ is the only control parameter here, which is convenient. It can be derived from object's refractive index: 
+            $$R_F(0^{\circ}) = (\frac{n - 1}{n + 1})^2$$
+
+            If refractive indices vary from frequencies, it's better to converted to RGB vector using methods described at 7.3\newline 
+
+            For typical objects, according to their $R_F(0^{\circ})$, can be divided to insulators(or dielectrics), metals and semiconductors. Semiconductors too rare to put into discussion. 
+
+            Most encountered materials are insulators with $R_F(0^{\circ})$ lower than 0.05. This makes fresnel effect more obvious. Besides, the optical properties of insulators rarely vary much over the visible spectrum, leading to colorless reflectance value. The light may go over further scattering and absorption; It may have internal reflection going through transparent objects. 
+
+            Metals have high value of $R_F(0^{\circ})$, almost always 0.5 or above. The optical properties of insulators vary over the visible spectrum, leading to colorful reflectance value. The light will be immediately absorbed. 
+
+            Internal reflection and External reflection have different refractive indices determine different Fresnel reflectance. \newline 
+
+            \emph{Internal Reflection} occurs when light is travelling in the interior of a transparent object and encounters the object's surface. 
+
+            The difference between external reflection and inter reflection is the \emph{critical angle} for \emph{total internal refraction}. The $R_F(\theta_i)$ curve of internal reflection is a compressed version of that of external reflection with same $R_F(0^{\circ})$. The compute to critical angle is straightforward: 
+            $$\sin{\theta_c} = \frac{n_2}{n_1} = \frac{1 + \sqrt{R_F(0^{\circ})}}{1 - \sqrt{R_F(0^{\circ})}}$$
+
+            The approximation for external reflectance can be used in internal reflectance when $\theta_t$ substitutes $\theta_i$.
+
+        \subsubsection{Local Subsurface Scattering}
+            For insulators, body reflectance needs to be taken into consideration. If the insulators are \emph{homogeneous}, with few internal discontinuities to scatter light, like glass; they partially absorb bur don't change their direction. 
+
+            Most insulators are \emph{heterogeneous}, containing numerous discontinuities. These will cause light to scatter inside the substance. The light will be partially absorbed and those is not absorbed will re-emitted. We assume that the light is re-emitted from the same point at which it entered. This assumption is called \emph{local subsurface scattering}.
+            
+            The \emph{scattering albedo of} $\rho$ of a heterogeneous insulators is the ratio between the energy of the light that escapes a surface compared to the energy of the light entering into the interior of the material. $\rho$ is in range [0,1] and is modeled into RGB vectors. The bigger $\rho$ is, the more light scattered and the brighter the objects are visualized. 
+            
+            Since insulators transmit most incoming light rather than reflecting it at the surface, $\rho$ is more visually important than the $R_F(\theta_i)$. Since it results from a completely different physical process than the specular color, $\rho$ may have a completely different spectra distribution. 
+
+            As introduced before, the diffuse term of BRDF in Lambertian is usually used to represent local subsurface scattering. Recall:  
+
+            $$f(\textbf{l}, \textbf{v})_{\text{diff}} = \frac{\textbf{c}_{\text{diff}}}{\pi}$$
+
+            To set $\textbf{c}_{\text{diff}}$, we should first subtract specular term and get the diffuse term. If we have constant specular directional-hemispherical reflectance, it can be computed as :
+
+            $$\textbf{c}_{\text{diff}} = (1 - \textbf{c}_{\text{spec}})\rho$$
+
+            Only using $\rho$ to present $\textbf{c}_{\text{diff}}$, it just count specular term into subsurface scattering. 
+
+            As fresnel reflectance represents the proportion of reflection, the diffuse term can be computed as:
+
+            $$f_{\text{diff}}(\textbf{l}, \textbf{v}) = (1 - R_F(\theta_i))\frac{\rho}{\pi}$$
+
+            It seems reasonable for the diffuse term is not affected by \textbf{v}. However, as it's implied by reciprocity and fresnel reflectance direction preference, the outgoing direction should be taken into consideration. 
+
+            The assumption support both energy conservation and Helmholtz reciprocity: 
+            $$f_{\text{diff}}(\textbf{l}, \textbf{v}) = k_{\text{norm}}(1 - R_{\text{spec}}(\textbf{l}))(1 - R_{\text{spec}}(\textbf{v}))\rho$$
+
+            where $k_{\text{norm}}$ is a constant computed to ensure energy conversion. Given a specular BRDF term, using this equation to derive a matching diffuse term is not trivial since in general $R_{\text{spec}}$ does not have a closed form. 
+        
+        \subsubsection{Microgeometry}
+            Surface detail modeled by a BRDF is \emph{microscale} -- smaller than the visible scale, or in other words, smaller than a single pixel. Since such \emph{microgeometry} is too small to be seen directly, its effect is expressed statistically in the way light scatters from the surface. 
+
+            The most important visual effect of the microgeometry is due to the fact that many surface normals are present at each visible surface point. As normal can determine the outgoing direction, and the directions are somewhat random, it make sense to model them statistically as a distribution. For most surfaces, the distribution of microgeometry surface normals is a continuous distribution with a strong peak at the macroscopic surface normal. The tightness of this distribution determined by surface normal. 
+
+            The visible effect of increasing microscale roughness is greater blurring of reflected environmental detail. It also can be seen that  statistical patterns in the many small highlights eventually become details in the shape of the resulting aggregate highlight.  
+
+            For most surfaces, the distribution of the microscale surface normals is isotropic. While some surfaces have microscale structure that is \emph{anisotropic}, resulting in directional blurring of reflections and highlights. Some surfaces have highly structured microgeometry, resulting in interesting microscale normal distributions and surface appearance, e.g., fabric. 
+
+            Other effects can also be important.\emph{Shadowing} refers to occlusion of the light source by microscale surface detail. \emph{Masking} refers to the visibility occlusion of microscale surface detail. If there is a correlation between this and surface normal, the distribution will change. As glancing angle $\theta_i$ increases, the irregularities will decrease. When $\theta_i \approx 90$, the surface will become optically smooth. This effect will be reinforced by Fresnel effect. 
+
+            Light may experience inter reflections. Under the effect of Fresnel reflection, it tends to be attenuated and not noticeable in insulators. In metals, this is the source of diffuse reflection. Note that the reflection will make the light more colored. 
+
+            In certain cases, microscale surface detail can affect body reflectance. If the scale of the microgeometry is large relative to the scale of subsurface scattering, then shadowing and masking can cause a \emph{retro-reflection} effect, where light is preferentially reflected back toward the incoming direction . 
+ 
             
 
 \end{document}
+

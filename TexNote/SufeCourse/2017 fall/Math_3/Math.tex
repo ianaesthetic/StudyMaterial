@@ -123,18 +123,34 @@
                 
                 求这个式子取得最小值时的$a, b$值。
     \section{条件极值}
-        条件概率最为基础的方法是带入消元，无法消元再使用拉格朗日乘数法
+        条件极值最为基础的方法是带入消元，无法消元再使用拉格朗日乘数法
 
-        要找函数$z = f(x, y)$在条件$\phi (x, y) = 0$ 下的可能极值点。 
-        先构造函数, 其中$\lambda$为一个常数：
-        $$F(x, y) = f(x, y) + \lambda \phi (x, y)$$
-        \begin{equation*}
-            \left\{
-                \begin{aligned}
-                    f_x(x,\ y) + \lambda
-                \end{aligned} 
-                \right.
-        \end{equation*} 
+        以三元函数为例：求目标函数$f(x, y, z)$的极值，在
+        $$
+            \begin{cases}
+                G(x, y, z) = 0\\
+                H(x, y, z) = 0 
+            \end{cases}
+        $$
 
-        asdasdasd
+        在无法消元的情况下，使用隐函数求导得出y,z相关于x的关系，代入回原式子
+        $$\Phi(x) = f(x, y(x), z(x))$$
+        $$f_x + f_y\frac{dy}{dx} + f_x\frac{dz}{dx} = 0$$
+    
+        以上可得出梯度向量\textbf{grad}$f$与向量$(1, \frac{dy}{dx}, \frac{dz}{dx})$正交，及与切向量正交。那么，梯度向量正好在法平面上。而法平面是由$\textbf{grad}G$和$\textbf{H}$张成的,所以：
+
+        $$\textbf{grad}f = \lambda\textbf{grad}G + \mu\textbf{grad}H$$
+
+        可以构造函数$L(x,y,z,\lambda,\mu) = f(x, y,z) - \lambda G(x,y,z) - \mu H(x,y,z)$
+
+        $$
+        \begin{cases}
+            L_x = +-0 \\
+            L_y = 0 \\
+            L_z = 0 \\
+            G = 0 \\
+            H = 0
+        \end{cases}
+        $$
+    
 \end{document}

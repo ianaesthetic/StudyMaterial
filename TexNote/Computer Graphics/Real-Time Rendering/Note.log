@@ -1,18 +1,18 @@
-This is XeTeX, Version 3.14159265-2.6-0.99998 (TeX Live 2017/W32TeX) (preloaded format=xelatex 2017.8.23)  3 OCT 2017 11:55
+This is XeTeX, Version 3.14159265-2.6-0.99998 (TeX Live 2017/W32TeX) (preloaded format=xelatex 2017.9.18)  9 OCT 2017 19:41
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
  %&-line parsing enabled.
-**"e:/StudyMaterial/TexNote/Computer Graphics/Real-Time Rendering/Real-Time Ren
-dering.tex"
+**"c:/Users/ianaesthetic/Desktop/hbw/StudyMaterial/TexNote/Computer Graphics/Re
+al-Time Rendering/Note.tex"
 
-(e:/StudyMaterial/TexNote/Computer Graphics/Real-Time Rendering/Real-Time Rende
-ring.tex
+(c:/Users/ianaesthetic/Desktop/hbw/StudyMaterial/TexNote/Computer Graphics/Real
+-Time Rendering/Note.tex
 LaTeX2e <2017-04-15>
 Babel <3.10> and hyphenation patterns for 84 language(s) loaded.
-(e:/TexLive/texmf-dist/tex/latex/base/article.cls
+(c:/texlive/2017/texmf-dist/tex/latex/base/article.cls
 Document Class: article 2014/09/29 v1.4h Standard LaTeX document class
-(e:/TexLive/texmf-dist/tex/latex/base/size10.clo
+(c:/texlive/2017/texmf-dist/tex/latex/base/size10.clo
 File: size10.clo 2014/09/29 v1.4h Standard LaTeX file (size option)
 )
 \c@part=\count79
@@ -27,27 +27,27 @@ File: size10.clo 2014/09/29 v1.4h Standard LaTeX file (size option)
 \belowcaptionskip=\skip42
 \bibindent=\dimen102
 )
-(e:/TexLive/texmf-dist/tex/latex/tools/indentfirst.sty
+(c:/texlive/2017/texmf-dist/tex/latex/tools/indentfirst.sty
 Package: indentfirst 1995/11/23 v1.03 Indent first paragraph (DPC)
 )
-(e:/TexLive/texmf-dist/tex/latex/amsmath/amsmath.sty
+(c:/texlive/2017/texmf-dist/tex/latex/amsmath/amsmath.sty
 Package: amsmath 2016/11/05 v2.16a AMS math features
 \@mathmargin=\skip43
 
 For additional information on amsmath, use the `?' option.
-(e:/TexLive/texmf-dist/tex/latex/amsmath/amstext.sty
+(c:/texlive/2017/texmf-dist/tex/latex/amsmath/amstext.sty
 Package: amstext 2000/06/29 v2.01 AMS text
 
-(e:/TexLive/texmf-dist/tex/latex/amsmath/amsgen.sty
+(c:/texlive/2017/texmf-dist/tex/latex/amsmath/amsgen.sty
 File: amsgen.sty 1999/11/30 v2.0 generic functions
 \@emptytoks=\toks14
 \ex@=\dimen103
 ))
-(e:/TexLive/texmf-dist/tex/latex/amsmath/amsbsy.sty
+(c:/texlive/2017/texmf-dist/tex/latex/amsmath/amsbsy.sty
 Package: amsbsy 1999/11/29 v1.2d Bold Symbols
 \pmbraise@=\dimen104
 )
-(e:/TexLive/texmf-dist/tex/latex/amsmath/amsopn.sty
+(c:/texlive/2017/texmf-dist/tex/latex/amsmath/amsopn.sty
 Package: amsopn 2016/03/08 v2.02 operator names
 )
 \inf@bad=\count87
@@ -88,20 +88,36 @@ LaTeX Font Info:    Redeclaring font encoding OMS on input line 713.
 LaTeX Info: Redefining \[ on input line 2817.
 LaTeX Info: Redefining \] on input line 2818.
 )
-(e:/TexLive/texmf-dist/tex/latex/graphics/color.sty
+(c:/texlive/2017/texmf-dist/tex/latex/graphics/color.sty
 Package: color 2016/07/10 v1.1e Standard LaTeX Color (DPC)
 
-(e:/TexLive/texmf-dist/tex/latex/graphics-cfg/color.cfg
+(c:/texlive/2017/texmf-dist/tex/latex/graphics-cfg/color.cfg
 File: color.cfg 2016/01/02 v1.6 sample color configuration
 )
 Package color Info: Driver file: xetex.def on input line 147.
 
-(e:/TexLive/texmf-dist/tex/latex/graphics-def/xetex.def
+(c:/texlive/2017/texmf-dist/tex/latex/graphics-def/xetex.def
 File: xetex.def 2016/07/11 v4.10 LaTeX color/graphics driver for XeTeX (L3/RRM/
 JK)
 ))
-(./Real-Time Rendering.aux)
-\openout1 = `"Real-Time Rendering.aux"'.
+(c:/texlive/2017/texmf-dist/tex/latex/multirow/multirow.sty
+Package: multirow 2016/11/25 v2.2 Span multiple rows of a table
+\multirow@colwidth=\skip46
+\multirow@cntb=\count99
+\multirow@dima=\skip47
+\bigstrutjot=\dimen112
+)
+(c:/texlive/2017/texmf-dist/tex/latex/amsfonts/amssymb.sty
+Package: amssymb 2013/01/14 v3.01 AMS font symbols
+
+(c:/texlive/2017/texmf-dist/tex/latex/amsfonts/amsfonts.sty
+Package: amsfonts 2013/01/14 v3.01 Basic AMSFonts support
+\symAMSa=\mathgroup4
+\symAMSb=\mathgroup5
+LaTeX Font Info:    Overwriting math alphabet `\mathfrak' in version `bold'
+(Font)                  U/euf/m/n --> U/euf/b/n on input line 106.
+)) (./Note.aux)
+\openout1 = `Note.aux'.
 
 LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 5.
 LaTeX Font Info:    ... okay on input line 5.
@@ -117,7 +133,16 @@ LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 5.
 LaTeX Font Info:    ... okay on input line 5.
 LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 5.
 LaTeX Font Info:    ... okay on input line 5.
- [1
+LaTeX Font Info:    Try loading font information for U+msa on input line 6.
+
+(c:/texlive/2017/texmf-dist/tex/latex/amsfonts/umsa.fd
+File: umsa.fd 2013/01/14 v3.01 AMS symbols A
+)
+LaTeX Font Info:    Try loading font information for U+msb on input line 6.
+
+(c:/texlive/2017/texmf-dist/tex/latex/amsfonts/umsb.fd
+File: umsb.fd 2013/01/14 v3.01 AMS symbols B
+) [1
 
 ]
 Underfull \hbox (badness 10000) in paragraph at lines 8--8
@@ -316,15 +341,52 @@ Underfull \hbox (badness 10000) in paragraph at lines 848--850
 
  []
 
-[23] [24] [25] [26] [27] [28] [29] [30] [31] [32] [33] [34] [35] [36]
-(./Real-Time Rendering.aux) ) 
-Here is how much of TeX's memory you used:
- 1129 strings out of 493005
- 14156 string characters out of 6140056
- 89192 words of memory out of 5000000
- 5113 multiletter control sequences out of 15000+600000
- 7648 words of font info for 46 fonts, out of 8000000 for 9000
- 1348 hyphenation exceptions out of 8191
- 27i,18n,20p,1152b,187s stack positions out of 5000i,500n,10000p,200000b,80000s
+[23] [24] [25] [26] [27] [28] [29] [30] [31] [32] [33] [34] [35]
+Overfull \hbox (0.9787pt too wide) in paragraph at lines 1139--1140
+[]\TU/lmr/m/it/10 Alpha to coverage\TU/lmr/m/n/10 , and the similar feature \TU
+/lmr/m/it/10 transparency adaptive anti-aliasing\TU/lmr/m/n/10 ,
+ []
 
-Output written on Real-Time Rendering.pdf (36 pages).
+[36] [37] [38] [39] [40] [41] [42] [43] [44] [45]
+Underfull \hbox (badness 10000) in paragraph at lines 1438--1439
+
+ []
+
+[46]
+Underfull \hbox (badness 10000) in paragraph at lines 1497--1498
+
+ []
+
+[47]
+Underfull \hbox (badness 10000) in paragraph at lines 1510--1511
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 1518--1519
+
+ []
+
+[48]
+Overfull \hbox (5.58203pt too wide) in paragraph at lines 1530--1531
+[]\TU/lmr/m/n/10 Most insulators are \TU/lmr/m/it/10 heterogeneous\TU/lmr/m/n/1
+0 , containing numerous discontinuities. These
+ []
+
+
+Overfull \hbox (1.50002pt too wide) in paragraph at lines 1552--1553
+[]\TU/lmr/m/n/10 The assumption support both energy conservation and Helmholtz 
+reciprocity: 
+ []
+
+[49] [50] (./Note.aux) ) 
+Here is how much of TeX's memory you used:
+ 1474 strings out of 493005
+ 18253 string characters out of 6137956
+ 90797 words of memory out of 5000000
+ 5435 multiletter control sequences out of 15000+600000
+ 10128 words of font info for 58 fonts, out of 8000000 for 9000
+ 1348 hyphenation exceptions out of 8191
+ 27i,18n,26p,1168b,198s stack positions out of 5000i,500n,10000p,200000b,80000s
+
+Output written on Note.pdf (50 pages).
