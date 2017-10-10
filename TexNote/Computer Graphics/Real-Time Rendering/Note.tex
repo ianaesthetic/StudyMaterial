@@ -1,7 +1,7 @@
 \documentclass[10pt, a4paper]{article}
     \author{Ianaesthetic}
     \title{Real-Time Rendering Note}
-    \usepackage{indentfirst, amsmath, color, multirow, amssymb}
+    \usepackage{indentfirst, amsmath, color, amssymb}
 \begin{document}
 \maketitle
 \newpage
@@ -1457,7 +1457,7 @@ Tangent and Bitangent don't have to truly be perpendicular to each other since t
 
             $$R(\textbf{l}) = \int_{\Omega}f(\textbf{l}, \textbf{v})\cos{\theta_o}d\omega_o$$
 
-            where $\theta_o$ is the angle between \textbf{n} and \textbf{l}.
+            where $\theta_o$ is the angle between \textbf{n} and \textbf{v}.
 
             The most simple BRDF model is Lambertian BRDF. It has a constant value and usually represents subsurface scattering. The directional-hemispherical is also a constant value:
             $$R(\textbf{l}) = \pi f(\textbf{l}, \textbf{v})$$
@@ -1535,7 +1535,7 @@ Tangent and Bitangent don't have to truly be perpendicular to each other since t
 
             As introduced before, the diffuse term of BRDF in Lambertian is usually used to represent local subsurface scattering. Recall:  
 
-            $$f(\textbf{l}, \textbf{v})_{\text{diff}} = \frac{\textbf{c}_{\text{diff}}}{\pi}$$
+            $$f_{\text{diff}}(\textbf{l}, \textbf{v}) = \frac{\textbf{c}_{\text{diff}}}{\pi}$$
 
             To set $\textbf{c}_{\text{diff}}$, we should first subtract specular term and get the diffuse term. If we have constant specular directional-hemispherical reflectance, it can be computed as :
 
@@ -1567,9 +1567,228 @@ Tangent and Bitangent don't have to truly be perpendicular to each other since t
 
             Light may experience inter reflections. Under the effect of Fresnel reflection, it tends to be attenuated and not noticeable in insulators. In metals, this is the source of diffuse reflection. Note that the reflection will make the light more colored. 
 
-            In certain cases, microscale surface detail can affect body reflectance. If the scale of the microgeometry is large relative to the scale of subsurface scattering, then shadowing and masking can cause a \emph{retro-reflection} effect, where light is preferentially reflected back toward the incoming direction . 
- 
-            
+            In certain cases, microscale surface detail can affect body reflectance. If the scale of the microgeometry is large relative to the scale of subsurface scattering, then shadowing and masking can cause a \emph{retro-reflection} effect, where light is preferentially reflected back toward the incoming direction. This will result different brightness viewing from different directions. It will also tend to make the surface flatter. 
 
+        \subsubsection{Microfacet Theory}
+            BRDF models are based on a mathematical analysis of the effects of microgeometry on reflectance called \emph{microfacet theory}. The theory  is based on the modeling of microgeometry as a collection of \emph{microfacets}. Each microfacet is a tiny, flat Fresnel mirror. In microfacet theory, a surface is characterized by the distribution of the microfacet surface normal, which is defined by the surface's \emph{normal distribution function} (NDF) represented by $p()$. The NDF is defined as the probability distribution function of the microfacet surface normals. 
+            
+            The probability that the surface normal of a given microfacet lies within a infinitesimal solid angle $d\omega$ surrounding a candidate direction vector $n_{\mu}$ is equal to $p(n_{\mu})d\omega$. For a function to be a valid NDF, it needs to be \emph{normalized} so that it integrates to 1 over the sphere. As mentioned, most surfaces have NDFs that show a strong peak at the macroscopic surface normal $n$.
+
+            Microfacet theory focuses on modeling the first-bounce specular reflection so microfacet-derived BRDF terms are paired with a diffuse term. Shadowing and masking are done in specific way. 
+
+            As microfacets are assumed to be ideal mirrors, only those microfacets that reflect \textbf{l} tp \textbf{v} will participate in the reflection. It means the normal vector is aligned with \emph{half vector} \textbf{h}.
+
+            The fraction of active microfacets is equal to $p(\textbf{h}$. The reflectance will also depend on Fresnel reflectance $R_F(\alpha_h)$, where $\alpha_h$ is the angle between \textbf{l} and \textbf{h}. 
+
+            shadowing and masking are accounted for by introducing a \emph{geometry factor} or \emph{geometrical attenuation factor} G(\textbf{l}, \textbf{v}). It's in range [0,1], representing how much light remains after shadowing and masking are applied. The shadowing and masking are not correlated with microfacet orientation. A example of derivation:
+
+            $$f(\textbf{l}, \textbf{v}) = \frac{p(\textbf{h})G(\textbf{l},\textbf{v})R_F(\alpha_h)}{4k_p\overline{\text{cos}}\theta_i\overline{\text{cos}}\theta_o}$$
+            
+            $$k_p = \int_{\Omega}p(\textbf{h})\cos{\theta_h}d\omega_h$$
+
+            The NDF $p()$ is usually \emph{isotropic} -- rotationally symmetrical about the macroscopic surface normal \textbf{n}. In this case, it's a function of just one variable: $\theta_h$.
+
+            Another, more complete surface representation is called \emph{height correlation}. It can correlate the normal with shadowing and masking while is too costly. 
+
+        \subsubsection{Half Vector VS. Reflection Vector}
+            Instead of $\theta_h$, some BRDFs use the angle $\alpha_r$ between the reflection vector $\textbf{r}_i$ and the view vector \textbf{v}. $\theta_h$ has physical interpretation -- it shows to what extent the active microfacet normals diverge from the overall macroscopic surface normal -- while $\alpha_r$ hasn't. 
+
+            While the highlight position will be the same, the shape of the highlight may differ. In reality, the half vector based BRDFs is closer to reality. 
+    
+    \subsection{BRDF models}
+
+        \subsubsection{Special Notes}
+            Last subsection it introduces physical based BRDF: microfacet BRDF. It's derived from the actual physics. When modeling the empirical model, it's better to make it more corresponding to the microfacet BRDF to form the physical based one. 
+            
+            Another perspective for Blinn-Phong Shading evolution: 
+
+            The original form: 
+            $$I = k_aI_a + k_d(\textbf{n}\cdot \textbf{l})I_d + k_s(\textbf{r} \cdot \textbf{v})^{\alpha})I_s$$
+            
+            Introduced in BRDF: 
+
+            $$L_o(\textbf{v}) = f(\textbf{l}, \textbf{v}) \otimes E_L\overline{\text{cos}}\theta_{i}$$
+
+            The $E_L\overline{\text{cos}}\theta_i$ is the irradiance, which symbolizes $I$. The environmental part is integrated into the diffuse term to match physical rules. For this:
+
+            $$f(\textbf{l}, \textbf{v}) = \textbf{c}_{\text{diff}} + \textbf{c}_{\text{spec}}\overline{\text{cos}}^m\alpha_r$$
+
+            For the half-vector version: 
+
+            $$f(\textbf{l}, \textbf{v}) = \textbf{c}_{\text{diff}} + \textbf{c}_{\text{spec}}\overline{\text{cos}}^m\theta_h$$            
+
+            The diffuse term in Lambertian is a constant. Considering from hemispherical-directional reflectance, to keep $\textbf{c}_{\text{diff}}$ as a color and energy conversation(This is a easy way to normalize)
+
+            $$R(\textbf{l}) =  \pi\textbf{c}_{\text{diff}} \quad\Rightarrow\quad \textbf{c}_{\text{diff}} = \frac{R(\textbf{l})}{\pi}$$
+            
+            For specular term, comparing with microfacet model in most use: 
+            $$f(\textbf{l}, \textbf{v}) = \frac{p(\textbf{h})G(\textbf{l}, \textbf{v})R_F(\theta_i)}{4\overline{\text{cos}}\theta_i\overline{\text{cos}}\theta_o}$$
+
+            The $\textbf{c}_{\text{spec}}$ matches $R_F(\theta_i)$. As NDFs can present roughness, it requires normalization of the NDF, which means the sum of projected microfacet are to be equal to the macro projected area along \textbf{v}(This is ensured the integral is equal to 1)
+
+            $$1 = \int_{\Omega}K\overline{\text{cos}}^m\theta_hd\omega_i$$
+            $$K = \frac{m + 2}{2\pi}$$
+
+            We set the visibility term to $\frac{1}{4}$. So the outcome is
+            
+            $$f(\textbf{l}, \textbf{v}) = \frac{\textbf{c}_{\text{diff}}}{\pi} + \frac{m + 2}{8\pi}R_F(\alpha_h)\overline{\text{cos}}^m\theta_h $$
+
+        Symbols in use: 
+
+        $\theta_i$: angle between \textbf{l} and \textbf{n}
+
+        $\theta_o$: angle between \textbf{v} and \textbf{n}
+
+        $\theta_h$: angle between \textbf{h} and \textbf{n}
+        
+        $\alpha_r$: angle between \textbf{v} and $\textbf{r}_i$
+
+        $\alpha_h$: angle between \textbf{l} and \textbf{h}
+
+
+        \subsubsection{Main Text}
+
+        BRDF models fall into two broad groups: those based on physical theory and those that are designed to empirically fit a class of surface types. 
+
+        Since empirical BRDF models tend to be simpler, they are commonly used in real-time rendering. The first such model used was Lambertian or constant BRDF. The BRDF form: 
+        $$
+            f(\textbf{l}, \textbf{v}) =
+            \begin{cases}
+                \frac{\textbf{c}_{\text{diff}}}{\pi} + \frac{\textbf{c}_{\text{spec}}\overline{\text{cos}}^m\alpha_r}{\pi\overline{\text{cos}}\theta_i} & \text{where } \theta_i > 0 \\
+                
+                0 & \text{where } \theta_i \leqslant 0 
+            \end{cases}
+        $$
+            
+        Fortunately, $\textbf{c}_{\text{diff}} = R_{\text{diff}}(\textbf{l})$. As$\textbf{c}_{\text{diff}}$ is restricted to values between 0 and 1, so it can be treated as color. For specular term, as $R_{\text{spec}}$ is unbounded. This is caused by the division by $\overline{\text{cos}}\theta_i$. When removing from it from the BRDF, it's simpler and more physically plausible.
+        $$f(\textbf{l}, \textbf{v}) = \frac{\textbf{c}_{\text{diff}}}{\pi} + \frac{\textbf{c}_{\text{spec}}\overline{\text{cos}}^m\alpha_r}{\pi}$$
+        
+        In this term, when $\theta_i = 0$, $R_{\text{spec}_{\text{max}}} = \frac{2\textbf{c}_{\text{spec}}}{m + 2}$. In order to make $\textbf{c}_{\text{spec}} = R_{\text{spec}}$: 
+
+        $$f(\textbf{l}, \textbf{v}) = \frac{\textbf{c}_{\text{diff}}}{\pi} + \frac{m + 2}{2\pi}\textbf{c}_{\text{spec}}\overline{\text{cos}}^m\alpha_r$$
+
+        This process of multiplying a BRDF term by a value to ensure that parameters are  equivalent to reflectance values is called \emph{BRDF normalization}. The value by which the term is divided is called a \emph{normalization factor}, and the resulting BRDF is referred to as a \emph{normalized BRDF}. The parameter being normalized can be treated as color. In this case, the maximum value of the $R_{\text{spec}}$ is closely related to the Fresnel reflectance at normal incidence. As the equation don't account for the fresnel effect, it's wise to use a value between white and $R_F(0^{\circ})$. For energy conservation, it's guaranteed by ensuring $\textbf{c}_{\text{diff}} + \textbf{c}_{\text{spec}} \leqslant 1$
+
+        Another important effect of normalization is that now the $m$ parameter is independent of reflectance and only controls surface roughness. For the original one, when $m$ changed, the integral of all view direction's reflected energy will be decreased as $m$ increases. This is bad because the reflectance defines the \emph{perceived} specular color. So for texture editing with both smoothness and color, it's hard to choose a proper $m$. 
+
+        When normalized, the reflectance is constant. Recall that although reflectance values are in [0,1], but BRDF values can exceed 1. In particular scene, the highlight follows the property that it becomes brighter as it narrows using normalized BRDF. The original BRDF doesn't have the property. It's hard and unintuitive to adjust to the same effect with original one. 
+        
+        Normalized BRDFs yield the ability to intuitively control physically meaningful parameters, enabling easy authoring of realistic materials. Note that the physically derived BRDFs do not require normalization, since they have physical parameters by construction. 
+
+        The purpose of the normalization is to guarantee energy conservation. So in Lambertian BRDF, we will modify $\textbf{c}_{\text{diff}}$ to the maximum of $R_{\text{spec}}$
+        
+        The presentation can be converted to half-vector-based variant with normalization (\emph{Blinn-Phong BRDF}): 
+
+        $$f(\textbf{l}, \textbf{v}) = \frac{\textbf{c}_{\text{diff}}}{\pi} + \frac{m + 8}{8\pi}\textbf{c}_{\text{spec}}\overline{\text{cos}}^m\theta_h$$ 
+
+        Note that to get a similar highlight, the value of $m$ used in the Blinn-Phong BRDF should be about four times that used for the Phong BRDF. The Blinn-Phong BRDF can also be cheaper to evaluate than the Phong BRDF in some cases. 
+
+        Anther advantage is that the form is similar to a microfacet BRDF. This similarity means that the various expressions can be interpreted using microfacet theory. For example, the cosine power term can be interpolated as a NDF. It's also clear that the BRDF can be extended to include Fresnel effect by simply replacing $\textbf{c}_{\text{spec}}$ with $R_F{\alpha_h}$. It's also acceptable to replace the diffuse term with other diffuse terms. 
+
+        $$f(\textbf{l}, \textbf{v}) = \frac{\textbf{c}_{\text{diff}}}{\pi} + \frac{m + 8}{8\pi}R_F(\alpha_h)\overline{\text{cos}}^m\theta_h$$ 
+        
+        This equation is enough for most real-time rendering needs. However, there are some phenomena it does not model and the need or a different BRDF will arise. For example, the cosine term NDF used (sometimes called a \emph{Phong lobe}) can be replaced. While the hardest part is computing a new normalization factor for the specular term. 
+        
+        Various other isotropic NDFs have been proposed. \emph{multi-scale roughness} results in NDF curves that appear to be combinations of simpler curves. 
+
+        Anisotropic NDFs can be used as well. Anisotropic NDFs can't be evaluated just with the angle $\theta_h$; additional orientation information is needed. In general case, the half vector \textbf{h[} needs to be transformed into the tangent space(\emph{local frame}).
+
+        For surfaces that are extremely anisotropic surfaces and best modeled as tightly packed one-dimensional lines, the Kajiya-Kay BRDF is employed. The basic concept is based on the observation that a surface composed of one-dimensional lines has an infinite number of normals at any given location, defined by the \emph{normal plane} perpendicular to the tangent vector \textbf{t}. When normal is selected out, it's identical to the original Phong BRDF. For diffuse and specular term, different normals are selected. The diffuse term uses the projection of light vector \textbf{l} onto the normal plane, and the specular term uses the view vector \textbf{v} projected onto the normal plane. 
+
+        $$\overline{\text{cos}}\theta_i^{'} = \sqrt{1 - (\textbf{l}\cdot\textbf{n})^2}$$
+
+        $$\overline{\text{cos}}\alpha_r^{'} = \text{max}(\sqrt{1 - (\textbf{l}\cdot\textbf{t})^2}\sqrt{1 - (\textbf{v}\cdot\textbf{t})^2} - (\textbf{l}\cdot\textbf{t})(\textbf{v}\cdot\textbf{t}), 0)$$
+
+        The substitution of angle can be used in normalized version. It's also better to use half-vector \textbf{h} to find the specular shading normal. 
+
+        
+        \bigskip 
+        \bigskip
+
+
+        Comparing the modified Blinn-Phong specular term with the full microfacet BRDF. We first use the cosine term as NDF:
+
+        $$f(\textbf{l}, \textbf{v}) = (\frac{G(\textbf{l}, \textbf{v})}{\overline{\text{cos}}\theta_i\overline{\text{cos}}\theta_o})(\frac{m + 2}{8\pi}\overline{\text{cos}}^m\theta_h)R_F(\alpha_h)$$
+
+        Aside from the difference in normalization, the most significant difference between the two BRDFs is the leftmost term. The geometry factor models shadowing and masking, and the cosine factors model the foreshortening of the surface with respect the the light or camera based on surface area. This combined term is the \emph{visibility term}.
+
+        The modified Blinn-Phong BRDF has a visibility term equals to 1, which will bring: 
+        $$G_{BF}(\textbf{l}, \textbf{v}) = \overline{\text{cos}}\theta_i\overline{\text{cos}}\theta_o$$
+            
+        The visibility term tend to decrease at glancing angles. However, the decrease happens rapidly as the light or view vector diverges from the surface normal according to the implied relationship, causing Blinn-Phong BRDF to appear dark at glancing angles compared to real surfaces. 
+
+        The visibility term of the Ward BRDF is equal to $\frac{1}{\overline{\text{cos}}\theta_i\overline{\text{cos}}\theta_o}$. The Ward BRDF also does not include a Fresnel term. This visibility term is not recommended as it is unbounded at a glancing angle.   
+
+        A visibility term between no visibility term and unbounded visibility term is preferred. They are designed primarily to ensure reasonable behavior at glancing angles. Those included in physically based microfacet BRDF models have explicit geometry factors designed to model shadowing and masking, divided by the cosine terms to model foreshortening. The most well-known one is: 
+
+        $$G_{TS}(\textbf{l}, \textbf{v}) = \text{min}(1, \frac{2\overline{\text{cos}}\theta_h\overline{\text{cos}}\theta_o}{\overline{\text{cos}}\alpha_h}, \frac{2\overline{\text{cos}}\theta_h\overline{\text{cos}}\theta_i}{\overline{\text{cos}}\alpha_h})$$
+
+        There is a simple approximation the entire visibility using this geometry factor: 
+
+        $$\frac{G_{TS}(\textbf{l}, \textbf{v})}{\overline{\text{cos}}\theta_i\overline{\text{cos}}\theta_o} \approx \frac{2}{1 + \textbf{l}\cdot\textbf{v}} = \frac{4}{\textbf{h}^{'}\cdot\textbf{h}^{'}} = \frac{1}{\cos^2{\alpha_h}}$$
+
+        $$\textbf{h}^{'} = \textbf{l} + \textbf{v}$$
+
+    \subsection{BRDF Acquisition and Representation}
+        In most real-time applications, BRDFs are manually selected and their parameters set to achieve a desired look. However, they are measured from actual surfaces. 
+        \subsubsection{Acquiring BRDFs}
+            goniometer, imaging bidirectional reflectometer, and image-based methods have being used.
+        \subsubsection{Representations for Measured BRDFs}
+            The result of BRDF capture is a large, densely sampled four-dimensional table. The acquisition process also introduces noise into the data. So the raw data must be converted into some other representation. 
+
+            One common method is to select an analytic BRDF and fit its parameters to the measured data. It's not so simple to choose a suitable BRDF, a weighted sum of multiple BRDF terms is optional with hight cost. 
+
+            Another way to represent BRDFs is to project them onto \emph{orthonormal bases}, such as spherical harmonics, spherical wavelets, etc. These techniques are focused on representing the shape of the BRDF as a generic function. 
+
+            As four-dimensional functions, BRDFs can also be approximated, or \emph{factored}, into a sum of products of lower-dimensional functions. It these function are one or two dimensional, they can be stored in textures. The parameterization of the lower-dimensional functions needs to be chosen with care so as to minimize the number of functions needed. 
+
+            These factorization techniques have two limitations: They are not suitable for measured SVBRDF, since a separate factorization process needs to be performed for each location, and the results can not easily be edited. a \emph{shade tree} is created to combine the textures and produce the final shaded pixel color. 
+        
+        \subsection{Implementing BRDFs}
+            In many rendering systems, the $\frac{1}{\pi}$ factor is folded into $E_L$ for convenience. 
+            
+            The most straightforward way to evaluate any BRDF model that has an analytic expression, as opposed to being represented by a factorization or a sum of basis functions, is to simply evaluate the expression in a shader for each light source. It has best visual effect to do the whole calculation in pixel shader while expensive. Spatially varying BRDFs can be encoded in textures. The cosine value can be derived by the dot product of normalized vector. 
+
+            In principle, BRDF equations apply in the \emph{local frame} of the surface in the \emph{local frame} of the surface defined by the vectors \textbf{n}, \textbf{t}, \textbf{b}. Normal mapping actually perturbs the entire local frame, while isotropic BRDF rarely require other than normals. Anisotropic BRDFs introduce the possibility of the per-pixel modification of the tangent direction -- use of textures to perturb both the normal and tangent vectors is called \emph{frame mapping}.
+
+            BRDFs using non-parametric representations are more difficult to render efficiently. 
+
+        \subsubsection{Mipmapping BRDF and Normal Maps}
+            normal maps can't adopt common linear interpolation like bilinear filtering and mipmapping. Remember the BRDF is a statistical description of the effects of subpixel surface structure. As the distance between surface and camera increases, the surface is handled by BRDF rather than bump mapping. This transition is tied to the mipmap chain. Macro--geometry; Meso--bump mapping; Micro--BRDFs. 
+
+            The normal maps and surrounding NDF represents the underlying structure. Each texel in the normal map, combined with the cosine power, can be seen as collecting the NDF across the surface area covered by the texel. 
+
+            The ideal representation of this surface at a lower resolution would be exactly represent the NDFs collected across largest surface areas.
+            
+            However, as presentation at low resolutions is the responsibility of higher level mipmap, one result is averaging and re-normalizing the normals in the normal map, and NDF experience same integration.This will lead to incorrect appearance.
+            
+            We can't represent the ideal NDFs directly with the Blinn-Phong BRDF. However, with a gloss map, the cosine power can be varied from texel to texel. For each ideal NDF, we find the rotated cosine lobe that matches it most closely. We store the center direction of this cosine lobe in the normal map, and its cosine power in the gloss map.  
+
+            (For cosine lobe method, it isolates the effect of controlling parameter $m$[NDF] and integrate normals in the mipmap hierarchy)
+
+            In general, the ideal is to filter the entire surface appearance, represented by the BRDF. 
+
+            A clever observation is that  if normals are averaged and not re-normalized, the length of the averaged normal correlates inversely with the width of the normal distribution. So for aggregate $m$ value in the gloss map for mipmap: 
+
+            $$m^{'} = \frac{\|\textbf{n}_a\|m}{\|\textbf{n}_a\| + m(1 - \|\textbf{n}_a\|)}$$
+
+            Where $\|\textbf{n}_a\|$ is the length of the averaged normal. This feature is particularly useful for dynamically generated normal maps on the fly. This pattern doesn't allow for compression but gloss map can be encoded. 
+        
+    \subsection{Combining Lights and Materials}
+        Lighting computations occur in two phases. In the \emph{light phases}, it is relevant to the \textbf{l} and $E_L$. In the \emph{material phase}, the BRDF parameters and surface normal are found via interpolation or texturing to evaluate  the BRDF value.
+
+        The combinations with different lights and materials create numerous pixel shader combinations. In addition, the fact that both the light and material phase need to be repeated for each light source  can lead to great inefficiencies. As the limitation of dynamic branches, a common solution to this problem is to write a single large shader that is compiled multiple times, using language features or code pre-processors to create different shader combinations. However, it's impossible when combination is too much. 
+
+        One tactic commonly used by game developers is to define a fixed, cheap lighting model and approximate the actual lighting environment of each object to fit the model. Other kind of light source will be converted into defined light sources to cut the number of combination. However, it introduces visual artifacts. 
+
+        \subsubsection{Multipass Lighting}
+            Multipass lighting is another solution to the problem of combining lights and materials. Here the idea is to process every light in a separate rendering pass, using the hardware's additive blending capabilities to sum the results in the frame buffer. The list of affecting each object can be narrowed by bounding volume intersection. After the set of lights is determined, each object is rendered once for each light. This control the amount of shader. 
+
+            There are some practical issue: The use of a lot of1 memory bandwidth; The mesh needs to be processed multiple times by the vertex shader, and any pixel shader computations that produce results used by the lighting process need to be repeated for each light source. The summing of light may cause artifacts as well. 
+        
+        \subsubsection{Deferred Shading}
+            The basic idea behind deferred shading is to perform all visibility testing before performing any lighting computations.   
+
+        
 \end{document}
 
