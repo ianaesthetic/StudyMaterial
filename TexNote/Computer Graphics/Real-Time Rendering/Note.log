@@ -1,4 +1,4 @@
-This is XeTeX, Version 3.14159265-2.6-0.99998 (TeX Live 2017/W32TeX) (preloaded format=xelatex 2017.9.18)  10 OCT 2017 23:49
+This is XeTeX, Version 3.14159265-2.6-0.99998 (TeX Live 2017/W32TeX) (preloaded format=xelatex 2017.9.18)  12 OCT 2017 23:30
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -325,4 +325,73 @@ Underfull \hbox (badness 10000) in paragraph at lines 603--605
  []
 
 [17]
-Underfull \hbox (badness 10000) in paragraph at line
+Underfull \hbox (badness 10000) in paragraph at lines 676--678
+
+ []
+
+[18] [19] [20] [21] [22]
+Underfull \hbox (badness 10000) in paragraph at lines 848--850
+
+ []
+
+[23] [24] [25] [26] [27] [28] [29] [30] [31] [32] [33] [34] [35]
+Overfull \hbox (0.9787pt too wide) in paragraph at lines 1139--1140
+[]\TU/lmr/m/it/10 Alpha to coverage\TU/lmr/m/n/10 , and the similar feature \TU
+/lmr/m/it/10 transparency adaptive anti-aliasing\TU/lmr/m/n/10 ,
+ []
+
+[36] [37] [38] [39] [40] [41] [42] [43] [44] [45]
+Underfull \hbox (badness 10000) in paragraph at lines 1438--1439
+
+ []
+
+[46]
+Underfull \hbox (badness 10000) in paragraph at lines 1497--1498
+
+ []
+
+[47]
+Underfull \hbox (badness 10000) in paragraph at lines 1510--1511
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 1518--1519
+
+ []
+
+[48]
+Overfull \hbox (5.58203pt too wide) in paragraph at lines 1530--1531
+[]\TU/lmr/m/n/10 Most insulators are \TU/lmr/m/it/10 heterogeneous\TU/lmr/m/n/1
+0 , containing numerous discontinuities. These
+ []
+
+
+Overfull \hbox (1.50002pt too wide) in paragraph at lines 1552--1553
+[]\TU/lmr/m/n/10 The assumption support both energy conservation and Helmholtz 
+reciprocity: 
+ []
+
+[49] [50] [51]
+Overfull \hbox (5.46pt too wide) in paragraph at lines 1620--1621
+[]\TU/lmr/m/n/10 The diffuse term in Lambertian is a constant. Considering from
+ hemispherical-
+ []
+
+[52] [53] [54] [55]
+Overfull \hbox (3.58215pt too wide) in paragraph at lines 1767--1768
+[]\TU/lmr/m/n/10 (For cosine lobe method, it isolates the effect of controlling
+ parameter $\OML/cmm/m/it/10 m$\TU/lmr/m/n/10 [NDF]
+ []
+
+[56] [57] [58] [59] [60] (./Note.aux) ) 
+Here is how much of TeX's memory you used:
+ 1423 strings out of 493005
+ 17500 string characters out of 6137956
+ 90263 words of memory out of 5000000
+ 5387 multiletter control sequences out of 15000+600000
+ 10136 words of font info for 59 fonts, out of 8000000 for 9000
+ 1348 hyphenation exceptions out of 8191
+ 27i,18n,26p,1168b,198s stack positions out of 5000i,500n,10000p,200000b,80000s
+
+Output written on Note.pdf (60 pages).

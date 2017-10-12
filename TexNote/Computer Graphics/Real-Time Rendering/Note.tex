@@ -1419,7 +1419,7 @@ Tangent and Bitangent don't have to truly be perpendicular to each other since t
 
             The value of the BRDF depends on wavelength, so for rendering purposes it is represented as an RGB vector. 
 
-            For non-area light sources, the BRDF definition can be expressed in a non-differential form. 
+            For non-area light sources, the BRDF definition can be expressed in a non-differential form as $E_L$ can be derived as a specific model. 
 
             $$f(\text{l}, \text{v}) = \frac{L_o(\textbf{v})}{E_L(\textbf{l})\overline{\text{cos}}\theta_i}$$
 
@@ -1609,7 +1609,7 @@ Tangent and Bitangent don't have to truly be perpendicular to each other since t
 
             $$L_o(\textbf{v}) = f(\textbf{l}, \textbf{v}) \otimes E_L\overline{\text{cos}}\theta_{i}$$
 
-            The $E_L\overline{\text{cos}}\theta_i$ is the irradiance, which symbolizes $I$. The environmental part is integrated into the diffuse term to match physical rules. For this:
+            The $E_L\overline{\text{cos}}\theta_i$ is the irradiance, which symbolizes $I$. The environmental part is integrated into the diffuse term to match physical rules. Note that diffuse color and specular color describes the ratio of light energy in a spectrum form. The difference between them is that specular term is derived from diffuse term with the influence of viewing angle. These two term is different in the viewing perspective; Equation for this:
 
             $$f(\textbf{l}, \textbf{v}) = \textbf{c}_{\text{diff}} + \textbf{c}_{\text{spec}}\overline{\text{cos}}^m\alpha_r$$
 
@@ -1787,7 +1787,99 @@ Tangent and Bitangent don't have to truly be perpendicular to each other since t
             There are some practical issue: The use of a lot of1 memory bandwidth; The mesh needs to be processed multiple times by the vertex shader, and any pixel shader computations that produce results used by the lighting process need to be repeated for each light source. The summing of light may cause artifacts as well. 
         
         \subsubsection{Deferred Shading}
-            The basic idea behind deferred shading is to perform all visibility testing before performing any lighting computations.   
+            The basic idea behind deferred shading is to perform all visibility testing before performing any lighting computations. For the first pass, values included the $z$-depth, normal, texture coordinates, and material parameters are saved to multiple render targets accessed by the pixel shader program with the sorting of $Z$-buffer. The stored buffer are commonly called \emph{G-buffers}. 
+
+            After this, separate pixel shader programs are used to apply lighting algorithms or visual effects. A pixel shader program is applied with a viewport-filling quadrilateral to drive each computation.  One advantage is fragment shading is done only once per pixel and so has a predictable upper bound on rendering cost. Geometric transformation is done only once, in the initial pass, and any computations needed for lighting are done only once. 
+
+            Another important advantages has to do with programming and assets management costs. It allows a strong separation between lighting and material definition as they are abstracted. And the time-consuming process of determining exactly which lights affect which objects is avoided. 
+
+            The drawbacks: The video memory requirements and fill rate costs for the G-buffer are significant;  Antialiasing is limited; Transparent objects must be drawn using screen-door transparency or rendered into scene after all deferred shading passes are done. 
+    \newpage
+
+\section{Area and Environmental Lighting}
+    This section focuses on indirect lighting. Other from the focus on viewing in the last section(focus on BRDF $f(\textbf{l}, \textbf{v})$), this section is considered about the lighting perspective ($E_L\cos{\theta_i}$). 
+    \subsection{Radiometry for Arbitrary}
+
+        We assume that light can be in any direction; Recall the definition of radiance, as irradiance adds up all incoming light:
+
+        
+        $$E = \int_{\Omega}L_i(\textbf{l})\cos{\theta_i}d\omega_i$$
+
+        $\Omega$ represents a hemisphere direction of light. Combining generalized BRDF :
+        
+        $$L_o(\textbf{v}) = \int_{\Omega}f(\textbf{l}, \textbf{v}) \otimes L_i(\textbf{l})\cos{\theta_i}d\omega_i$$
+
+        For parameterization version:
+        $$L_o(\theta_o, \phi_o) = \int_{\phi_i = 0}^{2\pi}\int_{\theta_i = 0}^{\frac{\pi}{2}}f(\theta_i, \phi_i, \theta_o, \phi_o) L(\theta_i, \phi_i)\cos{\theta_i}\sin{theta_i}d\theta_i d\phi_i$$
+
+    \subsection{Area light}
+        Other than direction light, which the surface is illuminated from one direction only for every point, the area light \emph{subtend} a solid  angel of $\omega_L$ as the light source is considered to have non-zero area. For smooth surface with small solid angle, the BRDF used for directional can be good approximation. The equation for the approximation is:
+
+        $$L_o(\textbf{v}) = \int_{\omega_L}f(\textbf{l}, \textbf{v}) \otimes L_L\overline{\text{cos}}\theta_id_{\omega_i} \approx f(\textbf{l}_L, \textbf{v}) E_L\overline{\text{cos}}\theta_{i_L}$$ 
+
+        For the special case of Lambertian surface to a single wavelength, as 
+        
+        $$L_o(\textbf{v}) = \frac{\textbf{c}_{\text{diff}}}{\pi}E$$
+
+        Under this circumstances we focus on the irradiance:
+
+        $$E = \int_{\omega_L}L_L\overline{\text{cos}}\theta_id\omega_i \approx E_L\overline{\text{cos}}\theta_{i_L}$$
+
+        \emph{Net irradiance}, compared to the normal irradiance, particles are counted as positive or negative depending on which way it pass through. The equation: 
+            $$\overline{E}(\textbf{p}, \textbf{n}) = E(\textbf{p}, \textbf{n}) - E(\textbf{p}, -\textbf{n})$$
+        
+        \emph{Vector irradiance} can convert the total irradiance of area lighting to a irradiance of a point or directional light accurately, as presented by three basis:
+
+        $$\textbf{e}(\textbf{p}) = \int_{\Theta}L_i(\textbf{p}, \textbf{l})\textbf{l}d\omega_i$$
+
+        So the relationship between vector irradiance and net irradiance: 
+
+        $$\overline{E}(\textbf{p}, \textbf{n}) = \textbf{n} \cdot \textbf{e}(\textbf{p})$$
+
+        When the negative part of net irradiance is 0:
+        $$E(\textbf{p}, \textbf{n}) = \textbf{n} \cdot \textbf{e}(\textbf{p})$$
+        
+        This can be a solution to area light with no negative component of net irradiance. For mixed light, if all light sources have the same spectrum distribution, they will have same light distribution. A light color $\textbf{c}_L$ is introduced to the original equation with $\textbf{e}(\textbf{p})$ is a matrix; 
+
+        This forms just apply for the Lambertian surface with no light source under the horizon. 
+
+        The smoothness of surface matters for the different occlusion effects for sole-direction light or a light cone, as the latter will have a continuous highlight edge. Area light will have an obvious and sharp highlight on the surface compared to a tiny spot of the directional light.
+    
+    \subsubsection{Ambient Light}
+        The current equation doesn't count the difference in the direct light and indirect light. Ambient light is the simplest way to define indirect light as it shares the same constant value $L_A$.
+
+        For lambertian surface as $f(\textbf{l}, \textbf{v}) = \frac{\textbf{c}_{\text{diff}}}{\pi}$: 
+
+        $$L_o(\textbf{v}) = \frac{\textbf{c}_{\text{diff}}}{\pi} \otimes L_A\int_{\Omega}\cos{\theta_i}d\omega_i  = \textbf{c}_{\text{diff}} \otimes L_A$$
+           
+        For arbitrary BRDF: 
+        $$
+            L_o(\textbf{v}) = \int_{\Omega}f(\textbf{l}, \textbf{v})(L_A + L_i(\textbf{l}))\cos{\theta_i}d\omega_i
+        $$
+
+        We define the \emph{ambient reflectance $R_A$(\textbf{v})}
+
+        $$R_A(\textbf{v}) = \int_{\Omega}f(\textbf{l}, \textbf{v})\cos{\theta_i}d\omega_i$$
+
+        In rendering, \emph{ambient color} represents ambient reflectance in RGB form: 
+        $$
+        L_o(\textbf{v}) = \textbf{c}_{\text{amb}} \otimes L_A  + \int_{\Omega}f(\textbf{l}, \textbf{v}) \otimes L_i(\textbf{l})\cos{\theta_i}d\omega_i
+    $$
+
+        Current discussion of ambient light ignores occlusion. 
+    
+    \subsubsection{}
+
+        
+
+
+
+        
+
+    
+
+
+
 
         
 \end{document}
