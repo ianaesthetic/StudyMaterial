@@ -1868,18 +1868,29 @@ Tangent and Bitangent don't have to truly be perpendicular to each other since t
 
         Current discussion of ambient light ignores occlusion. 
     
-    \subsubsection{}
+    \subsection{Environment Mapping}
+        From the viewing angle perspective, the reflected view vector $\textbf{r}$ is :
 
+        $$\textbf{r} = 2(\textbf{n} \cdot \textbf{v})\textbf{n} - \textbf{v}$$
+
+        If the incoming radiance $L_i$ is only dependent on direction, it can be stored in an \emph{environment map}. The texel coordinates are derived from the reflected view vector. Environment mapping is worse for flat surface as reflected view vector changes just a little bit and a small area of textures will be magnified to the surface. It's straightforward to use normal map and environment map together. 
+
+        \subsubsection{Blinn and Newell's Method}
+            This uses a simple spherical projector functions on the reflected view vector, and this brings uniform are distribution and pole artifacts. 
+        \subsubsection{Sphere Mapping}
+            This is different from spherical projector. Rather than use spherical coordinates, it presents a realistic-appearance sphere derived from sometimes ray-tracing and find one point on the sphere with the normal. This sphere is represented in a view base as view vector is along one of the axis. 
+
+            In the view base, with reflected view angle $(r_x, r_y, r_z)$ on a unit sphere:
+
+            $$m = \sqrt{r_x^2 + r_y^2 + (r_z + 1)^2}$$
+            $$n = (\frac{r_x}{m}, \frac{r_y}{m}, \frac{r_z + 1}{m})$$
+            $$u = \frac{n_x}{2} + 0.5, \quad v = \frac{n_y}{2} + 0.5$$
+
+            The sphere mapping is valid for one direction. Changing sphere mapping will bring more artifacts as some area will be changed. 
         
-
-
-
-        
-
-    
-
-
-
+        \subsubsection{Cubic Environment Mapping}
+            The \emph{cubic environment map} is obtained by placing the camera in the center of the environment and then projecting the environment onto the sides of a cube positioned with its center at the camera's location along with the viewing direction.
+            
 
         
 \end{document}
