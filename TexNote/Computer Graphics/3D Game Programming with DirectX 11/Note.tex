@@ -1,0 +1,24 @@
+\documentclass[10pt, a4paper]{article}
+    \author{ianaesthetic}
+    \title{3d Game Programming with DirectX 11}
+\usepackage{indentfirst, amsmath, fontspec, listings, xcolor, amssymb}
+
+\newfontfamily\consolas{Consolas}
+\lstset{numberstyle = \small\consolas, basicstyle=\small\consolas}
+
+\XeTeXlinebreaklocale "zh"
+\XeTeXlinebreakskip = 0pt plus 1pt
+
+\begin{document}
+\maketitle
+\newpage
+
+\section{Vector Algebra}
+    \subsection{Orthogonalization}
+        For a set of vectors $\{ \textbf{v}_0, \textbf{v}_1 \cdots \textbf{v}_n \}$, the process is:
+
+        $$\textbf{w}_0 = \textbf{v}_0$$
+        $$\textbf{w}_i = \textbf{v}_i - \sum_{j = 0}^{i}\text{proj}_{\textbf{w}_j}(\textbf{v}_i)$$
+        $$\textbf{w}_i = \frac{\textbf{w}_i}{\parallel \textbf{w}_i \parallel}$$
+
+\end{document}
