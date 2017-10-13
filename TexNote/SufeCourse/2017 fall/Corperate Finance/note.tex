@@ -327,7 +327,7 @@
 
             The future value is to estimate the amount of savings. 
         \subsection{The Power of Compounding}
-            Compounding: the interest on interest as the interest in the early time period will generate interest. 
+           \textbf{Compounding}: the interest on interest as the interest in the early time period will generate interest. 
 
             The rule of 72 say that the double of wealth will take 72 years with $1\%$ interest rate. 
 
@@ -341,9 +341,9 @@
 
         \subsection{Annuities and Perpetuities Defined}
         
-        Annuity: Finite series of equal payments that occur at regular intervals. If the first payment of the period, it's called an \emph{ordinary annuity}. If the first payment occurs at the beginning of the period, it's called an \emph{annuity due}. 
+        \textbf{Annuity}: Finite series of equal payments that occur at regular intervals. If the first payment of the period, it's called an \emph{ordinary annuity}. If the first payment occurs at the beginning of the period, it's called an \emph{annuity due}. 
 
-        Perpetuity: Infinite series of equal payments.
+        \textbf{Perpetuity}: Infinite series of equal payments.
         $$PV = C\sum_{n = 1}^{\infty}\frac{1}{(1 + r)^n} = \frac{C}{r}$$
 
         For growing Perpetuity with constant growing unit($C$ is the $t_1$ value and $PV$ is evaluated in $t_0$): 
@@ -357,5 +357,27 @@
         For growing annuity:
 
         $$GAnn = GP_0 - GP_t = \frac{C}{r - g}(1 - (\frac{1 + g}{1 + r})^t)$$
+
+        For the interest for more than one year, can be solved by the equation:
+        $$1 + R = (1 + r) ^ n$$
+
+\section{Interest rate}
+    \subsection{Annual Percentage Rate}
+        \textbf{APR} is the annual rate that is quoted by the law; 
+            $$APR = Period\ Rate \times Number\ of\ Periods\ per\ Year$$
+    \subsection{Effective Annual Rate}
+        \textbf{EAR} is the actual rate paid after accounting for compounding that occurs the year.
+        
+        $$EAR = (1 + \frac{APR}{m})^m - 1$$
+
+        The higher the m is, the more is the EAR; 
+
+    \subsection{Interest Rates and Inflation}
+        the real interest rate:
+        $$1 + R = \frac{1 + r}{1 + i^e}$$
+
+        \textbf{Term Structure}: The relationship between the investment term and the interest rate.
+
+        \textbf{Yield Curve}: A graph of the term structure.
 
 \end{document}
