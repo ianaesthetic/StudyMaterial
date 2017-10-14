@@ -2,23 +2,65 @@
     \author{ianaesthetic}
     \title{3d Game Programming with DirectX 11}
 \usepackage{indentfirst, amsmath, fontspec, listings, xcolor, amssymb}
+\usepackage{verbatim}
+
+\usepackage{xeCJK}
+\setCJKmainfont{Microsoft YaHei}
 
 \newfontfamily\consolas{Consolas}
 \lstset{numberstyle = \small\consolas, basicstyle=\small\consolas}
 
 \XeTeXlinebreaklocale "zh"
 \XeTeXlinebreakskip = 0pt plus 1pt
+\setmainfont{Consolas}
 
 \begin{document}
 \maketitle
 \newpage
 
-\section{Vector Algebra}
-    \subsection{Orthogonalization}
-        For a set of vectors $\{ \textbf{v}_0, \textbf{v}_1 \cdots \textbf{v}_n \}$, the process is:
+\section{向量(Vector)}
+    \subsection{正交化 (Orthogonalization)}
+        对于一组向量$\{ \textbf{v}_0, \textbf{v}_1 \cdots \textbf{v}_n \}$, 正交化的过程为：
 
         $$\textbf{w}_0 = \textbf{v}_0$$
         $$\textbf{w}_i = \textbf{v}_i - \sum_{j = 0}^{i}\text{proj}_{\textbf{w}_j}(\textbf{v}_i)$$
         $$\textbf{w}_i = \frac{\textbf{w}_i}{\parallel \textbf{w}_i \parallel}$$
+
+    \subsection{数学库 DirectXMath}
+        数学库已经从原来的 XNAMath 转变为集成到 Windows SDk 的 DirectXMath 。 相较于使用 <xnamath.h> , 现在是使用 <DirectXMath.h> 并且在所有的函数都将在命名空间 DirectX 下。
+        
+        使用 SIMD 的向量 XMVECTOR 用于计算， 而相对应的储存由专门的其他类型来储存，以 3D 为例 XMFLOAT3 。整形向量使用数组来定义。 之间的转换定义为： 
+\begin{lstlisting}  
+XMVECTOR XMLoadFloat3(const XMFLOAT3 *source);
+void XMStoreFloat3(XMFLOAT3* destination, FXMVECTOR v); 
+\end{lstlisting}
+        
+        单独获取一个分量或者修改一个分量的定义为(分量替换为 X, Y, Z, W):
+\begin{lstlisting}
+FLOAT XMVectorSetX(FXMVECTOR v, FLOAT x); 
+FLOAT XMVectorGetX(FXMVECTOR v); 
+\end{lstlisting}
+
+        在定义函数的时候，参数需要使用 FXMVECTOR 或者 CXMVECTOR 以更好的利用 SIMD 。 函数的前三个 XMVECTOR 参数为 FXMVECTOR, 后面的一律使用 CXMVECTOR 。引用参数依然为 XMVECTOR 。常量 XMVECTOR 定义为 
+\begin{lstlisting}
+    XMVECTORF32 v = {1.0f, 1.0f, 1.0f, 1.0f}; 
+\end{lstlisting}
+    
+    \medskip
+
+        一些很常用的 3D 函数列表(注意有一些返回标量的函数为了保持 SIMD 选择依然返回一个 XMVECTOR ,并且将所有的分量都设置为结果标量)：
+
+\begin{lstlisting}
+    XMVECTOR XMVectorSet(
+        FLOAT x, FLOAT y, FLOAT z, FLOAT w
+    );
+    XMVECTOR XMVector3Length(FXMVECTOR v); 
+    XMVECTOR XMVector3LengthSq(FXMVECTOR v); 
+    XMVECTOR XMVector3Dot(FXMVECTOR v, FXMVECTOR u); 
+    XMVECTOR XMVector3Cross(FXMVECTOR v, FXMVECTOR u);
+    XMVECTOR XMVector3Normalize(FXMVECTOR v);
+    BOOL XMVectorEqual(FXMVECTOR v, FXMVECTOR u);
+\end{lstlisting}
+
 
 \end{document}
