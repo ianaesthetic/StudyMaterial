@@ -44,6 +44,7 @@ FLOAT XMVectorGetX(FXMVECTOR v);
         在定义函数的时候，参数需要使用 FXMVECTOR 或者 CXMVECTOR 以更好的利用 SIMD 。 函数的前三个 XMVECTOR 参数为 FXMVECTOR, 后面的一律使用 CXMVECTOR 。引用参数依然为 XMVECTOR 。常量 XMVECTOR 定义为 
 \begin{lstlisting}
     XMVECTORF32 v = {1.0f, 1.0f, 1.0f, 1.0f}; 
+    XMVECTORU32 u = {1, 1, 1, 1}; 
 \end{lstlisting}
     
     \medskip
@@ -63,4 +64,83 @@ FLOAT XMVectorGetX(FXMVECTOR v);
 \end{lstlisting}
 
 
+\section{矩阵(Matrix)}
+    类似于 DirectXMath 中的向量的命名方式，同时实质上在运算时是由4个 XMVECTOR 构成。参数一律为 CXMMATRIX 类型。一些函数的定义:
+\begin{lstlisting}
+    XMMATRIX　XMMatrixSet(
+        FLOAT m00, FLOAT m01, FLOAT m02, FLOAT m03, 
+        FLOAT m10, FLOAT m11, FLOAT m12, FLOAT m13, 
+        FLOAT m20, FLOAT m21, FLOAT m22, FLOAT m23, 
+        FLOAT m30, FLOAT m31, FLOAt m32, FLOAT m33
+    );
+    XMMATRIX XMMatrixIdentity(); 
+    BOOL XMMatrixIsIdentity(CXMMATRIX a);
+    XMMATRIX XMMatrixMultiply(CXMMATRIX a, CXMMATRIX b); 
+    XMMATRIX XMMatrixTranspose(CXMMATRIX a);
+    XMMATRIX XMMatrixDeterminant(CXMMATRIX a);
+    XMMatrixInverse(XMMATRIX *p, CXMMATRIX a);
+\end{lstlisting}
+
+\section{矩阵变化(Transformation)}
+    在 DirectXMath 这个库中，所有的向量都是行向量。这也就导致所有的变化矩阵都和列向量时的矩阵呈转置关系,下面的笔记仍然按照列向量来标记。针对于点的坐标轴旋转要加上点的坐标偏移量，对于点$\textbf{p} = \textbf{v} + \textbf{o}$：
+
+    \begin{equation*}
+        \begin{pmatrix}
+            \textbf{u}_x & \textbf{u}_y & \textbf{u}_z & \textbf{o}_x \\
+            \textbf{v}_x & \textbf{v}_y & \textbf{v}_z & \textbf{o}_y \\
+            \textbf{w}_x & \textbf{w}_y & \textbf{w}_z & \textbf{o}_z \\
+            0 & 0 & 0 & 1  
+        \end{pmatrix}
+    \end{equation*}\
+    
+    一些在 DirectXMath 中定义的旋转矩阵: 
+\begin{lstlisting}
+    XMMATRIX XMMatrixScaling(FLOAT x, FLOAT y, FLOAT z); 
+    XMMATRIX XMMatrixScalingFromVector(FXMVECTOR v); 
+    XMMATRIX XMMatrixRotationX(FLOAT angleX);
+    XMMATRIX XMMatrixTranslation(FLOAT x, FLOAT y, FLOAT z);
+    XMMATRIX XMMatrixTranslationFromVector(FXMVECTOR v); 
+    XMMATRIX XMVector3Transform(FXMVECTOR v, CXMMATRIX m);  
+\end{lstlisting}
+\newpage 
+
+\section{初始化 DirectX3D}
+    组件对象模型(Component Object Model, COM)表示抽象出来，具有接口的模型。在编程过程中，我们不会对于这个模型进行内部访问，而是向对类一样通过接口进行内部的访问以及删除操作。 
+
+    数据的储存类型有： 
+
+\begin{lstlisting}
+    DXGI_FORMAT_R32G32B32_FLOAT;
+    DXGI_FORMAT_R16G16B16_UNORM;
+    DXGI_FORMAT_R32G32_UINT;
+    DXGI_FORMAT_R8G8B8_UNORM;
+    DXGI_FORMAT_R8G8B8_SNORM;
+    DXGI_FORMAT_R8G8B8_UINT;
+    DXGI_FORMAT_R8G8B8_SINT;
+    
+\end{lstlisting}
+
+    对于每一个像素，都会有一个深度缓存 (depth-buffering) 用来处理隐藏平面。所有的深度缓存会记录当前的深度值(在区间[0, 1]之间)，并记录对应的数据。这实际上被储存为一种材质，有以下的几种类型:
+\begin{lstlisting}
+    DXGI_FORMAT_D32_FLOAT_S8X24_UINT; 
+    DXGI_FORMAT_D32_FLOAT;
+    DXGI_FORMAT_D24_UINT_S8_UINT;
+    DXGI_FORMAT_D16_UNORM ;
+\end{lstlisting} 
+
+    对于每一个材质，一定要转化为资源视图(resource view)才能被硬件在管道中使用。对于材质来说，会有不同的标签(binding flag)来表示可以被用作何种材质，如 shader resource, render target:
+\begin{lstlisting}
+    D3D11_BIND_RENDER_TARGET; 
+    D3D11_BIND_SHADER_RESOURCE; 
+\end{lstlisting}
+
+    材质的反锯齿，在MSAA模式下有一个 DXGI\_SAMPLE\_DESC 的结构需要设定。 其中有两个成员， Count 表示每一个像素会被分为几个子像素，而 Quality 是一个定义最后反锯齿质量的值，有材质本身的存储格式和 Count 决定， 对于 Quality 上限的查询为[0, *pNumQualityLevels - 1]： 
+
+\begin{lstlisting}
+    HRESULT ID3D11Device::CheckMultisampleQualityLevels(
+        DXGI_FORMAT format, 
+        UINT sampleCount, 
+        UINT *pNUmQualityLevels
+    );
+\end{lstlisting}
 \end{document}
