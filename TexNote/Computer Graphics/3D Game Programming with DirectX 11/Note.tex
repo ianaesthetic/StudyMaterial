@@ -14,6 +14,8 @@
 \XeTeXlinebreakskip = 0pt plus 1pt
 \setmainfont{Consolas}
 
+%Cspell: ignore Curr, IDXGIFACTORY
+
 \begin{document}
 \maketitle
 \newpage
@@ -143,4 +145,63 @@ FLOAT XMVectorGetX(FXMVECTOR v);
         UINT *pNUmQualityLevels
     );
 \end{lstlisting}
+    \subsection{计时器 (GameTimer)}
+    Windows 里面的时间是由 Counts 计算的。每一秒内的 count 数目可以由以下得到：
+\begin{lstlisting}
+    __int64 CountsPerSecond; 
+    QueryPerformanceFrequency((LARGE_INTEGER*)CountsPerSecond);
+\end{lstlisting}
+
+    得到当前有 Counts 作为单位的时间:
+\begin{lstlisting}
+    __int64 CurrTime; 
+    QueryPerformanceCounter((LARGE_INTEGER*)CurrTime);
+\end{lstlisting}
+
+\begin{lstlisting}
+    Class GameTimer {
+    public: 
+        GameTimer(); 
+
+        float TotalTime(); //Two situations: paused or not paused
+        float DeltaTime(); 
+
+        void Tick();    // Update every frame
+        void Pause();   // Update when paused
+        void Start();   // Update when restarted
+        void Reset();   // Update when set current time to base time 
+
+    private: 
+        double _SecondPerCounts; 
+        double _DeltaTime;
+
+        __int64 _BaseTime;  //Time recognized to be origin
+        __int64 _CurrTime;  //Time of current frame
+        __int64 _PrevTime;  //Time of previous frame 
+        __int64 _StopTime;  //Time of recent pause
+        __int64 _PauseTime; //Time total length of pause time 
+
+        bool _Stop;       // Whether program is paused
+    };
+\end{lstlisting}
+
+    \subsection{DirectX 基本框架} 
+    所有的流程的基本框架是: 
+        
+        \quad(a) 设定 Feature Level
+
+        \quad(b) 通过 D3D11CreateDevice() 创建 Device(ID3D11Device) 和 Context(ID3D11DeviceContext) 接口
+
+        \quad(c) 通过 CheckMultisampleQualityLevels() 来检查支持的 MSAA QualityLevel 
+
+        \quad(d) 通过 \text{DXGI\_SWAP\_CHAIN\_DESC} 结构来描述 Swap chain
+
+        \quad(e) 使用 IDXGIFACTORY 的成员函数 CreateSwapChain() 来创建DirectX; 注意要先查询 Device 和 Adaptor 来得到它。 
+
+        \quad(e) 将 back buffer 作为 Render Target View; 要先将它用 GetBuffer 取出再设定成RTV 
+
+        \quad(f) 类似的，设定depth buffer 的属性并将其绑到 merger stage上
+
+        \quad(g) 设定 ViewPort
+
 \end{document}
