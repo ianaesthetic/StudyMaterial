@@ -11,6 +11,8 @@
 \XeTeXlinebreaklocale "zh"
 \XeTeXlinebreakskip = 0pt plus 1pt
 
+%Cspell: ignore notin
+
 \begin{document}
     \section{}
         可能性为0的时间不一定时不可能事件，设想：在圆内找随机找到任意一个点的概率都为0，但是不是不可能事件，
@@ -189,6 +191,9 @@
         $$\int_{-\infty}^{\infty}p(t)dt = 1$$
         $$P(x_1 < X \leqslant x_2) = \int_{x_1}^{x_2}p(t)dt$$
         $$P(X = a) = \lim_{h\rightarrow0}\int_{a}^{a + h}p(t)dt = 0$$
+
+        判断一个分布是不是密度函数:
+        $$\int_{-\infty}^{\infty}p(t)dt = 1, \quad p(x) \geqslant 0 \ \text{for } \forall x \in R $$
     \subsection{常用连续型随机变量的分布}
         \subsubsection{均匀分布}
         $$
@@ -200,10 +205,76 @@
         $$
         $$X \sim U(a, b)$$
 
-        均匀分布对应于之前的几何概型。
+        均匀分布中相同长度区间的概率一样，对应于之前的几何概型。  
+        
+        \subsubsection{指数分布}
+        $$
+        p(x) = 
+        \begin{cases}
+            \lambda e^{-\lambda x} & x > 0 \\
+            0 & x \leqslant 0 
+        \end{cases}
+        $$
 
+        $$X \sim EXP(\lambda)$$
+    
+        $\lambda$ 越大，靠近原点的分布就越密集。拥有无记忆性
+        $$\begin{aligned} 
+            P(X > s + t | X > s)
+            &= \frac{P(X > s  t)}{P(X > s)} \\
+            &= \frac{e^{-\lambda(s + t)}}{e ^ {-\lambda s}}\\
+            &= P(x > t) 
+        \end{aligned}
+        $$
+        
+        无记忆性可以理解为：电子元件的寿命在符合指数分布的情况下，以上式子可以解释为在已经工作了$s$小时的情况下，再工作$t$小时的概率和新的电子原件工作$t$小时的概率一样，和已经正常工作的时间无关。几何概型中也类似满足这恶样的无记忆性。
+        
+        \subsubsection{正态分布}
+        $$p(x) = \frac{1}{\sqrt{2\pi}\sigma}e^{-\frac{(x - \mu)^2}{2\sigma^2}},\ x \in R,\ \sigma > 0 $$
+        $$X \sim N(\mu, \sigma^2)$$
+
+        标准正态分布:
+        $$X\sim N(0,1) \quad \varphi(x) = \frac{1}{\sqrt{2\pi}}e^{-\frac{x^2}{2}}$$
+
+        $p(x)$ 关于 $x = \mu$对称, 顶点为 $(\mu, \sqrt{2\pi}\sigma)$; $\mu$ 会导致曲线平移，被陈伟位置参数; $\sigma$ 反映了取值分散性，被称为形状参数。
+        
+        正态分布于标准正态分布之间的关系, 可以将任意的正态分布转化为标准正态分布
+        $$p(x) = \frac{1}{\sigma}\varphi(\frac{x - \mu}{\sigma})$$
+        $$F(x) = \Phi(\frac{x - \mu}{\sigma})$$
+        $$X \sim N(\mu, \sigma^2),\ Y = \frac{X - \mu}{\sigma} \quad \Rightarrow \quad Y \sim N(0, 1)$$
+
+        证明：
+
+        $$\begin{aligned} 
+            F_Y(y)
+            &= P(Y \leqslant y) \\
+            &= P(\frac{X - \mu}{\sigma} \leqslant y) \\
+            &= P(X \leqslant \sigma y + \mu) \\
+            &= F(\sigma y + \mu) \\ 
+            &= \Phi (y)
+        \end{aligned} $$
+        
+        以上可以推出，$X \sim N(\mu, \sigma^2)$：
+
+        $$\begin{aligned} 
+            P(a < X \leqslant b) 
+            &= F(b) - F(a) \\ 
+            &= \Phi(\frac{b - \mu}{\sigma}) - \Phi(\frac{a - \mu}{\sigma})
+        \end{aligned}$$
+
+        标准正态分布的性质:
+        $$\Phi(-x) = 1 - \Phi(x)$$
+        
+        这个时候负值就可由正值得到
+
+        $3\sigma$ 原则
+        $$P(|x - \mu| < \sigma)\ \ = 2\Phi(1) - 1 =  0.6826$$
+        $$P(|x - \mu| < 2\sigma) = 2\Phi(2) - 1 = 0.9546$$
+        $$P(|x - \mu| < 3\sigma) = 2\Phi(3) - 1 = 0.9974$$
+
+        所以我们常常只研究 $(\mu - 3\sigma, \mu + 3\sigma)$ 范围内的概率
 
 \section{作业}
-p63 26,27,28,30
+p63 26,27,28,30 p65 37,39,47
         
 \end{document}
