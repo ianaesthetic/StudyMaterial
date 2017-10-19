@@ -1,5 +1,5 @@
 \documentclass[10pt, a4paper]{article}
-\usepackage{indentfirst, amssymb}
+\usepackage{indentfirst, amssymb,amsmath}
 
 \begin{document}
 1(a).\emph{The stated annual interest rate is 10\% per year. Find the effective annual interest rate when the stated annual rate is with monthly compounding}.
@@ -8,23 +8,26 @@ $$EAR = (1 + \frac{APR}{m})^m - 1 = 10.47\%$$
 1(b). \emph{Consider two growing annuities each with 20 annual payments. The first growing annuity starts a year from today at \$10 and grows at a rate o  f 5\% per year. The second growing annuity starts paying \$C five years from today and payments decline at a rate of 5\% per year. If the effective annual interest rate is 10\% per year, what is the value of C such that you are indifferent between these two growing annuities?}
 
 $$PV_1 = \frac{C_1}{r - g_1}(1 - (\frac{1 + g_1}{1 + r})^{20})$$
-$$PV_2 = (\frac{1}{1 + r})^5\frac{C}{r - g_2}(1 - (\frac{1 + g_2}{1 + r})^{20})$$
-$$C = 30.9$$
+$$PV_2 = (\frac{1}{1 + r})^4\frac{C}{r - g_2}(1 - (\frac{1 + g_2}{1 + r})^{20})$$
+$$C = 28.097$$
 
 1(c).\emph{Suppose the effective annual interest rate is 12\%/year. A security offers the following 36 cash flows: the first 12 cash flows are monthly payments of 
 \$50 each, with the first cash flow starting at 3 years from today; the next 24 cash flows are quarterly payments of \$200 each, with the first one starting at 4 years from today. 
 Compute the present value of these 36 cash flows.}
 
-
-$$PV_1 = (\frac{1}{1 + r}) ^ 3 (\frac{C_1}{r}(1 - (\frac{1}{1 + r})^{\frac{m_1}{12}})$$
-$$PV_2 = (\frac{1}{1 + r}) ^ 4 (\frac{C_2}{r}(1 - (\frac{1}{1 + r})^{\frac{m_2}{4}})$$
-$$PV = PV_1 + PV_2 = 554.351$$
+$$APR_1 = (\sqrt[12]{EAR + 1} - 1) \times 12 $$
+$$APR_2 = (\sqrt[4]{EAR + 1} - 1) \times 4 $$
+$$r_{m1} = APR_1 / 12$$
+$$r_{m2} = APR_2 / 4$$
+$$PV_1 = (\frac{1}{1 + EAR}) ^ 3 (\frac{C_1}{r_{m1}}(1 - (\frac{1}{1 + r_{m1}})^{m_1})$$
+$$PV_2 = (\frac{1}{1 + EAR}) ^ 4 (\frac{C_2}{r_{m2}}(1 - (\frac{1}{1 + r_{m2}})^{m_2})$$
+$$PV = PV_1 + PV_2 = 2584$$
 
 2(a).\emph{What are the payoffs of a portfolio of one share of security A and one share of security B? What is the market price of this portfolio? What expected return will you earn from holding this portfolio}
 
 Payoff: as the combination of this portfolio is risk-free, the payoff is 600
 $$P(A + B) = P(A) + P(B) = 577$$
-$$r = \frac{\rm{payoff}}{P(A + B)} - 1 = 0.398$$
+$$r = \frac{\rm{payoff}}{P(A + B)} - 1 = 3.98\%$$
 
 2(b).\emph{ Suppose security C has a payoff of \$600 when the economy is weak and \$1800 when the economy is strong. The risk-free interest rate is 4\%. What is the no-arbitrage price of security C?}
 $$P(C) = 3P(A) + P(B) = 1039$$

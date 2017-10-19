@@ -126,7 +126,7 @@ FLOAT XMVectorGetX(FXMVECTOR v);
 \begin{lstlisting}
     DXGI_FORMAT_D32_FLOAT_S8X24_UINT; 
     DXGI_FORMAT_D32_FLOAT;
-    DXGI_FORMAT_D24_UINT_S8_UINT;
+    DXGI_FORMAT_D24_UNORM_S8_UINT;
     DXGI_FORMAT_D16_UNORM ;
 \end{lstlisting} 
 
@@ -187,21 +187,71 @@ FLOAT XMVectorGetX(FXMVECTOR v);
 
     \subsection{DirectX 基本框架} 
     所有的流程的基本框架是: 
-        
-        \quad(a) 设定 Feature Level
 
-        \quad(b) 通过 D3D11CreateDevice() 创建 Device(ID3D11Device) 和 Context(ID3D11DeviceContext) 接口
+        \quad(a) 通过 D3D11CreateDevice() 创建 Device(ID3D11Device) 和 Context(ID3D11DeviceContext) 接口
+\begin{lstlisting}
+    DriverType = D3D_DRIVER_TYPE_HARDWARE
+    SDKVersion = D3D11_SDK_VERSION 
+\end{lstlisting}
 
-        \quad(c) 通过 CheckMultisampleQualityLevels() 来检查支持的 MSAA QualityLevel 
+        \quad(b) 通过 CheckMultisampleQualityLevels() 来检查支持的 MSAA QualityLevel。注意 assert(mMsaa4xQualityLevel > 0)
 
-        \quad(d) 通过 \text{DXGI\_SWAP\_CHAIN\_DESC} 结构来描述 Swap chain
+        \quad(c) 通过 \text{DXGI\_SWAP\_CHAIN\_DESC} 结构来描述 mSwapChain
+\begin{lstlisting}
+    BufferDesc.Scaling = DXGI_MODE_SCALING_UNSPECIFIED;
+    BufferDesc.ScanlineOrdering = 
+        DXGI_MODE_SCANLINE_ORDERING_UNSPECIFIED;
+    BufferUsage = DXGI_USAGE_RENDER_TARGET_VIEW;
+    SwapEffect = DXGI_SWAP_EFFECT_DISCARD;
+\end{lstlisting}
 
-        \quad(e) 使用 IDXGIFACTORY 的成员函数 CreateSwapChain() 来创建DirectX; 注意要先查询 Device 和 Adaptor 来得到它。 
+        \quad(d) 使用 IDXGIFACTORY 的成员函数 CreateSwapChain() 来创建 mSwapChain; IDXGIFACTORY 要先用 mDevice->QueryInterface() 得到 IDXGIDevice, 然后再通过成员函数 GetAdapter() 和 GetParent()得到IDXGIFACTORY 
 
-        \quad(e) 将 back buffer 作为 Render Target View; 要先将它用 GetBuffer 取出再设定成RTV 
+        \quad(e) BackBuffer 本质上也是一种Texture, 创建 ID3D11Texture2D* backBuffer, mSwapChain->GetBuffer()得到 backBuffer 然后再用 mDevice-> CreateRenderTargetView() 创建 ID3D11RenderTargetView mRenderTargetView 
 
-        \quad(f) 类似的，设定depth buffer 的属性并将其绑到 merger stage上
+        \quad(f) depthStencilBuffer 也是一种 texture, 与 backBuffer 类似。 与其不同的是对于 depthStencilBuffer,需要设定D3D11\_TEXTURE2D\_DESC。之后类似于之前方法, ID3D11TEXTURE2D* mDepthStencilBuffer 由 mDevice-> CreateTexture2D()得到, 然后通过 mDevice->CreateDepthStencilView() 创建 ID3D11DepthStencilView() 创建 mDepthStencilView; 再将得到的 mRenderTargetView 和 mDepthStencilView 绑到 Output Merger: mDeviceContext-> OMSetRenderTarget()
+\begin{lstlisting}
+    BindFlags = D3D11_BIND_DEPTH_STENCIL;
+    Format = DXGI_FORMAT_D24_UNORM_S8_UINT; 
+    USAGE = D3D11_USAGE_DEFAULT;
+\end{lstlisting}
 
-        \quad(g) 设定 ViewPort
+        \quad(g) 设定 D3D\_VIEWPORT mViewport, 然后再作为一种状态加入 Context: mDeviceContext-> RSSetViewport()
+
+    \subsection{D3DAPP.h 整体框架}
+    与图形部分直接相关的函数有:
+\begin{lstlisting}
+    virtual bool Init(); 
+    virtual void OnResize(); 
+    virtual void UpdateScene(float dt); 
+    virtual void DrawScene(); 
+    int Run();
+\end{lstlisting}
+
+    其中 Run() 函数尤其值得注意:
+\begin{lstlisting}
+    int D3ADPP::Run() {
+        MGS msg; 
+        mTimer.Reset(); 
+
+        While(msg.Message != WM_QUIT) {
+            if(PeekMessage(&smg, 0, 0, 0, PM_REMOVE)) {
+                TranslateMessage(&msg);
+                DisPatchMessage(&msg);
+            }
+            else {
+                if(!mAppPaused) {
+                    Timer.Tick();
+                    UpdateScene(); 
+                    DrawScene();
+                }
+                else {
+                    Sleep(100); 
+                }
+            }
+        }
+        return (int)msg.wParam;
+    }
+\end{lstlisting}
 
 \end{document}

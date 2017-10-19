@@ -1,4 +1,4 @@
-This is XeTeX, Version 3.14159265-2.6-0.99998 (TeX Live 2017/W32TeX) (preloaded format=xelatex 2017.8.23)  17 OCT 2017 14:44
+This is XeTeX, Version 3.14159265-2.6-0.99998 (TeX Live 2017/W32TeX) (preloaded format=xelatex 2017.8.23)  19 OCT 2017 23:48
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -1124,14 +1124,42 @@ Overfull \hbox (22.20374pt too wide) in paragraph at lines 172--174
 [][][][][][][][][][][][][][][][][][][][][][][][][][][] 
  []
 
-[5] (./Note.aux) ) 
+
+Overfull \hbox (19.59186pt too wide) in paragraph at lines 210--211
+\TU/Consolas(1)/m/n/10 backBuffer, mSwapChain->GetBuffer() \TU/MicrosoftYaHei(0
+)/m/n/10 得 到 \TU/Consolas(1)/m/n/10 backBuffer \TU/MicrosoftYaHei(0)/m/n/10 然 后
+ 再 用 \TU/Consolas(1)/m/n/10 mDevice-
+ []
+
+
+Overfull \hbox (3.50406pt too wide) in paragraph at lines 212--213
+\TU/MicrosoftYaHei(0)/m/n/10 与 其 不 同 的 是 对 于 \TU/Consolas(1)/m/n/10 depthStenci
+lBuffer, \TU/MicrosoftYaHei(0)/m/n/10 需 要 设 定 \TU/Consolas(1)/m/n/10 D3D11_TEXT
+URE2D_DESC\TU/MicrosoftYaHei(0)/m/n/10 。|
+ []
+
+
+Overfull \hbox (11.94211pt too wide) in paragraph at lines 212--213
+\TU/MicrosoftYaHei(0)/m/n/10 之 后 类 似 于 之 前 方 法\TU/Consolas(1)/m/n/10 , ID3D11TE
+XTURE2D* mDepthStencilBuffer \TU/MicrosoftYaHei(0)/m/n/10 由 \TU/Consolas(1)/m/n
+/10 mDevice-
+ []
+
+
+Overfull \hbox (15.92627pt too wide) in paragraph at lines 212--213
+\TU/Consolas(1)/m/n/10 > CreateTexture2D() \TU/MicrosoftYaHei(0)/m/n/10 得 到\TU/
+Consolas(1)/m/n/10 , \TU/MicrosoftYaHei(0)/m/n/10 然 后 通 过 \TU/Consolas(1)/m/n/1
+0 mDevice->CreateDepthStencilView()
+ []
+
+[5] [6] (./Note.aux) ) 
 Here is how much of TeX's memory you used:
  19518 strings out of 493005
  379821 string characters out of 6140056
- 446292 words of memory out of 5000000
+ 452292 words of memory out of 5000000
  23366 multiletter control sequences out of 15000+600000
  10232 words of font info for 71 fonts, out of 8000000 for 9000
  1348 hyphenation exceptions out of 8191
  46i,9n,66p,10456b,1501s stack positions out of 5000i,500n,10000p,200000b,80000s
 
-Output written on Note.pdf (5 pages).
+Output written on Note.pdf (6 pages).
