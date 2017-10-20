@@ -381,7 +381,7 @@
         \textbf{Yield Curve}: A graph of the term structure.
 
     \section{Investment Rules}
-        \subsubsection{Capital budgeting}
+        \subsection{Capital budgeting}
             Analysis of potential additions to fixed assets. This is a long-term decision involving large expenditures.
             
             Steps:
@@ -403,7 +403,7 @@
             Mutually exclusive projects: if the cash flows of one can be adversely impacted by the acceptance of the other. 
         \subsection{Investment Rules} 
             \subsubsection{Payback Period rule}
-                Payback period is the number of years required to recover a project's initial cost back. Independent projects will be accepted if the payback period is less than some present limit. For mutually exclusive projects, we choose the one with minimum cost.
+                Payback period is the number of years required to recover a project's initial cost back with a preset time. Independent projects will be accepted if the payback period is less than some present limit. For mutually exclusive projects, we choose the one with minimum cost.
 
                 However, when using payback period rule, we don't take time value into consideration so that is not so accurate. 
             \subsubsection{Discounted Payback period}
@@ -414,6 +414,42 @@
 
                 For independent projects, choose any project that NPV > 0; For mutually exclusive projects, choose the one with highest return. 
             \subsubsection{Internal Rate of Return}
-                IRR is the discount rate that forces PV of inflows equal to cost, and the NPV = 0; 
+                IRR is the discount rate that forces PV of inflows equal to cost, and the NPV = 0; It means that the highest financial cost you can accept to do the project; However, when using IRR, you assume you the discount rate is IRR rather the real interest rate; 
                 $$0 = \sum_{i = 0}^{n}\frac{\text{CF}_t}{(1 + \text{IRR})^t}$$
+
+                For Independent projects: accept a project if IRR > some fixed $\text{IRR}^*$(financial cost); For mutually exclusive projects, choose the one with highest IRR; This is even more important and it's independent of other interest rate; 
+            \subsubsection{Reinvestment rate assumption}
+                NPV assumes we reinvest in $r$  while IRR method assume we reinvest at IRR; There is a little different between NPV and IRR, and NPV is more realistic;
+
+                When NPV and IRR agree: 
+                
+                \quad(a). There is only one cash outflow at time 0 and all other cash flow are positive; 
+
+                \quad(b). Only one is under consideration (not mutually exclusive projects) 
+
+                \quad(c). The opportunity cost of capital is the same for all period 
+
+                NPV directly measures the increase in value to the firm, which is reliable. 
+
+                Problems with IRR: 
+
+                \quad(a). Projects of the loan type; 
+
+                %Cspell: ignore IRRs
+                \quad(b): Multiple IRRs
+                
+                \quad(c):  For mutually exclusive projects with different Scale or different pattern
+
+                \quad(d)" IRR Ignores Term Structures of Interest Rate: the interest rates may change for periods;
+            \subsubsection{Profitability Index(PI)}
+                The ratio of the present value of future cash flows and the initial cost. Accept all projects with PI > 1 and for mutually exclusive projects choose the highest; It's consistent with NPV but disregarding initial cost and focusing on efficiency of projects, which can be used in multiple projects decision. 
+                $$PI = \frac{PV_f}{C_0}$$
+\newpage
+    \section{Capital Budgeting}
+            $$\begin{aligned}
+                \text{Free Cash Flow} &=
+            \text{(Revenues - Costs - Depreciation)} \times (1 - \tau_i) \\
+            &+ \text{Depreciation} - \text{CapEx} - \Delta NWC
+            \end{aligned}$$
+
 \end{document}
