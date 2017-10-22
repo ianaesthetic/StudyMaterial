@@ -14,7 +14,7 @@
 \XeTeXlinebreakskip = 0pt plus 1pt
 \setmainfont{Consolas}
 
-%Cspell: ignore Curr, IDXGIFACTORY
+%Cspell: ignore Curr, IDXGIFACTORY, Scanline , cbuffer, wireframe
 
 \begin{document}
 \maketitle
@@ -218,8 +218,8 @@ FLOAT XMVectorGetX(FXMVECTOR v);
 
         \quad(g) 设定 D3D\_VIEWPORT mViewport, 然后再作为一种状态加入 Context: mDeviceContext-> RSSetViewport()
 
-    \subsection{D3DAPP.h 整体框架}
-    与图形部分直接相关的函数有:
+    \subsection{D3DApp.h 整体框架}
+    与图形部分直接相关的框架函数有:
 \begin{lstlisting}
     virtual bool Init(); 
     virtual void OnResize(); 
@@ -230,7 +230,7 @@ FLOAT XMVectorGetX(FXMVECTOR v);
 
     其中 Run() 函数尤其值得注意:
 \begin{lstlisting}
-    int D3ADPP::Run() {
+    int D3App::Run() {
         MGS msg; 
         mTimer.Reset(); 
 
@@ -252,6 +252,54 @@ FLOAT XMVectorGetX(FXMVECTOR v);
         }
         return (int)msg.wParam;
     }
+\end{lstlisting}
+
+\section{Some BackGround Knowledge}
+    nothing new to say 
+
+\newpage
+
+\section{Direct3D 初步}
+    \subsection{Vertex 读入} 
+    顶点读入数据元素格式的设定：所有的顶点的信息是由结构体存储的，所以需要指定每一个元素的读入规则来对应到之后的shader / effect 文件的读入。 读入的格式由一个 D3D11\_INPUT\_ELEMENT\_DESC 数组来制定。 这之后再用 ID3D11Device::CreateInputLayout() 来创建。其中为了让 shader 中的读入和 结构体中的名字对应， 要用 effect 中的 technique 的有关读入的 pass 的 passDesc 来作为参数。
+
+\begin{lstlisting}
+    mTech-> GetPassByIndex(0)-> GetDesc(&passDesc);
+    passDesc.pIAInputSignature; 
+    passDesc.IAInputSignatureSize;
+\end{lstlisting}
+
+    顶点数据缓冲区的设定：所有的顶点数据将会先储存在缓冲区 (buffer) 中。所以缓冲区要先用 D3D11\_BUFFER\_DESC 来描述, 然后再用 D3D11\_SUB RESOURCE\_DATA 来指定缓冲区的数据来源，然后再用ID3D11DEVICE::Create Buffer()来创造。根据之前对于 Vertex 机构体读入的 input slot 的描述通过 ID3D11DeviceContext::IASetVertexBuffers()来绑定缓冲区和 Input slot
+
+    Indices 设定: Indices 用于描述 triangle mesh , 由UINT数组直接描述。相类似的，它也是由 D3D11\_BUFFER\_DESC 来描述的，同时由 D3D11\_SUBRESOURCE\_DATA 来制定缓冲数据，再由 ID3D11DeviceContext:: IASetIndexBuffers() 来制定。
+
+    \subsection{Shader \& Effect}
+    Shader 中的常量数据制定在 cbuffer 之中。
+
+    Render States 可以由 D3D11 中已经设置好的变量来更改。 在这里引入 Rasterizer State; 它首先是由 D3D11\_RASTERIZER\_DESC 描述，然后由 ID3D11Device::CreateRasterizerState() 来得到 ID3D11RasterizerState*; 通过 ID3D11DeviceContext::RSSetState() 来改变状态自动机。 同时也可以写在 effect 文件当中类似于:
+\begin{lstlisting}
+RasterizerState WireframeRs {
+    FillMode = Wireframe;
+    CullMode = Back; 
+    FontCounterClockwise = false;
+}
+
+pass p0 {
+    ...
+    SetRasterizerState(WireframeRs);
+}
+\end{lstlisting}
+
+    在开源到的 effect.lib 中，C++ 程序使用 D3DX11CompileEffectFromFile() 来编译 effect 文件。在这个函数中，原本的 pFunction, pProfile, pPump, pHResult 都被弃用了。 然后可以使用DX11CreateEffectFromMemory()函数来创造effect接口(e.g mFX) 通过这个接口，我们可以访问shader中定义的内部结构：
+\begin{lstlisting}
+    ID3DX11EffectMatrixVariable* fxWVPVar; 
+    fxWVPVar = mfx-> GetVariableByName("gWVP")-> AsMatrix();
+    fxWVPVar-> SetMatrix((float)* &M);
+\end{lstlisting}
+
+    ID3DX11EffectVectorVariable 指 4D, 而 ID3DX11EffectVariable 指 3D 数组。 通过 ID3DX11Effect::GetTechniqueByName 可以获得technique; 使用 effect 文件来画的方式为： 
+\begin{lstlisting}
+    D3DX11_TECHI
 \end{lstlisting}
 
 \end{document}
