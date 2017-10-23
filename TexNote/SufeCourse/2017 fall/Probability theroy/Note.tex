@@ -273,8 +273,23 @@
         $$P(|x - \mu| < 3\sigma) = 2\Phi(3) - 1 = 0.9974$$
 
         所以我们常常只研究 $(\mu - 3\sigma, \mu + 3\sigma)$ 范围内的概率
+    \subsection{随机变量函数的分布}
+    $$P(X = x_k) = p_k, \quad Y = f(X)$$
+   
+    Y一定是一个离散型随机变量，确定y的取值然后的带等价的随机变量分布。
+        $$P(Y = y_j) = P(f(X) = y_j, X \in D)$$
+    
+    计算的时候应该先算更加简单的分布; 连续型随机变量可能会映射为离散型随机变量。连续型随机变量要先算出Y的分布函数，然后再算出概率密度函数。
+
+    当$Y = f(X)$ 可以求出反函数的$X = h(Y)$，则可以先求出密度函数：
+
+    $$p_Y(y) = p_x(h(y)) \cdot |h^{'}(y)|$$
+    
+    其中$y \in (\alpha, \beta), \quad \alpha = \text{min}(f(-\infty), f(+\infty)), \quad \beta = \text{max}(f(-\infty), f(+\infty))$
+
+    $$X \sim N(\mu, \sigma^2), \quad Y = aX + b \Rightarrow Y \sim N(a\mu + b, a^2\sigma^2)$$
 
 \section{作业}
-p63 26,27,28,30 p65 37,39,47
+p65, 49, 50, 55
         
 \end{document}
