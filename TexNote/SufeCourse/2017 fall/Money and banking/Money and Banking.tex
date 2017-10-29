@@ -222,11 +222,11 @@
 \section{Money}
     \emph{Money}:anything that is generally accepted in payment for goods or services or in the repayment of debts
     
-    Currency: cash; consisting of dollar bills and coins and is one of type of money.
+   \emph{Currency}: cash; consisting of dollar bills and coins and is one of type of money.
     
-    Wealth: the total collection of pieces of property that serve to store value. Wealth includes non-monetary part and monetary part which includes money.
+    \emph{Wealth}: the total collection of pieces of property that serve to store value. Wealth includes non-monetary part and monetary part which includes money.
     
-    Income: flow of earnings per unit of time; money belongs to the concept of stocks
+    \emph{Income}: flow of earnings per unit of time; money belongs to the concept of stocks
 
     \subsection{Functions of money}
         Medium of Exchange: pays for goods and service with transaction; Without medium, barter economy will appear and bring high transaction costs(double coincidence of wants); So the money is a lubricant; 
@@ -240,7 +240,7 @@
         Criteria of money: Standardized, Accepted, Divisible, Easy to carry, Not Deteriorate quickly
 
     \subsection{Evolution of Payments System}
-        \subsection{Commodity Money}
+        \subsubsection{Commodity Money}
             An object that clearly has value to everyone is a likely candidate to serve aas money, and a natural choice is a precious metal such as gold or silver. 
 
             Precious metals' Advantage: quality uniform; easy to shape; easy to divide; durable 
@@ -254,10 +254,78 @@
 
             E-money: Debit card(no overdrawing); Credit card(allow overdrawing with overdraw line); stored-value card/z-purse (allow offline as data is in the chip);e-cash; 
     \subsection{Measuring Money}
-        $\text{M}_0$: cash / currency; 
+        In America: 
+
+        \quad $\text{M}_0$: cash / currency; 
         
-        $\text{M}_1$: $\text{M}_0$ + Traveler's check + demand deposits + other checkable deposits (USA); They are real-purchasing power that they can directly pay for goods and services; Narrow money; 
+        \quad $\text{M}_1$: $\text{M}_0$ + Traveler's check + demand deposits + other checkable deposits (USA); They are real-purchasing power that they can directly pay for goods and services; Narrow money; 
         
-        $\text{M}_2$: $\text{M}_1$ + quasi-money (small-denomination time deposits + savings deposits and money market deposit accounts + money market mutual fund shares);
+        \quad $\text{M}_2$: $\text{M}_1$ + quasi-money (small-denomination time deposits + savings deposits and money market deposit accounts + money market mutual fund shares); They can't be used directly to pay for goods;
+
+        In China: the deposits in China is especially for individuals
+
+        \quad $\text{M}_0$: cash in circulation;
+        
+        \quad $\text{M}_1$: $\text{M}_0$ + demand deposits of \emph{enterprises}; Individual demand deposits are excluded as China doesn't allow check for individuals.
+
+        \quad $\text{M}_2$: $\text{M}_1$ + time deposits of enterprises + saving deposits + other deposits
+
+\section{Interest Rate}
+    \subsection{Measuring Interest Rates}: 
+        The proportion of a sum of money that is paid over a specified period of time: simple interest and compound interest
+
+        $$I_S = P \times i \times n,\quad  S_S = P \times (1 + ni)$$
+        $$I_C = S_C - P,\quad S_C = P(1 + i)^n$$
+
+        Discounting the future: 
+        $$PV = \frac{FV}{(1 + r)^n}$$
+
+        Annuity: ordinary annuity, annuity due, differed annuity and perpetual annuity 
+
+        \subsubsection{Four types of Credit Market Instrument} 
+
+        \quad Simple Loan:  Lender will repay $P + I$ in the maturity date; Example on money market short-term instruments
+
+        \quad Fixed Payment Loan(fully amortized loan): Lender will repay same amount in periods, which is actually the form of annuity. The start of repayments contain mainly interest and the end of repayments contain mainly principal. e.g. mortgage
+
+        \quad Coupon Bond: : Lender will repay same amount of interest in periods, and will finally pay out interest and principal the tha last period; This is used in capital market instruments;
+
+        \quad Discount Bond(Zero-Coupon Bound) : Borrower will lend at $(P - I)$ and get paid of $P$  
+
+        \subsubsection{How to calculate interest rate}
+
+            Theses are abstracted annual interests.
+
+            Yield to  Maturity: the interest rate that equates the present value of cash flow payments received from a debt instrument with its value today. This is the same concept with IRR; When coupon bond is sold at par, the real interest rate is equal to coupon bond no matter what the term is as every year the lender pay out all the interest without any principal. The interest rate is negatively related to current price of the bound; The lower of actual price you buy the coupon bond, the more yield to maturity.  
+
+            $$P = \sum_{t = 1}^{n}\frac{CF_t}{(1 + i)^t}$$
+
+            For discount bond: 
+
+            $$i = \frac{F - P}{P}$$
+
+            current Yield (for coupon bound):
+
+            $$i = \frac{C}{P}$$
+
+            For coupon bound is not sold on face price:
+
+            $$YTM =  \frac{c + \frac{P_s - P_b}{\text{year}}}{P_b} = i_c + \frac{P_s - P_b}{\text{year}\times P_b}$$
+
+            Discount yield (for discount bound):
+            $$i = \frac{F - P}{F} \times \frac{360}{\text{days to maturity}}$$
+
+            $\frac{1}{F}$ will understate the interest rate; $\frac{1}{\text{days}}$ is to evaluate the per day interest; So for annual interest rate as 360 < 365 this will also understate the interest rate. 
+
+            Consol or perpetuity: it's a perpetual bond with no maturity date and no repayment of principal that makes fixed coupon payments of C forever.
+        
+        \subsection{Rate of return} 
+        The payments to the owner plus the change in value expressed as a fraction of the purchase price. 
+
+        $$\text{Ret} = \frac{C}{P_t}(\text{current yield}) + \frac{P_{t + 1} - P_t}{P_t \cdot \text{year}}(\text{rate of capital gain})$$
+
+        $P_{t+1}$ is the present value of future cash flow bought by this bond.
+        
+        The return on a bond is equal to the yield to maturity in the circumstances of one-year coupon bond. Bonds whose term to maturity is longer than the holding period are subject to interest-rate risk, as market interest-rate increases will lead to loss in return; The more distant a bond's maturity, the lower the rate of return that occurs as a result of an increase in the interest rate. Even if a bond has a substantial initial interest rate, its return can bee negative if market interest rates rise. There is no interest-rate risk for any bond whose time to maturity matches the holding period;
 
 \end{document}

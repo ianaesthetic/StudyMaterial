@@ -69,18 +69,18 @@
     \section{Review of Financial Statement Analysis}
         \subsection{Balance Sheet}
             \textbf{Definition}: a snapshot of the firm's asset and liabilities at a given point of time, indicating all operations during the time point. 
-            $$Assets = Liability + Stockholder's\ Equity$$
+            $$\text{Assets} = \text{Liability + Stockholder's\ Equity}$$
 
             Assets are listed in order to liquidity(Current asset > Fixed Asset[Tangible and Intangible]). Liquidity stands for ease of cash conversion without significant loss.
 
             Current asset includes \emph{Cash and equivalents}, \emph{Accounts receivable}, \emph{Inventories}. Fixed asset includes \emph{Property, plant and equipment(PPE)}, \emph{Less accumulated depreciation}, Intangible assets and other. Amotization;
             \begin{align*}
-                Total\ Current\ Assets &= Cash\ and\ Equivalents\\
-                                       &+ Accounts\ Receivable\\
-                                       &+ Inventories  
+                \text{Total\ Current\ Asset}s &= \text{Cash\ and\ Equivalents}\\
+                                       &+ \text{Accounts\ Receivable}\\
+                                       &+ \text{Inventories}  
             \end{align*}
             \begin{align*}
-                Total\ Fixed\ Assets &= Net Property,\ Plant,\ equipment\ (PPE) \\
+                \text{Total\ Fixed\ Assets} &= \text{Net Property,\ Plant,\ equipment\ (PPE)} \\
                                      &+ Intangible\ Assets\ and\ Other        
             \end{align*}
             $$Net\ PPE = PPE - Less\ Accumulated\ Depreciation$$
@@ -440,16 +440,66 @@
                 
                 \quad(c):  For mutually exclusive projects with different Scale or different pattern
 
-                \quad(d)" IRR Ignores Term Structures of Interest Rate: the interest rates may change for periods;
+                \quad(d): IRR Ignores Term Structures of Interest Rate: the interest rates may change for periods;
             \subsubsection{Profitability Index(PI)}
                 The ratio of the present value of future cash flows and the initial cost. Accept all projects with PI > 1 and for mutually exclusive projects choose the highest; It's consistent with NPV but disregarding initial cost and focusing on efficiency of projects, which can be used in multiple projects decision. 
                 $$PI = \frac{PV_f}{C_0}$$
 \newpage
     \section{Capital Budgeting}
-            $$\begin{aligned}
+    $$\begin{aligned}
+        \text{EBIT} &= \text{unLevered netIncome} * (1 - \tau) \\
+            &= (\text{Revenue - Costs - Depreciation}) * (1 - \tau)
+    \end{aligned}$$
+
+    $$\begin{aligned}
                 \text{Free Cash Flow} &=
             \text{(Revenues - Costs - Depreciation)} \times (1 - \tau_i) \\
             &+ \text{Depreciation} - \text{CapEx} - \Delta NWC
             \end{aligned}$$
+    
+    $$c_t = (1 - \tau)(\text{Operating profit})_t + \tau \text{DPR}_r - \text{CAPX}_t - \Delta WC_t$$
+
+    We don't take financing into consideration;
+
+    General rules: 
+
+    \quad(a). Use cash flows rather than accounting earnings: you may not collect the money back of a contract; 
+    
+    \quad(b). Use incremental cash flow: Only use cash flows attributable to the project; DO NOT USE SUNK COSTS!; Remember Externality and opportunity cost; Sunk costs include all costs before $t_0$. 
+
+    Externality: Indirect effects of the project that may affect the profits of other business activity of the firm. \emph{Cannibalization} is when sales of a new product displaces sales of an existing product, which will influence both revenue and cost.
+    
+    %Cspell:ignore MACRS,CAPEX
+
+    \subsection{Some adjustment}
+
+    Further  adjustment: Modified accelerated cost recovery system depreciation (MACRS depreciation). This assumes the depreciation starts from year 0, which is not the same with common depreciation. This will affect tax shield.
+    \medskip
+    
+    Liquidation or Salvage Value:
+
+    $$\text{Capital Gain} = \text{Sale Price} - \text{Book Value}$$
+    $$\text{Book Value} = \text{Purchase Price} - \text{Accumulated Depreciation}$$
+    $$\text{After-Tax Cash Flow Form Asset Sale(CAPEX)} = \text{Sale Price} - (\tau_t \times \text{Capital Gain})$$
+
+    The use of old equipment will have an opportunity cost equaling after-tax cash flow from asset sale as you can sell it. The purchase of new equipment will be exactly the price you buy it; 
+
+    \medskip
+
+    Terminal or Continuation Value: This amount represents the market value of the free cash flow from the project at all future dates. 
+
+    %Cspell: ignore carryforward, carrybacks
+
+    Tax Carryforward: Tax loss carryforward  amd carrybacks allow Corporation to take losses during its current year and offset them against gains in nearby years. 
+
+    \subsection{Evaluating NPV estimates} 
+        Forecasting risk -- how sensitive is our NPV to changes in the cash flow estimates, the more sensitive, the greater the forecasting risk. 
+
+        Source of Value: what factors NPV depend on
+
+        \subsubsection{Sensitivity Analysis} 
+            Sensitivity analysis examines how sensitive a particular NPV calculation is to changes in the underlying assumption. We set one factors to different situations with other factors stay the constant; after that we can find which parameter is more important. 3r
+
+            Scenario Analysis: As factors can be interrelated, so we created a series of scenarios with different assumptions to estimate the risk. 
 
 \end{document}

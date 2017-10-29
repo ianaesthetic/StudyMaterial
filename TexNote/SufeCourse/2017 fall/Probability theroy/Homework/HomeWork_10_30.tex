@@ -1,0 +1,117 @@
+\documentclass[10pt, a4paper,twocolumn]{article}
+    \author{ianaesthetic}
+    \title{3d Game Programming with DirectX 11}
+\usepackage{indentfirst, amsmath, fontspec, listings, xcolor, amssymb}
+%\usepackage{verbatim}
+
+\usepackage{xeCJK}
+\setCJKmainfont{Microsoft YaHei}
+
+\newfontfamily\consolas{Consolas}
+\lstset{numberstyle = \small\consolas, basicstyle=\small\consolas}
+
+\XeTeXlinebreaklocale "zh"
+\XeTeXlinebreakskip = 0pt plus 1pt
+
+\begin{document}
+    胡博闻 2016121518 
+    \medskip 
+
+    49. 
+    $$
+        P(2X + 1 = k) = 
+        \begin{cases}
+            0.1, & k = -1 \\
+            0.2, & k = 1 \\
+            0.3, & k = 3 \\
+            0.4, & k = 5
+        \end{cases}
+    $$
+
+    $$
+        p(X^2 = k) = 
+        \begin{cases}
+            0.2, & k = 0 \\ 
+            0.4, & k = 1 \\
+            0.4, & k = 4 
+        \end{cases}
+    $$
+
+    50.
+    $$F(x) = 
+        \begin{cases}
+            0 & x \leqslant 0 \\
+        1 - e^{-x}  & x > 0
+        \end{cases}
+    $$
+
+    $$
+        \begin{aligned}
+            G(y)
+            &= P(Y \leqslant y) \\
+            &= P(X^2 \leqslant y) \\
+            &= P(X \leqslant \sqrt{y}) \\
+            &= F(\sqrt{y})  
+        \end{aligned}
+    $$
+
+    $$
+        G(y) = 
+        \begin{cases}
+            0 & y \leqslant 0 \\ 
+            1 - e^{-\sqrt{y}} & y > 0 
+        \end{cases}
+    $$
+
+    $$
+        P(Y) = 
+        \begin{cases}
+            \frac{\sqrt{y}e^{-\sqrt{y}}}{2y} & y >  0 \\
+            0 & y \leqslant 0 
+        \end{cases}
+    $$
+
+    55. 
+    $$
+        p(x) = 
+        \begin{cases}
+            \frac{1}{2\pi} & x \in [0, 2\pi] \\
+            0 & x \notin  [0, 2\pi]
+        \end{cases}
+    $$
+
+    $$
+        F(x) = 
+        \begin{cases}
+            0 & x \in (-\infty, 0) \\
+            \frac{x}{2\pi} & x \in [0, 2\pi] \\
+            1 & x \in (2, +\infty)
+        \end{cases}
+    $$
+
+    $$
+        \begin{aligned}
+            G(y) &= P(Y \leqslant y) \\
+                &= P(cosX \leqslant y) \\ 
+                &= P(\text{arccos}y \leqslant X \leqslant 2\pi - \text{arccos}y)
+        \end{aligned}
+    $$
+
+    $$
+        G(y) = 
+        \begin{cases}
+            0 & y \in (-\infty, -1) \\
+            1 - \frac{\text{arccos}y}{\pi} & y \in [-1, 1] \\ 
+            1 & y \in (1, +\infty)
+        \end{cases}
+    $$
+
+    $$
+        p(y) = 
+        \begin{cases}
+            \frac{1}{\pi\sqrt{1 - y^2}} & y \in [-1, 1] \\
+            0 & y \notin [-1, 1]
+        \end{cases}
+    $$
+
+\end{document}

@@ -1,4 +1,4 @@
-This is XeTeX, Version 3.14159265-2.6-0.99998 (TeX Live 2017/W32TeX) (preloaded format=xelatex 2017.9.18)  18 OCT 2017 20:33
+This is XeTeX, Version 3.14159265-2.6-0.99998 (TeX Live 2017/W32TeX) (preloaded format=xelatex 2017.9.18)  25 OCT 2017 20:30
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -575,13 +575,13 @@ Overfull \hbox (5.53001pt too wide) in paragraph at lines 210--211
 xchange; 
  []
 
-[6]
-Overfull \hbox (0.14001pt too wide) in paragraph at lines 261--262
-\TU/lmr/m/n/10 posits and money market deposit accounts + money market mutual f
-und shares); 
+[6] [7]
+Overfull \hbox (2.65501pt too wide) in paragraph at lines 289--290
+[] \TU/lmr/m/n/10 Fixed Payment Loan(fully amortized loan): Lender will repay s
+ame amount
  []
 
-[7] [8] (./Money and Banking.aux) ) 
+[8] [9] (./Money and Banking.aux) ) 
 Here is how much of TeX's memory you used:
  11736 strings out of 493005
  245822 string characters out of 6137956
@@ -591,4 +591,4 @@ Here is how much of TeX's memory you used:
  1348 hyphenation exceptions out of 8191
  35i,6n,58p,10454b,233s stack positions out of 5000i,500n,10000p,200000b,80000s
 
-Output written on Money and Banking.pdf (8 pages).
+Output written on Money and Banking.pdf (9 pages).

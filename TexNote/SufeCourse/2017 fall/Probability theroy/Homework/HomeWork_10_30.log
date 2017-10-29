@@ -1,13 +1,13 @@
-This is XeTeX, Version 3.14159265-2.6-0.99998 (TeX Live 2017/W32TeX) (preloaded format=xelatex 2017.9.18)  26 OCT 2017 13:05
+This is XeTeX, Version 3.14159265-2.6-0.99998 (TeX Live 2017/W32TeX) (preloaded format=xelatex 2017.9.18)  26 OCT 2017 13:36
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
  %&-line parsing enabled.
 **"c:/Users/ianaesthetic/Desktop/hbw/StudyMaterial/TexNote/SufeCourse/2017 fall
-/Probability theroy/Homework/HomeWork_10_23.tex"
+/Probability theroy/Homework/HomeWork_10_30.tex"
 
 (c:/Users/ianaesthetic/Desktop/hbw/StudyMaterial/TexNote/SufeCourse/2017 fall/P
-robability theroy/Homework/HomeWork_10_23.tex
+robability theroy/Homework/HomeWork_10_30.tex
 LaTeX2e <2017-04-15>
 Babel <3.10> and hyphenation patterns for 84 language(s) loaded.
 (c:/texlive/2017/texmf-dist/tex/latex/base/article.cls
@@ -997,8 +997,8 @@ Package: xeCJK-listings 2017/05/15 v3.4.8 xeCJK patch file for listings
 \l__xeCJK_listings_max_char_int=\count166
 \l__xeCJK_listings_flag_int=\count167
 )
-(./HomeWork_10_23.aux)
-\openout1 = `HomeWork_10_23.aux'.
+(./HomeWork_10_30.aux)
+\openout1 = `HomeWork_10_30.aux'.
 
 LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 16.
 LaTeX Font Info:    ... okay on input line 16.
@@ -1087,26 +1087,18 @@ LaTeX Font Info:    Try loading font information for U+msb on input line 21.
 
 (c:/texlive/2017/texmf-dist/tex/latex/amsfonts/umsb.fd
 File: umsb.fd 2013/01/14 v3.01 AMS symbols B
-)
-Overfull \hbox (18.28474pt too wide) detected at line 68
-[][]
- []
+) [1
 
 
-Overfull \hbox (68.61502pt too wide) detected at line 88
-[][]
- []
-
-[1
-
-] (./HomeWork_10_23.aux) ) 
+]
+(./HomeWork_10_30.aux) ) 
 Here is how much of TeX's memory you used:
  19406 strings out of 493005
  376081 string characters out of 6137956
- 429072 words of memory out of 5000000
+ 432072 words of memory out of 5000000
  23281 multiletter control sequences out of 15000+600000
  5459 words of font info for 37 fonts, out of 8000000 for 9000
  1348 hyphenation exceptions out of 8191
- 46i,8n,62p,10461b,241s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 46i,13n,62p,10461b,241s stack positions out of 5000i,500n,10000p,200000b,80000s
 
-Output written on HomeWork_10_23.pdf (1 page).
+Output written on HomeWork_10_30.pdf (1 page).
