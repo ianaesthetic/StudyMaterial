@@ -294,7 +294,44 @@
         判别一个函数是不是分布函数：单调不减，$F(-\infty) = 0, F(+\infty) = 0$, 右连续，
 
         习题集：p52, 6,26,27, 3, 12, 16, 27,28,31, 8, 27;
+\newpage
 
+\section{随机向量及其分布}
+    \subsection{随机向量}
+        \subsubsection{二维随机向量}
+            设随机试验$E$的样本空间为$\Omega = \{\omega\}$, 若对于一个$\omega$,都有确定两个单值实$X(\omega), Y(\omega)$函数与之对应，称$(X(\omega), Y(\omega))$ 为二维随机向量，记为 $(X, Y)$
+
+        \subsubsection{联合分布函数}
+            对于二维随机向量$(X, Y)$, 则二元函数
+            $$F(x, y) = P(X \leqslant x, Y \leqslant y), \quad (x, y) \in R^2$$
+        
+            为$(X, Y)$的联合分布函数。
+            $$P(x_1 < X \leqslant x_2, y_1 < Y \leqslant y_2) = F(x_2, y_2) - F(x_1, y_2) - F(x_2, y_1) + F(x_1, y_1)$$
+
+            逆事件概率:
+            $$1 - F(X, Y) = P(X > x) + P(Y > y) - P(X > x, Y > y)$$
+            $$F(-\infty, x) = F(y, -\infty) = F(-\infty, -\infty) = 0$$
+            $$F(+\infty, +\infty) = 1$$
+
+            $$x_1 < x_2 \Rightarrow F(x_1, y) \leqslant F(x_2, y)$$
+            $$y_1 < y_2 \Rightarrow F(x, y_1) \leqslant F(x, y_2)$$
+
+            $$\lim_{\varepsilon \rightarrow 0^+}F(x + \varepsilon, y) = F(x, y)$$
+            $$\lim_{\varepsilon \rightarrow 0^+}F(x, y + \varepsilon) = F(x, y)$$
+            $$x_1\leqslant x_2, y_1 \leqslant y_2, \quad F(x_2, y_2) - F(x_1, y_2) - F(x_2, y_1) + F(x_1, y_1) \geqslant 0$$
+        
+        \subsubsection{边际分布}
+            对于联合分布函数$F(x, y)$, $F_X(x), F_Y(y)$称为边际分布 
+                $$F_X(x) = F(x, +\infty),\quad F_Y(y) = F(+\infty, y)$$
+        \subsubsection{二维离散型随机向量}
+            $$p_{ij} = P(X = x_i, Y = y_j)$$
+            
+            称为随机向量的联合分布律
+            $$p_{ij} > 0,\quad\sum_{i = 1}^{\infty}\sum_{j = 1}^{\infty}p_{ij} = 1$$
+            $$P(X = x_i) = p_{i^{.}} = \sum_{j}^{+\infty}p_{ij}$$
+            $$P(y = y_j) = p_{^{.}j} = \sum_{i}^{+\infty}p_{ij}$$
+
+            \newpage 
 \section{作业}
 p65, 42, 44, 48, 54
         
