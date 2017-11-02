@@ -288,9 +288,11 @@
 
         \quad Fixed Payment Loan(fully amortized loan): Lender will repay same amount in periods, which is actually the form of annuity. The start of repayments contain mainly interest and the end of repayments contain mainly principal. e.g. mortgage
 
-        \quad Coupon Bond: : Lender will repay same amount of interest in periods, and will finally pay out interest and principal the tha last period; This is used in capital market instruments;
+        \quad Coupon Bond: : Lender will repay same amount of interest in periods, and will finally pay out interest and principal in the last period; This is used in capital market instruments;
 
         \quad Discount Bond(Zero-Coupon Bound) : Borrower will lend at $(P - I)$ and get paid of $P$  
+
+        note: For mortgage, you can either repay in fixed payment per month or fixed principal with varying interest. The latter one will pay less interest as the amount of principal decreases quickly, while faced more pressure at the starting period
 
         \subsubsection{How to calculate interest rate}
 
@@ -304,7 +306,9 @@
 
             $$i = \frac{F - P}{P}$$
 
-            current Yield (for coupon bound):
+            \medskip
+            
+            current Yield (an approximation for coupon bound):
 
             $$i = \frac{C}{P}$$
 
@@ -327,5 +331,95 @@
         $P_{t+1}$ is the present value of future cash flow bought by this bond.
         
         The return on a bond is equal to the yield to maturity in the circumstances of one-year coupon bond. Bonds whose term to maturity is longer than the holding period are subject to interest-rate risk, as market interest-rate increases will lead to loss in return; The more distant a bond's maturity, the lower the rate of return that occurs as a result of an increase in the interest rate. Even if a bond has a substantial initial interest rate, its return can bee negative if market interest rates rise. There is no interest-rate risk for any bond whose time to maturity matches the holding period;
+        
 
+        \subsection{Real interest rate and Nominal Interest rate}
+        $$i_r = i_n - \pi^e$$
+
+\section{Behavior of interest  rate}
+    Factors of Determining the Quantity Demanded of an Asset:
+        
+    Wealth(+); Expected Return(+)(deposit; equity; bond); Risk(-); Liquidity(+); 
+
+    \subsection{Theory of Asset Demand}
+        $i$ is determined by Supply and Demand for Bonds. 
+
+        Demand side: as the price goes down, the more demand from investors to buy the bonds. Factors: Wealth(+), Expected return in a future term (-), Expected inflation(-), risk(-), liquidity(+);  
+
+        Supply side: as the price goes up, the more supply from issuers to sell the bonds. Factors: Profitability of investments(+), Expected inflation(+), Government deficit(+)
+
+        The equilibrium of the demand and supply will define a interest rate. Fisher effect means the changes in $\pi^e$($\uparrow$) at $i_n$($\uparrow$). 
+
+    %Cspell: ignore dishoarding, medskip
+
+    \subsection{Loanable Funds theory}
+        $$L^s = S + \Delta M + DH(\text{dishoarding})$$
+        $$L^d = I + H(\text{hoarding})$$
+
+        market equilibrium : 
+
+        $$S + \Delta M = I + \Delta H$$
+
+        The relationship wih theory of asset demand: the demand for bonds is the supply for loanable funds, and the supply for bonds is the demand for loanable fonds;
+
+    \subsection{The Liquidity Preference Framework}
+        $$W = B + M\quad \Rightarrow \quad B^S + M^s = B^d + M^d\quad \Rightarrow \quad M^s - M^d = B^d - M^s$$
+
+        So we analysis money market; $i$ is negatively related to $M^d$: 
+        $$i\uparrow\quad \Rightarrow \quad B^d \quad \Rightarrow \quad M^d\downarrow $$
+
+        $i$ determines the balance between the bond and money as wealth is fixed. In this theory, the $M^s$ is constant as it's a external factor. Now we can find the equilibrium in money market. Factors: $B^s$(-), Income(+), Price level(+) (maintain purchasing power) 
+        
+        More specifically, the impacts of money supply are following.
+        
+        \quad Liquidity effect: $M^s \uparrow$, $i\downarrow$
+        
+        \quad Income effect: $M^s \uparrow$, Income$\uparrow$, $M^d\uparrow$, $i\uparrow$
+
+        \quad Price level effect: $M^s \uparrow$, Price Level$\uparrow$, $i\uparrow$
+
+        \quad Expected inflation effect: $M^s \uparrow$, Fisher effect, $i\uparrow$
+
+\section{The risk and Term Structure of Interest Rate} 
+\subsection{Risk structure of Interest Rates}
+$$i = RR + IP + (DRP + LP) + MRP$$
+
+\begin{center}
+    $RR$: risk free rate 
+    
+    $IP$:  Inflation premium
+    
+    $DRP$: Default risk premium
+
+    $LP$: Liquidity premium
+
+    $MRP$: Maturity 
+\end{center}
+
+    Default risk: occurs when the issuer of the bond is unable or unwilling to make interest payment or pay off the face value; 
+
+    Default-free bonds: Bonds with on default risk; U.S. TBs are considered default-free 
+
+    \medskip
+    
+    Risk premium: the spread between the interest rates on bonds with default risk and the interest rates on TBs. (People are willing to choose TB when they share same $i$). The risk will be indicated by agencies: Over BBB(Baa): Investment grade; Below BBB(Baa): Speculative grade;   
+
+    Liquidity premium: the ease with which asset cam be converted into cash. Similar to risk premium ass people willing to buy TB as it has high liquidity, this will create spread;
+    
+    Municipal bond is a special case as it has a higher bond but has a lower $i$. This is because there is no tax on it, which will bring extra interest compered to taxed bond.  
+    \medskip
+\subsection{MRP and Yield Curve}
+    Yield curve: a plot of the yield on specific bonds with differing terms to maturity  but the same risk, liquidity  and tax consideration for specific date. It's normal to have upward slope with same tendency. When short-term interest rate is too high, the yield curve may inverse and have downward slope. There are some explanations here. 
+
+    \subsubsection{Expectations Theory}
+        The interest rate on a long-term bond will equal an average of the short-term interest rates that people expect to occur over the life of the long-term bond. There is an assumption that types of bonds are substitution free. Prove with two year: 
+
+        $$(1 + R)^2 = (1 + r)(1 + r^e)$$
+        $$R^2 + 2R = rr^e + r^e + r$$
+        $$R^2, rr^e \approx 0$$
+        $$R = \frac{r + r^e}{2}$$
+        $$R = \frac{r + r^{e_1} + r^{e_2} + \cdots + r^{e_{n - 1}}}{n}$$
+
+        This can explain Yield curve will inverse when short-term interest is high and curves have same tendency, while can't explain that it's normal to have upward slope. 
+    
 \end{document}
