@@ -13,8 +13,14 @@
 \XeTeXlinebreaklocale "zh"
 \XeTeXlinebreakskip = 0pt plus 1pt
 
+
+\usepackage{makecell}
+
+
 \begin{document}
     胡博闻 2016121518 
+
+    注* 包含上一周的作业，上次没来得及打印老师让我可以这周一起交上来
     \medskip 
 
     49. 
@@ -138,6 +144,101 @@ $$p(y) = \begin{cases}
     \frac{2}{\sqrt{2\pi}}e^{-\frac{y^2}{2}} & x > 0 \\
     0 & x \leqslant 0
 \end{cases}$$
+
+2.
+\begin{center}
+\begin{tabular}{|r|r|r|r|r|}
+    \hline
+
+    \makecell{} & \makecell{1} & \makecell{2} & \makecell{3} &\makecell{4} \\ 
+
+    \hline
+
+    \makecell{1} & \makecell{$\frac{1}{4}$} & \makecell{0} & \makecell{0} &\makecell{0} \\
+    \hline
+    \makecell{2} & \makecell{$\frac{1}{8}$} & \makecell{$\frac{1}{8}$} & \makecell{0} &\makecell{0} \\
+    \hline
+    \makecell{3} & \makecell{$\frac{1}{12}$} & \makecell{$\frac{1}{12}$} & \makecell{$\frac{1}{12}$} &\makecell{0} \\
+    \hline
+    \makecell{4} & \makecell{$\frac{1}{16}$} & \makecell{$\frac{1}{16}$} & \makecell{$\frac{1}{16}$} &\makecell{$\frac{1}{16}$} 
+    \\
+    \hline
+    \end{tabular}
+\end{center}
+    
+3. 
+\begin{center}
+    \begin{tabular} {|r|r|r|r|r|r|r|}
+        \hline
+        \makecell{} & \makecell{1} & \makecell{2} & \makecell{3} &\makecell{4} & \makecell{5} & \makecell{$P(X = x_i)$}\\
+        \hline
+        \makecell{1} & \makecell{0} & \makecell{0} & \makecell{0} &\makecell{0} & \makecell{0} &\makecell{0}\\
+        \hline
+        \makecell{2} & \makecell{0} & \makecell{0} & \makecell{0} &\makecell{0} & \makecell{0} & \makecell{0}\\
+        \hline
+        \makecell{3} & \makecell{0.1} & \makecell{0} & \makecell{0} &\makecell{0} & \makecell{0} & \makecell{0.1}\\
+        \hline
+        \makecell{4} & \makecell{0.2} & \makecell{0.1} & \makecell{0} &\makecell{0} & \makecell{0} & \makecell{0.3}\\
+        \hline
+        \makecell{5} & \makecell{0.3} & \makecell{0.2} & \makecell{0.1} &\makecell{0} & \makecell{0} & \makecell{0.6}\\
+        \hline
+        \makecell{$P(Y = y_i)$} & \makecell{0.6} & \makecell{0.3} & \makecell{0.1} & \makecell{0} & \makecell{0} & \makecell{1} \\
+        \hline
+
+    \end{tabular}
+\end{center}
+
+5.
+$$\int_{\Omega}Ae^{-(2x + 3y)} = 1$$
+$$A = 6$$
+$$F(x, y) = \begin{cases}
+    0  & x \leqslant 0 \text{ or } y \leqslant 0 \\
+    (1 - e^{-2x})(1 - e^{-2y}) & x > 0, y > 0
+\end{cases}$$
+
+$$P(-1 \leqslant X \leqslant 1,\ -2\leqslant Y \leqslant 2) = (1 - e^{-2})(1 - e^{-6})$$
+
+8.
+
+$0 < x < 1$: 
+$$p(x) = \int_{-x}^{+x}\frac{3}{2}x\ dy = 3x^2$$
+$$p_X(x) = \begin{cases}
+    3x^2 & 0 < x < 1 \\
+    0 & \text{其他}
+\end{cases}$$
+
+$-1 < y < 1$: 
+$$p(y) = \int_{|y|}^1 \frac{3}{2}x\ dx = \frac{3}{4}(1 - y^2)$$
+$$p_Y(y) = \begin{cases}
+    \frac{3}{4}(1 - y^2) & -1 < y < 1  \\
+    0 & \text{其他}
+\end{cases}$$
+
+10. 
+\begin{align*}
+    P(X + Y \leqslant 1) &= \int_0^{\frac{1}{2}}\ dx\int_x^{1 - x} e^{-y}\ dy \\
+        &= 1 + e^{-1} - 2e^{-\frac{1}{2}}
+\end{align*}
+
+$$P(X = Y) = 0$$
+
+$x > 0$:
+$$p(x) = \int_{x}^{+\infty}e^{-y}\ dy = e^{-x}$$
+$$p_X(x) = \begin{cases}
+    e^{-x} & x > 0 \\
+    0 & \text{其他}
+\end{cases}$$
+
+$y > 0$ 
+$$p(y) = \int_{0}^{y}e^{-y}\ dx = ye^{-y}$$
+$$p_Y(y) = \begin{cases}
+    ye^{-y} & y > 0 \\
+    0 & \text{其他}
+\end{cases}$$
+
+$$P(X > 2 | Y < 4) = \frac{P(2 < X < Y < 4)}{P(Y < 4)} = \frac{e^{-2} - 3e^{-4}}{1 - 5e^{-4}}$$
+
+$$$$
 
 \end{document}
 

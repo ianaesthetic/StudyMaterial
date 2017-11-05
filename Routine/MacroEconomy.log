@@ -1,4 +1,4 @@
-This is XeTeX, Version 3.14159265-2.6-0.99998 (TeX Live 2017/W32TeX) (preloaded format=xelatex 2017.8.23)  31 OCT 2017 08:51
+This is XeTeX, Version 3.14159265-2.6-0.99998 (TeX Live 2017/W32TeX) (preloaded format=xelatex 2017.8.23)  5 NOV 2017 01:03
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -1132,10 +1132,10 @@ Overfull \hbox (16.5pt too wide) in paragraph at lines 24--25
 
 ] (./MacroEconomy.aux) ) 
 Here is how much of TeX's memory you used:
- 19561 strings out of 493005
- 380506 string characters out of 6140056
- 427433 words of memory out of 5000000
- 23420 multiletter control sequences out of 15000+600000
+ 19591 strings out of 493005
+ 382577 string characters out of 6140056
+ 431433 words of memory out of 5000000
+ 23450 multiletter control sequences out of 15000+600000
  5539 words of font info for 47 fonts, out of 8000000 for 9000
  1348 hyphenation exceptions out of 8191
  46i,5n,66p,10408b,241s stack positions out of 5000i,500n,10000p,200000b,80000s
