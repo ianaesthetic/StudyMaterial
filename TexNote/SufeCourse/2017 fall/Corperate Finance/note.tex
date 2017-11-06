@@ -506,34 +506,36 @@
                 $$PI = \frac{PV_f}{C_0}$$
 \newpage
     \section{Capital Budgeting}
-    $$\begin{aligned}
-        \text{EBIT} &= \text{unLevered netIncome} * (1 - \tau) \\
-            &= (\text{Revenue - Costs - Depreciation}) * (1 - \tau)
-    \end{aligned}$$
 
-    $$\begin{aligned}
-                \text{Free Cash Flow} &=
-            \text{(Revenues - Costs - Depreciation)} \times (1 - \tau_i) \\
-            &+ \text{Depreciation} - \text{CapEx} - \Delta NWC
-            \end{aligned}$$
+    \subsection{General rules} 
     
-    $$c_t = (1 - \tau)(\text{Operating profit})_t + \tau \text{DPR}_r - \text{CAPX}_t - \Delta WC_t$$
-
-    We don't take financing into consideration;
-
-    General rules: 
-
-    \quad(a). Use cash flows rather than accounting earnings: you may not collect the money back of a contract; 
+        \quad(a). Use cash flows rather than accounting earnings: you may not collect the money back of a contract; 
+        
+        \quad(b). Use incremental cash flow: Only use cash flows attributable to the project; DO NOT USE SUNK COSTS!; Remember Externality and opportunity cost; Sunk costs include all costs before $t_0$. 
     
-    \quad(b). Use incremental cash flow: Only use cash flows attributable to the project; DO NOT USE SUNK COSTS!; Remember Externality and opportunity cost; Sunk costs include all costs before $t_0$. 
+        Externality: Indirect effects of the project that may affect the profits of other business activity of the firm. \emph{Cannibalization} is when sales of a new product displaces sales of an existing product, which will influence both revenue and cost.
 
-    Externality: Indirect effects of the project that may affect the profits of other business activity of the firm. \emph{Cannibalization} is when sales of a new product displaces sales of an existing product, which will influence both revenue and cost.
+    \subsection{Calculation} 
+    \begin{align*}
+        \text{Free Cash Flow} &= \text{Operating Cash Flow}\\
+            &- \text{Net Capital Spending} \\
+            &- \Delta NWC
+    \end{align*}
+
+    In capital budgeting we don't take interest into consideration. The following equations shows different ways to calculate Operating Cash Flow;  
+
+    \begin{align*}
+        \text{OCF} &= \text{EBIT} + \text{Depreciation} - \text{Taxes}\\
+        &= \text{EBIT} \times (1 - \tau) + \text{Depreciation} \\
+        &= (\text{Revenues} - \text{Costs} - \text{Expenses} - \text{Depreciation}) \times (1 - \tau) + \text{Depreciation} \\
+        &= (\text{Operating Profit}) \times (1 - \tau) + \tau \times \text{Depreciation}  
+    \end{align*}
     
     %Cspell:ignore MACRS,CAPEX
 
     \subsection{Some adjustment}
 
-    Further  adjustment: Modified accelerated cost recovery system depreciation (MACRS depreciation). This assumes the depreciation starts from year 0, which is not the same with common depreciation. This will affect tax shield.
+    Depreciation: Modified accelerated cost recovery system depreciation (MACRS depreciation). This assumes the depreciation starts from year 0, which is not the same with common depreciation. This will affect tax shield.
     \medskip
     
     Liquidation or Salvage Value:
