@@ -414,7 +414,15 @@
         
         $$EAR = (1 + \frac{APR}{m})^m - 1$$
 
-        The higher the m is, the more is the EAR; 
+        The higher the m is, the more is the EAR; With a given APR and a compounding time span $n$ month, we can compute the monthly interest as :
+
+        $$i = (1 + \frac{APR}{\frac{12}{n}}) ^{\frac{1}{n}} - 1$$
+        $$i = (1 + EAR) ^{\frac{1}{12}} - 1,\quad EAR = (1 + \frac{APR}{\frac{12}{n}})^{\frac{12}{n}} - 1$$
+
+        Specifically, to calculate monthly with APR or EAR: 
+        $$i = APR / 12$$
+        $$i = (1 + EAR) ^ {\frac{1}{12}} - 1$$
+
 
     \subsection{Interest Rates and Inflation}
         the real interest rate:
@@ -450,6 +458,14 @@
                 Payback period is the number of years required to recover a project's initial cost back with a preset time. Independent projects will be accepted if the payback period is less than some present limit. For mutually exclusive projects, we choose the one with minimum cost.
 
                 However, when using payback period rule, we don't take time value into consideration so that is not so accurate. 
+
+                Drawback:
+                
+                \quad a). We can't choose a bigger NPV projects 
+                
+                \quad b). We don't care the income after payback period, which may have big affects. 
+
+                \quad c). Arbitrary standard for payback period
             \subsubsection{Discounted Payback period}
                 Take the time value into consideration. 
             \subsubsection{Net Present Value}
@@ -461,7 +477,7 @@
                 IRR is the discount rate that forces PV of inflows equal to cost, and the NPV = 0; It means that the highest financial cost you can accept to do the project; However, when using IRR, you assume you the discount rate is IRR rather the real interest rate; 
                 $$0 = \sum_{i = 0}^{n}\frac{\text{CF}_t}{(1 + \text{IRR})^t}$$
 
-                For Independent projects: accept a project if IRR > some fixed $\text{IRR}^*$(financial cost); For mutually exclusive projects, choose the one with highest IRR; This is even more important and it's independent of other interest rate; 
+                For Independent projects: accept a project if IRR > current discount rate(financial cost); For mutually exclusive projects, choose the one with highest IRR; This is even more important and it's independent of other interest rate; 
             \subsubsection{Reinvestment rate assumption}
                 NPV assumes we reinvest in $r$  while IRR method assume we reinvest at IRR; There is a little different between NPV and IRR, and NPV is more realistic;
 
@@ -477,7 +493,7 @@
 
                 Problems with IRR: 
 
-                \quad(a). Projects of the loan type; 
+                \quad(a). Negative cash flow happens after positive cash flow(Projects of the loan type)
 
                 %Cspell: ignore IRRs
                 \quad(b): Multiple IRRs
