@@ -1,13 +1,13 @@
-This is XeTeX, Version 3.14159265-2.6-0.99998 (TeX Live 2017/W32TeX) (preloaded format=xelatex 2017.9.18)  6 NOV 2017 20:13
+This is XeTeX, Version 3.14159265-2.6-0.99998 (TeX Live 2017/W32TeX) (preloaded format=xelatex 2017.9.18)  6 NOV 2017 22:46
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
  %&-line parsing enabled.
 **"c:/Users/ianaesthetic/Desktop/hbw/StudyMaterial/TexNote/SufeCourse/2017 fall
-/Corperate Finance/note.tex"
+/Corperate Finance/Homework2.tex"
 
 (c:/Users/ianaesthetic/Desktop/hbw/StudyMaterial/TexNote/SufeCourse/2017 fall/C
-orperate Finance/note.tex
+orperate Finance/Homework2.tex
 LaTeX2e <2017-04-15>
 Babel <3.10> and hyphenation patterns for 84 language(s) loaded.
 (c:/texlive/2017/texmf-dist/tex/latex/base/article.cls
@@ -483,8 +483,8 @@ Package: array 2016/10/06 v2.4d Tabular extension package (FMi)
 . <->"Consolas/BI/OT:script=latn;language=DFLT;"
 . - 'bold italic small caps'  (bx/itsc) with NFSS spec.: 
 .................................................
- (./note.aux)
-\openout1 = `note.aux'.
+ (./Homework2.aux)
+\openout1 = `Homework2.aux'.
 
 LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 16.
 LaTeX Font Info:    ... okay on input line 16.
@@ -559,44 +559,16 @@ LaTeX Font Info:    Overwriting math alphabet `\mathtt' in version `bold'
 (Font)                  OT1/cmtt/m/n --> TU/lmtt/bx/n on input line 16.
 \c@lstlisting=\count154
 
-Overfull \hbox (0.87503pt too wide) in paragraph at lines 29--30
-[]\TU/lmr/m/n/10 Differences between of Limited-Liability Company and Corporati
-on: whether
- []
-
 [1
 
-] [2] [3] [4] [5] [6] [7] [8] [9] [10] [11]
-Overfull \hbox (23.22392pt too wide) in paragraph at lines 484--485
-[]\TU/lmr/m/n/10 For Independent projects: accept a project if IRR > current di
-scount rate(financial
- []
-
-[12] [13]
-Overfull \hbox (4.85515pt too wide) in paragraph at lines 536--536
-[] 
- []
-
-
-Overfull \hbox (9.17503pt too wide) in paragraph at lines 542--544
-[]\TU/lmr/m/n/10 Depreciation: Modified accelerated cost recovery system deprec
-iation (MACRS
- []
-
-
-Overfull \hbox (10.29903pt too wide) detected at line 549
-[] \OT1/cmr/m/n/10 = [] \OMS/cmsy/m/n/10 ^^@ \OT1/cmr/m/n/10 (\OML/cmm/m/it/10 
-^^\[] \OMS/cmsy/m/n/10 ^^B []\OT1/cmr/m/n/10 )
- []
-
-[14] [15] [16] (./note.aux) ) 
+] [2] (./Homework2.aux) ) 
 Here is how much of TeX's memory you used:
- 11928 strings out of 493005
- 247767 string characters out of 6137956
- 323270 words of memory out of 5000000
- 15871 multiletter control sequences out of 15000+600000
- 4206 words of font info for 30 fonts, out of 8000000 for 9000
+ 11917 strings out of 493005
+ 247535 string characters out of 6137956
+ 325275 words of memory out of 5000000
+ 15866 multiletter control sequences out of 15000+600000
+ 4174 words of font info for 26 fonts, out of 8000000 for 9000
  1348 hyphenation exceptions out of 8191
- 35i,15n,58p,10441b,233s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 35i,13n,58p,10446b,233s stack positions out of 5000i,500n,10000p,200000b,80000s
 
-Output written on note.pdf (16 pages).
+Output written on Homework2.pdf (2 pages).

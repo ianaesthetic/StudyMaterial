@@ -3,6 +3,10 @@
     \title{Unity3D note}
 \usepackage{indentfirst, amsmath, fontspec, listings, xcolor}
 
+%cSpell: ignore makecell
+
+\usepackage{makecell}
+
 \newfontfamily\consolas{Consolas}
 \lstset{numbers = left, numberstyle = \small\consolas, basicstyle=\small\consolas}
 
@@ -563,5 +567,63 @@
             Sensitivity analysis examines how sensitive a particular NPV calculation is to changes in the underlying assumption. We set one factors to different situations with other factors stay the constant; after that we can find which parameter is more important. 3r
 
             Scenario Analysis: As factors can be interrelated, so we created a series of scenarios with different assumptions to estimate the risk. 
+
+\section{Interest Rate and Bond Valuation}
+    definition: A long-term debt instrument in which a borrower agrees to make payments of principal and interest, on specific dates, to the  holders of the bond. The regular interest is called \emph{bond's coupon}($r_c$).
+
+    \begin{center}
+        Bond Value = PV of coupons + PV of Par 
+
+        Bond Value = PV annuity + PV of lump sum
+    \end{center}
+
+    The discount rate ($r_d$) is the opportunity cost of capital, and is the rate could be earned on alternative investments of equal risk
+
+    $$r_r = r_f + IP + DRP + LP + MRP$$
+\begin{center}
+
+    $r_r$ = Required return on a debt security 
+
+    IP = inflation premium 
+
+    DRP = default risk premium 
+
+    LP = liquidity premium 
+
+    MRP = maturity risk premium 
+\end{center}
+
+\begin{center}
+\begin{tabular}{|r|r|r|r|r|}
+    \hline
+    \makecell{} & \makecell{LP} & \makecell{MRP} & \makecell{DRP} & \makecell{LP} \\
+    \hline
+    \makecell{S-T Treasury} & \makecell{$\surd$} & \makecell{} & \makecell{} & \makecell{} \\
+    \hline
+    \makecell{L-T Treasure} & \makecell{$\surd$} & \makecell{$\surd$} & \makecell{} & \makecell{} \\
+    \hline
+    \makecell{S-T Corporate} & \makecell{$\surd$} & \makecell{} & \makecell{$\surd$} & \makecell{$\surd$} \\
+    \hline
+    \makecell{L-T Corporate} & \makecell{$\surd$} & \makecell{$\surd$} & \makecell{$\surd$} & \makecell{$\surd$} \\
+    \hline
+
+\end{tabular}
+\end{center}
+
+$r_r < r_c$: Bond is sold at a premium
+
+$r_r > r_c$: Bond is sold at a discount
+
+\subsection{Yield to Maturity}
+    For situations like semi-annual, we double the maturity year and double the outcome of yield.
+
+    $$\text{Current Yield} = \frac{\text{Annual coupon}}{\text{Current Price}}$$
+    $$\text{Capital Gain Yield} = \frac{\text{Change in Price}}{\text{Beginning Price}}$$
+    $$\text{Yield to Maturity} = \text{Current Yield} + \text{Capital Gains Yield}$$
+
+    Bonds of similar risk(and maturity) will be priced to yield about the same return, regardless of the coupon rate. 
+
+\subsection{Features of bonds}
+    Call provisions: 
 
 \end{document}
