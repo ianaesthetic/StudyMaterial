@@ -1,7 +1,7 @@
 \documentclass[10pt, a4paper]{article}
     \author{ianaesthetic}
     \title{Unity3D note}
-\usepackage{indentfirst, amsmath, fontspec, listings, xcolor}
+\usepackage{indentfirst, amsmath, fontspec, listings, xcolor, amssymb}
 
 \newfontfamily\consolas{Consolas}
 \lstset{numberstyle = \small\consolas, basicstyle=\small\consolas}
@@ -409,7 +409,7 @@ $$i = RR + IP + (DRP + LP) + MRP$$
     Municipal bond is a special case as it has a higher bond but has a lower $i$. This is because there is no tax on it, which will bring extra interest compered to taxed bond.  
     \medskip
 \subsection{MRP and Yield Curve}
-    Yield curve: a plot of the yield on specific bonds with differing terms to maturity  but the same risk, liquidity  and tax consideration for specific date. It's normal to have upward slope with same tendency. When short-term interest rate is too high, the yield curve may inverse and have downward slope. There are some explanations here. 
+    Yield curve: a plot of the yield on specific bonds with differing terms to maturity  but the same risk, liquidity  and tax consideration for specific date. It's normal to have upward slope and in different periods they will change in the same direction. When short-term interest rate is too high, the yield curve may inverse and have downward slope. There are some explanations here. 
 
     \subsubsection{Expectations Theory}
         The interest rate on a long-term bond will equal an average of the short-term interest rates that people expect to occur over the life of the long-term bond. There is an assumption that types of bonds are substitution free. Prove with two year: 
@@ -419,7 +419,199 @@ $$i = RR + IP + (DRP + LP) + MRP$$
         $$R^2, rr^e \approx 0$$
         $$R = \frac{r + r^e}{2}$$
         $$R = \frac{r + r^{e_1} + r^{e_2} + \cdots + r^{e_{n - 1}}}{n}$$
+        $$R = \sqrt[n]{(1 + r)(1 + r^{e_1})\cdots(1 + r^{e_{n - 1}})} - 1$$
 
-        This can explain Yield curve will inverse when short-term interest is high and curves have same tendency, while can't explain that it's normal to have upward slope. 
+        As you expect the interest will go up, the yield curves will be upward sloping. As you expect differently, the yield curve will have different shape. 
+
+        Within one per
+        iod, as your expectation of future interest rate is persistent, meaning that one-year rates will always rise or decrease in the future, so in different periods the interest rates will have the same tendency. 
+
+        When ST interest rate is high, you will expect the interest rate will go down(This is according to real situation) so the LT interest rate will be below the ST interest rate. 
+
+    \subsubsection{Segmented Markets Theory}
+        We assume bonds of different maturities are not substitutes at all, compared to expectations theory. So the market is segmented, so interest rates are determined separately by different terms of bonds equilibrium. So when LT bonds demand goes up, the ST bonds demand goes down. This will result in ST interest rate $\uparrow$ and LT interest rate $\downarrow$, which can lead to a downward slope curve.
+
+        As people prefer ST bonds, so the yield curve is normally have a upward slope curve. 
     
+    \subsubsection{Liquidity Premium Theory}
+
+    $$RR = \frac{r + r^{e_1} + r^{e_2} + \cdots + r^{e_{n - 1}}}{n} + r_l$$
+    $$rl:\text{liquidity premium for the bond}$$
+
+    \subsubsection{Effect of Yield Curve}
+        we can analysis the interest expectations: with year one yield curve we can draw the next year yield curve.  
+
+        Make different investment decisions. 
+\newpage
+
+\section{Banking Industry}
+    \subsection{Balance Sheet of Bank}  
+        The main asset is loan, and the main loan kind is real estate. And the  liabilities are mainly come from the small-denomination time 
+        \subsubsection{Liabilities}
+            A bank acquires liabilities is from deposits, 
+
+            \textbf{Deposits}: 
+            
+            \quad  check deposits Demand deposits(DD allow for check without interest 
+            
+            \quad negotiable order of withdrawal(NOW, with interest and allow withdrawal, by combination of DD account and saving account) 
+            
+            \quad money market deposit accounts(MMDAs, turns to investment in money market)
+            
+            Non-transaction deposits(Check is forbidden with higher interest rate): 
+
+            \quad saving deposits (money can go inflow and outflow at any time)  
+
+            \quad time deposits (with a fixed maturity length without inflow or outflow and penalty for early withdrawal)
+
+            \textbf{Borrowing}: 
+            
+            \quad from the Federal Reserve System( discount loans / advances)
+
+            \quad federal funds 
+
+            \quad from parent company 
+
+            \quad from Corporations (Repurchase agreements) 
+
+            \textbf{Capital}(= Asset - Liability, be divided to two tiers, ): 
+
+            \quad Tier one capital(core capital, ownership presentation): core tier 1[common stocks, surplus, generation preparation]; non-accumulative and unlimited instruments 
+            
+            \quad Tier two capital: undisclosed reserves, hybrid instrument...; 
+
+            \quad Core capital adequacy ratios $\geq$ 8 \% 
+    
+        \subsubsection{Asset} 
+            \textbf{Cash items}: 
+    
+            \quad Reserve / vault cash(required reserve \& excess reserve[for obligation]); 
+            
+            \quad Cash items in process of collection; 
+            
+            \quad deposits at other banks(due from other banks)s; 
+
+            \textbf{securities (Investment)}: Requires for safety
+                
+            \quad US government and agency securities(short term is called second reserve)
+
+            \quad state and local government securities 
+
+            \quad other securities 
+
+            \textbf{loans}:
+                
+            \quad Commercial and industrial loan; (C \& I loans) 
+
+            \quad real estate loan 
+
+            \quad consumer loan 
+
+            \quad inter-bank loan 
+                
+            \textbf{other}: buildings and other equipments 
+    \subsection{Basic Banking}
+        Asset transformation: borrows short and lends long
+
+        Providing a set of services: check clearing, record keeping, credit...
+
+    Cash Inflows: 
+    \begin{center}
+            Asset \quad \quad \quad \quad Liability
+
+            $\text{Reserve} + X$ \quad  Checkable deposits $+ X$
+    \end{center} 
+
+        Check will first become cash in the process of collection and will finally turn into reserves. The reserves will form excess reserves and rearranged them to make profit. 
+
+    \subsection{Bank Management}
+        \textbf{Liquidity Management}: of the highest importance; If a bank has ample excess reserves, a deposit outflow does not necessitate changes in other parts of its balance sheet; With short reserves, bank needs to borrow money with interest, sell securities with cost, call in or sell off loans; So reserves are a legal requirement and the shortfall must be eliminated,  Excess reserves are insurance against the costs associated with deposit outflows. 
+        \medskip
+
+     \textbf{Asset Management}(goals[Seek highest possible returns; Reduce risk; Have adequate liquidity]): four tools:
+            
+        \quad Find borrowers who will pay high $r$ with low possibility of defaulting 
+
+        \quad Purchases securities with high returns and low risk 
+
+        \quad Lower by diversifying 
+
+        \quad Balance need for liquidity against increased returns from less liquid asset 
+        \medskip
+
+        \textbf{Liability Management}
+
+            \quad Principle: More sources \& Low cost
+        
+        \medskip 
+
+        \textbf{Capital Adequacy Management} 
+            Bank capital helps prevent bank failure. The amount of capital affects return for the owners of the bank; Methods: 
+
+            \quad Sell or retire stock 
+
+            \quad Change dividends to change retained earnings 
+
+            \quad Change asset growth or adjust asset structure (size \& risk weight)
+        
+            \medskip
+
+        \textbf{Risk Management} 
+
+            %cSpell:ignore counterparty
+
+            \quad Credit Risk(default risk): the risk of loss arising from default bt a debtor or counterparty; This is resulted from asymmetric information: 
+            
+            \quad \quad Adverse selection(before deal) :When hiding adverse information, bank can only choose the higher $r$ loan; while higher $r$ means higher risk ) 
+            
+            \quad \quad Moral hazard(after deal):loan is used on other places with higher risk  
+
+            \quad \quad Solution to credit risk: Screening and information collection; Specialization in lending; Monitoring and enforcement of restrictive covenants; Long-term customer relationships; Loan commitments; Collateral and compensating balances; Credit rationing; 
+
+            \medskip
+
+            \quad Interest Rate Risk:risk of loss arising from change of interest rate; Rate insensitive (fixed rate; long term) / sensitive (short term); 
+            $$\pi = \sum A\cdot i_A - \sum L\cdot i_L$$
+            
+            \begin{align*}
+            \Delta \pi &= 
+            \sum A_{RS} \cdot \Delta i - \sum L_{RS} \cdot \Delta i \\
+            &= (\sum A_{RS} - \sum L_{RS}) \cdot \Delta i
+        \end{align*}
+
+            \quad  This is called RS\_GAP analysis; The final interest impact is related to the sign of $(\sum A_{RS} - \sum L_{RS})$. According to the estimated interest rate changes, banks can adjust the sign and amount of ($\sum A_{RS} - \sum L_{RS})$.
+
+            \quad operational risk 
+
+            \quad country  risk 
+
+    %Cspell: ignore securitization
+
+    \subsection{Off-Balance-Sheet Activities}
+        These activities are uncertain: Loan sales(secondary loan participation ) / loan securitization , generation of fee income, trading activities; 
+    
+        Generation of fee income: 
+            
+        \quad a. Foreign exchange trades for customers (risk free) 
+
+        \quad b. Servicing mortgage-backed securities 
+
+        \quad c. Guarantees of debt (Bank Acceptance; Letter of Guarantee, Letter of Credit);
+
+        \quad d. Backup lines of credit
+
+        Trading activities
+    
+    \subsection{Evolution of the Banking Industry}
+        Dual Banking System: National Banks(chartered by federal government) and State Banks(by state government); 
+
+        %Cspell: ignore Steagall, Riegle
+
+        Glass-Steagall Act: the establishment of FDIC; Segregation of financial business(Prohibit commercial banks from corporate securities and Investment banks from deposits, which separate commercial and investment banks);
+        
+        Branch restriction: prohibition of branching across state lines and forced all national banks to conform to the branching regulations of the state in which they were located. The response to it: Bank Holding Companies; Non-bank  bank; Automated Teller Machines. Until Riegle-Neal Act of 1994 allow full interstate branching. 
+        
+        %Cspell: ignore Gramm, Bliley
+
+        Gramm-Leach-Bliley Financial Services Modernization Act of 1999 abolishes Glass-Steagall act; 
 \end{document}
