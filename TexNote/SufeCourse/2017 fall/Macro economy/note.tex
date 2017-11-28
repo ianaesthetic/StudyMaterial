@@ -11,8 +11,8 @@
             
             \emph{Capital goods} which are used to produce goods are included. \emph{Inventory investment} which is the amount that inventories of unsold finished goods, goods in process and raw material \emph{have changed} in this period. It's can also be done to add up \emph{value-added}. Tax is another form of adding value on the product from the government. 
             $$
-                Value-added = Total\ Revenue - value\ of\ intermediate\ goods.
-            $$·
+                \text{Value-added = Total\ Revenue - value\ of\ intermediate\ goods}
+            $$
 
         \subsection{The Expenditure Approach}
             It's the standard approach for calculating GPD in most countries. It's consists of several aspects: 
@@ -656,6 +656,9 @@
     \subsection{Exchange Rate}
         Nominal exchange rate ($e$) (dollar / yuan)\& Real exchange rate ($\varepsilon$). The interest is evaluated in direct way. We mainly consider real 
 
+        $$e = \frac{\text{Foreign Currency}}{\text{Home Currency}}$$
+        $$\varepsilon = \frac{\text{Foreign goods}}{\text{Home goods}}$$
+
         \begin{align*}
             \varepsilon &= \frac{e \times P}{P ^ *} 
         \end{align*}
@@ -665,6 +668,9 @@
         \end{center}
    
         $$NX(\varepsilon) = S(r^*) - I(r^*)$$
+        $$\frac{M^*}{P^*} = L^*(r^* + \pi^*, Y^*)$$
+        $$\frac{M}{P} = L(r ^ * + \pi, Y)$$
+        $$\frac{\Delta e}{e} = \frac{\Delta \varepsilon}{\varepsilon} + \frac{\Delta P^*}{P^*} - \frac{\Delta P}{P} = \frac{\Delta \varepsilon}{\varepsilon} + \pi^* - \pi$$
 
         The equation before will determine real exchange rate. For home currency $S(r^*) - I(r^*)$ is the currency supply of home as home currency flows out and invested abroad, and $NX(\varepsilon)$ is the currency demand of home as exported goods will be calculated in home currency. Consider from the foreign currency will inverse the conclusion.  
 
@@ -680,12 +686,37 @@
             \quad HonKong \& Europe: free capital flows \& fixed exchange rate 
 
             \quad China(before 2005): Independent monetary policy \& Fixed exchange rate 
-    \subsection{Experiement}
+    \subsection{Experiment}
         Fiscal policy: expansionary policy, $S(r^*) - I(r^*) \downarrow$, $\varepsilon \uparrow$; Only $S$ change, $I$ and $r^*$ stay same. 
 
         Fiscal policy abroad: expansionary policy, $r^* \downarrow$, $S(r^*) - I(r^*) \uparrow$ , $\varepsilon \downarrow$ 
 
         Trade policy: those that directly influence the amount of goods and services exported or imported, usually tax or quota on foreign imports to protect domestic industries, or export subsidies. For $IM \downarrow$, $NX(\varepsilon) \uparrow$ will shift left, $\varepsilon \uparrow$, $\Delta NX  = 0$ as currency supply is the same. 
 
+    %Cspell: ignore Solow
+\section{The Growth Theory: Solow Model}
+    \subsection{The Sources of Economic Growth}
+        $$\frac{\Delta Y}{Y} = \frac{\Delta A}{A} + a_k\frac{\Delta K}{K} + a_L\frac{\Delta L}{L}$$
 
+        In Cobb-Douglas:
+        $$a_k = \text{Capital Ratio},\quad a_L = \text{Labor Ratio} = 1 - a_k$$
+    \subsection{Solow Model}
+        Assumption: Closed economy, no government, focus on $C$ and $I$ and per-worker, ignore productivity growth, assume a constant returns to scale(Cobb-Douglas). 
+        $$C_t = Y_t - I_t$$
+
+        $$Y_t = F(K, L)\quad \Rightarrow\quad y_t = f(k),\quad MPK = MPk$$
+        $$c_t = y_t - i_t$$
+        $$s = \text{the saving rate, the fraction of income that is saved}$$
+        $$c_t = (1 - s)y_t,\quad \text{saving} = \text{Investment} = sy_t$$
+
+        \subsubsection{Steady States}
+            A steady state is a situation in which the economy's output per worker, consumption per worker and capital stock per worker are constant. That is, in the steady state, $y_t$, $c_t$, $k_t$ don't change over time. 
+
+            $$\text{Break-even investment} = (n + \delta)k$$
+            $$\delta k = \text{depreciation},\quad nk = \text{population growth}$$
+            $$\Delta k = i - (\delta + n)k = sf(k) - (\delta + n)k$$
+
+            when $\Delta K = 0$ occurring in  $k^*$,this is the steady state. Under Cobb-Douglas, we can find a unique intersection between $sf(k)$ and $(\delta + n)k$. As long as $k < k^*$, the k will continue toward $k^*$. $k^*$ will stay same as all factors are unchanged. 
+
+            Prediction: $s\uparrow$, $k\uparrow$, $y\uparrow$;\quad $n\uparrow$, $k\downarrow$, $y\downarrow$
 \end{document} 
