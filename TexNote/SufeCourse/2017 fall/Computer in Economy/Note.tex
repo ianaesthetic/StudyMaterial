@@ -4,9 +4,13 @@
 \usepackage{indentfirst, amsmath, fontspec, listings, xcolor}
 
 \usepackage{xeCJK}
-\setCJKmainfont{Microsoft YaHei}
-\setmainfont{Consolas}
-
+\setCJKmainfont{STFangsong}
+\setmainfont{Microsoft YaHei Light}
+\usepackage{titlesec}
+\newCJKfontfamily\sectionFont{Microsoft YaHei} 
+\titleformat*{\section}{\Large\sectionFont}
+\titleformat*{\subsection}{\large\sectionFont}
+\titleformat*{\subsubsection}{\sectionFont}
 \newfontfamily\consolas{Consolas}
 \lstset{numberstyle = \small\consolas, basicstyle=\small\consolas}
 
@@ -271,4 +275,53 @@
 
         $$Q_0 = \sqrt{\frac{2kD}{h}}$$
         $$C_{\text{min}} = \sqrt{2khD}$$
+
+\section{投资决策}
+
+%cSpell: ignore nper
+PV() 返回投资的现值
+\begin{center}
+    \textbf{PV(rate, nper, pmt, fv, type)}
+    
+    rate: 各期利率(注意单位转化)
+    
+    nper: 付款总期数
+
+    pmt: 每期付款额
+
+    fv: 未来值(bond中的$P_s$)
+
+    type: 0 / 1, 期初/期末 付款
+
+\end{center}
+
+FV() 基于固定利率及付款方式返回投资的未来值
+\begin{center}
+    \textbf{FV(rate, nper, pmt, pv, type)}
+
+    pv: 现在投入值 (存款本金)
+\end{center}
+
+PMT() 返回投资或贷款的每期付款额
+\begin{center}
+    \textbf{PMT(rate, nper, pv, fv, type)}
+\end{center}
+
+PPMT() 返回投资或者贷款再某一给定期次内的本金偿还额
+
+\begin{center}
+    \textbf{PPMT(rate, per, nper, pv, fv, type)}
+    per: 
+\end{center}
+
+NPV() 没有减去原有的投资，只计算了回报额的折现值  
+\begin{center}
+    \textbf{NPV(rate, value1, value2 .. )}
+
+    rate: 各期的贴现率
+    
+    value: 连续期的现金流量
+\end{center}
+
+ 
 \end{document}

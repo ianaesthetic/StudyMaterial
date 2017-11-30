@@ -1,4 +1,4 @@
-This is XeTeX, Version 3.14159265-2.6-0.99998 (TeX Live 2017/W32TeX) (preloaded format=xelatex 2017.9.18)  22 NOV 2017 19:21
+This is XeTeX, Version 3.14159265-2.6-0.99998 (TeX Live 2017/W32TeX) (preloaded format=xelatex 2017.9.18)  29 NOV 2017 20:34
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -600,7 +600,19 @@ Overfull \hbox (2.65501pt too wide) in paragraph at lines 289--290
 ame amount
  []
 
-[8] [9] [10] [11] [12] [13] [14] [15] (./Money and Banking.aux) ) 
+[8] [9] [10] [11] [12] [13] [14] [15] [16]
+Overfull \hbox (34.72pt too wide) in paragraph at lines 723--724
+[]\TU/lmr/m/n/10 Could be used to facilitate Treasury financing of large budget
+ deficits-accommodation 
+ []
+
+[17]
+Overfull \hbox (8.53pt too wide) in paragraph at lines 749--750
+[] \TU/lmr/m/n/10 Chartering(Screening of proposals to open new banks) and Exam
+ination(On-
+ []
+
+[18] (./Money and Banking.aux) ) 
 Here is how much of TeX's memory you used:
  12022 strings out of 493005
  248950 string characters out of 6137956
@@ -610,4 +622,4 @@ Here is how much of TeX's memory you used:
  1348 hyphenation exceptions out of 8191
  35i,8n,58p,10454b,233s stack positions out of 5000i,500n,10000p,200000b,80000s
 
-Output written on Money and Banking.pdf (15 pages).
+Output written on Money and Banking.pdf (18 pages).

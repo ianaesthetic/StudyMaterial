@@ -3,7 +3,15 @@
     \author{ianaesthetic}
 \usepackage{indentfirst, amsmath, fontspec, listings, xcolor, amssymb}
 \usepackage{xeCJK}
-\setCJKmainfont{微软雅黑}
+\setCJKmainfont{STFangsong}
+
+\usepackage{titlesec}
+\newCJKfontfamily\sectionFont{Microsoft YaHei} 
+\titleformat*{\section}{\Large\sectionFont}
+\titleformat*{\subsection}{\large\sectionFont}
+\titleformat*{\subsubsection}{\sectionFont}
+\newfontfamily\consolas{Consolas}
+\lstset{numberstyle = \small\consolas, basicstyle=\small\consolas}
 
 \newfontfamily\consolas{Consolas}
 \lstset{numbers = left, numberstyle = \small\consolas, basicstyle = \small\consolas}
@@ -353,7 +361,63 @@
         \subsection{随机变量的独立性}
             $$F(x, y) = F_X(x)F_Y(y)$$
             \newpage 
-\section{作业}
-p65, 42, 44, 48, 54
+
+\newpage
+\section{随机变量的数字特征}
+    \subsection{数学期望}
+        对于离散型随机变量，设概率分布为$P(X = x_k) = p_k$, 则数学期望 $EX$ 为
+        $$EX = \sum_{k = 1}^{+\infty}x_kp_k$$
+
+        对于连续型随机变量，对于密度函数为$p(x)$, 当
+        $$EX = \int_{-\infty}^{+\infty}xp(x)dx$$
+      
+        绝对收敛时，则数学期望$EX$存在
+    
+    \subsubsection{随机变量函数的数学期望}
+        $$EY = E[f(X)] = \sum_{k = 1}^{+\infty}f(x_k)P(X = k)$$
+        $$EY = E(f(x)] = \int_{-\infty}^{+\infty}f(x)p(x)dx $$
+        $$EZ = E[f(X, Y)] = \sum_{i = 0}^{+\infty}\sum_{j = 0}^{+\infty}f(x, y)p_{ij}$$
+        $$EZ = E[f(x, y)] = \int_{-\infty}^{+\infty}\int_{-\infty}^{+\infty}f(x, y)p(x, y)dxdy$$
+
+    \subsubsection{数学期望的性质}
+    $$E(C) = C, \text{ $C$是常数}$$
+    $$E(CX) = CE(X)$$
+    $$E(\sum_{i = 1}^nX_i) = \sum_{i = 1}^nE(X_i)$$
+    
+    若两个随机变量相互独立，则
+    $$E(XY) = E(X)E(Y)$$
+
+    利用数学期望的可加性，在计算数学期望的时候可以将随机变量拆分成小的随机变量然后计算
+
+    \subsection{方差}
+    $$DX = E[(X - EX)^2]$$
+    $$\sqrt{DX} = \sqrt{E[(X - EX)^2]} = \sigma(x) \text{ (标准差)}$$
+    
+    $DX$ 表示了随机变量$X$ 的分散程度，越小表示分散程度越小。$DX$ 也是 $Y = (X - EX)^2$ 的期望
+
+    $$DX = E(X^2) - (EX)^2$$
+
+    \subsubsection{方差的性质}   
+    $$D(C) = 0$$
+    $$D(CX) = C^2D(X)$$
+
+    当$X_i$相互独立:
+    $$D(\sum_{i = 1}^n \pm X_i) = \sum_{i = 1}^nD(X_i)$$
+    $$$$
+
+    \subsection{总结}
+    $$X \sim B(1, p),\ EX = p,\ DX = p(1 - p)$$
+    $$X \sim B(n, p),\ EX = np,\ DX = np(1 - p)$$
+    $$X \sim P(\lambda),\ EX = \lambda,\ DX = \lambda$$
+    $$X \sim G(P),\ EX = \frac{1}{p},\ DX = \frac{1 - p}{p^2}$$
+    
+    $$X \sim U(a, b),\ EX = \frac{a + b}{2},\ DX = \frac{(b - a)^2}{12}$$
+    $$X \sim Exp(\lambda),\ EX = \frac{1}{\lambda},\ DX = \frac{1}{\lambda^2}$$
+    $$X \sim N(\mu, \sigma^2),\ EX = \mu,\ DX = \sigma^2$$
+
+
+
+        \newpage
+\section{}
         
 \end{document}
