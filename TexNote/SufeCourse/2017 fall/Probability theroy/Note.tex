@@ -338,6 +338,19 @@
             $$p_{ij} > 0,\quad\sum_{i = 1}^{\infty}\sum_{j = 1}^{\infty}p_{ij} = 1$$
             $$P(X = x_i) = p_{i^{.}} = \sum_{j}^{+\infty}p_{ij}$$
             $$P(y = y_j) = p_{^{.}j} = \sum_{i}^{+\infty}p_{ij}$$
+
+
+        %Cspell: ignore dudv
+
+        \subsubsection{二维连续型随机变量}
+            定义：设二维随机向量$(X, Y)$的联合分布函数为$F(x, y)$, 若存在非负可积的函数$p(x, y)$, 使得对于任意的实数$x$, $y$ 有
+            $$F(x, y) = \int_{-\infty}^x\int_{-\infty}^y p(u, v)dudv$$
+            
+            $p(u, v)$ 是密度函数。注意联合分布函数也是一个连续函数。 
+        
+            $$p(x, y) > 0, \int_{-\infty}^{+\infty}\int_{-\infty}^{+\infty}p(u, v)dudv = 1$$
+            $$P((X, Y) \in D) = \int\int_Dp(u, v)dudv$$
+            $$\frac{\partial^2 F(x, y)}{\partial x\partial y} = p(x, y)$$
     
     \subsection{二维连续性随机变量常用分布}
         \subsubsection{二维均匀分布}
@@ -358,10 +371,28 @@
             记作: $(X, Y) \sim N(\mu_1, \mu_2, \sigma_1^2, \sigma_2^2, \rho)$
 
             边际分布 $X \sim N(\mu_1, \sigma_1^2)$, $Y \sim N(\mu_2, \sigma_2^2)$
-        \subsection{随机变量的独立性}
-            $$F(x, y) = F_X(x)F_Y(y)$$
-            \newpage 
+    \subsubsection{随机变量的独立性}
+            $$F(x, y) = F_X(x)F_Y(y)$$ 
+            称$x$, $y$相互独立，且$g(x)$, $h(y)$ 也相互独立。 
+            $$p_{ij} = p_i \times p_j$$
+            $$p(x, y) = p_X(x)p_Y(y)$$
+            
+    \subsection{二维随机向量的函数变量}
+    $$Z = f(X, Y)$$
+    计算方法：
+    $$P(Z = z_k) = P(f(X, Y) = z) = \sum_{f(X_i, Y_j) = Z_k}p_{ij}$$
+    $$F(Z = z_k) = P(f(X, Y) \leqslant z) = \int\int_{f(u, v) \leqslant z}p(u, v)dudv$$
 
+    若$X_1 \sim B(n_1, p)$, $X_2 \sim B(n_2, p)$, $X_1$ $X_2$相互独立 则
+    $$X_1 + X_2 \sim B(n_1 + n_2, p)$$
+
+    若$X_1 \sim P(\lambda_1)$, $X_2 \sim P(\lambda_2)$, $X_1$ $X_2$相互独立 则
+    $$X_1 + X_2 \sim P(\lambda_1 + \lambda_2)$$
+ 
+    若$X_1 \sim N(\mu_1,\sigma_1^2)$, $X_2 \sim N(\mu_2, \sigma_2^2)$, $X_1$ $X_2$相互独立 则
+    $$X_1 + X_2 \sim N(\mu_1 + \mu_2, \sigma_1^2 + \sigma_2^2)$$
+
+    满足上面类似情况的联合分布函数被称为拥有可加性
 \newpage
 \section{随机变量的数字特征}
     \subsection{数学期望}
@@ -403,7 +434,8 @@
 
     当$X_i$相互独立:
     $$D(\sum_{i = 1}^n \pm X_i) = \sum_{i = 1}^nD(X_i)$$
-    $$$$
+    $$DX = 0 \Leftrightarrow P(X = EX) = 1$$
+    上式称$X$依概率等于常数$EX$
 
     \subsection{总结}
     $$X \sim B(1, p),\ EX = p,\ DX = p(1 - p)$$
@@ -415,9 +447,43 @@
     $$X \sim Exp(\lambda),\ EX = \frac{1}{\lambda},\ DX = \frac{1}{\lambda^2}$$
     $$X \sim N(\mu, \sigma^2),\ EX = \mu,\ DX = \sigma^2$$
 
+    \subsubsection{方差的应用}
+    $$Y = \frac{X - EX}{\sqrt{DX}}$$
+    
+    估计概率的方法： 
+    $$\forall \varepsilon,\quad P(|X - EX| \geqslant \varepsilon) \leqslant \frac{DX}{\varepsilon^2}$$
 
+    \subsection{协方差和相关系数}
+        协方差：对与$(X, Y)$:
+        $$Cov(X, Y) = E[(X - EX)(Y - EY)]$$
+
+        协方差刻画的是$X$ $Y$取值的相互关系, 反映了$X$ $Y$取值偏差的关联程度。
+
+        $$Cov(X, Y) = Cov(Y, X)$$
+        $$Cov(aX, bY) = abCov(aX, bY)$$
+        $$Cov(X_1 + X_2, Y) = Cov(X_1, Y) + Cov(X_2, Y)$$
+        $$Cov(aX_1 + bX_2, cY_1 + dY_2) = acCov(X_1, Y_1) + adCov(X_1, Y_2) + bcCov(X_2, Y_1) + bd(X_2, Y_2)$$
+        $$D(X \pm Y) = D(X) + D(Y) \pm 2Cov(X, Y)$$
+        $$Cov(X, Y) = E(XY) - EX\cdot EY$$
+        $$Cov(X, C) = 0, \quad Cov(X, X) = D(X)$$
+    
+    \subsubsection{相关系数}
+        相关系数刻画两个变量之间的线性关系强弱:
+        $$\rho_{XY} = \frac{Cov(X, Y)}{\sqrt{DX}\cdot\sqrt{DY}} = \frac{E(XY) - EX\cdot EY}{\sqrt{DX}\cdot\sqrt{DY}}$$ 
+        $$D(\frac{D}{\sqrt{DX}} \pm \frac{Y}{\sqrt{DY}}) = 2 \pm 2\rho \quad \Rightarrow |\rho| \leqslant 1$$
+
+        $$|\rho| = 1 \quad \Rightarrow \quad \exists a, b, P(Y = aX + b) = 1$$
+        $\rho = 1$, 正相关； $\rho = -1$ 负相关; $\rho = 0$ 不相关;
+        
+        $X$, $Y$ 独立 $\Rightarrow$ $X$, $Y$ 不相关 (反过来不成立)。二维正态中反过来可以成立
+
+        \begin{align*}
+            \rho = 0 &\Leftrightarrow Cov(X, Y) = 0\\ 
+                    &\Leftrightarrow D(X + Y) = DX + DY \\
+                    &\Leftrightarrow E(XY) = EX\cdot EY
+        \end{align*}
 
         \newpage
-\section{}
+\section{极限定义}
         
 \end{document}

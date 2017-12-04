@@ -1,4 +1,4 @@
-This is XeTeX, Version 3.14159265-2.6-0.99998 (TeX Live 2017/W32TeX) (preloaded format=xelatex 2017.9.18)  30 NOV 2017 14:12
+This is XeTeX, Version 3.14159265-2.6-0.99998 (TeX Live 2017/W32TeX) (preloaded format=xelatex 2017.9.18)  4 DEC 2017 09:36
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -1141,7 +1141,18 @@ Missing character: There is no ┻ in font [lmroman12-regular]:mapping=tex-text;
 Missing character: There is no ━ in font [lmroman12-regular]:mapping=tex-text;!
 Missing character: There is no ┻ in font [lmroman12-regular]:mapping=tex-text;!
  [3] [4]
-[5] [6] [7] [8] [9] [10] [11] [12] (./Note.aux) ) 
+[5] [6] [7] [8] [9] [10] [11] [12]
+Overfull \hbox (36.25693pt too wide) detected at line 465
+\OML/cmm/m/it/10 Cov\OT1/cmr/m/n/10 (\OML/cmm/m/it/10 aX[] \OT1/cmr/m/n/10 + \O
+ML/cmm/m/it/10 bX[]; cY[] \OT1/cmr/m/n/10 + \OML/cmm/m/it/10 dY[]\OT1/cmr/m/n/1
+0 ) = \OML/cmm/m/it/10 acCov\OT1/cmr/m/n/10 (\OML/cmm/m/it/10 X[]; Y[]\OT1/cmr/
+m/n/10 ) + \OML/cmm/m/it/10 adCov\OT1/cmr/m/n/10 (\OML/cmm/m/it/10 X[]; Y[]\OT1
+/cmr/m/n/10 ) + \OML/cmm/m/it/10 bcCov\OT1/cmr/m/n/10 (\OML/cmm/m/it/10 X[]; Y[
+]\OT1/cmr/m/n/10 ) + \OML/cmm/m/it/10 bd\OT1/cmr/m/n/10 (\OML/cmm/m/it/10 X[]; 
+Y[]\OT1/cmr/m/n/10 )
+ []
+
+[13] [14] (./Note.aux) ) 
 Here is how much of TeX's memory you used:
  19820 strings out of 493005
  387065 string characters out of 6137956
@@ -1151,4 +1162,4 @@ Here is how much of TeX's memory you used:
  1348 hyphenation exceptions out of 8191
  46i,13n,77p,10460b,311s stack positions out of 5000i,500n,10000p,200000b,80000s
 
-Output written on Note.pdf (12 pages).
+Output written on Note.pdf (14 pages).
