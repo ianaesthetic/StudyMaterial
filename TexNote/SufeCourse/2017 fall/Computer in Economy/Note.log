@@ -1,4 +1,4 @@
-This is XeTeX, Version 3.14159265-2.6-0.99998 (TeX Live 2017/W32TeX) (preloaded format=xelatex 2017.9.18)  30 NOV 2017 11:13
+This is XeTeX, Version 3.14159265-2.6-0.99998 (TeX Live 2017/W32TeX) (preloaded format=xelatex 2017.9.18)  7 DEC 2017 10:26
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -447,6 +447,16 @@ Package xcolor Info: Model `HSB' substituted by `hsb' on input line 1369.
 Package xcolor Info: Model `Gray' substituted by `gray' on input line 1370.
 Package xcolor Info: Model `wave' substituted by `hsb' on input line 1371.
 )
+(c:/texlive/2017/texmf-dist/tex/latex/amsfonts/amssymb.sty
+Package: amssymb 2013/01/14 v3.01 AMS font symbols
+
+(c:/texlive/2017/texmf-dist/tex/latex/amsfonts/amsfonts.sty
+Package: amsfonts 2013/01/14 v3.01 Basic AMSFonts support
+\symAMSa=\mathgroup4
+\symAMSb=\mathgroup5
+LaTeX Font Info:    Overwriting math alphabet `\mathfrak' in version `bold'
+(Font)                  U/euf/m/n --> U/euf/b/n on input line 106.
+))
 (c:/texlive/2017/texmf-dist/tex/xelatex/xecjk/xeCJK.sty
 Package: xeCJK 2017/05/15 v3.4.8 Typesetting CJK scripts with XeLaTeX
 
@@ -1058,7 +1068,7 @@ LaTeX Font Info:    ... okay on input line 20.
 . 
 . Adjusting the maths setup (use [no-math] to avoid this).
 .................................................
-\symlegacymaths=\mathgroup4
+\symlegacymaths=\mathgroup6
 LaTeX Font Info:    Overwriting symbol font `legacymaths' in version `bold'
 (Font)                  OT1/cmr/m/n --> OT1/cmr/bx/n on input line 20.
 LaTeX Font Info:    Redeclaring math accent \acute on input line 20.
@@ -1142,17 +1152,26 @@ LaTeX Font Info:    Overwriting math alphabet `\mathtt' in version `bold'
 . YaHei/BI/OT:script=hani;language=DFLT;"
 . - 'bold italic small caps'  (bx/itsc) with NFSS spec.: 
 .................................................
- [1
+LaTeX Font Info:    Try loading font information for U+msa on input line 25.
 
-] [2] [3] [4] [5]
-[6] [7] [8] [9] (./Note.aux) ) 
+(c:/texlive/2017/texmf-dist/tex/latex/amsfonts/umsa.fd
+File: umsa.fd 2013/01/14 v3.01 AMS symbols A
+)
+LaTeX Font Info:    Try loading font information for U+msb on input line 25.
+
+(c:/texlive/2017/texmf-dist/tex/latex/amsfonts/umsb.fd
+File: umsb.fd 2013/01/14 v3.01 AMS symbols B
+) [1
+
+] [2] [3] [4]
+[5] [6] [7] [8] [9] [10] (./Note.aux) ) 
 Here is how much of TeX's memory you used:
- 19595 strings out of 493005
- 386703 string characters out of 6137956
- 446510 words of memory out of 5000000
- 23458 multiletter control sequences out of 15000+600000
- 4334 words of font info for 46 fonts, out of 8000000 for 9000
+ 19888 strings out of 493005
+ 390621 string characters out of 6137956
+ 447003 words of memory out of 5000000
+ 23730 multiletter control sequences out of 15000+600000
+ 5595 words of font info for 54 fonts, out of 8000000 for 9000
  1348 hyphenation exceptions out of 8191
  46i,8n,77p,10443b,905s stack positions out of 5000i,500n,10000p,200000b,80000s
 
-Output written on Note.pdf (9 pages).
+Output written on Note.pdf (10 pages).

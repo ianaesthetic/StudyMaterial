@@ -1,7 +1,7 @@
 \documentclass[10pt, a4paper]{article}
     \author{ianaesthetic}
     \title{Unity3D note}
-\usepackage{indentfirst, amsmath, fontspec, listings, xcolor}
+\usepackage{indentfirst, amsmath, fontspec, listings, xcolor, amssymb}
 
 \usepackage{xeCJK}
 \setCJKmainfont{STFangsong}
@@ -278,6 +278,7 @@
 
 \section{投资决策}
 
+\subsection{有关贷款的一些函数}
 %cSpell: ignore nper
 PV() 返回投资的现值
 \begin{center}
@@ -302,26 +303,86 @@ FV() 基于固定利率及付款方式返回投资的未来值
     pv: 现在投入值 (存款本金)
 \end{center}
 
-PMT() 返回投资或贷款的每期付款额
+%Cspell:ignore PPMT, IPMT, ISPMT, 
+
+PMT() 基于固定利率以及分期付款，返回投资或贷款的每期付款额
 \begin{center}
     \textbf{PMT(rate, nper, pv, fv, type)}
+    
+    per:用于计算其本金数额的期次，必须在1$\sim$npr之间
 \end{center}
 
-PPMT() 返回投资或者贷款再某一给定期次内的本金偿还额
+PPMT() 基于固定利率以及分期付款，返回投资或者贷款再某一给定期次内的本金偿还额
 
 \begin{center}
     \textbf{PPMT(rate, per, nper, pv, fv, type)}
-    per: 
 \end{center}
 
-NPV() 没有减去原有的投资，只计算了回报额的折现值  
+IPMT() 基于固定利率以及分期付款，返回投资或贷款在某一个给定期次内的利息偿还额，用于等本还款，形式同PPMT()
+
+ISPMT()：计算特定的投资期内要支付的利息，形式同PPMT() 
+
+Rate() :返回年金的各期利率
+\begin{center}
+    \textbf{Rate(nper, pmt, pv, fv, type, guess)}
+
+    pmt:预期利率估计值，缺省为10\%
+\end{center}
+
+NPER():基于固定利率意继等额分期付款的贷款，返回某项投资的总期数
+\begin{center}
+    \textbf{NPER(rate, pmt, pv, fv, type)}
+\end{center}
+
+\subsection{资产管理的相关函数}
+
+SLN():返回某项资产在一个期间中的线性折旧值
+\begin{center}
+    \textbf{SLN(cost,  salvage, life)}
+
+    cost: 资产原值
+
+    salvage:资产在这折旧期末的价值
+
+    life:折旧期数
+\end{center}
+
+DB():用固定余额递减法，计算一笔资产在给定期限内的折旧值
+\begin{center}
+    \textbf{DB(cost, salvage, lie, period, month)}
+
+    period:需要计算折旧值的期间
+
+    month:第一年月份数
+\end{center}
+
+\subsection{投资决策的相关函数}
+NPV():
 \begin{center}
     \textbf{NPV(rate, value1, value2 .. )}
 
     rate: 各期的贴现率
-    
     value: 连续期的现金流量
 \end{center}
 
+IRR():我不想解释了(╯‵□′)╯︵┻━┻ 
+\begin{center}
+    \textbf{IRR(values, guess)}
+    
+    values:对数组或者单元格范围的引用
+
+    guess: 对IRR计算结果的估计值
+
+\end{center}
  
+\section{最优化模型}
+    模型:
+    $$Max: y = f(\textbf{X})$$
+   $$s_1(\textbf{X}) \geqslant 0$$ 
+        $$s_2(\textbf{X}) \geqslant 0$$
+            $$\cdots$$
+        $$s_m(\textbf{X}) \geqslant 0$$
+
+    应用数组公式：例如在计算$x_1y_1 + x_2y_2 \cdots$, 可以使用 \{sum(x, y)\}。注意外面的大括号不能手打，代表的就是数组公式, 快捷键 ctrl + shift + enter
+
 \end{document}
