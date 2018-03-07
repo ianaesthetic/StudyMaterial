@@ -1,4 +1,4 @@
-This is XeTeX, Version 3.14159265-2.6-0.99998 (TeX Live 2017/W32TeX) (preloaded format=xelatex 2017.8.23)  7 DEC 2017 15:23
+This is XeTeX, Version 3.14159265-2.6-0.99998 (TeX Live 2017/W32TeX) (preloaded format=xelatex 2017.8.23)  7 DEC 2017 23:15
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -1034,28 +1034,6 @@ Package: titlesec 2016/03/21 v2.10.2 Sectioning titles
 . <->"Consolas/BI/OT:script=latn;language=DFLT;"
 . - 'bold italic small caps'  (bx/itsc) with NFSS spec.: 
 .................................................
-.................................................
-. fontspec info: "defining-font"
-. 
-. Font family 'Consolas(1)' created for font 'Consolas' with options
-. [Ligatures=TeX].
-.  
-.  This font family consists of the following NFSS series/shapes:
-.  
-. - 'normal' (m/n) with NFSS spec.:
-. <->"Consolas/OT:script=latn;language=DFLT;mapping=tex-text;"
-. - 'small caps'  (m/sc) with NFSS spec.: 
-. - 'bold' (bx/n) with NFSS spec.:
-. <->"Consolas/B/OT:script=latn;language=DFLT;mapping=tex-text;"
-. - 'bold small caps'  (bx/sc) with NFSS spec.: 
-. - 'italic' (m/it) with NFSS spec.:
-. <->"Consolas/I/OT:script=latn;language=DFLT;mapping=tex-text;"
-. - 'italic small caps'  (m/itsc) with NFSS spec.: 
-. - 'bold italic' (bx/it) with NFSS spec.:
-. <->"Consolas/BI/OT:script=latn;language=DFLT;mapping=tex-text;"
-. - 'bold italic small caps'  (bx/itsc) with NFSS spec.: 
-.................................................
-LaTeX Info: Redefining \rmfamily on input line 22.
 
 (d:/TexLive/texmf-dist/tex/xelatex/xecjk/xeCJK-listings.sty
 Package: xeCJK-listings 2017/05/15 v3.4.8 xeCJK patch file for listings
@@ -1064,27 +1042,27 @@ Package: xeCJK-listings 2017/05/15 v3.4.8 xeCJK patch file for listings
 ) (./Note.aux)
 \openout1 = `Note.aux'.
 
-LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 26.
-LaTeX Font Info:    ... okay on input line 26.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 26.
-LaTeX Font Info:    ... okay on input line 26.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 26.
-LaTeX Font Info:    ... okay on input line 26.
-LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 26.
-LaTeX Font Info:    ... okay on input line 26.
-LaTeX Font Info:    Checking defaults for TU/lmr/m/n on input line 26.
-LaTeX Font Info:    ... okay on input line 26.
-LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 26.
-LaTeX Font Info:    ... okay on input line 26.
-LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 26.
-LaTeX Font Info:    ... okay on input line 26.
-LaTeX Font Info:    Checking defaults for T3/cmr/m/n on input line 26.
-LaTeX Font Info:    Try loading font information for T3+cmr on input line 26.
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 24.
+LaTeX Font Info:    ... okay on input line 24.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 24.
+LaTeX Font Info:    ... okay on input line 24.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 24.
+LaTeX Font Info:    ... okay on input line 24.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 24.
+LaTeX Font Info:    ... okay on input line 24.
+LaTeX Font Info:    Checking defaults for TU/lmr/m/n on input line 24.
+LaTeX Font Info:    ... okay on input line 24.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 24.
+LaTeX Font Info:    ... okay on input line 24.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 24.
+LaTeX Font Info:    ... okay on input line 24.
+LaTeX Font Info:    Checking defaults for T3/cmr/m/n on input line 24.
+LaTeX Font Info:    Try loading font information for T3+cmr on input line 24.
 
 (d:/TexLive/texmf-dist/tex/latex/tipa/t3cmr.fd
 File: t3cmr.fd 2001/12/31 TIPA font definitions
 )
-LaTeX Font Info:    ... okay on input line 26.
+LaTeX Font Info:    ... okay on input line 24.
 .................................................
 . fontspec info: "setup-math"
 . 
@@ -1092,66 +1070,70 @@ LaTeX Font Info:    ... okay on input line 26.
 .................................................
 \symlegacymaths=\mathgroup6
 LaTeX Font Info:    Overwriting symbol font `legacymaths' in version `bold'
-(Font)                  OT1/cmr/m/n --> OT1/cmr/bx/n on input line 26.
-LaTeX Font Info:    Redeclaring math accent \acute on input line 26.
-LaTeX Font Info:    Redeclaring math accent \grave on input line 26.
-LaTeX Font Info:    Redeclaring math accent \ddot on input line 26.
-LaTeX Font Info:    Redeclaring math accent \tilde on input line 26.
-LaTeX Font Info:    Redeclaring math accent \bar on input line 26.
-LaTeX Font Info:    Redeclaring math accent \breve on input line 26.
-LaTeX Font Info:    Redeclaring math accent \check on input line 26.
-LaTeX Font Info:    Redeclaring math accent \hat on input line 26.
-LaTeX Font Info:    Redeclaring math accent \dot on input line 26.
-LaTeX Font Info:    Redeclaring math accent \mathring on input line 26.
-LaTeX Font Info:    Redeclaring math symbol \Gamma on input line 26.
-LaTeX Font Info:    Redeclaring math symbol \Delta on input line 26.
-LaTeX Font Info:    Redeclaring math symbol \Theta on input line 26.
-LaTeX Font Info:    Redeclaring math symbol \Lambda on input line 26.
-LaTeX Font Info:    Redeclaring math symbol \Xi on input line 26.
-LaTeX Font Info:    Redeclaring math symbol \Pi on input line 26.
-LaTeX Font Info:    Redeclaring math symbol \Sigma on input line 26.
-LaTeX Font Info:    Redeclaring math symbol \Upsilon on input line 26.
-LaTeX Font Info:    Redeclaring math symbol \Phi on input line 26.
-LaTeX Font Info:    Redeclaring math symbol \Psi on input line 26.
-LaTeX Font Info:    Redeclaring math symbol \Omega on input line 26.
-LaTeX Font Info:    Redeclaring math symbol \mathdollar on input line 26.
-LaTeX Font Info:    Redeclaring symbol font `operators' on input line 26.
+(Font)                  OT1/cmr/m/n --> OT1/cmr/bx/n on input line 24.
+LaTeX Font Info:    Redeclaring math accent \acute on input line 24.
+LaTeX Font Info:    Redeclaring math accent \grave on input line 24.
+LaTeX Font Info:    Redeclaring math accent \ddot on input line 24.
+LaTeX Font Info:    Redeclaring math accent \tilde on input line 24.
+LaTeX Font Info:    Redeclaring math accent \bar on input line 24.
+LaTeX Font Info:    Redeclaring math accent \breve on input line 24.
+LaTeX Font Info:    Redeclaring math accent \check on input line 24.
+LaTeX Font Info:    Redeclaring math accent \hat on input line 24.
+LaTeX Font Info:    Redeclaring math accent \dot on input line 24.
+LaTeX Font Info:    Redeclaring math accent \mathring on input line 24.
+LaTeX Font Info:    Redeclaring math symbol \Gamma on input line 24.
+LaTeX Font Info:    Redeclaring math symbol \Delta on input line 24.
+LaTeX Font Info:    Redeclaring math symbol \Theta on input line 24.
+LaTeX Font Info:    Redeclaring math symbol \Lambda on input line 24.
+LaTeX Font Info:    Redeclaring math symbol \Xi on input line 24.
+LaTeX Font Info:    Redeclaring math symbol \Pi on input line 24.
+LaTeX Font Info:    Redeclaring math symbol \Sigma on input line 24.
+LaTeX Font Info:    Redeclaring math symbol \Upsilon on input line 24.
+LaTeX Font Info:    Redeclaring math symbol \Phi on input line 24.
+LaTeX Font Info:    Redeclaring math symbol \Psi on input line 24.
+LaTeX Font Info:    Redeclaring math symbol \Omega on input line 24.
+LaTeX Font Info:    Redeclaring math symbol \mathdollar on input line 24.
+LaTeX Font Info:    Redeclaring symbol font `operators' on input line 24.
 LaTeX Font Info:    Encoding `OT1' has changed to `TU' for symbol font
-(Font)              `operators' in the math version `normal' on input line 26.
+(Font)              `operators' in the math version `normal' on input line 24.
 LaTeX Font Info:    Overwriting symbol font `operators' in version `normal'
-(Font)                  OT1/cmr/m/n --> TU/Consolas(1)/m/n on input line 26.
+(Font)                  OT1/cmr/m/n --> TU/MicrosoftYaHeiLight(0)/m/n on input 
+line 24.
 LaTeX Font Info:    Encoding `OT1' has changed to `TU' for symbol font
-(Font)              `operators' in the math version `bold' on input line 26.
+(Font)              `operators' in the math version `bold' on input line 24.
 LaTeX Font Info:    Overwriting symbol font `operators' in version `bold'
-(Font)                  OT1/cmr/bx/n --> TU/Consolas(1)/m/n on input line 26.
+(Font)                  OT1/cmr/bx/n --> TU/MicrosoftYaHeiLight(0)/m/n on input
+ line 24.
 LaTeX Font Info:    Overwriting symbol font `operators' in version `normal'
-(Font)                  TU/Consolas(1)/m/n --> TU/Consolas(1)/m/n on input line
- 26.
+(Font)                  TU/MicrosoftYaHeiLight(0)/m/n --> TU/MicrosoftYaHeiLigh
+t(0)/m/n on input line 24.
 LaTeX Font Info:    Overwriting math alphabet `\mathit' in version `normal'
-(Font)                  OT1/cmr/m/it --> TU/Consolas(1)/m/it on input line 26.
+(Font)                  OT1/cmr/m/it --> TU/MicrosoftYaHeiLight(0)/m/it on inpu
+t line 24.
 LaTeX Font Info:    Overwriting math alphabet `\mathbf' in version `normal'
-(Font)                  OT1/cmr/bx/n --> TU/Consolas(1)/bx/n on input line 26.
+(Font)                  OT1/cmr/bx/n --> TU/MicrosoftYaHeiLight(0)/bx/n on inpu
+t line 24.
 LaTeX Font Info:    Overwriting math alphabet `\mathsf' in version `normal'
-(Font)                  OT1/cmss/m/n --> TU/lmss/m/n on input line 26.
+(Font)                  OT1/cmss/m/n --> TU/lmss/m/n on input line 24.
 LaTeX Font Info:    Overwriting math alphabet `\mathtt' in version `normal'
-(Font)                  OT1/cmtt/m/n --> TU/lmtt/m/n on input line 26.
+(Font)                  OT1/cmtt/m/n --> TU/lmtt/m/n on input line 24.
 LaTeX Font Info:    Overwriting symbol font `operators' in version `bold'
-(Font)                  TU/Consolas(1)/m/n --> TU/Consolas(1)/bx/n on input lin
-e 26.
+(Font)                  TU/MicrosoftYaHeiLight(0)/m/n --> TU/MicrosoftYaHeiLigh
+t(0)/bx/n on input line 24.
 LaTeX Font Info:    Overwriting math alphabet `\mathit' in version `bold'
-(Font)                  OT1/cmr/bx/it --> TU/Consolas(1)/bx/it on input line 26
-.
+(Font)                  OT1/cmr/bx/it --> TU/MicrosoftYaHeiLight(0)/bx/it on in
+put line 24.
 LaTeX Font Info:    Overwriting math alphabet `\mathsf' in version `bold'
-(Font)                  OT1/cmss/bx/n --> TU/lmss/bx/n on input line 26.
+(Font)                  OT1/cmss/bx/n --> TU/lmss/bx/n on input line 24.
 LaTeX Font Info:    Overwriting math alphabet `\mathtt' in version `bold'
-(Font)                  OT1/cmtt/m/n --> TU/lmtt/bx/n on input line 26.
+(Font)                  OT1/cmtt/m/n --> TU/lmtt/bx/n on input line 24.
 \c@lstlisting=\count169
-LaTeX Font Info:    Try loading font information for U+msa on input line 27.
+LaTeX Font Info:    Try loading font information for U+msa on input line 25.
 
 (d:/TexLive/texmf-dist/tex/latex/amsfonts/umsa.fd
 File: umsa.fd 2013/01/14 v3.01 AMS symbols A
 )
-LaTeX Font Info:    Try loading font information for U+msb on input line 27.
+LaTeX Font Info:    Try loading font information for U+msb on input line 25.
 
 (d:/TexLive/texmf-dist/tex/latex/amsfonts/umsb.fd
 File: umsb.fd 2013/01/14 v3.01 AMS symbols B
@@ -1183,63 +1165,61 @@ File: umsb.fd 2013/01/14 v3.01 AMS symbols B
 . - 'bold italic small caps'  (bx/itsc) with NFSS spec.: 
 .................................................
  [2] [3] [4]
-Overfull \hbox (6.00357pt too wide) in paragraph at lines 173--174
+Overfull \hbox (6.00357pt too wide) in paragraph at lines 171--172
 [][][][][][][][][][][][][][][][][][][][][] 
  []
 
 
-Overfull \hbox (22.20374pt too wide) in paragraph at lines 179--181
+Overfull \hbox (22.20374pt too wide) in paragraph at lines 177--179
 [][][][][][][][][][][][][][][][][][][][][][][][][][][] 
  []
 
 
-Overfull \hbox (19.59186pt too wide) in paragraph at lines 217--218
-\TU/Consolas(1)/m/n/10 backBuffer, mSwapChain->GetBuffer() \TU/STFangsong(0)/m/
-n/10 得 到 \TU/Consolas(1)/m/n/10 backBuffer \TU/STFangsong(0)/m/n/10 然 后 再 用 \TU
-/Consolas(1)/m/n/10 mDevice-
+Overfull \hbox (79.8992pt too wide) in paragraph at lines 196--197
+[] \TU/MicrosoftYaHeiLight(0)/m/n/10 (a) \TU/STFangsong(0)/m/n/10 通 过 \TU/Micro
+softYaHeiLight(0)/m/n/10 D3D11CreateDevice() \TU/STFangsong(0)/m/n/10 创 建 \TU/M
+icrosoftYaHeiLight(0)/m/n/10 Device(ID3D11Device) \TU/STFangsong(0)/m/n/10 和 \T
+U/MicrosoftYaHeiLight(0)/m/n/10 Context(ID3D11DeviceContext)
  []
 
 
-Overfull \hbox (4.08812pt too wide) in paragraph at lines 219--220
-\TU/STFangsong(0)/m/n/10 与 其 不 同 的 是 对 于 \TU/Consolas(1)/m/n/10 depthStencilBuf
-fer, \TU/STFangsong(0)/m/n/10 需 要 设 定 \TU/Consolas(1)/m/n/10 D3D11_TEXTURE2D_DE
-SC\TU/STFangsong(0)/m/n/10 。|
+Overfull \hbox (20.42654pt too wide) in paragraph at lines 213--214
+[] \TU/MicrosoftYaHeiLight(0)/m/n/10 (d) \TU/STFangsong(0)/m/n/10 使 用 \TU/Micro
+softYaHeiLight(0)/m/n/10 IDXGIFACTORY \TU/STFangsong(0)/m/n/10 的 成 员 函 数 \TU/Mi
+crosoftYaHeiLight(0)/m/n/10 CreateSwapChain() \TU/STFangsong(0)/m/n/10 来 创 建 \T
+U/MicrosoftYaHeiLight(0)/m/n/10 mSwapChain;
  []
 
 
-Overfull \hbox (11.94211pt too wide) in paragraph at lines 219--220
-\TU/STFangsong(0)/m/n/10 之 后 类 似 于 之 前 方 法\TU/Consolas(1)/m/n/10 , ID3D11TEXTUR
-E2D* mDepthStencilBuffer \TU/STFangsong(0)/m/n/10 由 \TU/Consolas(1)/m/n/10 mDev
-ice-
- []
-
-
-Overfull \hbox (15.92627pt too wide) in paragraph at lines 219--220
-\TU/Consolas(1)/m/n/10 > CreateTexture2D() \TU/STFangsong(0)/m/n/10 得 到\TU/Cons
-olas(1)/m/n/10 , \TU/STFangsong(0)/m/n/10 然 后 通 过 \TU/Consolas(1)/m/n/10 mDevic
-e->CreateDepthStencilView()
+Overfull \hbox (63.47733pt too wide) in paragraph at lines 217--218
+\TU/MicrosoftYaHeiLight(0)/m/n/10 ture2D() \TU/STFangsong(0)/m/n/10 得 到\TU/Micr
+osoftYaHeiLight(0)/m/n/10 , \TU/STFangsong(0)/m/n/10 然 后 通 过 \TU/MicrosoftYaHei
+Light(0)/m/n/10 mDevice->CreateDepthStencilView() \TU/STFangsong(0)/m/n/10 创 建 
+\TU/MicrosoftYaHeiLight(0)/m/n/10 ID3D11DepthStencilView()
  []
 
 [5] [6]
-Overfull \hbox (22.21152pt too wide) in paragraph at lines 286--287
-\TU/Consolas(1)/m/n/10 ID3D11Device::CreateRasterizerState() \TU/STFangsong(0)/
-m/n/10 来 得 到 \TU/Consolas(1)/m/n/10 ID3D11RasterizerState*;
+Overfull \hbox (28.4444pt too wide) in paragraph at lines 279--280
+\TU/STFangsong(0)/m/n/10 似 的，|  它 也 是 由 \TU/MicrosoftYaHeiLight(0)/m/n/10 D3D11
+_BUFFER_DESC \TU/STFangsong(0)/m/n/10 来 描 述 的，|  同 时 由 \TU/MicrosoftYaHeiLight(
+0)/m/n/10 D3D11_SUBRESOURCE_DATA
  []
 
 
-Overfull \hbox (20.68742pt too wide) in paragraph at lines 300--301
-[]\TU/STFangsong(0)/m/n/10 在 开 源 到 的 \TU/Consolas(1)/m/n/10 effect.lib \TU/STFa
-ngsong(0)/m/n/10 中，| \TU/Consolas(1)/m/n/10 C+ + \TU/STFangsong(0)/m/n/10 程 序 使
- 用 \TU/Consolas(1)/m/n/10 D3DX11CompileEffectFromFile()
+Overfull \hbox (107.8917pt too wide) in paragraph at lines 284--285
+\TU/MicrosoftYaHeiLight(0)/m/n/10 terizer State; \TU/STFangsong(0)/m/n/10 它 首 先
+ 是 由 \TU/MicrosoftYaHeiLight(0)/m/n/10 D3D11_RASTERIZER_DESC \TU/STFangsong(0)/
+m/n/10 描 述，|  然 后 由 \TU/MicrosoftYaHeiLight(0)/m/n/10 ID3D11Device::CreateRaste
+rizerState()
  []
 
 [7] [8] (./Note.aux) ) 
 Here is how much of TeX's memory you used:
- 19833 strings out of 493005
- 384168 string characters out of 6140056
- 458128 words of memory out of 5000000
- 23658 multiletter control sequences out of 15000+600000
- 11801 words of font info for 80 fonts, out of 8000000 for 9000
+ 19817 strings out of 493005
+ 383860 string characters out of 6140056
+ 457026 words of memory out of 5000000
+ 23643 multiletter control sequences out of 15000+600000
+ 11793 words of font info for 79 fonts, out of 8000000 for 9000
  1348 hyphenation exceptions out of 8191
  46i,9n,77p,10456b,1501s stack positions out of 5000i,500n,10000p,200000b,80000s
 
