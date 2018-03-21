@@ -1,0 +1,39 @@
+\documentclass[12pt, a4paper]{article}   
+\usepackage{indentfirst, amsmath, fontspec, listings, xcolor, amssymb}
+    
+\setmainfont{Microsoft YaHei}
+        
+\newfontfamily\consolas{Consolas}
+\lstset{numberstyle = \small\consolas, basicstyle=\small\consolas}
+        
+\XeTeXlinebreaklocale "zh"
+\XeTeXlinebreakskip = 0pt plus 1pt
+
+\begin{document}
+    \section*{2017/3/20} 
+
+    \subsection*{Material editor reference}
+        comment / comment boxes: 材质编辑器中每一个节点可以写comment, 编辑图中用C开可以编写 comment boxes 
+
+        Live Preview / Live Node / Live Update 
+
+        Reroute nodes 
+
+        compile errors
+
+        material graph search 
+
+    %Cspell:ignore Coord
+
+    \subsection*{How to do material}
+        Panner material expression: 让uv坐标跟随时间改变
+
+        coordinate: 当前在实际贴图上的坐标，模型顶点的uv坐标 TexCoord 的衍生
+
+        time: 控制 panner 中 speed x speed y的倍数 time节点可以被理解为 deltaTime
+
+        speed: Speed x \& Speed Y
+
+
+
+\end{document}
