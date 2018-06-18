@@ -1,0 +1,412 @@
+\documentclass[12pt, a4paper, twocolumn]{article}   
+    \usepackage{indentfirst, amsmath, fontspec, listings, xcolor, amssymb}
+
+    \newfontfamily\consolas{Consolas}
+    \lstset{numberstyle = \small\consolas, basicstyle=\small\consolas}
+        
+    \XeTeXlinebreaklocale "zh"
+    \XeTeXlinebreakskip = 0pt plus 1pt
+
+\begin{document}
+\section*{5.6}
+
+5,7,9,11
+
+In order to ease my effort to do homework through latex, I will not pay too much attention toward the format of my output. So there will be no align function in my latex document. 
+
+1.
+$$\Phi^{-1}(0.1) = -\Phi^{-1}(0.9) = -1.2816$$
+$$\Phi^{-1}(0.9) = 1.2816$$
+$$\Phi^{-1}(0.5) = 0$$
+$$\Phi^{-1}(0.75) = 0.6745$$
+$$\Phi^{-1}(0.25) = -0.6745$$
+
+2.
+$$F(x) = \Phi(\frac{x - \mu}{\sigma})$$
+$$P(X \geqslant 0) = 1 - F(0) $$
+$$= 1 - \Phi(-0.5) = 0.6915$$
+
+$$P(-1 < X < 0.5) = F(0.5) - F(-1) $$
+$$ = \Phi(-0.25) - \Phi(-1) = 0.2426$$
+
+$$P(|X| < 2) = F(2) - F(-2)$$
+$$=\Phi(0.5) - \Phi(-1.5) = 0.6247$$
+
+$$P(1\leqslant -2X + 3 \leqslant 8)$$
+$$ = P(-2 \leqslant -2x \ leqslant 5)$$
+$$ = P(-2.5 \leqslant x \leqslant 1)$$
+$$ = F(1) - F(-2.5) = \Phi(0) - \Phi(-1.75) = 0.4599$$
+
+5.
+$$P(X \leqslant 290) = 1 - F(290)$$
+$$ = 1 - \Phi(-1) = \Phi(1)$$
+$$P_{answer} = 1 - (1 - \Phi(1))^3$$
+$$ = 0.996$$
+
+
+7.
+$$P = P(116\leqslant X \leqslant 118) = F(118) - F(116)$$
+$$=\Phi(-1) - \Phi(-2)$$
+$$P_{answer} = P^3 = 0.0025$$
+
+9.
+$$X_1 \sim N(20. 0.04)$$
+$$X_2 \sim N(14, 0.01)$$
+$$X_3 \sim N(26, 0.04)$$
+$$X_1 + X_2 + X_3 \sim N(60, 0.09)$$
+$$P(55.7 + 4 \leqslant X \leqslant 56.3 + 4)$$
+$$ = F(60.3) - F(59.7) = \Phi(1) - \Phi(-1) = 0.6827$$
+
+11.
+$$\bar{X_n} \sim N(\mu, \frac{2}{n})$$
+$$Z = (X - \mu) \times \sqrt{\frac{n}{2}}$$
+$$P(|Z|<\frac{\sqrt{n}}{20}) \geqslant 0.9$$
+$$ n = 1083$$
+
+\section*{5.7}
+1.
+
+$$\psi_Y(t)= E(e^{tY}) = E(e^{(tc)X})$$
+$$=(\frac{\beta}{\beta - ct})^\alpha = \frac{\frac{\beta}{c}}{\frac{\beta}{c} - t}$$
+$$\beta \rightarrow \frac{\beta}{c}$$
+
+//The following is a way that I don't know whether it's correct through the derivation of c.d.f and p.d.f, but I decide to reserve it in the homework
+
+$$p(x) = \frac{\beta^\alpha}{\Gamma(\alpha)}x^{\alpha - 1}e^{-\beta x}, x > 0$$
+$$Y = cX$$
+$$F_x(x) = \int_{0}^x\frac{\beta^\alpha}{\Gamma(\alpha)}x^{\alpha - 1}e^{-\beta x}dx$$
+$$F_y(y) = P(Y \leqslant y)$$
+$$ = P(cX \leqslant y)$$
+$$ = P(X \leqslant \frac{y}{c})$$
+$$ = F_x(\frac{y}{c})$$
+$$ = \int_{0}^{\frac{y}{c}}\frac{\beta^\alpha}{\Gamma(\alpha)}(\frac{y}{c})^{\alpha - 1}e^{-\frac{\beta x}{c}}dx)$$
+$$ = \int_{0}^{y}\frac{(\frac{\beta}{c})^\alpha}{\Gamma(\alpha)}(\frac{y}{c})^{\alpha - 1}e^{-\frac{\beta x}{c}}dx$$
+
+6.
+$$\psi(\bar{X_n}) = E(e^\frac{t\sum_1^n X_i}{n})$$
+$$=E(e^{\sum_1^n\frac{t}{n}X_i})$$
+$$=(\frac{\beta}{\beta - \frac{t}{n}})^{n\alpha}$$
+$$=(\frac{n\beta}{n\beta - t})^{n\alpha}$$
+
+For exponential distribution, $\alpha = 1$
+$$=(\frac{n\beta}{n\beta - t})^n$$
+
+It follows the gamma distribution with parameter $(n, n\beta)$
+
+
+7.
+
+Let $Y = Max(X_1, X_2 ... X_n)$ 
+$$P(Y < t) = 1 - P(X_1 < t)P(X_2 < t)...P(X_n < t)$$
+$$ = (\int_0^t \beta e^{-\beta x}dx)^n$$
+$$ = (1 - e^{\beta t}) ^ n $$
+$$ P_{answer} = 1 - (1 - e^{\beta t})^3$$
+
+8.
+$$Y = Min(X_1, X_2, ... X_n)$$
+Follow the similar way in 7:
+$$P(Y > y) = e^{-y\sum_{i = 1}^n\beta_i}$$
+$$F(y) =  1 - e^{-y\sum_{i = 1}^n\beta_i}$$
+$$p(y) = F^{'}(y) = (\sum_{i = 1}^n\beta_i) e^{-t\sum_{i = 1}^n\beta_i}$$
+
+So Y follows exponential distribution with parameter $\sum_{i = 1}^n \beta_i$
+
+9.
+
+All three components should not fail in order to maintain the system, as three components are independent.
+
+$$P = P(X_1 > 100)P(X_2 > 100)P(X_3 > 100)$$
+For exponential distribution
+$$P(X > t) = e^{-\beta t}$$
+$$P = e^{-100\times(0.001 + 0.003 + 0.006)}$$
+$$ = \frac{1}{e}$$
+
+10.
+$$\beta = \frac{1}{\mu}$$
+with the conclusion of 7
+$$P = e^{-\frac{nt}{\mu}}$$
+$$E(Y) = \frac{\mu}{n}$$
+$$Var(Y) = \frac{\mu^2}{n^2}$$
+
+\section*{6.2}
+5.
+$$P(|\overline{X_n} - E(X)| < 2\sigma) > 0.99 $$
+$$P(|\overline{X_n} - E(X)| < 2\sigma) > 1 - \frac{\sigma^2}{4n\sigma^2} $$
+$$= 1 - \frac{1}{4n} \geqslant 0.99$$
+$$n \geqslant 25$$
+
+6.
+$$P(|\overline{X_n} - E(X)| \leqslant 0.5) \geqslant 0.8$$
+$$P(|\overline{X_n} - E(X)| \leqslant 0.5) > 1 - \frac{\sigma^2}{0.25n} $$
+$$1 - \frac{16}{n} \geqslant 0.8 $$
+$$ n \geqslant 80$$
+
+\section*{6.3}
+1.
+$$n = 60, \sigma = 5, \mu = 4$$
+$$ T = \sum_{i = 1}^n X_i$$
+$$ T \sim N(240, 1500)$$
+$$ P(T \geqslant 250) = 1 - \Phi(\frac{\sqrt{15}}{15}) = 0.001$$
+
+3.
+$$n = 125, \mu = \sigma^2 = 5$$
+$$ \overline{X_n} = \frac{\sum_{i = 1}^n X_i}{n} $$
+$$ \overline{X_n} \sim N(5, \frac{1}{25})$$
+$$ P(\overline{X_n} < 5.5) = \Phi(2.5) = 0.9938$$
+
+7.
+$$n = 16, \mu = 4.5, \sigma^2 = 8.25 $$
+$$\overline{X_n} \sim N(4.5, 8.25)$$
+$$P(4 \leqslant \overline{X_n} \leqslant 6)$$
+$$=\Phi(\frac{}{})$$
+
+10.
+$$P(|\overline{X_n} - E(X)| < \frac{\sigma}{4})$$
+$$>1 - \frac{\sigma^2}{\frac{\sigma^2}{16}n} = \frac{9}{25}$$
+
+$$X_n \sim N(\mu, \frac{\sigma^2}{n})$$
+$$P(|\overline{X_n} - E(X)| < \frac{\sigma}{4})$$
+$$ = P(|Z| < \frac{\sqrt{n}}{4n}) = 2\Phi(\frac{1}{20}) - 1$$
+
+\section*{6.4}
+4.
+$$n = 1200, \mu = \frac{1}{4}, \sigma^2 = \frac{3}{16}$$
+$$T = \sum_{i = 1}^n X_i $$
+$$T \sim N(300, 225)$$
+$$P(T \leqslant 270) = P(T \leqslant 270.5)$$
+$$ = \Phi(\frac{-29.5}{15})$$
+
+5.
+$$P(\overline{X_n} < 5.5) = P(\overline{X_n} < 6)$$
+$$ = \Phi()$$
+
+\section*{7.5}
+
+2.
+$$\widehat{p} = \frac{\sum_{i = 1}^n x_i}{n} = \frac{29}{35}$$
+
+3.
+
+$$L(p) = p^{\sum_{i = 1}^nx_i}(1 - p)^{n-\sum_{i = 1}^nx_i} $$
+$$\lambda(p) = \sum_{i = 1}^nx_ilog(p) + (n - \sum_{i = 1}^nx_i)log(1 - p)$$
+$$\frac{d\lambda}{dp} = \frac{\sum_{i = 1}^nx_i}{p} + \frac{n - \sum_{i = 1}^nx_i}{1 - p}$$
+$$=\frac{58}{p} + \frac{12}{1 - p}$$
+$$p \in [\frac{1}{2}, \frac{2}{3}]$$
+$$\frac{d\lambda}{dp} > 0$$
+$$\widehat{p} = \frac{2}{3}$$
+
+5.
+
+$$p(X = k) = \frac{\theta^k}{k!}e^{-\theta}$$
+$$L(\theta) = \frac{e^{-n\theta}\theta^{\sum_{i = 1}^nx_i}}{\prod_{i = 1}^{n}(x_i!)}$$
+$$\lambda(\theta) = -n\theta + \sum_{i = 1}^nx_ilog(\theta) - \sum_{i = 1}^n\frac{x_i(x_i + 1)}{2} $$
+$$\frac{d\lambda}{d\theta} = -n + \frac{\sum_{i = 1}^nx_i}{\theta} = 0$$
+$$\widehat{\theta} = \overline{x}$$
+$$\frac{d^2\lambda}{d\theta^2} = -\frac{\sum_{i = 1}^nx_i}{\theta^2} < 0$$
+
+6.
+
+note ...
+
+7.
+
+$$f(x | \theta) = \beta e^{\beta x}$$
+$$L(\beta) = \beta^n e^{-\beta\sum_{i = 1}^nx_i}$$
+$$\lambda(\beta) = nlog(\beta) - \beta\sum_{i = 1}^nx_i$$
+$$\frac{d\lambda}{d\beta} = \frac{n}{\beta} - \sum_{i = 1}^nx_i$$
+$$\widehat{\beta} = \frac{n}{\sum_{i = 1}^nx_i}$$
+$$\frac{d^2\lambda}{d\beta^2} = -\frac{n}{\beta^2} < 0$$
+
+8.
+
+$$L(\theta) = e^{n\theta - \sum_{i = 1}^nx_i}$$
+$$\lambda(\beta) = n\theta - \sum_{i = 1}^nx_i$$
+$$\frac{d\lambda}{d\theta} > 0$$
+$$\theta \in R$$
+
+9.
+$$L(\theta) = \theta^n\prod_{i = 1}^{n}x_i^{\theta - 1}$$
+$$\lambda(\theta) = nlog(\theta) + (\theta - 1)\sum_{i = 1}^nx_i$$
+$$\frac{d\lambda}{d\theta} =\frac{n}{\theta} + \sum_{i = 1}^nlog(x_i)$$
+$$\widehat{\theta} = -\frac{n}{\sum_{i = 1}^nlog(x_i)}$$
+
+11.
+$$L(\theta_1, \theta_2) = \prod_{i = 1}^n\frac{1}{\theta_2 - \theta_1}$$
+$$\lambda(\theta_1, \theta_2) = -nlog(\theta_2 - \theta_1)$$
+$$\frac{\partial\lambda}{\partial\theta_1} = \frac{n}{\theta_2 - \theta_1}$$
+$$\frac{\partial\lambda}{\partial\theta_2} = -\frac{n}{\theta_2 - \theta_1}$$
+
+$$\theta_2 = max, \theta_1 = min$$
+
+\section*{7.6}
+1.
+$$\theta = -\frac{n}{\sum_{i = 1}^nlog(x_i)}$$
+$$e^{-\frac{1}{\theta}} = (\prod_{i = 1}^nx_i)^{\frac{1}{n}}$$
+
+2.
+$$\widehat{\theta} = \overline{x}$$
+$$D(X) = \sqrt{\theta}$$
+
+3.
+$$\widehat{\beta} = \frac{1}{\overline{x}}$$
+$$\int_0^{s} \beta e^{-\beta x}dx = 1 - e^{-\beta s} = \frac{1}{2}$$
+$$ = \frac{log2}{\beta} = log2\overline{x}$$
+
+5.
+$$\frac{a + b}{2}$$
+$$a = min, b = max$$
+
+6.
+$$\Phi(\frac{s - \mu}{\theta}) = 0.95$$
+$$s = 1.645\theta + \mu$$
+
+7.
+$$v = 1 - P(x \leqslant 2) $$
+$$=1 - \Phi(\frac{2 - \mu}{\theta})$$
+
+\section*{7.7}
+1.
+$$f(T|p) = p^{\sum_{i = 1}^nx_i}(1 - p)^{n - \sum_{i = 1}^nx_i}$$
+$$u(x) =  1, v(a, b) = b^a(1 - b)^{n - a}$$
+
+2.
+$$f(T|p) = p^n(1 - p)^{\sum_{i = 1}^nx_i}$$
+$$u(x) = 1, v(a, b) = b^n(1 - b)^a$$
+
+3.
+$$f(T|p) = \prod_{i = 1}^n C_{r + x_i - 1}^{x_i}p^r(1 - p)^{x_i - 1}$$
+$$u(x) = \prod_{i = 1}^n C_{r + x_i - 1}^{x_i}$$
+$$v(x) = \prod_{i = 1}^n p^r(1 - p)^{x_i - 1}$$
+
+4.
+$$f(T|\theta) = \prod_{i = 1}^n \frac{1}{\sqrt{2\pi}\theta}e^{-\frac{(x_i - \mu)^2}{2\theta^2}}$$
+$$u(x) = 1$$
+$$v(a, b) = (\frac{1}{\sqrt{2\pi b}})^ne^{-\frac{a}{2b}}$$
+
+5.
+$$f(T|\beta) = \prod_{i = 1}^n \frac{\beta^\alpha}{\Gamma(\alpha)}x_i^{\alpha - 1}e^{-\beta x}$$
+$$u(x) = \frac{(\prod_{i = 1}^nx_i)^{\alpha - 1}}{\Gamma^n(\alpha)}$$
+$$V(a, b) = b^{n\alpha}e^{-nab}$$
+
+6.
+$$u(x) = e^{-\beta\sum_{i = 1}^nx_i}$$
+$$V(a, b) = \frac{\beta^{nb}}{\Gamma^n(b)}a^{b - 1}$$
+
+7.
+$$f(T|\alpha) = \prod_{i = 1}^n\frac{\Gamma(\alpha + \beta)}{\Gamma(\alpha)\Gamma(\beta)}x_i^{\alpha - 1}(1 - x_i)^{\beta - 1}$$
+$$u(x) = \frac{\prod_{i = 1}^n(1 - x_i)^{\beta - 1}}{\Gamma^n(\beta)}$$
+$$V(a, b) = (\frac{\Gamma(b + \beta)}{\Gamma(b)})^n a^{b - 1}$$
+
+8.
+$$f(T|\theta) = (\frac{1}{\theta})^nI_A(x_1, x_2 ... x_n)I_B(x_1, x_2 ... x_n)$$
+$$u(x) = I_B(x_1, x_2...x_n)$$
+$$v(a, b) = (\frac{1}{b})^nI(a)$$
+
+9.
+$$f(T|b) = (\frac{1}{b - a})^nI_A(x_1, x_2 ... x_n)I_B(x_1, x_2 ... x_n)$$
+$$u(x) = I_B(x_1, x_2...x_n)$$
+$$v(a, b) = (\frac{1}{b})^nI(a)$$
+
+10.
+
+$$f(T|a) = (\frac{1}{b - a})^nI_A(x_1, x_2 ... x_n)I_B(x_1, x_2 ... x_n)$$
+$$u(x) = I_A(x_1, x_2...x_n)$$
+$$v(a, b) = (\frac{1}{b})^nI(b)$$
+
+\section*{7.8}
+1.
+$$f(x_1, x_2 ... x_n) = \prod_{i = 1}^n\frac{\beta^\alpha}{\Gamma(\alpha)}x_i^{\alpha - 1}e^{-\beta x}$$
+$$u(x) = 1$$
+$$V((T_1, T_2), (\alpha, \theta)) = \frac{\beta^{n\alpha}}{\Gamma^{n}(\alpha)}T_1^{\alpha - 1}e^{-\beta T_2}$$
+
+2.
+$$f(x_1, x_2...x_n|\alpha, \beta) = \prod_{i = 1}^n\frac{\Gamma(\alpha + \beta)}{\Gamma(\alpha)\Gamma(\beta)}x_i^{\alpha - 1}(1 - x_i)^{\beta - 1}$$
+$$u(x) = 1$$
+$$V((T_1, T_2), (\alpha, \beta)) = (\frac{\Gamma(\alpha + \beta)}{\Gamma(\alpha)\Gamma(\beta)})^nT_1^{\alpha - 1}T_2^{\beta - 1}$$
+
+3.
+
+$$f(x_1, x_2...x_n|\theta) = (\frac{1}{3})^nI_A(x_1, x_2...x_n)I_B(x_1, x_2...x_n)$$
+
+4.
+
+\section*{7.9}
+4*.
+
+5.
+$$R(\delta_2, \theta) = Var(\delta) - (E(\delta_2) - \theta)^2$$
+$$E(cY) = cE(Y)$$
+$$E(\delta_2) - \theta = \frac{nc\theta}{n + 1}$$
+$$c^{*} = c = \frac{n + 1}{n}$$
+
+6.
+$$\delta(x) = \overline{X_n}$$
+$$T = \prod_{i = 1}^nx_i$$
+
+8.
+$$$$
+
+12.
+$$E(X_1|T) = 1\times P(X_1 = 1 |T)$$
+$$ = \frac{P(X_1 = 1)P(X_1 = 1, \sum_{i = 1}^nx_i = t)}{P(\sum_{i = 1}^nx_i = t)} $$
+$$P(X_1 = 1, \sum_{i = 1}^nx_i = t) = C_{n - 1}^{t - 1}p^{t - 1}(1 - p)^{n - t} $$
+$$P(\sum_{i = 1}^nx_i = t) = C_n^tp^t(1 - p)^{n - t}$$
+$$ origin= \frac{C_{n - 1}^{t - 1}}{C_n^t}$$
+
+13.
+$$E(Y_i|T) = 1 \times P(Y_i = 1 | T) $$
+$$=\frac{P(x_i = 0, \sum_{i = 1}^nx_i = t)}{P(\sum_{i = 1}^nx_i)}$$
+$$=\frac{e^{-\theta}\frac{((n-1)\theta)^te^{-(n-1)\theta})}{t!}}{\frac{(n\theta)^te^{-n\theta}}{t!}}$$
+$$ = (\frac{n - 1}{n})^t = (1 - \frac{1}{n})^{T}$$
+$$ = ((1 - \frac{1}{n})^n)^{\overline{x}}$$
+$$ = e^{\overline{x}}$$
+
+14.
+
+\section*{8.1}
+5.
+$$P(|\overline{X_n} - p| \leqslant 0.1) \geqslant 1 - \frac{Var(X_n)}{0.01}$$
+$$Var(X_n) = \frac{p - p^2}{n} = \frac{0.16}{n}$$
+$$n \geqslant 22$$
+
+6.
+$$P(|\overline{X_n} - p| \leqslant 0.1) = 2*\Phi(\frac{\sqrt{n}}{4}) - 1 \geqslant 0.95$$
+
+7.
+$$Var(X_n) \leqslant 0.01$$
+$$\frac{0.16}{n} \leqslant 0.01$$
+$$ n \geqslant 16$$
+
+8.
+$$\frac{p - p^2}{n} \leqslant 0.01$$
+$$ n \geqslant 100(p - p^2) \geqslant 25$$
+
+\section*{8.2}
+5.
+$$X^2 + Y^2 + Z^2 < 1$$
+$$X^2 + Y^2 + Z^2 \sim \chi^2(3): \frac{1}{2^{\frac{3}{2}}\Gamma(\frac{3}{2})}x^{\frac{1}{2}}e^{-\frac{1}{2}x}$$
+$$\int_{0}^{1}\frac{1}{2^{\frac{3}{2}}\Gamma(\frac{3}{2})}x^{\frac{1}{2}}e^{-\frac{1}{2}x}dx$$
+6.
+$$t = 2, Var = 2\sigma^2$$
+$$X^2 + Y^2 + Z^2 \sim \chi^2(3)$$
+$$P(X^2 + Y^2 + Z^2) \leqslant 16\sigma^2$$
+7.?
+$$\psi(Y) = E(e^{ty})$$
+$$ = E(e^{-2\sum_{i = 1}^nlog(F_i(x_i))t})$$
+$$ = E(\prod_{i = 1}^nF_i(x_i)e^{-2t})$$
+$$ = \prod_{i = 1}^nE(F_i(x_i)e^{-2t})$$
+$$ = \prod_{i = 1}^n\int_{-\infty}^{\infty}F_i(x_i)e^{-2t}x_idx$$
+
+10.
+
+11.
+$$\psi(\sqrt{x}) = E(e^{t\sqrt{x}})$$
+
+13.
+$$\hat{\delta^2_0} = \frac{\sigma^2}{n}\sum_{i = 1}^n Z_i^2 $$
+$$\psi(\hat{\delta^2_0}) = E(e^{t\frac{\sigma^2}{n}\sum_{i = 1}^n Z_i^2}) $$
+$$=  \prod_{i = 1}^n(\frac{1}{1 - \frac{2\sigma^2t}{n}})^{\frac{n}{2}}$$
+
+$$\psi_{target} = (\frac{\frac{n}{2\sigma^2}}{\frac{n}{2\sigma^2} - t})^{n/2}$$
+
+\end{document}

@@ -1,0 +1,770 @@
+\documentclass[10pt, a4paper]{article}
+    \author{ianaesthetic}
+    \title{Unity3D note}
+\usepackage{indentfirst, amsmath, fontspec, listings, xcolor, amssymb}
+
+\newfontfamily\consolas{Consolas}
+\lstset{numberstyle = \small\consolas, basicstyle=\small\consolas}
+
+\XeTeXlinebreaklocale "zh"
+\XeTeXlinebreakskip = 0pt plus 1pt
+
+%Cspell: ignore repo
+
+\begin{document}
+    \section{Introduction} 
+        Study: Financial Market, Financial Institution, Financial Management.
+        \subsection{Financial Market} 
+        \textbf{Financial Market}: Markets where the funds flow from lenders to the borrowers. It's the \emph{channel} funds from servers to investors and can \emph{promote} economic efficiency.
+        \subsubsection{The Bond Market and Interest Rate}
+            A \textbf{security (financial instrument)} is a claim on the issuer's future income or assets.  it includes \textbf{Bond} and \textbf{Stock}.
+
+            \textbf{Bond} is a debt security that promises to make payments periodically for a specified period of time. 
+            
+            \textbf{Stock}: Common stock represents a share of ownership.
+
+            \textbf{Interest Rate}: Cost of borrowing or the price paid for rental of funds. When it increases, It can affect consumption, saving and investment. 
+        \subsubsection{The Foreign Exchange Market}
+            \textbf{Definition}: where funds are converted from one currency into another. 
+
+            \textbf{Foreign Exchange Rate}: the price of one currency in terms of another currency. It mainly influence the imports and exports. There three methods of quotations : 
+            
+            \textbf{Direct}: $100\ FOREX = e_x\ Domestic\ Currency$ 
+
+            \textbf{Indirect}: $100\ Domestic\ Currency = e_y\ FOREX$
+
+            \textbf{USD} $1\ USD = e_z\ Domestic\ Currency$
+            \newline 
+
+            (de)appreciate: the influence of market; 
+            
+            (de)valuate: the influence of government
+
+            US Dollar Index(USDX): To evaluate the value of Dollar by exchange rate with other countries. 
+
+            \subsubsection{Factors of Foreign Exchange Rate}
+                The Exchange rate is something rated to the Demand \& Supply of foreign currency. For e - Q(foreign currency) graph, it satisfies the normal demand and supply curve. All the exchange rate is discussed in direct quotations. 
+
+                Balance of Payment(BOP):\emph{surplus} (FOREX $\uparrow$, e $\downarrow$),\emph{deficit}(FOREX $\downarrow$, e $\downarrow$).
+                
+                Economic Performance can be apparent in some time point(end of the year). Good performance will lure foreign cash(e $\downarrow$).
+                
+                Interest rate will also affect(i $\uparrow$, e $\downarrow$, for it can lure foreign investment). 
+
+                Price will affect as well(p $\uparrow$, e $\uparrow$).
+    \subsection{Banking and Financial Institutions}
+        \textbf{Functions}: 
+
+            $a$. They make financial markets work 
+
+            $b$. Financial intermediary for funds flowing from savers to investors
+
+            $c$. Important effects on the performance of the economy as a whole
+        
+        \textbf{Examples}: 
+            
+            \quad Insurance Company; 
+            
+            \quad Banks; 
+            
+            \quad Securities Firm; 
+            
+            \quad Trust Company; 
+            
+            \quad Credit Union; 
+            
+            \quad Financial Company;
+            
+            \quad Financial Leasing Company;
+            
+            \quad Credit Rating Agency; 
+
+            \quad Exchanger; 
+            
+            \quad Funds Management; 
+
+        All examples can be divided to two types: \emph{banks-institution} and \emph{non-banks-institution}. Banks are the largest financial intermediaries in our economy, including Central Bank; Commercial Bank; Policy Bank(non-profitable); Specialized Bank. There is a trend of \emph{disintermediation}.
+        
+        \subsubsection{Financial Innovation}
+            Anything new in Finance. 
+
+            New financial product, financial institution, financial services and more appear, such as e-finance and financial derivatives. 
+        \subsection{Money and Money policy}
+            \textbf{Definition}: Money is defined as anything that is \emph{generally} accepted in payment for goods or services or in the repayment of debts. It is linked to changes in economic variables that affect all of us and are important to the health of the economy. 
+
+            Money affect \emph{business cycle} (including four stages: \emph{recession},\emph{depression} \emph{recovery} and \emph{boom}. 
+
+            Money growth rate will have a severe decrease and rapid growth. The recession will cause the money decreasing, for example, people are don't intend to consume. After a big recession, government will get in and add the amount of money in the market to boost economy. This phenomena can be used to  predict the performance.
+            
+            \subsubsection{Relationship between Money and Inflation} 
+                \textbf{The aggregate price level}: the average price of goods and services in an economy. 
+                
+                \textbf{Inflation}: A continue rise in the price level which affects all economic players. 
+
+                The rise of money supply will lead to the rise of inflation. 
+            \subsubsection{Money and Interest Rates}
+                Interest Rates are the price of money. The increase of money supply will lead to the decrease of interest rate, something like demand and supply.
+            \subsubsection{Monetary and Fiscal Policy}
+                \textbf{Monetary policy} is the management of the money supply and interest rates. (Central bank) 
+
+                \textbf{Fiscal Policy} is government spending and taxation, which is set by department of Treasure. (fiscal revenue and expense, the department of treasury) 
+
+                Both policies make government be able to manage and manipulate markets. Government raise money from taxation, profit of state-owned company, fee, etc. Government spends on procurement, investment, transfer payment,interest payment, etc. 
+
+                The effect on aggregate demanding($C + I + G + NX$): Money policy influences C, I, NX, has a indirect effect to AD. Fiscal policy will have a direct effect on G and AD.  
+
+                Interest rate change($\uparrow$, as example) will affect exchange market, stock market($\downarrow$, as it's more difficult to raise money), national bond market, commercial market($\downarrow$, as it will lower the need for consumption).
+    
+    \section{Financial Market}
+        \subsection{Function of Financial Markets} 
+            Perform the essential function of channeling funds from lenders to borrowers. It can also promote \emph{economic efficiency} by producing a efficient allocation of capital. It will also directly improve the well-being of consumers by allowing them to time purchases better (allow consumers to use the money in the future to purchase by loans or something else).
+            \subsubsection{Channel of Financing}
+                \textbf{Direct Finance}: Borrowers borrow funds directly from lenders in financial markets by selling them securities. More specifically, the relationship between lender and borrower is direct and clear. 
+
+                \textbf{Indirect Finance}: Involves a financial intermediary that stands between the lender-savers. The relationship between intial lender and final  borrower is indirect. (Banks)
+
+                The graph of flow of funds can be referred to ppt.  
+        \subsection{Structure of Financial Market}
+            \subsubsection{Debt and Equity Markets}
+                \textbf{Debt instrument} is a \emph{contractual agreement} by the borrower to pay the holder of the instrument fixed dollar amount(interest and principal payments) at regular intervals until a specified date(the \emph{Maturity Date}, when a final payment is made, includes: \emph{bonds}, \emph{mortgage}.
+
+                It has different terms includes: 
+                
+                \quad short-term($M < 1yr$): T-Bill
+
+                \quad intermediate term($1yr < M < 10yr$): T-Note
+   
+                \quad long-term ($M > 10yr$): T-Bond \newline
+
+                \textbf{Equity instrument} is claim to share in the net income(income after expenses and taxes) and the asset of a business, includes: \emph{common stock}, \emph{preferred stock}. 
+
+                The difference between common stock and preferred stock: Preferred stock has priority in dividends receiving and liquidation during the corruption. Common stock owner has \emph{voting right} based on the share owned while limited in priority stock owner. And the common stock has priority to buy new shares to avoid dilution. From the crisis perspective, common stock holder has bigger crisis than preferred stock. 
+
+                Priority stock has two type: accumulative and non-accumulative. Accumulative has a right to claim the unpaid dividends in the later year while non-accumulative can just claim current dividends. Accumulative stock is more analogous to long-term bond. 
+
+                The main disadvantage of owning a corporation's equities rather than its debt is that an equity holder is a \emph{residual claimant}.
+            \subsubsection{Primary and Secondary Markets}
+                \textbf{Primary markets} are those where new security issues sold to initial buyers. Investment Banks will \emph{underwrite} securities in primary markets.  
+
+                \textbf{Second markets} are markets where securities previously issued are bought and sold between investors. Broker(agency) and dealers  work in secondary markets. 
+            \subsubsection{Exchanges and Over-the-Counter(OTC) Markets} 
+                \textbf{Exchanges markets}: Trades conducted in central locations(eg. New York Stock Exchange, NASDAQ)      
+                \textbf{OTC markets}: Dealers at different locations buy and sell(eg. OTCBB).  
+            \subsubsection{Money and Capital Markets}
+                \textbf{Money Markets} deal with short-term debt instruments. 
+                
+                \textbf{Capital markets} deal with longer-term debt and equity instruments. 
+                
+            \subsubsection{Money Markets Instruments}
+                Treasury Bills[TB]: Short-term; A solution to the government deficit; IT has the lowest rate in the markets, so called gilt-edged / risk-free  bond, as it's guaranteed by the taxation of the government. They are usually sold at discount by auction to generate interest.
+                
+                Negotiable Bank Certificates of Deposit (large dominations) [CD]: Large domination; Transferable in second market which can receive the interest before maturity; Of low risk as it's published by guaranteed banks and they absorbs funds quickly. For bank it's of large dominations and can't be taken out before maturity. 
+                
+                Commercial paper: a unsecured promissory note with a fixed maturity less tha 270 days and is published by well-known cooperation; During selling on credits, or in the credit term, there is no interest and will form accounts receivable/payable; When exceeding the credit term, they will change to note receivable/payable with interest. Notes include Promissory note and draft.
+                
+                Draft is an order, issued by the creditor for the debtor to pay fo a payee. Promissory note is a promise issued by debtor to pay back to the creditor. \emph{Acceptance} is needed in the draft to promise to pay the debt;\emph{Trader's acceptance} will be in the promissory from the debtor. Bank can also be the issuer by charging the debtor to stamp this trader's acceptance and it will be called \emph{bank acceptance} which has more liquidity as bank has better reputation. \emph{Endorsement} is transferring notes to other to retrieve money before maturity with guaranteeing the debt will be paid. \emph{Discount} is transferring notes to a bank before maturity subtracting the interest. In summary, they are different on their characteristic, issuer, acceptance; If the debt is paid out, it's called \emph{Honor}. 
+
+                Federal Funds: a form of inter-bank offering as are borrowed between financial institution; short-term concentrating on overnight borrowings; large amount for immediate spending; interest rate is liberalized for inter-bank offering expect for Federal Funds;
+                
+                Repurchase agreement[RP]: After A sells a low-risk bond to B, RP is the scene that A buys back the bond at a higher price later. In fact, it's a loan for A with bond. For A this is a \emph{positive repo} and B is \emph{negative(reverse)} repo. For a, the bond still belongs to A when A is in need of funds. For B is safer to give the loan in this way with bonds as pledge. For normal \emph{pledged repo}, the pledged bonds can't be pledged again. While \emph{outright repo} allow for a shorter term of transition by another repurchase agreement with shorter term;
+
+            \subsubsection{Capital Market Instruments}
+                Capital market instruments are for long-term. 
+
+                Bonds: T-Note \& T-Bond with large amount and low risk; 
+
+                Government agency securities: by the agency of government or sponsored by government
+
+                State and local government bonds 
+
+                Cooperate bonds: with a relative hight risk, which introduces credit rating; It includes converted bonds, which can convert the bonds to stock at a price. 
+
+                Corporate stocks:
+                
+                commercial loans, consumer loans, commercial and farm mortgages, residential mortgage.
+    \subsection{Internationalization of}
+        \subsubsection{foreign exchange}
+        
+            Euro-currencies: foreign currencies deposited in banks outside the home country.
+
+            Euro-dollar: dollars deposited in foreign banks outside the US. 
+
+            Euro is actually refers to offshore. 
+        \subsubsection{World Bonds Market}
+            Foreign bonds: sold in a foreign country and denominated in that country's currency. 
+
+            Euro-bond: bond denominated in a currency other than that of the country in which it is sold. 
+        \subsubsection{World Stock Markets}
+            Stock price indices: composite indices and component indices.
+    \subsection{Financial Intermediaries}
+        \subsubsection{Types of Financial Intermediaries}
+            Depository institutions: commercial banks, saving banks, credit union, as the only institutions that the main source of liabilities is deposits;  
+
+            Contractual savings institutions: life insurance companies(Policy), fire and casualty insurance companies, pension funds(Contribution); As there is a contract between the institution and consumers;
+            
+            Investment intermediaries: Finance companies, mutual funds, money market mutual funds; They are related to the capital market;
+    
+    \subsection{Regulations of financial system}
+        Security and Exchange Commission(SEC): Bond and other exchanges are supervised by SEC;
+        
+        Commodities Futures Trading Commission(CFTC): Futures market exchange; 
+
+        Office of the Controller of the Currency(OCC): Belongs to treasury and is responsible for bank registration 
+
+        Federal Deposit Insurance Corporation (FDIC): To guarantee the deposit  deposit institutions under some limitations.
+
+        Fed reserve system: all the deposit institution; 
+
+        The content of supervision: To increase information for investors to avoid insider trading and reduce adverse selection and moral hazard problems; To ensure the soundness of financial intermediaries, e.g. restrictions on entry, disclosure, limits on competition, restrictions on interest rate; To improve monetary control by monetary policy.
+\newpage
+
+
+\section{Money}
+    \emph{Money}:anything that is generally accepted in payment for goods or services or in the repayment of debts
+    
+   \emph{Currency}: cash; consisting of dollar bills and coins and is one of type of money.
+    
+    \emph{Wealth}: the total collection of pieces of property that serve to store value. Wealth includes non-monetary part and monetary part which includes money.
+    
+    \emph{Income}: flow of earnings per unit of time; money belongs to the concept of stocks
+
+    \subsection{Functions of money}
+        Medium of Exchange: pays for goods and service with transaction; Without medium, barter economy will appear and bring high transaction costs(double coincidence of wants); So the money is a lubricant; 
+        
+        Unit of Account: the price;  
+        
+        Store of Value: used to save purchasing power to divide the process of buying and selling with high liquidity;
+        
+        Liquidity: the relative ease and speed with which an assets can be converted into a medium of exchange.
+
+        Criteria of money: Standardized, Accepted, Divisible, Easy to carry, Not Deteriorate quickly
+
+    \subsection{Evolution of Payments System}
+        \subsubsection{Commodity Money}
+            An object that clearly has value to everyone is a likely candidate to serve aas money, and a natural choice is a precious metal such as gold or silver. 
+
+            Precious metals' Advantage: quality uniform; easy to shape; easy to divide; durable 
+
+            Representative: usually bank note and it's based on precious metals
+
+        \subsubsection{Credit Money}
+            Fiat Money: Paper currency decreed by governments as legal tender.  
+            
+            Check: An \emph{instruction} from you to your bank to transfer money from your account to someone else account when she deposits the check; Who receives the check can deposit it in his bank account. This bank will collects money by contacting the bank where the check's original account resides. 
+
+            E-money: Debit card(no overdrawing); Credit card(allow overdrawing with overdraw line); stored-value card/z-purse (allow offline as data is in the chip);e-cash; 
+    \subsection{Measuring Money}
+        In America: 
+
+        \quad $\text{M}_0$: cash / currency; 
+        
+        \quad $\text{M}_1$: $\text{M}_0$ + Traveler's check + demand deposits + other checkable deposits (USA); They are real-purchasing power that they can directly pay for goods and services; Narrow money; 
+        
+        \quad $\text{M}_2$: $\text{M}_1$ + quasi-money (small-denomination time deposits + savings deposits and money market deposit accounts + money market mutual fund shares); They can't be used directly to pay for goods;
+
+        In China: the deposits in China is especially for individuals
+
+        \quad $\text{M}_0$: cash in circulation;
+        
+        \quad $\text{M}_1$: $\text{M}_0$ + demand deposits of \emph{enterprises}; Individual demand deposits are excluded as China doesn't allow check for individuals.
+
+        \quad $\text{M}_2$: $\text{M}_1$ + time deposits of enterprises + saving deposits + other deposits
+
+\section{Interest Rate}
+    \subsection{Measuring Interest Rates}: 
+        The proportion of a sum of money that is paid over a specified period of time: simple interest and compound interest
+
+        $$I_S = P \times i \times n,\quad  S_S = P \times (1 + ni)$$
+        $$I_C = S_C - P,\quad S_C = P(1 + i)^n$$
+
+        Discounting the future: 
+        $$PV = \frac{FV}{(1 + r)^n}$$
+
+        Annuity: ordinary annuity, annuity due, differed annuity and perpetual annuity 
+
+        \subsubsection{Four types of Credit Market Instrument} 
+
+        \quad Simple Loan:  Lender will repay $P + I$ in the maturity date; Example on money market short-term instruments
+
+        \quad Fixed Payment Loan(fully amortized loan): Lender will repay same amount in periods, which is actually the form of annuity. The start of repayments contain mainly interest and the end of repayments contain mainly principal. e.g. mortgage
+
+        \quad Coupon Bond: : Lender will repay same amount of interest in periods, and will finally pay out interest and principal in the last period; This is used in capital market instruments;
+
+        \quad Discount Bond(Zero-Coupon Bound) : Borrower will lend at $(P - I)$ and get paid of $P$  
+
+        note: For mortgage, you can either repay in fixed payment per month or fixed principal with varying interest. The latter one will pay less interest as the amount of principal decreases quickly, while faced more pressure at the starting period
+
+        \subsubsection{How to calculate interest rate}
+
+            Theses are abstracted annual interests.
+
+            Yield to  Maturity: the interest rate that equates the present value of cash flow payments received from a debt instrument with its value today. This is the same concept with IRR; When coupon bond is sold at par, the real interest rate is equal to coupon bond no matter what the term is as every year the lender pay out all the interest without any principal. The interest rate is negatively related to current price of the bound; The lower of actual price you buy the coupon bond, the more yield to maturity.  
+
+            $$P = \sum_{t = 1}^{n}\frac{CF_t}{(1 + i)^t}$$
+
+            For discount bond: 
+
+            $$i = \frac{F - P}{P}$$
+
+            \medskip
+            
+            current Yield (an approximation for coupon bound):
+
+            $$i = \frac{C}{P}$$
+
+            For coupon bound is not sold on face price:
+
+            $$YTM =  \frac{c + \frac{P_s - P_b}{\text{year}}}{P_b} = i_c + \frac{P_s - P_b}{\text{year}\times P_b}$$
+
+            Discount yield (for discount bound):
+            $$i = \frac{F - P}{F} \times \frac{360}{\text{days to maturity}}$$
+
+            $\frac{1}{F}$ will understate the interest rate; $\frac{1}{\text{days}}$ is to evaluate the per day interest; So for annual interest rate as 360 < 365 this will also understate the interest rate. 
+
+            Consol or perpetuity: it's a perpetual bond with no maturity date and no repayment of principal that makes fixed coupon payments of C forever.
+        
+        \subsection{Rate of return} 
+        The payments to the owner plus the change in value expressed as a fraction of the purchase price. 
+
+        $$\text{Ret} = \frac{C}{P_t}(\text{current yield}) + \frac{P_{t + 1} - P_t}{P_t \cdot \text{year}}(\text{rate of capital gain})$$
+
+        $P_{t+1}$ is the present value of future cash flow bought by this bond.
+        
+        The return on a bond is equal to the yield to maturity in the circumstances of one-year coupon bond. Bonds whose term to maturity is longer than the holding period are subject to interest-rate risk, as market interest-rate increases will lead to loss in return; The more distant a bond's maturity, the lower the rate of return that occurs as a result of an increase in the interest rate. Even if a bond has a substantial initial interest rate, its return can bee negative if market interest rates rise. There is no interest-rate risk for any bond whose time to maturity matches the holding period;
+        
+
+        \subsection{Real interest rate and Nominal Interest rate}
+        $$i_r = i_n - \pi^e$$
+
+\section{Behavior of interest  rate}
+    Factors of Determining the Quantity Demanded of an Asset:
+        
+    Wealth(+); Expected Return(+)(deposit; equity; bond); Risk(-); Liquidity(+); 
+
+    \subsection{Theory of Asset Demand}
+        $i$ is determined by Supply and Demand for Bonds. 
+
+        Demand side: as the price goes down, the more demand from investors to buy the bonds. Factors: Wealth(+), Expected return in a future term (-), Expected inflation(-), risk(-), liquidity(+);  
+
+        Supply side: as the price goes up, the more supply from issuers to sell the bonds. Factors: Profitability of investments(+), Expected inflation(+), Government deficit(+)
+
+        The equilibrium of the demand and supply will define a interest rate. Fisher effect means the changes in $\pi^e$($\uparrow$) at $i_n$($\uparrow$). 
+
+    %Cspell: ignore dishoarding, medskip
+
+    \subsection{Loanable Funds theory}
+        $$L^s = S + \Delta M + DH(\text{dishoarding})$$
+        $$L^d = I + H(\text{hoarding})$$
+
+        market equilibrium : 
+
+        $$S + \Delta M = I + \Delta H$$
+
+        The relationship wih theory of asset demand: the demand for bonds is the supply for loanable funds, and the supply for bonds is the demand for loanable fonds;
+
+    \subsection{The Liquidity Preference Framework}
+        $$W = B + M\quad \Rightarrow \quad B^S + M^s = B^d + M^d\quad \Rightarrow \quad M^s - M^d = B^d - M^s$$
+
+        So we analysis money market; $i$ is negatively related to $M^d$: 
+        $$i\uparrow\quad \Rightarrow \quad B^d \quad \Rightarrow \quad M^d\downarrow $$
+
+        $i$ determines the balance between the bond and money as wealth is fixed. In this theory, the $M^s$ is constant as it's a external factor. Now we can find the equilibrium in money market. Factors: $B^s$(-), Income(+), Price level(+) (maintain purchasing power) 
+        
+        More specifically, the impacts of money supply are following.
+        
+        \quad Liquidity effect: $M^s \uparrow$, $i\downarrow$
+        
+        \quad Income effect: $M^s \uparrow$, Income$\uparrow$, $M^d\uparrow$, $i\uparrow$
+
+        \quad Price level effect: $M^s \uparrow$, Price Level$\uparrow$, $i\uparrow$
+
+        \quad Expected inflation effect: $M^s \uparrow$, Fisher effect, $i\uparrow$
+
+\section{The risk and Term Structure of Interest Rate} 
+\subsection{Risk structure of Interest Rates}
+$$i = RR + IP + (DRP + LP) + MRP$$
+
+\begin{center}
+    $RR$: risk free rate 
+    
+    $IP$:  Inflation premium
+    
+    $DRP$: Default risk premium
+
+    $LP$: Liquidity premium
+
+    $MRP$: Maturity 
+\end{center}
+
+    Default risk: occurs when the issuer of the bond is unable or unwilling to make interest payment or pay off the face value; 
+
+    Default-free bonds: Bonds with on default risk; U.S. TBs are considered default-free 
+
+    \medskip
+    
+    Risk premium: the spread between the interest rates on bonds with default risk and the interest rates on TBs. (People are willing to choose TB when they share same $i$). The risk will be indicated by agencies: Over BBB(Baa): Investment grade; Below BBB(Baa): Speculative grade;   
+
+    Liquidity premium: the ease with which asset cam be converted into cash. Similar to risk premium ass people willing to buy TB as it has high liquidity, this will create spread;
+    
+    Municipal bond is a special case as it has a higher bond but has a lower $i$. This is because there is no tax on it, which will bring extra interest compered to taxed bond.  
+    \medskip
+\subsection{MRP and Yield Curve}
+    Yield curve: a plot of the yield on specific bonds with differing terms to maturity  but the same risk, liquidity  and tax consideration for specific date. It's normal to have upward slope and in different periods they will change in the same direction. When short-term interest rate is too high, the yield curve may inverse and have downward slope. There are some explanations here. 
+
+    \subsubsection{Expectations Theory}
+        The interest rate on a long-term bond will equal an average of the short-term interest rates that people expect to occur over the life of the long-term bond. There is an assumption that types of bonds are substitution free. Prove with two year: 
+
+        $$(1 + R)^2 = (1 + r)(1 + r^e)$$
+        $$R^2 + 2R = rr^e + r^e + r$$
+        $$R^2, rr^e \approx 0$$
+        $$R = \frac{r + r^e}{2}$$
+        $$R = \frac{r + r^{e_1} + r^{e_2} + \cdots + r^{e_{n - 1}}}{n}$$
+        $$R = \sqrt[n]{(1 + r)(1 + r^{e_1})\cdots(1 + r^{e_{n - 1}})} - 1$$
+
+        As you expect the interest will go up, the yield curves will be upward sloping. As you expect differently, the yield curve will have different shape. 
+
+        Within one per
+        iod, as your expectation of future interest rate is persistent, meaning that one-year rates will always rise or decrease in the future, so in different periods the interest rates will have the same tendency. 
+
+        When ST interest rate is high, you will expect the interest rate will go down(This is according to real situation) so the LT interest rate will be below the ST interest rate. 
+
+    \subsubsection{Segmented Markets Theory}
+        We assume bonds of different maturities are not substitutes at all, compared to expectations theory. So the market is segmented, so interest rates are determined separately by different terms of bonds equilibrium. So when LT bonds demand goes up, the ST bonds demand goes down. This will result in ST interest rate $\uparrow$ and LT interest rate $\downarrow$, which can lead to a downward slope curve.
+
+        As people prefer ST bonds, so the yield curve is normally have a upward slope curve. 
+    
+    \subsubsection{Liquidity Premium Theory}
+
+    $$RR = \frac{r + r^{e_1} + r^{e_2} + \cdots + r^{e_{n - 1}}}{n} + r_l$$
+    $$rl:\text{liquidity premium for the bond}$$
+
+    \subsubsection{Effect of Yield Curve}
+        we can analysis the interest expectations: with year one yield curve we can draw the next year yield curve.  
+
+        Make different investment decisions. 
+\newpage
+
+\section{Banking Industry}
+    \subsection{Balance Sheet of Bank}  
+        The main asset is loan, and the main loan kind is real estate. And the  liabilities are mainly come from the small-denomination time 
+        \subsubsection{Liabilities}
+            A bank acquires liabilities is from deposits, 
+
+            \textbf{Deposits}: 
+            
+            \quad  check deposits Demand deposits(DD allow for check without interest 
+            
+            \quad negotiable order of withdrawal(NOW, with interest and allow withdrawal, by combination of DD account and saving account) 
+            
+            \quad money market deposit accounts(MMDAs, turns to investment in money market)
+            
+            Non-transaction deposits(Check is forbidden with higher interest rate): 
+
+            \quad saving deposits (money can go inflow and outflow at any time)  
+
+            \quad time deposits (with a fixed maturity length without inflow or outflow and penalty for early withdrawal)
+
+            \textbf{Borrowing}: 
+            
+            \quad from the Federal Reserve System( discount loans / advances)
+
+            \quad federal funds 
+
+            \quad from parent company 
+
+            \quad from Corporations (Repurchase agreements) 
+
+            \textbf{Capital}(= Asset - Liability, be divided to two tiers, ): 
+
+            \quad Tier one capital(core capital, ownership presentation): core tier 1[common stocks, surplus, generation preparation]; non-accumulative and unlimited instruments 
+            
+            \quad Tier two capital: undisclosed reserves, hybrid instrument...; 
+
+            \quad Core capital adequacy ratios $\geq$ 8 \% 
+    
+        \subsubsection{Asset} 
+            \textbf{Cash items}: 
+    
+            \quad Reserve / vault cash(required reserve \& excess reserve[for obligation]); 
+            
+            \quad Cash items in process of collection; 
+            
+            \quad deposits at other banks(due from other banks)s; 
+
+            \textbf{securities (Investment)}: Requires for safety
+                
+            \quad US government and agency securities(short term is called second reserve)
+
+            \quad state and local government securities 
+
+            \quad other securities 
+
+            \textbf{loans}:
+                
+            \quad Commercial and industrial loan; (C \& I loans) 
+
+            \quad real estate loan 
+
+            \quad consumer loan 
+
+            \quad inter-bank loan 
+                
+            \textbf{other}: buildings and other equipments 
+    \subsection{Basic Banking}
+        Asset transformation: borrows short and lends long
+
+        Providing a set of services: check clearing, record keeping, credit...
+
+    Cash Inflows: 
+    \begin{center}
+            Asset \quad \quad \quad \quad Liability
+
+            $\text{Reserve} + X$ \quad  Checkable deposits $+ X$
+    \end{center} 
+
+        Check will first become cash in the process of collection and will finally turn into reserves. The reserves will form excess reserves and rearranged them to make profit. 
+
+    \subsection{Bank Management}
+        \textbf{Liquidity Management}: of the highest importance; If a bank has ample excess reserves, a deposit outflow does not necessitate changes in other parts of its balance sheet; With short reserves, bank needs to borrow money with interest, sell securities with cost, call in or sell off loans; So reserves are a legal requirement and the shortfall must be eliminated,  Excess reserves are insurance against the costs associated with deposit outflows. 
+        \medskip
+
+     \textbf{Asset Management}(goals[Seek highest possible returns; Reduce risk; Have adequate liquidity]): four tools:
+            
+        \quad Find borrowers who will pay high $r$ with low possibility of defaulting 
+
+        \quad Purchases securities with high returns and low risk 
+
+        \quad Lower by diversifying 
+
+        \quad Balance need for liquidity against increased returns from less liquid asset 
+        \medskip
+
+        \textbf{Liability Management}
+
+            \quad Principle: More sources \& Low cost
+        
+        \medskip 
+
+        \textbf{Capital Adequacy Management} 
+            Bank capital helps prevent bank failure. The amount of capital affects return for the owners of the bank; Methods: 
+
+            \quad Sell or retire stock 
+
+            \quad Change dividends to change retained earnings 
+
+            \quad Change asset growth or adjust asset structure (size \& risk weight)
+        
+            \medskip
+
+        \textbf{Risk Management} 
+
+            %cSpell:ignore counterparty
+
+            \quad Credit Risk(default risk): the risk of loss arising from default bt a debtor or counterparty; This is resulted from asymmetric information: 
+            
+            \quad \quad Adverse selection(before deal) :When hiding adverse information, bank can only choose the higher $r$ loan; while higher $r$ means higher risk ) 
+            
+            \quad \quad Moral hazard(after deal):loan is used on other places with higher risk  
+
+            \quad \quad Solution to credit risk: Screening and information collection; Specialization in lending; Monitoring and enforcement of restrictive covenants; Long-term customer relationships; Loan commitments; Collateral and compensating balances; Credit rationing; 
+
+            \medskip
+
+            \quad Interest Rate Risk:risk of loss arising from change of interest rate; Rate insensitive (fixed rate; long term) / sensitive (short term); 
+            $$\pi = \sum A\cdot i_A - \sum L\cdot i_L$$
+            
+            \begin{align*}
+            \Delta \pi &= 
+            \sum A_{RS} \cdot \Delta i - \sum L_{RS} \cdot \Delta i \\
+            &= (\sum A_{RS} - \sum L_{RS}) \cdot \Delta i
+        \end{align*}
+
+            \quad  This is called RS\_GAP analysis; The final interest impact is related to the sign of $(\sum A_{RS} - \sum L_{RS})$. According to the estimated interest rate changes, banks can adjust the sign and amount of ($\sum A_{RS} - \sum L_{RS})$.
+
+            \quad operational risk 
+
+            \quad country  risk 
+
+    %Cspell: ignore securitization
+
+    \subsection{Off-Balance-Sheet Activities}
+        These activities are uncertain: Loan sales(secondary loan participation ) / loan securitization , generation of fee income, trading activities; 
+    
+        Generation of fee income: 
+            
+        \quad a. Foreign exchange trades for customers (risk free) 
+
+        \quad b. Servicing mortgage-backed securities 
+
+        \quad c. Guarantees of debt (Bank Acceptance; Letter of Guarantee, Letter of Credit);
+
+        \quad d. Backup lines of credit
+
+        Trading activities
+    
+    \subsection{Evolution of the Banking Industry}
+        Dual Banking System: National Banks(chartered by federal government) and State Banks(by state government); 
+
+        %Cspell: ignore Steagall, Riegle
+
+        Glass-Steagall Act: the establishment of FDIC; Segregation of financial business(Prohibit commercial banks from corporate securities and Investment banks from deposits, which separate commercial and investment banks);
+        
+        Branch restriction: prohibition of branching across state lines and forced all national banks to conform to the branching regulations of the state in which they were located. The response to it: Bank Holding Companies; Non-bank  bank; Automated Teller Machines. Until Riegle-Neal Act of 1994 allow full interstate branching. 
+        
+        %Cspell: ignore Gramm, Bliley, FOMC, FRBs 
+
+        Gramm-Leach-Bliley Financial Services Modernization Act of 1999 abolishes Glass-Steagall act;
+        
+        After 2008, WallStreet 
+\newpage
+\section{Central Banks}
+    The  origin of central banks is considered to be Bank of England (BOE) with monopolized issuers.
+
+    Structure of the FRS: 
+    
+    \quad Top level: BOG, FAC, FOMC
+
+    \quad Mid level: 12 FRBs 
+
+    \quad Low level: member banks
+
+    \subsection{Federal Reserve Banks}
+        \subsubsection{Functions of the Federal Reserve Bank} 
+        
+        Clear checks 
+
+        Issue new currency
+
+        Withdraw damaged currency from circulation 
+
+        Administer and make discount loans to banks in their districts
+
+        Evaluate proposed mergers and applications for banks to expand their activities 
+
+        Act as liaisons between the business community and the Federal Reserve System
+
+        Examine bank holding companies and state-chartered member banks
+
+        Collect data on local business conditions 
+
+        Uses Staffs of professional economists tp research topics related to the conduct of monetary  policy 
+
+        Decide which banks can obtain discount loans 
+
+        Five of the 12 bank presidents have a vote in the FOMC
+    
+    \subsubsection{Member Banks}
+        All national banks are required to be members of the FRS
+        
+        Commercial banks chartered by states are not required but may choose to be members
+
+    \subsubsection{Borders of Governors} 
+        Seven members headquartered in Washington, D.C; Appointed by the president and confirmed by the Senate; 14-year non-renewable term; required to come from different districts; Chairman is chosen from the governors and serves four-year term;
+
+        Duties: 
+
+            \quad Conduct monetary policies:
+            
+            \quad \quad  Votes on conduct of open market operations 
+
+            \quad \quad Set reserve requirements 
+
+            \quad \quad Controls the discount rate through review and determination process 
+
+            \quad Sets margin requirement 
+
+            \quad Sets salaries of president and officers of each FRB and reviews each bank's budget
+            
+            \quad Regulatory functions:
+
+            \quad\quad Approves bank mergers and applications for new activities 
+
+            \quad\quad Specifies the permissible activities of bank holding company 
+
+            \quad\quad Supervises the activities of foreign banks operating in the US 
+
+        \medskip
+        \medskip
+
+        Duty of Chairman: 
+
+            \quad Advises the president on economic policy 
+            
+            \quad Testifies in Congress 
+
+            \quad Speaks for the Federal Reserve System to the media 
+
+            \quad May represent the US in  negotiations with foreign governments on economic matters
+    
+        \subsubsection{Federal Open Market Committee(FOMC)}
+            Consists of 12 members; Seven members of the BOG, the president of the Federal Reserve Bank of New York, the presidents  of four other Federal Reserve banks; Issues directives to the trading desk at the Federal Reserve Bank of New York;
+
+            Green Book: a forecast of US economy 
+
+            Blue Book: suggestions for monetary policies
+
+            Beige Book: Data (on public)
+    
+    \subsection{European Central Bank}
+        Patterned after the Federal Reserve; Central banks from each country play similar role as Fed banks;
+
+        Executive Board(6): president, vice-president and four other members; Eight year, nonrenewable; 
+
+        Governing Council: members of Executive Board + presidents of member countries' central banks 
+
+        National Central Banks control their wn budgets  and the budget of the ECB; Monetary operations are not centralized; Does not supervise and regulate financial institutions;  
+
+    \subsection{Central Bank Independence}
+        \subsubsection{Case For Independence}
+        Political pressure would impart an inflationary bias to monetary policy 
+
+        political business cycle 
+
+        Could be used to facilitate Treasury financing of large budget deficits-accommodation 
+
+        Too important to leave to politicians-the principal-agent problem is worse for politicians 
+
+        \subsubsection{Case Against Independence}
+        
+        Undemocratic
+
+        Unaccountable 
+
+        Difficult to coordinate fiscal and monetary policy 
+
+        Has not  used its independence successfully 
+
+        \subsubsection{How Independent is the Fed}
+
+        Instrument independent; Goal independent; Independent Revenue; Structured by legislation from Congress and accountable for its actions; 
+
+        Presidential influence: Influence on Congress; Appoints members; Appoints chairman although terms are not concurrent; 
+
+\section{Bank Regulations}
+    \subsection{Content of Banking regulation}
+        Restrictions on Asset Holding and Bank Capital requirements: 
+
+        \quad Attempts to restrict banks from too much risk taking: Promote diversification Prohibit holdings of common stock; Set capital requirements(Minimum leverage ratio >= 3\%, Basel Accord: risk based capital requirements, Regulatory arbitrage);
+
+        \quad Chartering(Screening of proposals to open new banks) and Examination(On-site/ Off-site examination; Filling periodic call reports);
+        
+        \quad Assessment of Risk Management: Greater emphasis on evaluating soundness of management processes for controlling risk; Interest-rate risk limits;
+        
+        \quad Disclosure Requirements: Requirements to adhere to standard accounting principles and to disclose wide range of information 
+
+        \quad Consumer Protection
+
+        \quad Restriction on competition
+
+\section{Monetary Policy}
+    \subsection{Monetary Policy Goals}
+        High employment: 
+
+            \quad unemployment rate excludes frictional unemployment(mutual selection), structural unemployment(Mismatch of demand and skill), voluntary unemployment; 
+        
+        Economic Growth; Price stability; *International BOP equilibrium; Others: Stability of financial markets; Interest-rate stability; Foreign exchange market stability;
+
+    \subsection{Tools of Monetary Policy}
+    \subsection{Target, Strategy and Tactics}
+
+\end{document}
